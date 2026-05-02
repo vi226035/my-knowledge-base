@@ -1,0 +1,36 @@
+site_name: 我的知识库
+site_description: 信号处理与 FPGA 学习笔记
+site_author: 你自己
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.sections
+    - navigation.expand
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - 首页: index.md
+  - 信号处理:
+      - DDC: 信号处理/DDC.md
+  - FPGA:
+      - FPGA: FPGA/index.md
