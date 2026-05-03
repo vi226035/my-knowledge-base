@@ -2,15 +2,11 @@ site_name: 我的知识库
 site_description: 信号处理与 FPGA 学习笔记
 site_author: 你自己
 
+strict: false
+
 theme:
   name: material
   language: zh
-  features:
-    - navigation.sections
-    - navigation.expand
-    - search.highlight
-    - search.suggest
-    - content.code.copy
 
 plugins:
   - search
@@ -18,19 +14,30 @@ plugins:
 markdown_extensions:
   - admonition
   - tables
-  - toc:
-      permalink: true
-  - pymdownx.highlight
-  - pymdownx.superfences
+  - attr_list
+  - md_in_html
   - pymdownx.arithmatex:
       generic: true
+  - toc:
+      permalink: true
 
 extra_javascript:
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/katex.min.js
+  - javascripts/katex.js
+
+extra_css:
+  - stylesheets/katex.min.css
+  - stylesheets/extra.css
 
 nav:
   - 首页: index.md
   - 信号处理:
       - DDC: 信号处理/DDC.md
+      - 雷达数字信号中频接收: 信号处理/雷达数字信号中频接收.md
+      - 雷达信号检测: 信号处理/雷达信号检测.md
+      - 雷达信号调制类型识别: 信号处理/雷达信号调制类型识别.md
+  - 矩阵分解:
+      - 并行双边Jacobi旋转特征值分解: 矩阵分解/并行双边Jacobi旋转特征值分解.md
   - FPGA:
       - FPGA: FPGA/index.md
+

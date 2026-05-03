@@ -1,0 +1,63 @@
+/* 图片居中并统一宽度 */
+.md-content img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90%;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* 包含图片的段落居中 */
+.md-content p:has(img) {
+  text-align: center;
+}
+
+/* 图注居中 */
+.md-content p img + br + strong,
+.md-content p:has(img) + p strong {
+  display: block;
+  text-align: center;
+}
+
+/* 公式块间距优化 */
+.arithmatex {
+  overflow-x: auto;
+  margin: 0.8em 0;
+}
+
+/* 代码块圆角 */
+code, pre {
+  border-radius: 4px;
+}
+
+/* 表格美化 */
+.md-content table {
+  margin: 1em auto;
+  border-collapse: collapse;
+}
+.md-content table th {
+  background: #f5f5f5;
+}
+.md-content table td, .md-content table th {
+  padding: 8px 16px;
+  border: 1px solid #e0e0e0;
+}
+
+/* 引用块左侧色条 */
+blockquote {
+  border-left-color: #448aff;
+}
+
+/* 二级标题间距 */
+.md-content h2 {
+  margin-top: 2em;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.3em;
+}
+
+/* 配图记录的标题 */
+.md-content h4 {
+  margin-top: 1.8em;
+  color: #333;
+}
