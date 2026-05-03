@@ -1,0 +1,1701 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="信号处理与 FPGA 学习笔记">
+      
+      
+        <meta name="author" content="你自己">
+      
+      
+      
+        <link rel="prev" href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E8%B0%83%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB/">
+      
+      
+        <link rel="next" href="../../FPGA/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>并行双边Jacobi旋转特征值分解 - 我的知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fpgajacobi" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="我的知识库" class="md-header__button md-logo" aria-label="我的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              并行双边Jacobi旋转特征值分解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="我的知识库" class="md-nav__button md-logo" aria-label="我的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号处理
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号处理
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/DDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E4%B8%AD%E9%A2%91%E6%8E%A5%E6%94%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达数字信号中频接收
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E6%A3%80%E6%B5%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达信号检测
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E8%B0%83%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达信号调制类型识别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    矩阵分解
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并行双边Jacobi旋转特征值分解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并行双边Jacobi旋转特征值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 问题描述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-jacobi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 并行双边 Jacobi 旋转新方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 并行双边 Jacobi 旋转新方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-jacobi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1 双边 Jacobi 旋转算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.1 双边 Jacobi 旋转算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        符号说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2 稀疏旋转矩阵的乘法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3 复厄米特矩阵特征值分解新方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.3 复厄米特矩阵特征值分解新方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        符号说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        处理流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-times-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(2 \times 2\) 复厄米特矩阵验证示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 关键硬件体系架构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 关键硬件体系架构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1 顶层描述
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3.1 顶层描述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 个硬件模块及其功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        整体处理流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2 数据缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3 矩阵乘法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 实验结果与分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 实验结果与分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1 硬件资源消耗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2 数值性能
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-doa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 基于 DOA 估计的应用结果
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 基于 DOA 估计的应用结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#16-times-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        硬件资源消耗（\(16 \times 16\) 复矩阵）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FPGA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 问题描述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-jacobi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 并行双边 Jacobi 旋转新方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 并行双边 Jacobi 旋转新方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-jacobi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.1 双边 Jacobi 旋转算法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.1 双边 Jacobi 旋转算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        符号说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.2 稀疏旋转矩阵的乘法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2.3 复厄米特矩阵特征值分解新方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2.3 复厄米特矩阵特征值分解新方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        符号说明
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        处理流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-times-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(2 \times 2\) 复厄米特矩阵验证示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 关键硬件体系架构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 关键硬件体系架构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.1 顶层描述
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3.1 顶层描述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12 个硬件模块及其功能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        整体处理流程
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.2 数据缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3.3 矩阵乘法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 实验结果与分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 实验结果与分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.1 硬件资源消耗
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4.2 数值性能
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-doa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 基于 DOA 估计的应用结果
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 基于 DOA 估计的应用结果">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#16-times-16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        硬件资源消耗（\(16 \times 16\) 复矩阵）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 结论
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="fpgajacobi">基于FPGA的并行双边Jacobi旋转的矩阵特征值分解<a class="headerlink" href="#fpgajacobi" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>本章整理自《基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究》（闫迪，长安大学，2024）第二章</p>
+</blockquote>
+<h2 id="21">2.1 问题描述<a class="headerlink" href="#21" title="Permanent link">&para;</a></h2>
+<p>矩阵特征值分解（EVD）是阵列信号处理中的核心数学工具。实际工程中常用两种算法：QR 算法和 Jacobi 旋转算法。由于 Jacobi 算法比 QR 算法更精确、数值稳定性更好，且具有先天的高度并行性，本章选择以双边 Jacobi 旋转算法为基础进行 FPGA 高性能实现。</p>
+<p>当前基于 Jacobi 旋转的硬件实现方案存在以下不足：</p>
+<ul>
+<li>主要基于 CORDIC（坐标旋转数字计算）的定点运算，精度较低</li>
+<li>依赖 BLV（Brent-Luk-Van）脉动阵列，需将矩阵分块为多个 <span class="arithmatex">\(2 \times 2\)</span> 子矩阵，Jacobi 因子传递和数据交换使并行性和效率受限</li>
+<li>一次 Jacobi 旋转需执行三次 CORDIC 计算周期（一次矢量模式 + 两次旋转模式），时延较大</li>
+</ul>
+<p>本章提出了一种充分利用旋转矩阵稀疏特性的并行双边 Jacobi 旋转新方法，核心思路：使用 FPGA 乘法器进行单精度浮点运算，通过行式读取方式提高并行处理灵活性。</p>
+<h2 id="22-jacobi">2.2 并行双边 Jacobi 旋转新方法<a class="headerlink" href="#22-jacobi" title="Permanent link">&para;</a></h2>
+<h3 id="221-jacobi">2.2.1 双边 Jacobi 旋转算法<a class="headerlink" href="#221-jacobi" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\mathbf{B} \in \mathbb{R}^{N \times N}\)</span> 为实对称矩阵，双边 Jacobi 旋转算法通过一系列平面旋转矩阵 <span class="arithmatex">\(\mathbf{U}\)</span> 将其对角化：</p>
+<div class="arithmatex">\[
+\mathbf{B}_{i+1} = \mathbf{U}^T \mathbf{B}_i \mathbf{U} \tag{2.2}
+\]</div>
+<p>其中：
+- <span class="arithmatex">\(\mathbf{B}_1 = \mathbf{B}\)</span>：原始实对称矩阵
+- <span class="arithmatex">\([\cdot]^T\)</span>：矩阵转置
+- <span class="arithmatex">\(\mathbf{U}\)</span>：Jacobi 旋转矩阵
+- <span class="arithmatex">\(S\)</span>（<span class="arithmatex">\(1 \leq i \leq S\)</span>）：扫描次数</p>
+<p>旋转矩阵 <span class="arithmatex">\(\mathbf{U}\)</span> 是一类特殊的稀疏矩阵，行、列向量中只有两个非零元素：</p>
+<div class="arithmatex">\[
+\mathbf{U} = \begin{pmatrix}
+1 &amp; \dots &amp; 0 &amp; \dots &amp; 0 &amp; \dots &amp; 0 \\
+\vdots &amp; \ddots &amp; \vdots &amp; &amp; \vdots &amp; &amp; \vdots \\
+0 &amp; \dots &amp; c_{p,p} &amp; \dots &amp; s_{p,q} &amp; \dots &amp; 0 \\
+\vdots &amp; &amp; \vdots &amp; \ddots &amp; \vdots &amp; &amp; \vdots \\
+0 &amp; \dots &amp; s_{q,p} &amp; \dots &amp; c_{q,q} &amp; \dots &amp; 0 \\
+\vdots &amp; &amp; \vdots &amp; &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; \dots &amp; 0 &amp; \dots &amp; 0 &amp; \dots &amp; 1
+\end{pmatrix} \tag{2.3}
+\]</div>
+<p>其中 Jacobi 旋转因子为：</p>
+<div class="arithmatex">\[
+c_{p,p} = \cos\theta = c, \quad s_{p,q} = \sin\theta = s, \quad s_{q,p} = -\sin\theta = -s, \quad c_{q,q} = \cos\theta = c \tag{2.4, 2.5}
+\]</div>
+<p>旋转因子的计算涉及三角函数：</p>
+<div class="arithmatex">\[
+c = 1 / \sqrt{1 + t^2}, \quad s = t \times c \tag{2.7a, 2.7b}
+\]</div>
+<div class="arithmatex">\[
+t = \tan\theta = \frac{\operatorname{sign}(\tau)}{|\tau| + \sqrt{1 + \tau^2}}, \quad \tau = \cot 2\theta = \frac{b_{p,p} - b_{q,q}}{2b_{p,q}} \tag{2.7c, 2.7d}
+\]</div>
+<h4 id="_1">符号说明<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><span class="arithmatex">\(b_{p,p}, b_{q,q}, b_{p,q}\)</span>：矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 中的三个元素</li>
+<li><span class="arithmatex">\(\theta\)</span>：Jacobi 旋转角度</li>
+<li>CORDIC 将三角函数转换为移位运算，通过不断逼近旋转角度实现：<span class="arithmatex">\(x_{i+1} = x_i - y_i d_i 2^{-i}\)</span>，<span class="arithmatex">\(y_{i+1} = y_i - y_i d_i 2^{-i}\)</span>，<span class="arithmatex">\(z_{i+1} = z_i - d_i \arctan 2^{-i}\)</span></li>
+</ul>
+<p>当前主流的 BLV 脉动阵列结构包含对角处理器（计算 Jacobi 旋转因子）和非对角处理器（完成 <span class="arithmatex">\(2\times 2\)</span> 子矩阵的平面旋转），通过矩阵数据交换和多次迭代完成特征值分解。</p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/5e58b754c78696d6023b92c103d48570c20e1029b1a42b3adca8b39cbf02b681.jpg" /></p>
+<p><strong>图2.1 改进的BLV脉动阵列结构（<span class="arithmatex">\(N = 6\)</span>）</strong></p>
+<h3 id="222">2.2.2 稀疏旋转矩阵的乘法<a class="headerlink" href="#222" title="Permanent link">&para;</a></h3>
+<p>新方法的核心思想是利用旋转矩阵 <span class="arithmatex">\(\mathbf{U}\)</span> 行、列向量仅含两个非零元素的稀疏特性，简化矩阵乘法运算。</p>
+<p><strong>矩阵左乘</strong>：<span class="arithmatex">\(\mathbf{U}^T\)</span> 的第一行向量乘以 <span class="arithmatex">\(\mathbf{B}\)</span>，等效于仅用非零元素 <span class="arithmatex">\(c_1\)</span>、<span class="arithmatex">\(s_1\)</span> 乘以对应行向量：</p>
+<div class="arithmatex">\[
+c_1 \times [b_1\ b_2\ b_3\ b_4\ b_5\ b_6] + s_1 \times [b_2\ b_7\ b_8\ b_9\ b_{10}\ b_{11}]
+\]</div>
+<p><strong>矩阵右乘</strong>：类似地，<span class="arithmatex">\(\mathbf{B}\)</span> 右乘 <span class="arithmatex">\(\mathbf{U}\)</span> 的列向量也仅需非零元素参与计算。</p>
+<p>新方法可同时执行多个 Jacobi 旋转因子的平面旋转，无需矩阵分块和 Jacobi 因子传递。特征向量通过迭代累积旋转矩阵得到：</p>
+<div class="arithmatex">\[
+\mathbf{U} = \mathbf{U}_S \times \mathbf{U}_{S-1} \times \dots \times \mathbf{U}_2 \times \mathbf{U}_1 \tag{2.14}
+\]</div>
+<h3 id="223">2.2.3 复厄米特矩阵特征值分解新方法<a class="headerlink" href="#223" title="Permanent link">&para;</a></h3>
+<p>经典双边 Jacobi 算法仅适用于实对称矩阵，而实际工程中经常遇到的协方差矩阵实则是复厄米特矩阵。为此，本节给出了一种可基于双边 Jacobi 旋转处理复厄米特矩阵的特征值分解新方法。</p>
+<p>设 <span class="arithmatex">\(\mathbf{B} \in \mathbb{C}^{N \times N}\)</span> 是一个复厄米特矩阵，其特征值分解表示为：</p>
+<div class="arithmatex">\[
+\mathbf{B}\mathbf{V} = \lambda\mathbf{V}
+= \left(\mathbf{B}_{real} + j\mathbf{B}_{imag}\right)\left(\mathbf{V}_{real} + j\mathbf{V}_{imag}\right)
+= \lambda\left(\mathbf{V}_{real} + j\mathbf{V}_{imag}\right) \tag{2.15}
+\]</div>
+<p>其中 <span class="arithmatex">\(\lambda\)</span> 和 <span class="arithmatex">\(\mathbf{V}\)</span> 分别是 <span class="arithmatex">\(\mathbf{B}\)</span> 的一个特征值和对应的特征向量，<span class="arithmatex">\([\cdot]_{real}\)</span> 和 <span class="arithmatex">\([\cdot]_{imag}\)</span> 分别表示复厄米特矩阵的实部和虚部。</p>
+<p>将式（2.15）写成块矩阵形式：</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+\mathbf{B}_{real} &amp; \mathbf{B}_{imag}^T \\
+\mathbf{B}_{imag} &amp; \mathbf{B}_{real}
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{V}_{real} \\
+\mathbf{V}_{imag}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\mathbf{B}_{real} &amp; -\mathbf{B}_{imag} \\
+\mathbf{B}_{imag} &amp; \mathbf{B}_{real}
+\end{bmatrix}
+\begin{bmatrix}
+\mathbf{V}_{real} \\
+\mathbf{V}_{imag}
+\end{bmatrix}
+=
+\lambda
+\begin{bmatrix}
+\mathbf{V}_{real} \\
+\mathbf{V}_{imag}
+\end{bmatrix} \tag{2.16a}
+\]</div>
+<p>由此定义变形后的实矩阵形式：</p>
+<div class="arithmatex">\[
+\mathbf{B}_{new} =
+\begin{bmatrix}
+\mathbf{B}_{real} &amp; \mathbf{B}_{imag}^T \\
+\mathbf{B}_{imag} &amp; \mathbf{B}_{real}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\mathbf{B}_{real} &amp; -\mathbf{B}_{imag} \\
+\mathbf{B}_{imag} &amp; \mathbf{B}_{real}
+\end{bmatrix}
+\in \mathbb{R}^{2N \times 2N} \tag{2.16b}
+\]</div>
+<div class="arithmatex">\[
+\mathbf{V}_{new} =
+\begin{bmatrix}
+\mathbf{V}_{real} \\
+\mathbf{V}_{imag}
+\end{bmatrix}
+\in \mathbb{R}^{2N \times 1} \tag{2.16c}
+\]</div>
+<p>由于 <span class="arithmatex">\(\mathbf{B}_{new}\)</span> 是实对称矩阵，可以将其通过并行双边 Jacobi 旋转新方法进行矩阵特征值分解。</p>
+<h4 id="_2">符号说明<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><span class="arithmatex">\(\mathbf{B}_{real}\)</span>：复厄米特矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 的实部</li>
+<li><span class="arithmatex">\(\mathbf{B}_{imag}\)</span>：复厄米特矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 的虚部</li>
+<li><span class="arithmatex">\(\mathbf{V}_{real}\)</span>：特征向量 <span class="arithmatex">\(\mathbf{V}\)</span> 的实部</li>
+<li><span class="arithmatex">\(\mathbf{V}_{imag}\)</span>：特征向量 <span class="arithmatex">\(\mathbf{V}\)</span> 的虚部</li>
+<li><span class="arithmatex">\(\mathbf{B}_{new}\)</span>：变形后的 <span class="arithmatex">\(2N \times 2N\)</span> 维实对称矩阵</li>
+<li><span class="arithmatex">\(\mathbf{V}_{new}\)</span>：变形后的 <span class="arithmatex">\(2N \times 1\)</span> 维特征向量</li>
+</ul>
+<h4 id="_3">处理流程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>计算复厄米特矩阵特征值和特征向量的完整过程如下：</p>
+<p><strong>步骤 1：矩阵变形</strong></p>
+<p>将复厄米特矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 变形为新形式的实对称矩阵 <span class="arithmatex">\(\mathbf{B}_{new}\)</span>，即将实部和虚部按式（2.16b）拼接为 <span class="arithmatex">\(2N \times 2N\)</span> 的实矩阵。</p>
+<p><strong>步骤 2：特征值分解</strong></p>
+<p>通过并行双边 Jacobi 旋转新方法计算 <span class="arithmatex">\(\mathbf{V}_{new}\)</span> 和 <span class="arithmatex">\(\boldsymbol{\Sigma}\)</span>，其中 <span class="arithmatex">\(\boldsymbol{\Sigma}\)</span> 是由 <span class="arithmatex">\(\mathbf{B}_{new}\)</span> 的特征值组成的对角矩阵。</p>
+<p><strong>步骤 3：特征值排序</strong></p>
+<p>按降序对 <span class="arithmatex">\(\boldsymbol{\Sigma}\)</span> 的对角元素进行排序，排序是为了便于步骤 4 中特征值的选择。</p>
+<p><strong>步骤 4：提取特征值</strong></p>
+<p>选择对角矩阵 <span class="arithmatex">\(\boldsymbol{\Sigma}\)</span> 在奇数（或偶数）位置的主对角元素作为复厄米特矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 的特征值。</p>
+<p><strong>步骤 5：提取特征向量</strong></p>
+<p>根据步骤 4 选择与 <span class="arithmatex">\(\boldsymbol{\Sigma}\)</span> 中特征值位置相对应的 <span class="arithmatex">\(\mathbf{V}_{new}\)</span> 列向量，变形后作为复厄米特矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 的特征向量。</p>
+<h4 id="2-times-2"><span class="arithmatex">\(2 \times 2\)</span> 复厄米特矩阵验证示例<a class="headerlink" href="#2-times-2" title="Permanent link">&para;</a></h4>
+<p>以 <span class="arithmatex">\(2 \times 2\)</span> 的复厄米特矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 为例验证上述过程的正确性：</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+b_1 &amp; b_2 \\
+b_2^H &amp; b_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+c_1 &amp; c_2 \\
+c_3 &amp; c_4
+\end{bmatrix}
+\begin{bmatrix}
+\lambda_1 &amp; 0 \\
+0 &amp; \lambda_2
+\end{bmatrix}
+\begin{bmatrix}
+c_1^H &amp; c_3^H \\
+c_2^H &amp; c_4^H
+\end{bmatrix} \tag{2.17}
+\]</div>
+<p>其中 <span class="arithmatex">\(b_1\)</span>、<span class="arithmatex">\(b_3\)</span>、<span class="arithmatex">\(\lambda_1\)</span> 和 <span class="arithmatex">\(\lambda_2\)</span> 均为实数，其余为复数。设 <span class="arithmatex">\(b_2 = d_1 - d_3i\)</span>，根据式（2.16）将 <span class="arithmatex">\(\mathbf{B}\)</span> 变形为 <span class="arithmatex">\(4 \times 4\)</span> 实对称矩阵：</p>
+<div class="arithmatex">\[
+\begin{bmatrix}
+b_1 &amp; d_1 &amp; 0 &amp; -d_3 \\
+d_1 &amp; b_3 &amp; d_3 &amp; 0 \\
+0 &amp; d_3 &amp; b_1 &amp; d_1 \\
+-d_3 &amp; 0 &amp; d_1 &amp; b_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+f_1 &amp; f_2 &amp; f_3 &amp; f_4 \\
+f_5 &amp; f_6 &amp; f_7 &amp; f_8 \\
+f_9 &amp; f_{10} &amp; f_{11} &amp; f_{12} \\
+f_{13} &amp; f_{14} &amp; f_{15} &amp; f_{16}
+\end{bmatrix}
+\begin{bmatrix}
+e_1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; e_2 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; e_3 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; e_4
+\end{bmatrix}
+\begin{bmatrix}
+f_1 &amp; f_2 &amp; f_3 &amp; f_4 \\
+f_5 &amp; f_6 &amp; f_7 &amp; f_8 \\
+f_9 &amp; f_{10} &amp; f_{11} &amp; f_{12} \\
+f_{13} &amp; f_{14} &amp; f_{15} &amp; f_{16}
+\end{bmatrix}^H \tag{2.18}
+\]</div>
+<p>其中 <span class="arithmatex">\(e_i(i = 1,2,3,4)\)</span> 是特征值。求解方程得到：</p>
+<div class="arithmatex">\[
+e_1 = e_2 \tag{2.19}
+\]</div>
+<div class="arithmatex">\[
+e_3 = e_4 \tag{2.20}
+\]</div>
+<p>即 <span class="arithmatex">\(4 \times 4\)</span> 实对称矩阵只有两个不相等的特征值，与原始 <span class="arithmatex">\(2 \times 2\)</span> 复厄米特矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 只有两个特征值 <span class="arithmatex">\(\lambda_1\)</span> 和 <span class="arithmatex">\(\lambda_2\)</span> 一致，验证了新方法的正确性。</p>
+<h2 id="23">2.3 关键硬件体系架构<a class="headerlink" href="#23" title="Permanent link">&para;</a></h2>
+<h3 id="231">2.3.1 顶层描述<a class="headerlink" href="#231" title="Permanent link">&para;</a></h3>
+<p>图2.2 给出了基于 FPGA 的并行双边 Jacobi 旋转新方法的顶层描述，其中标明了模块之间的关键信号通路。</p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c0c11f84c7b6d3f7944e1a2827371cb550c3db6be02dda44c2f7a61fb621eeb1.jpg" /></p>
+<p><strong>图2.2 基于FPGA的并行双边Jacobi旋转新方法的顶层描述</strong></p>
+<h4 id="12">12 个硬件模块及其功能<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<p>根据图 2.2，新方法的硬件架构共计 12 个模块，各模块功能如下：</p>
+<p><strong>模块 1 — 协方差矩阵计算</strong></p>
+<p>用于计算输入数据的协方差矩阵，作为后续特征值分解的输入矩阵。</p>
+<p><strong>模块 2 — 实对称矩阵缓存</strong></p>
+<p>缓存模块 1 输出的实对称矩阵数据，为后续 Jacobi 旋转提供数据访问。</p>
+<p><strong>模块 3 — 调度序列缓存</strong></p>
+<p>缓存奇偶固定数据调度序列的编号，用于确定每次 Jacobi 旋转所影响的行和列。</p>
+<p><strong>模块 5 — Jacobi 旋转因子计算</strong></p>
+<p>根据调度序列选取矩阵中对应的元素，按式（2.7a）—（2.7d）计算 Jacobi 旋转因子 <span class="arithmatex">\(c\)</span> 和 <span class="arithmatex">\(s\)</span>，并输出给乘加模块。</p>
+<p><strong>模块 4 — 矩阵左乘</strong></p>
+<p>接收 Jacobi 旋转因子，读取对应的行向量，按照式（2.11）完成矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 的左乘旋转操作（<span class="arithmatex">\(\mathbf{U}^T \mathbf{B}\)</span>）。</p>
+<p><strong>模块 6 — 矩阵右乘</strong></p>
+<p>接收 Jacobi 旋转因子，读取对应的列向量，按照式（2.13）完成矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 的右乘旋转操作（<span class="arithmatex">\(\mathbf{B} \mathbf{U}\)</span>），一次平面旋转完成。</p>
+<p><strong>模块 9 — 特征向量左乘</strong></p>
+<p>与模块 4 功能相同，用于完成特征向量矩阵的迭代累乘运算（<span class="arithmatex">\(\mathbf{U} = \mathbf{U}_i \cdots \mathbf{U}_1 \mathbf{U}_0\)</span>）。</p>
+<p><strong>模块 7 — 特征向量中间结果缓存</strong></p>
+<p>缓存模块 9 输出的旋转矩阵乘法的中间结果。</p>
+<p><strong>模块 8 — 矩阵旋转中间结果缓存</strong></p>
+<p>缓存模块 6 输出的矩阵右乘中间计算结果，供下一次迭代和后续模块使用。</p>
+<p><strong>模块 10 — 特征值降序排序</strong></p>
+<p>对最终对角矩阵的对角元素（特征值）按降序进行排列。</p>
+<p><strong>模块 11 — 特征向量选择</strong></p>
+<p>通过模块 8 中缓存的对角元素的奇数（或偶数）位置，选择对应的特征向量。</p>
+<p><strong>模块 12 — 有限状态机（FSM）</strong></p>
+<p>用于控制和监控其他所有模块。对于一个固定维度的对称矩阵，扫描次数 <span class="arithmatex">\(S\)</span> 是固定的，可通过 MATLAB 或其他数学软件预先确定。FSM 根据设定的扫描次数控制整个计算过程的启动、迭代和终止。</p>
+<h4 id="_4">整体处理流程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<p>基于上述模块，对协方差矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 实现复厄米特矩阵特征值分解的整体过程共 7 个步骤：</p>
+<p><strong>步骤 1：矩阵变形输入</strong></p>
+<p>将输入矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 按式（2.16b）变形为实对称矩阵：</p>
+<div class="arithmatex">\[
+\mathbf{B}_{new} = \begin{bmatrix} \mathbf{B}_{real} &amp; \mathbf{B}_{imag}^T \\ \mathbf{B}_{imag} &amp; \mathbf{B}_{real} \end{bmatrix}
+\]</div>
+<p><strong>步骤 2：执行一次 Jacobi 旋转</strong>，包含以下子步骤：</p>
+<ul>
+<li>步骤 2a：依照选定的数据调度序列规则，根据设置好的并行度 <span class="arithmatex">\(P\)</span>，选择 <span class="arithmatex">\(\mathbf{B}_{new}\)</span> 中对应的元素，计算 Jacobi 旋转矩阵 <span class="arithmatex">\(\mathbf{U}_1\)</span></li>
+<li>步骤 2b：按照式（2.11）实现矩阵左旋转操作 <span class="arithmatex">\(\mathbf{B}_1 = \mathbf{U}_1^T \mathbf{B}_{new}\)</span></li>
+<li>步骤 2c：按照式（2.13）实现矩阵右旋转操作 <span class="arithmatex">\(\mathbf{B}_2 = \mathbf{B}_1 \mathbf{U}_1\)</span></li>
+<li>步骤 2d：按照式（2.14）完成特征矢量矩阵的迭代运算 <span class="arithmatex">\(\mathbf{U} = \mathbf{U}_1 \mathbf{U}_0\)</span>，其中 <span class="arithmatex">\(\mathbf{U}_0\)</span> 为单位阵</li>
+</ul>
+<p><strong>步骤 3：迭代旋转</strong></p>
+<p>在完成步骤 2 后，更新矩阵 <span class="arithmatex">\(\mathbf{B}_{new}\)</span> 为 <span class="arithmatex">\(\mathbf{B}_2\)</span>，同时按照设置好的并行度读取新的调度序列，选择 <span class="arithmatex">\(\mathbf{B}_{new}\)</span> 中对应的元素计算 Jacobi 旋转矩阵 <span class="arithmatex">\(\mathbf{U}_2\)</span>，重复步骤 2。</p>
+<p><strong>步骤 4：判断终止条件</strong></p>
+<p>如果步骤 2 的迭代次数达到预设的迭代次数 <span class="arithmatex">\(s\)</span>，则停止迭代，输出特征矢量矩阵 <span class="arithmatex">\(\mathbf{U} = \mathbf{U}_s \cdots \mathbf{U}_1 \mathbf{U}_0\)</span> 和对角矩阵 <span class="arithmatex">\(\boldsymbol{\Sigma} = \mathbf{B}_s\)</span>。</p>
+<p><strong>步骤 5：特征值降序排列</strong></p>
+<p>对矩阵 <span class="arithmatex">\(\boldsymbol{\Sigma}\)</span> 的对角元素按降序排列。</p>
+<p><strong>步骤 6：提取复矩阵特征值</strong></p>
+<p>选择排序后奇数（或偶数）位置处矩阵 <span class="arithmatex">\(\boldsymbol{\Sigma}\)</span> 的对角元素，即为复厄米特矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 的特征值。这是由于变形后的矩阵维数翻倍，每对相邻特征值相等（见式 2.19、2.20），因此只需取间隔位置的值。</p>
+<p><strong>步骤 7：提取复矩阵特征向量</strong></p>
+<p>根据步骤 6 所选特征值对应的特征矢量矩阵 <span class="arithmatex">\(\mathbf{U}\)</span> 的列矢量，将其变形后作为复厄米特矩阵 <span class="arithmatex">\(\mathbf{B}\)</span> 的特征向量。</p>
+<p>整体而言，该硬件实现的流程与式（2.1）—（2.7）的数学过程基本一致，结构清晰，便于硬件工程师理解和实现。</p>
+<h3 id="232">2.3.2 数据缓存<a class="headerlink" href="#232" title="Permanent link">&para;</a></h3>
+<p><strong>（1）调度序列缓存</strong></p>
+<p>采用奇偶固定调度序列确定每次 Jacobi 旋转影响的行和列。以 <span class="arithmatex">\(8 \times 8\)</span> 矩阵为例，一次循环需 8 步完成。优化规则：偶数步的行列编号可由奇数步的前 3 个和后 3 个元素推导得到，省去偶数步调度序列的缓存，节省硬件资源。</p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/6dbf6aadc63c4a74f40a5c944a6432b1fa8479cacd2abf75ef634274d42681f6.jpg" /></p>
+<p><strong>图2.3 标准奇偶固定调度序列</strong></p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/889a6347a0bce182f9db3e6defb42ed1ce001ebe540ae4685ee75d4e080b6139.jpg" /></p>
+<p><strong>图2.4 缓存的奇偶固定调度序列</strong></p>
+<p><strong>（2）矩阵数据行式读取</strong></p>
+<p>采用逐行方式读取矩阵数据，支持灵活的并行度：
+- <span class="arithmatex">\(P = 2\)</span>：每次读取 2 行（并行度 1）
+- <span class="arithmatex">\(P = 4\)</span>：每次读取 4 行（并行度 2）
+- <span class="arithmatex">\(P = 8\)</span>：每次读取 8 行（并行度 4）</p>
+<p>可根据硬件资源、实时性需求灵活选择并行度。</p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/58f3802894971bc0423d01f503913c608f081f5f20d020306464c0a36f12f5cf.jpg" /></p>
+<p><strong>图2.6 变形后的 <span class="arithmatex">\(8 \times 8\)</span> 实对称矩阵的两种读取方式</strong></p>
+<h3 id="233">2.3.3 矩阵乘法<a class="headerlink" href="#233" title="Permanent link">&para;</a></h3>
+<p>矩阵乘法硬件结构主要包括乘法器和加法器，可通过 FPGA 上的 DSP48E1 实现。矩阵左乘处理行向量，矩阵右乘处理列向量。</p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c370b447555b14c2f4e71093a5de21f1cb49e81352dacdfafc10f676cdf52b01.jpg" /></p>
+<p><strong>图2.7 矩阵乘法的硬件架构</strong></p>
+<h2 id="24">2.4 实验结果与分析<a class="headerlink" href="#24" title="Permanent link">&para;</a></h2>
+<p>实验平台：Xilinx XC7V690T-FPGA，测试矩阵维数为 <span class="arithmatex">\(8 \times 8\)</span> 复厄米特矩阵，与四种方法对比。</p>
+<p>参与比较的五种方法：
+- <strong>QR algorithm</strong>：修正的 Gram-Schmidt 方法（单精度浮点）
+- <strong>Improved QR algorithm [119]</strong>：改进 QR 算法（单精度浮点）
+- <strong>Fast CORDIC [126]</strong>：基于改进 CORDIC 的 BLV 脉动阵列（定点）
+- <strong>Improved Jacobi's method [130]</strong>：DSP48E1 定点 <span class="arithmatex">\(2\times 2\)</span> 分块（定点）
+- <strong>New method</strong>：本章提出的并行双边 Jacobi 旋转新方法（单精度浮点）</p>
+<h3 id="241">2.4.1 硬件资源消耗<a class="headerlink" href="#241" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>LUTs</th>
+<th>BRAM</th>
+<th>DSP48E1</th>
+<th>频率</th>
+<th>时延（一次扫描）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QR algorithm</td>
+<td>46k</td>
+<td>36</td>
+<td>1964</td>
+<td>250MHz</td>
+<td>50μs</td>
+</tr>
+<tr>
+<td>Improved QR [119]</td>
+<td>50k</td>
+<td>38</td>
+<td>2004</td>
+<td>250MHz</td>
+<td>43μs</td>
+</tr>
+<tr>
+<td>Fast CORDIC [126]</td>
+<td>81k</td>
+<td>48</td>
+<td>378</td>
+<td>200MHz</td>
+<td>55μs</td>
+</tr>
+<tr>
+<td>Improved Jacobi [130]</td>
+<td>65k</td>
+<td>48</td>
+<td>352</td>
+<td>200MHz</td>
+<td>52μs</td>
+</tr>
+<tr>
+<td><strong>New method (P=2)</strong></td>
+<td><strong>28k</strong></td>
+<td>48</td>
+<td>288</td>
+<td>250MHz</td>
+<td><strong>41.8μs</strong></td>
+</tr>
+<tr>
+<td>New method (P=4)</td>
+<td>46k</td>
+<td>90</td>
+<td>640</td>
+<td>250MHz</td>
+<td>38μs</td>
+</tr>
+<tr>
+<td>New method (P=8)</td>
+<td>73k</td>
+<td>128</td>
+<td>1740</td>
+<td>250MHz</td>
+<td>36μs</td>
+</tr>
+</tbody>
+</table>
+<p><strong>表2.1 五种高性能方法的硬件资源消耗</strong></p>
+<ul>
+<li><span class="arithmatex">\(P=2\)</span> 时新方法的 LUT 消耗最少（28k），因为主要操作为矩阵乘法而非逻辑电路</li>
+<li>Fast CORDIC 的 LUT 最多（81k），因为 CORDIC 主要由 LUT 逻辑电路实现</li>
+<li>DSP48E1 消耗：新方法显著低于 QR 类方法（利用了旋转矩阵稀疏性减少冗余计算）</li>
+<li>时延随并行度增大而减小（<span class="arithmatex">\(P=2\)</span>：41.8μs → <span class="arithmatex">\(P=8\)</span>：36μs）</li>
+</ul>
+<h3 id="242">2.4.2 数值性能<a class="headerlink" href="#242" title="Permanent link">&para;</a></h3>
+<p><strong>矩阵重建误差</strong>定义为：</p>
+<div class="arithmatex">\[
+\mathbf{E}_r = | \mathbf{B} - \mathbf{V}^H \boldsymbol{\Sigma} \mathbf{V} | \tag{2.21}
+\]</div>
+<p><strong>特征值计算误差</strong>定义为：</p>
+<div class="arithmatex">\[
+\mathbf{E}_{eig} = | \operatorname{diag}(\boldsymbol{\Sigma}_M) - \operatorname{diag}(\boldsymbol{\Sigma}_F) | \tag{2.22}
+\]</div>
+<p><strong>特征向量正交性</strong>定义为：</p>
+<div class="arithmatex">\[
+\mathbf{E}_v = | \mathbf{I} - \mathbf{V}^H \mathbf{V} | \tag{2.23}
+\]</div>
+<p>其中 <span class="arithmatex">\(\boldsymbol{\Sigma}_M\)</span> 和 <span class="arithmatex">\(\boldsymbol{\Sigma}_F\)</span> 分别是 MATLAB EIG 和 FPGA 得到的特征值矩阵。</p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/dcefeb6247585ad432fa53add61422573694f6aaf9023430283496638c70dab1.jpg" /></p>
+<p><strong>(a) QR algorithm 矩阵重建误差</strong></p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/7ca11101e8b95df36d1e9c4ef3927941d0ebfc81fe6047baae34a4f0b7f515c8.jpg" /></p>
+<p><strong>(b) Improved QR algorithm [119] 矩阵重建误差</strong></p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/8099b57ff1306e8086d2508c65ada0fb42421649f87c868e510561fba83a009f.jpg" /></p>
+<p><strong>(c) 本章新方法 矩阵重建误差</strong></p>
+<p><strong>图2.8 矩阵重建误差对比</strong></p>
+<p>实验结论：
+- <strong>矩阵重建误差</strong>：新方法 &lt; Improved QR &lt; QR（新方法性能最佳）
+- <strong>特征值计算误差</strong>：新方法 &lt; Improved QR &lt; QR（新方法精度最高）
+- <strong>特征向量正交性</strong>：QR 算法最优，但新方法的特征值精度显著优于 QR 类方法</p>
+<h2 id="25-doa">2.5 基于 DOA 估计的应用结果<a class="headerlink" href="#25-doa" title="Permanent link">&para;</a></h2>
+<p>将新方法应用于 16 通道、8 信源的 MUSIC 算法 DOA 估计（SNR = -10dB，快拍数 1024，步长 0.01°）。</p>
+<h4 id="16-times-16">硬件资源消耗（<span class="arithmatex">\(16 \times 16\)</span> 复矩阵）<a class="headerlink" href="#16-times-16" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>LUTs</th>
+<th>DSP48E1</th>
+<th>时延</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QR algorithm</td>
+<td>64k</td>
+<td>2210</td>
+<td>620μs</td>
+</tr>
+<tr>
+<td>Improved QR</td>
+<td>60k</td>
+<td>2184</td>
+<td>584μs</td>
+</tr>
+<tr>
+<td>Improved Jacobi</td>
+<td>72k</td>
+<td>1264</td>
+<td>600μs</td>
+</tr>
+<tr>
+<td><strong>New method (P=2)</strong></td>
+<td><strong>50k</strong></td>
+<td>1840</td>
+<td><strong>566μs</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>表2.2 DOA估计实验硬件资源消耗</strong></p>
+<p>新方法的硬件资源消耗最少，时延最小。数值计算结果显示：新方法得到特征向量正交性最佳，伪倒谱误差幅值最小，谱峰最尖锐（噪声子空间与信号子空间正交性最好）。</p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/641bb5ec6af960946ac99f53bfb5698b66d2b70f06e0919525d4dcbc81fbdc50.jpg" /></p>
+<p><strong>(a) QR algorithm 的伪倒谱</strong></p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c890e0004ac4072082bba580e4060f4644b261c37715def8b5b891be374b9676.jpg" /></p>
+<p><strong>(b) Improved QR algorithm [119] 的伪倒谱</strong></p>
+<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/42e46a2032a205c76aa735a59c0f4598142c3796e33da31cd723a6e7fd6b0e62.jpg" /></p>
+<p><strong>(c) 本章新方法的伪倒谱</strong></p>
+<p><strong>图2.12(a)-(c) 基于三种方法实现MUSIC算法的伪倒谱</strong></p>
+<h2 id="26">2.6 结论<a class="headerlink" href="#26" title="Permanent link">&para;</a></h2>
+<p>本章提出了一种基于 FPGA 的并行双边 Jacobi 旋转矩阵特征值分解新方法，核心创新点：</p>
+<ol>
+<li><strong>利用旋转矩阵稀疏性</strong>：无需 CORDIC 和 BLV 脉动阵列，通过非零元素与对应行/列向量相乘简化矩阵乘法，显著降低运算量</li>
+<li><strong>复厄米特矩阵支持</strong>：通过变形处理使双边 Jacobi 算法适用于复矩阵特征值分解</li>
+<li><strong>灵活并行度</strong>：行式读取方式支持 <span class="arithmatex">\(P = 2, 4, 8\)</span> 等不同并行度，适应不同硬件资源约束</li>
+<li><strong>单精度浮点运算</strong>：充分利用 FPGA 乘法器提高数值精度</li>
+</ol>
+<p>实验结果表明，新方法在硬件资源消耗（LUT 减少 40%~65%）、时延（降低 15%~25%）和数值精度（重建误差和特征值误差均小于对比方法）方面均具有明显优势。应用于 DOA 估计问题时，新方法的伪倒谱谱峰最尖锐，噪声子空间正交性最佳。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/katex.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+    
+  </body>
+</html>
