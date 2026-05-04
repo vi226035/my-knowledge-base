@@ -1,0 +1,995 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="信号处理与 FPGA 学习笔记">
+      
+      
+        <meta name="author" content="你自己">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>基于神经网络的全双工干扰机自干扰对消方法 - 我的知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的知识库" class="md-header__button md-logo" aria-label="我的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              基于神经网络的全双工干扰机自干扰对消方法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的知识库" class="md-nav__button md-logo" aria-label="我的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号处理
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号处理
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/DDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E4%B8%AD%E9%A2%91%E6%8E%A5%E6%94%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达数字信号中频接收
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E6%A3%80%E6%B5%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达信号检测
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E8%B0%83%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达信号调制类型识别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    矩阵分解
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3/%E5%B9%B6%E8%A1%8C%E5%8F%8C%E8%BE%B9Jacobi%E6%97%8B%E8%BD%AC%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并行双边Jacobi旋转特征值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../FPGA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">基于神经网络的全双工干扰机自干扰对消方法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>朱虹宇1，2，胡卫东1，2，王 超1，，施庆展1，张曦蒙1，2，袁乃昌1，2</p>
+<p>（1．国防科技大学电子科学学院，湖南 长沙410003；</p>
+<p>2．国防科技大学自动目标识别国家重点实验室，湖南 长沙410003）</p>
+<p>摘 要：针对复杂而强的非线性自干扰信号的对消问题，分析全双工系统中发射泄露产生的自干扰信号的组成及其非线性特性，基于多级隔离和对消自干扰的思想，提出一种数字域神经网络方法。神经网络通过快速学习和感知侦收自干扰信道模型参数，能有效地对消泄露进来的自干扰信号。仿真实验结果表明，与传统的线性对消和数字对消方法相比，所提方法能够快速适应雷达信号的变化，具有更强的自干扰抑制能力，为改善全双工干扰机的性能提供了技术途径。</p>
+<p>关键词：全双工干扰机；大功率信号；非线性特性；雷达信号变化；自干扰抑制能力</p>
+<p>中图分类号：TN974</p>
+<p>文献标志码：A</p>
+<p>犇犗犐：10．12305／j．issn．1001506X．2025．01．02</p>
+<h1 id="_2">犖犲狌狉犪犾狀犲狋狑狅狉犽犫犪狊犲犱狊犲犾犳犻狀狋犲狉犳犲狉犲狀犮犲犮犪狀犮犲犾犾犪狋犻狅狀犪狆狆狉狅犪犮犺犳狅狉犳狌犾犾犱狌狆犾犲狓犼犪犿犿犲狉<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h1>
+<p>ZHU Hongyu <span class="arithmatex">\(1 \cdot 2\)</span> ，HU Weidong1，2，WANGChao1，，SHIQingzhan1，ZHANGXimeng1，2，YUANNaichang1，2</p>
+<p>（1 ．犆狅犾犾犲犵犲 狅犳 犈犾犲犮狋狉狅狀犻犮 犛犮犻犲狀犮犲 犪狀犱 犜犲犮犺狀狅犾狅犵狔 ，犖犪狋犻狅狀犪犾 犝狀犻狏犲狉狊犻狋狔 狅犳 犇犲犳犲狀狊犲 犜犲犮犺狀狅犾狅犵狔 ，Changsha 4l0o03，China； 2. National Key Laboratory of Automatic Target Recognition,National Uniuersity of Defense Technology，Changsha 4looo3，China)</p>
+<p>犃犫狊狋狉犪犮狋：Inviewoftheproblemofcancellationthecomplexandstrongnonlinearselfinterferencesignals， thepaperanalysesthecompositionandnonlinearcharacteristicsoftheselfinterferencesignalsgeneratedbythe leakageinfullduplexsystems．Andadigitaldomainneuralnetworkapproachisproposedbasedontheideaof multilevelisolationandselfinterferencecancellation．Theneuralnetworkquicklylearnsandperceivesthe parametersoftheselfinterferencechannelmodel，effectivelycancelingtheleakedselfinterferencesignals Simulationresultsshowthatcomparedtotraditionallinearcancellationanddigitalcancellationmethods，the proposedapproachcanrapidlyadapttochangesinradarsignals，exhibitingstrongerselfinterferencesuppression capabilityandprovidingatechnologicalpathwayforenhancingtheperformanceoffullduplexjammer</p>
+<p>犓犲狔狑狅狉犱狊：fullduplexjammer；highpowersignal；nonlinearcharacteristics；changesinradarsignals； selfinterferencesuppressioncapability</p>
+<h1 id="0">0 引 言<a class="headerlink" href="#0" title="Permanent link">&para;</a></h1>
+<p>雷达与干扰机之间的对抗是电磁对抗领域的核心问题。为了应对雷达信号波形快速变化的挑战，干扰机需要升级为全双工模式。全双工干扰机能够实时侦测当前雷达</p>
+<p>信号，并利用调制算法生成干扰信号，从而制造虚假目标，以掩盖或欺骗雷达探测，保护真实目标。</p>
+<p>然而，由于尺寸限制和系统复杂的非线性效应，自干扰信号 难 以 消 除［13］。例 如，同 相 正 交 相 位 （inphaseandquadraturephase，IQ）不平衡、高斯随机噪声、相位噪声</p>
+<p>（phasenoise，PN）和高阶非线性自干扰信号都难以处理［46］。为了解决这一问题，可以采用以下两种方法：一是通过新算法和新系统架构设计，将自干扰降至接收机噪声底限以下；二是通过多次转发，以迭代方式逐步降低自干扰。与全双工通信系统相比，全双工干扰机无需实时解码信号数据，对自干扰消除的要求相对较低。为了实现理想的干扰效果，可以采用多域自干扰对消方法，降低接收机中剩余自干扰信号对雷达信号侦收的干扰［710］。</p>
+<p>自干扰信号抑制方法主要分为传播域自干扰抑制、模拟域自干扰对消和数字域自干扰对消三类［1113］。传播域和模拟域方法旨在避免接收机底噪增加和接收机饱和［1416］。针对数字域中的剩余自干扰对消问题，可以采用传统的非线性建模方法［1719］和深度学习方法［2022］。与计算机视觉和语言处理等领域使用的大型模型不同，全双工系统中的神经网络较小，所需训练数据也较少。</p>
+<p>从长时间来看，环境的多径效应和功率放大器（poweramplifier，PA）的工作状态都是动态变化的，因此自干扰信道被认为是时缓变的，具有时变特性［2326］。即使在相同信道中工作，也需要周期性地重新估计自干扰信道［2729］。此外，全双工自干扰抑制方法面临三大挑战：准确建模复杂的射频非理想因素、快速自适应时变和频变自干扰信道的方法，以及实现复杂自干扰信道的高抑制性能的方法［3034］。深度学习方法能够在提高自干扰抑制性能的同时，保持收敛速度的平衡。</p>
+<p>文献［1］对带内全双工（inbandfullduplex，IBFD）天线技术进行综述，为促进IBFD系统天线技术的发展做出了贡献。在数字域自干扰对消的必要性及其时机问题上，文献［2］提出独到的观点，并通过实验数据进行充分验证。文献［3］在提升自干扰抑制性能方面取得显著进展，提出理论边界，并通过数值仿真证明其算法的卓越性能，接近理论极限。与传统自适应算法相比，该算法具有更高的自干扰抑制性能。</p>
+<p>为实现理想的自干扰抑制效果，本文提出一种方法。首先，通过分离发射天线和接收天线，有效降低接收机中的自干扰，避免接收机饱和。此外，通过采用模拟域单抽头对消技术，进一步抑制线性自干扰信号。接着，在数字域中进一步消除非线性自干扰杂散信号，将自干扰降至接收机噪声底限以下。</p>
+<p>本文的其他部分安排如下：第1节详细地对非线性系统进行建模；第2节给出了本文提出方法的具体数字域对消算法；第3节进行了关键时间节点的切片分析；第4节和第5节分别呈现数值仿真和实验实测的结果和结论。</p>
+<h1 id="1">1 系统模型<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<h1 id="11">1．1 雷达系统非线性模型<a class="headerlink" href="#11" title="Permanent link">&para;</a></h1>
+<p>如图1所示，本文提出一种全双工干扰机自干扰抑制方法。与传统方法不同的是，该方法充分考虑系统的非线性</p>
+<p>效应，对系统进行充分的非线性建模，该框架主要包括：模拟数字转换器（analogtodigitalconversion，ADC）、数字模拟转换器（digitaltoanalogconversion，DAC）、低通滤波器（lowpassfilter，LPF）、IQ混频器、本地振荡器（localoscillator，LO）、PA、低噪声放大器（lownoiseamplifier，LNA）、发射天线（transmitantenna，TX）和接收天线（receiveantenna，RX）。此外，还包括加性高斯白噪声（additionalGaussianwhitenoise，AGWN）本振引入的PN。雷达信号作为全双工干扰机的感兴趣信号（signalofinterest，SOI）进入接收机，成为干扰机自干扰对消后想要提取的信号。</p>
+<p><img alt="" src="../images/8f3f69360d65c7480034356236cc7e02ae8c99dfd075f9832859b8992e85fdee.jpg" /><br />
+(a)传统的全双工系统</p>
+<p><img alt="" src="../images/c533359358e6c0202a15944f1e69e75e1d9c1ae745b91e2f9dbdad4e0e6d0a4a.jpg" /><br />
+(a) Traditional full-duplex system <br />
+(b)本文提出的全双工系统架构<br />
+(b) The proposed full-duplex system architecture <br />
+图1 全双工系统架构<br />
+Fig．1 Fullduplexsystemarchitecture</p>
+<p>数值仿真结果表明，通过二次转发，可形成较理想的假目标，本文提出的方法可以实现约110dB左右的自干扰抑制性能。本文还提出两种神经网络结构 AI1（artificialintelligence1）和 AI2（artificialintelligence2），神经网络方法比传统的方法具有更优的实时性性能，其中 AI2具有更高的实时性。搭建了实验平台，实验结果表明 AI2具有更强的自干扰抑制性能和实时性性能。</p>
+<h1 id="111">1．1．1 雷达发射通道<a class="headerlink" href="#111" title="Permanent link">&para;</a></h1>
+<p>本文采用数字信号模型来描述各个通道中的非线性效应。在数字域中，基带线性调频（linearfrequencymodulated，LFM）信号可以表示为</p>
+<div class="arithmatex">\[
+x [ n ] = \mathrm {e} ^ {\pi b n ^ {2}} \tag {1}
+\]</div>
+<p>式中： <span class="arithmatex">\(n\)</span> 代表采样索引。LFM 率可以表示为 <span class="arithmatex">\(k = B / T _ { \mathrm { F M } }\)</span> ，犅表示信号带宽， <span class="arithmatex">\(T _ { \mathrm { F M } }\)</span> 表示LFM 时间。</p>
+<p>随后，信号通过IQ混频器进行处理。由于器件的精度有限，引入了共轭信号分量。同时，本振的频偏效应也会在IQ混频器的输出端引入 PN。IQ 混频器的IQ 不平衡效应，可以使用以下数学形式表示：</p>
+<div class="arithmatex">\[
+x _ {\mathrm {I Q}, \mathrm {t x}} [ n ] = x [ n ] + \eta_ {\mathrm {t x}} x ^ {*} [ n ] \tag {2}
+\]</div>
+<p>其中，共轭分量的强度为 <span class="arithmatex">\(\eta _ { \mathrm { t x } }\)</span> 。IQ混频器质量，可以用镜像反射比例（imagerejectionratio，IRR）来衡量［3］，其数学表示式可以表示为 <span class="arithmatex">\(\mathrm { I R R } { = } \mid \eta _ { \mathrm { t x } } \mid { - 2 }\)</span> 。由于本振的频率和相位误差引起的PN可以表示为</p>
+<div class="arithmatex">\[
+x _ {\mathrm {P N}, \mathrm {t x}} [ n ] = x _ {\mathrm {I Q}, \mathrm {t x}} [ n ] \mathrm {e} ^ {\mathrm {j} (2 \pi f _ {0} n + \Phi (n))} \tag {3}
+\]</div>
+<p>式中： <span class="arithmatex">\(\Phi ( \cdot )\)</span> ）表示PN； <span class="arithmatex">\(f _ { 0 }\)</span> 表示载波频率。信号经过非线性系统，从基带信号上变频为射频信号。假设 LO使用的是自激振荡器，可以将其PN建模为</p>
+<div class="arithmatex">\[
+\Phi (t) - \Phi (t + \tau) = \Phi (\tau) \sim \mathrm {N} (0, 4 \pi \beta \tau) \tag {4}
+\]</div>
+<p>式中： <span class="arithmatex">\(\beta\)</span> 代表PN洛伦兹谱的3dB带宽； <span class="arithmatex">\(\tau\)</span> 是间隔时间； <span class="arithmatex">\(\varPhi ( \tau )\)</span> 表示PN函数。PN函数服从高斯分布。</p>
+<p>信号经过PA进行功率放大。然而，由于PA往往工作于非线性区域，信号在发射过程中会受到非线性效应的影响引入谐波信号。在本系统中，不考虑功放的记忆效应，使用Rapp模型对功放进行建模。Rapp模型是一种非线性模型，可以表示为</p>
+<div class="arithmatex">\[
+f _ {\mathrm {P A}} \left(x _ {\mathrm {I Q}, \mathrm {t x}} [ n ]\right) = \frac {g \cdot x _ {\mathrm {I Q} , \mathrm {t x}} [ n ]}{\left\{1 + \left(\frac {g \cdot | x _ {\mathrm {I Q} , \mathrm {t x}} [ n ] |}{V _ {\mathrm {s a t}}}\right) ^ {2 s} \right\} ^ {\frac {1}{2 s}}} \tag {5}
+\]</div>
+<p>式中： <span class="arithmatex">\(V _ { \mathrm { s a t } } \setminus g\)</span> 和 <span class="arithmatex">\(s\)</span> 分别表示饱和电压、信号增益和平滑因子。信号经过PA，其输出信号可以表示为</p>
+<div class="arithmatex">\[
+x _ {\mathrm {P A}, \mathrm {t x}} [ n ] = f _ {\mathrm {P A}} \left(x _ {\mathrm {P N}, \mathrm {t x}} [ n ]\right) \tag {6}
+\]</div>
+<p>此外，根据PA的输入输出特性曲线，说明功放输出的幅度和相位失真都不依赖于输入相位［3］。因此，PA的输出可以与 <span class="arithmatex">\(\mathrm { P N } \ \varPhi ( \cdot )\)</span> ）解耦，可以表示为</p>
+<div class="arithmatex">\[
+x _ {\mathrm {P A}, \mathrm {t x}} [ n ] = \tilde {x} _ {\mathrm {P A}, \mathrm {t x}} [ n ] \mathrm {e} ^ {\mathrm {j} \Phi (n)} \tag {7}
+\]</div>
+<p>式中： <span class="arithmatex">\(\tilde { x } _ { \mathrm { P A , t x } } \big [ n \big ] = f _ { \mathrm { P A } } \left( x _ { \mathrm { I Q , t x } } \big [ n \big ] \right)\)</span> ）。发射机由于系统的非理想因素，会引入随机噪声。在本文中，简化为 AWGN，可以表示为</p>
+<div class="arithmatex">\[
+x _ {\mathrm {A W G N}} [ n ] = x _ {\mathrm {P A}, \mathrm {t x}} [ n ] + z [ n ] \tag {8}
+\]</div>
+<p>式中： <span class="arithmatex">\(z [ n ]\)</span> ］表示 AWGN， <span class="arithmatex">\(z [ n ]\)</span> ］的实部和虚部可以分别表示为</p>
+<div class="arithmatex">\[
+\mathrm {R} \sim \mathrm {C N} \left(0, P _ {\mathrm {A W G N}}\right) \tag {9}
+\]</div>
+<div class="arithmatex">\[
+\Im \sim \mathrm {C N} (0, P _ {\mathrm {A W G N}}) \tag {10}
+\]</div>
+<p>在本文中，简化发射系统的 AWGN功率比理想发射信号低 <span class="arithmatex">\(6 0 ~ \mathrm { d B }\)</span> 。</p>
+<h1 id="112">1．1．2 雷达无线通道<a class="headerlink" href="#112" title="Permanent link">&para;</a></h1>
+<p>雷达发射信号会作用于探测目标和干扰机的接收机。目标反射一部分电磁波能量回到雷达接收机，其反射强度与雷达散射截面积（radarcrosssection，RCS）有关。雷达发射功率为</p>
+<div class="arithmatex">\[
+P _ {r} = \frac {P _ {t} G _ {t} G _ {r} \lambda^ {2} \sigma}{(4 \pi) ^ {3} R ^ {4}} \tag {11}
+\]</div>
+<p>式中： <span class="arithmatex">\(\sigma\)</span> 为 RCS；电磁波的波长可以表示为 <span class="arithmatex">\(\lambda { = } _ { \operatorname { c } } / f\)</span> ；TX和RX增益分别为 <span class="arithmatex">\(G _ { t }\)</span> 和 <span class="arithmatex">\(G _ { r }\)</span> ；犚 为探测目标距离雷达的距离。式（11）主要用于仿真时对感兴趣目标回波功率估计，但在实际情况下，雷达的感兴趣回波功率是未知的。唯有采用探扰一体化认知传感器或分布式组网平台的数据融合，才能较为精确地探测雷达的发射功率、定位雷达的空间位置，并实时获取目标位置的信息。雷达信号，经过路径损耗，达到干扰机接收机时的能量衰减（以dB表示）可以用下面的公式进行表示：</p>
+<div class="arithmatex">\[
+L = 2 0 \lg \frac {2 \pi d}{\lambda} \tag {12}
+\]</div>
+<p>式中：犱 表示雷达距离干扰机接收机的距离。</p>
+<h1 id="113">1．1．3 雷达接收通道<a class="headerlink" href="#113" title="Permanent link">&para;</a></h1>
+<p>通过LNA提升探测距离。然而，进入雷达接收机的信号包括全双工干扰机的转发干扰信号和目标回波信号，LNA在放大回波信号的同时也会放大转发干扰信号。LNA的输出信号通过IQ混频器将其下变频至基带信号。雷达接收机天线接收到的信号可以表示为</p>
+<div class="arithmatex">\[
+y _ {\text {r a d a r}} [ n ] = y _ {t} [ n ] + y _ {\text {j a m m e r}} [ n ] \tag {13}
+\]</div>
+<p>式中： <span class="arithmatex">\(y _ { t } \left[ n \right]\)</span> ］和 <span class="arithmatex">\(y _ { \mathrm { J a m m e r } } [ n ]\)</span> ］分别为目标回波和转发干扰，其功率强度可以从第1．1．1节中得到估算。</p>
+<p>接收机中的LNA与发射机中的PA使用相同的模型，在此不再详述。LNA在将信号功率放大了30dB的同时，会引入非线性效应。此外，本文采用分离的本振，这意味着当传播域自干扰隔离性能不够时，PN比本振共享更容易导致自干扰抑制性能的恶化。由于非线性效应的存在，LNA的输出信号可以表示为</p>
+<div class="arithmatex">\[
+y _ {\mathrm {L N A}} [ n ] = f _ {\mathrm {L N A}} \left(y _ {\mathrm {r a d a r}} [ n ]\right) \tag {14}
+\]</div>
+<p>接收机引入的高斯随机噪声，在本文中能量为－100dBm，本文中用 AWGN <span class="arithmatex">\(z _ { r } [ n ]\)</span> ］表示：</p>
+<div class="arithmatex">\[
+y _ {\mathrm {A W G N}} [ n ] = y _ {\mathrm {L N A}} [ n ] + z _ {r} [ n ] \tag {15}
+\]</div>
+<p>信号经过IQ混频器进行处理。通过下变频，LNA将输出转换为模拟基带信号。然而，在接收过程中，接收信号会受到接收机PN <span class="arithmatex">\(\boldsymbol { \varPhi } ^ { \prime } \left( \boldsymbol { n } \right)\)</span> ）的影响，这用数学方式可以表示为</p>
+<div class="arithmatex">\[
+y _ {\mathrm {P N}} [ n ] = y _ {\mathrm {A W G N}} [ n ] \mathrm {e} ^ {- \mathrm {j} (2 \pi f _ {0} n + \Phi^ {\prime} (n))} \tag {16}
+\]</div>
+<p>接收信号受到接收机的IQ不平衡影响，可以用数学方式表示为</p>
+<div class="arithmatex">\[
+y [ n ] = y _ {\mathrm {P N}} [ n ] + \eta_ {\mathrm {r x}} y _ {\mathrm {P N}} ^ {*} [ n ] \tag {17}
+\]</div>
+<p>式中： <span class="arithmatex">\(\eta _ { \mathrm { r x } }\)</span> 表示接收机中由于IQ不平衡引入的镜像分量强度。值得注意的是，接收机中的IQ不平衡和PN的顺序与发射机中是相反的，即IQ不平衡发生在PN之后。为验证干扰机对雷达的作用效果，在雷达接收机中对信号进行匹配滤波。匹配滤波的原理如下所示：</p>
+<div class="arithmatex">\[
+y _ {\text {o u t}} [ n ] = y [ n ] * x [ n ] \tag {18}
+\]</div>
+<p>式中：表示卷积运算符。</p>
+<h1 id="12">1．2 全双工干扰机系统非线性模型<a class="headerlink" href="#12" title="Permanent link">&para;</a></h1>
+<p>由于全双工干扰机模型与雷达模型有重合之处，本节中将重复部分省略。重点阐述两个系统模型的不同之处。</p>
+<h1 id="121">1．2．1 干扰发射通道<a class="headerlink" href="#121" title="Permanent link">&para;</a></h1>
+<p>干扰发射通道与雷达发射通道模型类似，因此直接给出干扰机的功率放大后的数学表示为</p>
+<div class="arithmatex">\[
+x _ {\mathrm {A W G N}, J} [ n ] = x _ {\mathrm {P A}, \mathrm {t x}, J} [ n ] + z _ {J} [ n ] \tag {19}
+\]</div>
+<p>式中： <span class="arithmatex">\(\mathcal { X } _ { \mathrm { P A } , \mathrm { t x } , J }\)</span> ［狀］表示全双工干扰机的功放输出信号； <span class="arithmatex">\(z _ { J } \left[ n \right]\)</span> 表示干扰机发射模块引入的 AWGN，其输出信号包括IQ不平衡，PN和功放非线性3种非理想因素。</p>
+<h1 id="122">1．2．2 无线通道<a class="headerlink" href="#122" title="Permanent link">&para;</a></h1>
+<p>全双工干扰机与半双工雷达不同，需要考虑自干扰这一因素。进入全双工干扰机的信号主要分为两个部分：雷达信号作为干扰机的SOI进入干扰机的接收机；另一部分是自干扰信号。由于空间限制，首先将自干扰信号的功率降低至接收机的动态范围内，以避免接收机饱和。全双工收发系统面临的挑战在于能够实时应对时变信道，并对变化后的新信道进行实时建模和快速训练，以最大程度地减少训练的时间开销。</p>
+<p>全双工干扰机具有突出的优势，具有更少的应对波形捷变的响应时间，能够转发完整波形适应智能波形对抗场景。为了减轻模拟域和数字域自干扰消除的压力，采用天线分离的方法，天线分离产生的自干扰衰减为 <span class="arithmatex">\(4 0 \ \mathrm { d B }\)</span> 。考虑到室内环境的多径反射效应，使用 <span class="arithmatex">\(h _ { \mathrm { t x } } [ l ]\)</span> 对发射机和接收机之间的无线信道进行建模，经过无线信道的自干扰信号可以用数学式表示为</p>
+<div class="arithmatex">\[
+y _ {\mathrm {a n t 1}} [ n ] = h _ {\mathrm {t x}} [ l ] * \left(\tilde {x} _ {\mathrm {P A}, \mathrm {t x}} [ n ] \mathrm {e} ^ {\mathrm {j} \Phi (n - \tau_ {\mathrm {t x}} / T _ {s})}\right) \tag {20}
+\]</div>
+<p>式中： <span class="arithmatex">\(\tau _ { \mathrm { t x } }\)</span> 表示发射机和接收机之间的传播延迟； <span class="arithmatex">\(T _ { s }\)</span> 表示采样时间。此外，雷达信号经过无线信道衰减并进入干扰机的接收机，则进入全双工干扰机接收机中的信号可以表示为</p>
+<div class="arithmatex">\[
+y _ {\text {a n t}} [ n ] = y _ {\text {a n t} 1} [ n ] + y _ {\text {S O I}} [ n ] \tag {21}
+\]</div>
+<p>式中： <span class="arithmatex">\(y _ { \mathrm { S O I } } [ n ]\)</span> 为全双工干扰机的SOI即雷达信号。</p>
+<h1 id="123">1．2．3 侦察接收通道<a class="headerlink" href="#123" title="Permanent link">&para;</a></h1>
+<p>为了降低数字域中自干扰对消的压力，首先在天线处对自干扰信号的线性部分进行单抽头实时对消。其他非线</p>
+<p>性部分将在接收机的数字域中进行对消。天线处自干扰对消点的输出信号可以表示为</p>
+<div class="arithmatex">\[
+y _ {\text {c a n c e l}} [ n ] = y _ {\text {a n t}} [ n ] + \tilde {y} _ {\text {l i n e a r}} [ n ] \tag {22}
+\]</div>
+<p>式中： <span class="arithmatex">\(\widetilde { y } _ { \mathrm { l i n e a r } } [ n ]\)</span> ］为单抽头实时对消信号； <span class="arithmatex">\(y _ { \mathrm { a n t } } \left[ n \right]\)</span> ］表示进入接收机中的信号，其中包括雷达信号。由于属于实时对消，因此该抽头的延迟应与直接耦合通道延迟匹配。信号进入LNA和IQ混频器与雷达系统模型相同，在此省略。因为采用直接转发干扰，直接将数字域接收到的信号转发出去，而不进行复杂的波形调制。数字域转发信号可以表示为</p>
+<div class="arithmatex">\[
+y _ {J} [ n ] = y _ {\mathrm {P N}, J} [ n ] + \eta_ {\mathrm {r x}, J} y _ {\mathrm {P N}, J} ^ {*} [ n ] \tag {23}
+\]</div>
+<p>式中： <span class="arithmatex">\(\eta _ { \mathrm { r x } , J }\)</span> 代表接收机中IQ混频器的镜像分量的幅度。</p>
+<h1 id="2">2 两种数字域自干扰对消方法<a class="headerlink" href="#2" title="Permanent link">&para;</a></h1>
+<h1 id="21">2．1 传统的信号模型建模及模型求解<a class="headerlink" href="#21" title="Permanent link">&para;</a></h1>
+<p>在这项工作中，为求解非线性自干扰信道参数采用了并行 Hammerstein模型。该模型没有记忆性，但可以准确描述PA的非线性互调失真特性。该模型的数学表示式如下：</p>
+<div class="arithmatex">\[
+x _ {\mathrm {P A}, \mathrm {t x}} [ n ] \approx \sum_ {p = 1, 3, \dots} ^ {\infty} \alpha_ {p} x _ {\mathrm {I Q}, \mathrm {t x}} [ n ] \mid x _ {\mathrm {I Q}, \mathrm {t x}} [ n ] \mid^ {p - 1} \tag {24}
+\]</div>
+<p>非线性失真系数 <span class="arithmatex">\(\alpha _ { \phi }\)</span> 表示 <span class="arithmatex">\(P\)</span> 阶非线性失真系数。通过利用信号的共轭形式，可以将 PA 输出信号的并行 Hammerstein逼近表示为以下形式：</p>
+<div class="arithmatex">\[
+x _ {\mathrm {P A}, \mathrm {t x}} [ n ] \approx \sum_ {p = 1, 3, \dots} ^ {\infty} \sum_ {q = 0} ^ {p} \alpha_ {p} \varsigma_ {l, p - q} x ^ {q} [ n ] \left(x ^ {*} [ n ]\right) ^ {p - q} \tag {25}
+\]</div>
+<p>实际求解和运算时，不可能求解无限高阶的近似，因此此处真实求解时存在求解近似，其中 <span class="arithmatex">\(\varsigma _ { q , \boldsymbol { p } - \boldsymbol { q } }\)</span> 包括发射机IQ不平衡系数 <span class="arithmatex">\(\eta _ { \mathrm { t x } }\)</span> 。虽然发射机的PN被包括在内，但在所提出的算法中将其忽略，即 <span class="arithmatex">\(\Phi ( \cdot ) \approx 0\)</span> 。估计是一项具有挑战性的任务。为了简化数学表达，定义 <span class="arithmatex">\(\Psi _ { P , q } [ n ]\)</span> ］如下：</p>
+<div class="arithmatex">\[
+\Psi_ {p, q} [ n ] = x ^ {q} [ n ] \left(x ^ {*} [ n ]\right) ^ {p - q} \tag {26}
+\]</div>
+<p>则PA的输出信号可以重写为</p>
+<div class="arithmatex">\[
+x _ {\mathrm {P A}, \mathrm {t x}} [ n ] \approx \sum_ {p = 1, 3, \dots} ^ {\infty} \sum_ {q = 0} ^ {p} \alpha_ {p} \varphi_ {q, p - q} \Psi_ {p, q} [ n ] \tag {27}
+\]</div>
+<p>该模型的参数包括了IQ不平衡和PA的非线性。因此，该模型能够有效地减轻这两种射频非理想因素和多径效应引起的自干扰。然而，值得注意的是，该模型的求解没有考虑PN、高斯白噪声、ADC和DAC的量化噪声的影响。此外，在模型求解时，干扰机的剩余自干扰中，不存在SOI。在全双工系统中，接收机在数字域内的自干扰信号可以表示为</p>
+<div class="arithmatex">\[
+y [ n ] = g _ {\mathrm {L N A}} \sum_ {p = 1, 3, \dots} ^ {P} \sum_ {q = 0} ^ {p} \left\{d _ {p, q} [ t ] * \Psi_ {p, q} [ n ] \right\} + z _ {\text {a l l}} [ n ] \tag {28}
+\]</div>
+<p>式中：</p>
+<div class="arithmatex">\[
+d _ {p, q} [ l ] = \alpha_ {p} \varsigma_ {q, p - q} h _ {\mathrm {t x}} [ l ] + \eta_ {\mathrm {t x}} \alpha_ {p} \varsigma_ {q, p - q} ^ {*} h _ {\mathrm {t x}} ^ {*} [ l ] \tag {29}
+\]</div>
+<p><span class="arithmatex">\(h _ { \mathrm { t x } } [ l ]\)</span> 表示主发射天线与接收天线之间的无线信道 <span class="arithmatex">\(z _ { \mathrm { a l l } } \left[ n \right]\)</span> 表示所有加性噪声，包括 <span class="arithmatex">\(z [ n ]\)</span> ］和模型之外的非线性失真。</p>
+<p>通过有限信号序列构建非线性特征信道矩阵，并利用时域最小二乘（leastsquares，LS）方法对特定样本进行模型参数估计。然而，估计时忽略了 LNA的影响，因此在数字域中接收到的自干扰信号可以表示为</p>
+<div class="arithmatex">\[
+y [ n ] = \sum_ {p = 1, 3, \dots} ^ {P} \sum_ {q = 0} ^ {p} \left\{d _ {p, q} [ l ] * \Psi_ {p, q} [ n ] \right\} + z _ {\text {a l l}} [ n ] \tag {30}
+\]</div>
+<p>当观测到 <span class="arithmatex">\(M\)</span> 个样本时，接收到的剩余自干扰信号序列向量记为 <span class="arithmatex">\(\textbf {  { y } }\)</span> ，可以表示为</p>
+<div class="arithmatex">\[
+\mathbf {y} = \mathbf {X} \mathbf {h} + \mathbf {z} \tag {31}
+\]</div>
+<p>式中：</p>
+<div class="arithmatex">\[
+\mathbf {y} = \left[ y ^ {\prime} [ n ], y ^ {\prime} [ n + 1 ], \dots , y ^ {\prime} [ n + M - 1 ] \right] ^ {\mathrm {T}} \tag {32}
+\]</div>
+<div class="arithmatex">\[
+\boldsymbol {h} = \left[ d _ {1, 0} [ 0 ], d _ {1, 0} [ 1 ], \dots , d _ {1, 0} [ L - 1 ], d _ {1, 1} [ 0 ], \dots , \right.
+\]</div>
+<div class="arithmatex">\[
+d _ {1, 1} [ L - 1 ], \dots , d _ {p, q} [ L - 1 ], d _ {p, q} [ L - 1 ] ] ^ {\mathrm {T}} \tag {33}
+\]</div>
+<div class="arithmatex">\[
+\boldsymbol {z} = \left[ z _ {\text {a l l}} [ n ], z _ {\text {a l l}} [ n + 1 ], \dots , z _ {\text {a l l}} [ n + M - 1 ] \right] ^ {\mathrm {T}} \tag {34}
+\]</div>
+<div class="arithmatex">\[
+\boldsymbol {X} = \left[ Y _ {1, 0} [ n, M ], Y _ {1, 0} [ n - 1, M ], \dots , \right.
+\]</div>
+<div class="arithmatex">\[
+Y _ {p, q} [ n - L + 1, M ], \dots , Y _ {p, p} [ n - L + 1, M ] \tag {35}
+\]</div>
+<p>式中： <span class="arithmatex">\(z _ { \mathrm { a l l } } \left[ n \right]\)</span> 代表包括 <span class="arithmatex">\(z [ n ]\)</span> 、估计误差和高于 <span class="arithmatex">\(P\)</span> 阶的非线性失真。因此， <span class="arithmatex">\(\pmb { X }\)</span> 可以表示为一个向量矩阵，具体形式由下式给出：</p>
+<div class="arithmatex">\[
+Y _ {p, q} [ n - L + 1, M ] = \left[ \Psi_ {p, q} [ n - L + 1 ], \right.
+\]</div>
+<div class="arithmatex">\[
+\left. \Psi_ {p, q} [ n - L + 2 ], \dots , \Psi_ {p, q} [ n - L + M ] \right] ^ {\mathrm {T}} \tag {36}
+\]</div>
+<p>模型参数 <span class="arithmatex">\(h\)</span> 使用LS法进行估计，其结果可以表示为</p>
+<div class="arithmatex">\[
+\hat {\boldsymbol {h}} = \arg \min  _ {h} \| \mathbf {y} - \mathbf {X h} \| ^ {2} = \left(\mathbf {X} ^ {\mathrm {H}} \mathbf {X}\right) ^ {- 1} \mathbf {X} ^ {\mathrm {H}} \mathbf {y} \tag {37}
+\]</div>
+<p>该方法的数学核心是寻找一个正交信号空间，在这个特征信号空间中存在着许多相互正交的子特征。通过算法，在这个正交信号空间中找到了复杂的非线性自干扰信号的位置坐标。这个空间可以由参考信号或经过校正的参考信号和自干扰信道特征组成，而特征空间的形成规律是已知的。问题的关键在于转化为在一个更简单、优化的特征空间中寻找解，这个空间的参数更少，从而可以更快地使用优化算法找到复杂且缓慢变化的非线性自干扰信道的特征坐标。由于自干扰信道的参数具有缓慢变化的特性，这意味着需要定期重新估计这些参数，因此需要提高方法的实时性，减少时变性对全双工系统稳定运行的不利影响。</p>
+<h1 id="22">2．2 神经网络数字域自干扰对消<a class="headerlink" href="#22" title="Permanent link">&para;</a></h1>
+<p>全双工系统要求估计周期尽可能短，全双工研究的目标是提出一种有效且快速收敛的网络方法。这种方法既可以解决高精度建模的问题，又需要平衡实时性要求。本文采用两种神经网络结构，仿真数据表明，这些结构都能实现18dB以上的数字域自干扰抑制性能。图2展示了本文提出的两种神经网络结构。当神经元个数较少时，AI2相对于 AI1具有明显的优势。仿真结果表明，AI1和 AI2都能够实现近20dB的数字域自干扰抑制性能，但是 AI2在自干扰抑制性能方面稍微优于 AI1。随着神经元个数的减少，这种性能优势将变得更加明显。</p>
+<p><img alt="" src="../images/74a468dd0819c64ecbdfd6dfa684361daa0f5df2f8c96d793a3ab95c6ef48d69.jpg" /></p>
+<p><img alt="" src="../images/6b974dc8c8b8ccb7947d1e402feac70e44afe9c51887cc110a7ce901e3f733a9.jpg" /><br />
+图2 两种神经网络架构<br />
+Fig．2 Twoneuralnetworkarchitectures</p>
+<h1 id="3">3 关键时间节点切片分析<a class="headerlink" href="#3" title="Permanent link">&para;</a></h1>
+<p>针对波形变化前后的动态过程开展时间切片观测，详情如图2所示，并归纳出5个步骤。其一，步骤1中转发干扰机把携带有先验信息的雷达信号传输至雷达接收机。随后，步骤2里全双工干扰机将剩余自干扰信号（residualselfinterferencesignal，RSI）与雷达信号的混合信号不加区分地予以转发。紧接着，步骤3呈现出雷达信号发生捷变，步骤4则是对捷变波形与剩余自干扰进行转发，步骤5为二次转发全新波形，且这一转发流程会循环往复多次。不管是雷达信号的变动，还是剩余自干扰信号的改变，均会对转发信号的波形产生作用。整个动态进程始终朝着SOI逐步靠近。</p>
+<p><img alt="" src="../images/7defba69f0224df4ead0310f4783fd6ab25806ed5a32769547863fe2747403d3.jpg" /></p>
+<p><img alt="" src="../images/6e5e7bdc3d5a82cc50d17079ee89faafbace4f28814dc847227e11ae62f6b382.jpg" /><br />
+步骤3 雷达波形捷变<br />
+图3 关键时间节点切片<br />
+Fig．3 Keytimeslotslicing</p>
+<h1 id="4">4 数值仿真及性能分析<a class="headerlink" href="#4" title="Permanent link">&para;</a></h1>
+<p>发射天线和接收天线之间的直接耦合可以建模为具有<span class="arithmatex">\(K\)</span> 因子的Rice信道，而多径信道可以建模为瑞利衰落信道。另外，Ω表示总功率，包括直达路径功率和多径反射路径功率。无线信道的模型长度为4，3个多径信号的幅度比为［1，0．1，0．01］。数值仿真参数如表1所示，变化后的雷达LFM信号的参数：载频为 <span class="arithmatex">\(9 . 5 \ \mathrm { G H z }\)</span> ，带宽为 <span class="arithmatex">\(1 . 5 \ \mathrm { G H z }\)</span> 。</p>
+<p>表1 仿真参数<br />
+犜犪犫犾犲1 犛犻犿狌犾犪狋犻狅狀狆犪狉犪犿犲狋犲狉狊   </p>
+<table><tr><td>参数</td><td>取值</td></tr><tr><td>载频频率/GHz</td><td>10</td></tr><tr><td>带宽/GHz</td><td>1</td></tr><tr><td>无线信道长度</td><td>4</td></tr><tr><td>K/dB</td><td>30</td></tr><tr><td>主通道延迟/ns</td><td>2</td></tr><tr><td>IRR/dB</td><td>30</td></tr><tr><td>PN 3 dB带宽/Hz</td><td>50</td></tr><tr><td>PA平滑参数</td><td>3</td></tr><tr><td>回退功率/dB</td><td>0</td></tr><tr><td>接收机底噪/dBm</td><td>-100</td></tr></table>
+
+<p>图4（a）是具有完美信号参数先验转发干扰和目标回波的雷达匹配滤波结果。第1个峰表示目标峰的位置，而第2个峰表示假目标的位置。假目标的数量和位置都可以进行调整。图4（b）是实时转发信号与目标回波的雷达匹配滤波结果。由于仅进行了射频域衰减和模拟域线性对消处理，依然存在较多的剩余自干扰。因此，匹配后的假目标峰值强度会降低。非线性系统的多径效应和非线性效应可能是存在多个假目标峰的主要原因。</p>
+<p><img alt="" src="../images/09627ec7cb9675ed05928d02f0010ec75e77cc2b8b7371a431be712afe7fd7b5.jpg" /><br />
+(a)步骤1中雷达匹配滤波结果</p>
+<p><img alt="" src="../images/a09847721ba64fc633ce9c5ff839428cbb520c48b837d05e7fc7604a299cf69c.jpg" /><br />
+(a) Radar matched filtering result of step 1 <br />
+(b)步骤2中雷达匹配滤波结果 <br />
+(b) Radar matched filtering result of step 2 <br />
+图4 雷达信号参数已知情形<br />
+Fig．4 Knownradarsignalparameters</p>
+<p>在本文中，通过表2详细描述所提出的自干扰对消方法。在表2中，括号内注明了所使用对消方法的适用范围以及该方法所需的时间。自干扰需要实时对消，因此算法实时性十分关键。</p>
+<p>表2 全双工干扰机自干扰对消方法<br />
+犜犪犫犾犲2 犛犲犾犳犻狀狋犲狉犳犲狉犲狀犮犲犮犪狀犮犲犾犾犪狋犻狅狀犪狆狆狉狅犪犮犺犲狊犳狅狉犳狌犾犾犱狌狆犾犲狓犼犪犿犿犲狉  </p>
+<table><tr><td>方法</td><td>内容</td></tr><tr><td>base(传播域+模拟域)</td><td>天线分离+单抽头</td></tr><tr><td>LS(数字域, 48 ms)</td><td>传统建模与模型求解</td></tr><tr><td>AI1(数字域, 31.9 ms)</td><td>神经网络(AI1)</td></tr><tr><td>AI2(数字域, 23.9 ms)</td><td>神经网络(AI2)</td></tr></table>
+
+<p>图5展示了本文所提自干扰对消方法的自干扰抑制性能。通过IQ混频器将基带信号变频为射频信号后，PA输出信号的功率谱密度函数的中心频率在 <span class="arithmatex">\(1 0 \ \mathrm { { G H z } }\)</span> 。值得注意的是，在全双工干扰机的自校准学习阶段，需要排除雷达SOI的影响，否则可能会导致学习阶段收敛后，新自干扰信道部分对消SOI。图5中，ideal表示全双工数字基带输出信号序列的功率谱密度函数，PA表示功放输出信号的功率谱密度函数，其他4条曲线表示经过对应方法后剩余自干扰信号的功率谱密度函数。图6展示的是，在雷达波形捷变为新波形的瞬间，干扰机发射旧波形时雷达进行匹配滤波后的结果。由于信号参数不匹配，匹配滤波结果中的假目标消失。与理想回波匹配结果相比，匹配结果略有恶化。</p>
+<p><img alt="" src="../images/92d94f3bd1337a0b9ea42057895e9a76bc302f703deebffdbb3bdcdc95ec4ea6.jpg" /><br />
+图5 本文所提自干扰对消方法剩余自干扰功率谱密度函数</p>
+<p><img alt="" src="../images/bfc695a9ea04aa6212254ed5c54308537132c5516419522cf02d855b72ba8f50.jpg" /><br />
+Fig．5 Residualselfinterferencepowerspectraldensityfunctionofthe proposedselfinterferencecancellationapproach <br />
+(a)步骤3中仅于扰信号雷达匹配滤波结果 <br />
+(a) Matched filtering result of only the interference radar signal of step 3</p>
+<p><img alt="" src="../images/cd24d189c8f0cea9bc2bf7719550a9e7c4f0c1b2dcbf2e8b20b236c0205bcc0b.jpg" /><br />
+(b)步骤3中雷达匹配滤波结果 <br />
+(b)Radar matched filtering result of step 3 <br />
+图6 雷达捷变而干扰机不变情形<br />
+Fig．6 Scenarioofradaragilewhilejammerremainsfixed</p>
+<p>图7（a）展示了经过基本方法后的转发干扰匹配滤波结果。图7（b）中，传统数字域自干扰对消方法实现了118．7dB的自干扰抑制性能。通过对比图7（a）和图7（b），说明更好的自干扰抑制性能明显改善了转发干扰的效果。考虑到已知雷达信号波形参数先验情形，虽然假目标匹配强度存在一定程度的恶化，但是假目标位置清晰。此外，图7（c）显示二次转发干扰效果可以与已知信号参数的情况相似。由于存在剩余自干扰和非线性效应，在真实目标之前产生了假目标。</p>
+<p><img alt="" src="../images/8b05a771144188286466c9e8e2b8802207b3e722aad3911d18c741f687a686f1.jpg" /><br />
+(a)步骤4中仅base对消雷达匹配滤波结果</p>
+<p><img alt="" src="../images/84cef08e8a4064daedc2c31aae86309677dd4382079c81b34aef426ba81e9005.jpg" /><br />
+(a) Matched filtering result of only the base cancellation in radar of step 4 <br />
+(b)步骤4中的传统数字对消雷达匹配滤波结果<br />
+(b)Matched filtering result of traditional digital cancellation in radar of step 4</p>
+<p><img alt="" src="../images/aa2ee9e48dd352ad12b00376bd432cd5e55982a77cda2a6c4a138bd75e7d0616.jpg" /><br />
+(c)步骤5中的传统数字对消雷达匹配滤波结果<br />
+(c)Matched filtering result of traditional digital cancellation in radar of step 5 <br />
+图7 传统方法一次转发和二次转发情形<br />
+Fig．7 Scenariooftraditionalmethodsforsingletransmissionand doubletransmission</p>
+<p>图8和图9分别展示了两种基于神经网络结构的数字对消方法，即 AI1和 AI2。这些方法在自干扰抑制性能方面表现优异，可以达到108dB的水平。通过二次转发信号匹配滤波的结果显示，假目标与真实目标的强度几乎相同。值得注意的是，增加神经元个数和神经元规模会使得自干扰抑制深度优于传统的数字域方法。</p>
+<p><img alt="" src="../images/41abb2b5d5628e77da5cf027c2e265b74c9ad304e1fa8d5c38b61038a16951a8.jpg" /><br />
+(a)步骤4中使用AI1网络对消雷达匹配滤波结果</p>
+<p><img alt="" src="../images/eac30f43b2e02da9e60dd8841450ab55bc81f41b3d54854a79226b5b815bc2be.jpg" /><br />
+(a) Matched filtering result of radar using AI1 network for cancellation of step 4 <br />
+(b)步骤5中使用AI1网络对消雷达匹配滤波结果<br />
+(b) Matched filtering result of radar using AI1 network for cancellation of step 5 <br />
+图8 AI1一次转发和二次转发情形<br />
+Fig．8 ScenarioofAI1forsingletransmissionand doubletransmission</p>
+<p><img alt="" src="../images/728632742bf3acb1925c227cd7d0f22c030e1f2338d44412de5ea16c2c57e5fc.jpg" /><br />
+(a)步骤4中使用AI2网络对消雷达匹配滤波结果</p>
+<p><img alt="" src="../images/cd8a0b47ef444b45e21f89e04473f6174b2a986cc9e13f6812fc5ef6e5349e6d.jpg" /><br />
+(a) Matched filtering result of radar using AI2 network for cancellation of step 4 <br />
+(b)步骤5中的使用AI2网络对消雷达匹配滤波结果<br />
+(b) Matched filtering result of radar using AI2 network for cancellation of step 5 <br />
+图9 AI2一次转发和二次转发情形<br />
+Fig．9 ScenarioofAI2forsingletransmissionand doubletransmission</p>
+<p>图10（a）是实验的系统设置，通过任意信号发生器（arbitrarysignalgenerator，ASG）发射基带信号，经过混频后，通过带通滤波器（bandpassfilter，BPF），经过功放和天线发射后，进入接收机最后通过示波器将自干扰信号采下来。框图下表示的是器件的型号名。图10（b）展示了在相同的实验环境下，使用实际测量数据时，不同传统方法与本文提出的方法在自干扰抑制性能上的比较。本文所采用的网络结构包括前馈神经网络和全连接层。为了应对复杂的时变效应，通过优化输入矩阵向量和网络结构来提高算法的实时性。在网络结构中，采用最少的神经元结构以获得最佳的自干扰抑制效果。为了比较本文提出的方法与传统方法的性能差异，本文对在相同场景下不同方法的自干扰抑制效果进行了对比。理论上，自干扰抑制性能越强，越能满足实际应用的需求。表3列出了采用不同方法的自干扰抑制性能。LS方法使用64个数据点进行训练，然后拓展至2048个数据点的波形进行自干扰抑制；神经网络方法使用128个数据点进行训练，再将其拓展至2048个数据点的波形进行自干扰抑制，隐藏神经元层数为1神经元数量设置为5，并采用前馈神经网络的全连接层。AI1代表1个输入单元和1个输出单元；AI2包含2个输入神经元和1个输出神经元。实验在室内环境中进行，考虑到了不可忽视的多径效应。通过对比实时性和自干扰抑制性能，所提网络模型结构表现出更高的自干扰抑制性能和更好的实时性。需要注</p>
+<p>意的是，实验中得到的实时性不能简单看作为实际消耗时间，因为特殊的软硬件设计可以显著提升其实时性。然而，不同方法得到的消耗时间是基于相同平台的，可以用来评估其相对实时性。由表3可知，AI2和 AI1的训练消耗时间分别为 <span class="arithmatex">\(1 8 7 5 ~ \mathrm { m s }\)</span> 和 <span class="arithmatex">\(9 8 3 , 9 \mathrm { ~ m s }\)</span> ，剩余自干扰重建时间分别为 <span class="arithmatex">\(3 3 9 ~ \mathrm { m s }\)</span> 和 <span class="arithmatex">\(7 2 . 6 ~ \mathrm { m s }\)</span> 。</p>
+<p><img alt="" src="../images/b378ffc2e63d316204dee49da4237d966fc91c110bd3de8055e8b22aeee7e5b6.jpg" /><br />
+(a)实测系统的系统设置</p>
+<p>(a) System settings of the measured system</p>
+<p>图10 实验系统与不同数字域方法自干扰抑制效果<br />
+Fig．10 Experimentalsystemandselfinterferencesuppression effectsusingdifferentdigitaldomainmethods <br />
+<img alt="" src="../images/73771cea45afe40fcb3f5bc87dd9e6cd5bbe62d03b186dab0cfef2ccae74b22f.jpg" /><br />
+—：对消前信号; ：宽带补偿参考信号;<br />
+：方法1对消后RSI; ：方法2对消后RSI;<br />
+：方法3对消后RSI；—：方法4对消后RSI;<br />
+：方法5对消后RSI；—：方法6对消后RSI。</p>
+<p>(b)不同数字域方法的自干扰抑制性能</p>
+<p>(b)Performance of self-interference suppression for different digital domain methods</p>
+<p>表3 不同数字域方法实测性能<br />
+犜犪犫犾犲3 犃犮狋狌犪犾狆犲狉犳狅狉犿犪狀犮犲狅犳犱犻犳犳犲狉犲狀狋犱犻犵犻狋犪犾犱狅犿犪犻狀犿犲狋犺狅犱狊  </p>
+<table><tr><td>方法名</td><td>内容</td><td>训练消耗时间/ms</td><td>剩余自干扰重建时间/ms</td><td>自干扰对消性能/dB</td></tr><tr><td>方法1</td><td>LS</td><td>0.58</td><td>0.26</td><td>4.75</td></tr><tr><td>方法2</td><td>LS(无多径效应)</td><td>0.25</td><td>0.12</td><td>3.13</td></tr><tr><td>方法3</td><td>LS(无非线性效应)</td><td>0.23</td><td>0.09</td><td>6.05</td></tr></table>
+
+<p>续表3 犆狅狀狋犻狀狌犲犱犜犪犫犾犲3   </p>
+<table><tr><td>方法名</td><td>内容</td><td>训练消耗时间/ms</td><td>剩余自干扰重建时间/ms</td><td>自干扰对消性能/dB</td></tr><tr><td>方法4</td><td>LS(仅线性)</td><td>0.37</td><td>0.14</td><td>3.12</td></tr><tr><td>方法5</td><td>AI1</td><td>1875</td><td>339</td><td>3.21</td></tr><tr><td>方法6</td><td>AI2(考虑多径效应)</td><td>983.9</td><td>72.6</td><td>7.29</td></tr></table>
+
+<h1 id="5">5 结 论<a class="headerlink" href="#5" title="Permanent link">&para;</a></h1>
+<p>在高威胁信号多变场景下，全双工干扰机的应用需求迫切。然而，剩余自干扰信号的存在对干扰效果产生了抑制作用，提升自干扰对消性能成为全双工干扰机的核心目标。本文通过关键时间节点的切片，详细分解波形捷变动态变化过程，并充分展现其过程中的干扰效果。尽管整个动态过程可能在毫秒级别完成，但可见窗口的持续时间有限，因此对算法的实时性提出要求。信道的时变特性会导致全双工自干扰抑制性能的恶化，并增加雷达识别被掩护目标的机会。因此，未来可以专注于时变信道的研究，以实现快速自适应时缓变的自干扰信道参数的变化。本文考虑更加复杂的系统非线性效应，并同时提出全双工自干扰对消方法。仿真结果表明，使用本文提出的方法可以实现118．7dB的自干扰抑制性能。二次转发的干扰效果接近于已知信号参数时的性能。本文还提出两种神经网络结构，神经网络方法比传统的方法具有更优的实时性性能，其中AI2具有更高的实时性。神经网络方法实现了108．3dB的自干扰抑制性能，并且二次转发时的假目标匹配滤波强度与真实回波接近。实验测试结果与仿真结果一致，说明AI2具有更高的性能和更强的实时性。</p>
+<h1 id="_3">参考文献<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h1>
+<p>［1］CHENYN，DINGC，JIAYT，etalAntenna／propagationdomainselfinterferencecancellation（SIC）forinbandfullduplexwirelesscommunicationsystems［J］．Sensors，2022，22（5）：1699<br />
+［2］DUARTE M，DICKC，SABHARWALA．Experimentdrivencharacterizationoffullduplexwirelesssystems［J］．IEEETransonWirelessCommunications，2012，11（12）：4296 4307<br />
+［3］FUKUIT，KOMATSUK，MIYAJIY，etal．AnalogselfinterferencecancellationusingauxiliarytransmitterconsideringIQimbalanceandamplifiernonlinearity［J］．IEEETrans．onWirelessCommunications，2020，19（11）：7439 7452<br />
+［4］JAIN M，CHOIJI，KIMTM，etal．Practical，realtime，full duplexwireless［C］∥Proc．ofthe17th AnnualInternational ConferenceonMobileComputingandNetworking，2011 <br />
+［5］KIAYANIA，ANTTILAL，VALKAMAM．ActiveRFcancel lationofnonlinearTXleakageinFDDtransceivers［C］∥Proc．of theIEEEGlobalConferenceonSignalandInformationProcess ing，2016 <br />
+［6］KOMATSUK，MIYAJIY，UEHARAH．BasisfunctionselectionoffrequencydomainHammersteinselfinterferencecancellerforinbandfullduplex wirelesscommunications［J］．IEEETrans．onWirelessCommunications，2018，17（6）：3768 3780</p>
+<p>［7］LIUY，QUANX，PANWS，etal．Digitallyassistedanaloginterferencecancellationforinbandfullduplexradios［J］．IEEECommunicationsLetters，2017，21（5）：1079 1082<br />
+［8］陈嘉贝，王青平，叶源，等．基于NSGAⅡ的波前相位畸变特性分析［J］．系统工程与电子技术，2022，44（5）：1439 1446CHENJB，WANG QP，YEY，etalAnalysisonwavefrontphasedistortioncharacteristicsbasedonNSGAⅡ［J］．SystemsEngineeringandElectronics，2022，44（5）：1439 1446<br />
+［9］QUANX，LIUY，SHAOSH，etal．Impactsofphasenoiseondigitalselfinterferencecancellationinfullduplexcommunications［J］．IEEE Trans．onSignalProcessing，2017，65（7）：1881 1893<br />
+［10］SNOW T，FULTONC，CHAPPELL WJ．Transmitreceiveduplexingusingdigitalbeamformingsystemtocancelselfinterference［J］．IEEETrans．onMicrowaveTheoryandTechniques，2011，59（12）：3494 3503<br />
+［11］ZOUQY，TARIGHATA，SAYEDAH．JointcompensationofIQimbalanceandphasenoiseinOFDM wirelesssystems［J］IEEETrans．onCommunications，2009，57：404 414<br />
+［12］ZHUHY，HUANGJJ，WANG C，etal．MultidomainselfinterferencecancellationmethodsconsideringRFimperfections［J］IEEETrans．on WirelessCommunications，2024，23（8）：8668 8682<br />
+［13］KONGDH，KILYS，KIMSH．Neuralnetworkaideddigitalselfinterferencecancellationforfullduplexcommunicationovertimevaryingchannels［J］．IEEETrans．onVehicularTechnology，2022，71（6）：6201 6213<br />
+［14］ZHANGJ，HEF，LIW，etal．Selfinterferencecancellation：acomprehensivereviewfromcircuitsandfieldsperspectives［J］Electronics，2022，11（2）：172<br />
+［15］LUOH，HOLM M，RATNARAJAHT．Ontheperformanceofactiveanalogselfinterferencecancellationtechniquesforbeyond5Gsystems［J］．ChinaCommunications，2021，18（10）：158 168<br />
+［16］KWAKJW，SIM MS，KANGIW，etal．AnalogselfinterferencecancellationwithpracticalRFcomponentsforfullduplexradios［J］．IEEE Trans．on WirelessCommunications，2023，22（7）：4552 4564<br />
+［17］ZHUXS，CHENW，WUQQ，etal．PerformanceofRISassistedfullduplexspaceshiftkeyingwithimperfectselfinterferencecancellation［J］．IEEEWirelessCommunicationsLetters，2023，13（1）：128 132<br />
+［18］HONGZH，ZHANGL，LIW，etal．FrequencydomainRFselfinterferencecancellationforinbandfullduplexcommunications［J］．IEEETrans．onWirelessCommunications，2022，22（4）：2352 2363<br />
+［19］KIMSM，LIM YG，DAIL，etal．PerformanceanalysisofselfinterferencecancellationinfullduplexmassiveMIMOsystems：subtractionversusspatialsuppression［J］．IEEETransonWirelessCommunications，2022，22（1）：642 657<br />
+［20］ZHU HY，WANGC，YUANNC，etal．MultidomainblindsourceseparationinbandfullduplextechniqueconsideringRFimpairments［J］．JournalofPhysics：ConferenceSeries，2023，2625（1）：012060</p>
+<p>［21］LIAO WS，ZHAOO，LIK，etal．Implementationofinbandfullduplexusingsoftwaredefinedradio withadaptivefilterbasedselfinterferencecancellation［J］．FutureInternet，2023，15（11）：360<br />
+［22］KOLODZIEJKE，COOKSONAU，PERRYBT．RFcancel lertuningaccelerationusingneuralnetworkmachinelearning forinbandfullduplexsystems［J］．IEEEOpenJournalofthe CommunicationsSociety，2021，2：1158 1170 <br />
+［23］ETELLISIE A，ELMANSOURI M A，FILIPOVIC D SWidebandmultimodemonostaticspiralantennaSTARsubsystem［J］．IEEETrans．onAntennasandPropagation，2017，65（4）：1845 1854<br />
+［24］LIANR，SHIH TY，YINY，etal．Ahighisolation，ultrawidebandsimultaneoustransmit and receive antenna withmonopolelikeradiationcharacteristics［J］．IEEETrans．onAntennasandPropagation，2017，66（2）：1002 1007<br />
+［25］LAUGHLINL，ZHANGC，BEACH MA，etal．TunablefrequencydivisionduplexRFfrontendusingelectricalbalanceandactivecancellation［J］．IEEETrans．onMicrowaveTheoryandTechniques，2018，66（12）：5812 5824<br />
+［26］ZAMANIFEKRIA，SMOLDERSAB．Beamsquintcompensa tionincircularlypolarizedoffsetreflectorantennasusingase quentiallyrotatedfocalplanearray［J］．IEEE Antennasand WirelessPropagationLetters，2014，14：815 818 <br />
+［27］DINCT，CHAKRABARTIA，KRISHNASWAMY H．A60GHz samechannelfullduplexCMOStransceiverandlinkbasedon reconfigurablepolarizationbasedantennacancellation［C］∥ Proc．oftheIEEERadioFrequencyIntegratedCircuitsSympo sium，2015：31 34 <br />
+［28］KORPID，HEINO M，ICHELN C，etal．Compactinband fullduplexrelayswithbeyond100dBselfinterferencesuppres sion：enablingtechniquesandfield measurements［J］．IEEE Trans．onAntennasandPropagation，2016，65（2）：960 965 <br />
+［29］ZHANGZY，YUANYQ，CANGJ，etal．Anorbitalangular momentumbasedinbandfullduplex communication system</p>
+<p>andits modeselection［J］．IEEE CommunicationsLetters，2017，21（5）：1183 1186<br />
+［30］WUJ，LIM，BEHDADN．Awideband，unidirectionalcircularlypolarizedantennaforfullduplexapplications［J］．IEEETrans．onAntennasandPropagation，2018，66（3）：1559 1563<br />
+［31］PANSEV，JAINTK，SHARMAPK，etal．Digitalselfin terferencecancellationintheeraofmachinelearning：acom prehensivereview［J］．PhysicalCommunication，2022，50：101526 <br />
+［32］吴飞，邵士海，唐友喜．一种基于多天线波束成形的全双工自干扰抵消算法［J］．电子学报，2017，45（1）：8 15WUF，SHAOS H，TANG Y X．Anovelselfinterferencecancellationalgorithmusingmultiantennabeamforminginfullduplexsystem［J］．ActaElectronicaSinica，2017，45（1）：8 15<br />
+［33］吴翔宇，沈莹，唐友喜，等．室内环境下共用收发天线同时同频全双工自干扰信道测量与建模［J］．系统工程与电子技术，2015，37（9）：2148 2155WU X Y，SHEN Y，TANG Y X，etal．Measurementandmodelingofcotimecofrequencysingleantennafullduplexselfinterferencechannelinindoorenvironment［J］．SystemsEngineeringandElectronics，2015，37（9）：2148 2155<br />
+［34］MASMOUDIA，LENGOCT．Channelestimationandselfinterferencecancelationinfullduplexcommunicationsystems［J］IEEETrans．onVehicularTechnology，2017，66（1）：321 334</p>
+<h1 id="_4">作者简介<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h1>
+<p>朱虹宇（1994—），男，博士研究生，主要研究方向为全双工。</p>
+<p>胡卫东（1967—），男，教授，博士，主要研究方向为目标识别、复杂波形设计。</p>
+<p>王 超（1977—），男，副教授，博士，主要研究方向为电子对抗。</p>
+<p>施庆展（1990—），男，讲师，博士，主要研究方向为雷达信号处理、电子对抗。</p>
+<p>张曦蒙（1995—），男，博士研究生，主要研究方向为组网通信目标的定位与跟踪。</p>
+<p>袁乃昌（1965—），男，教授，博士，主要研究方向为复杂电磁环境电子对抗。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+    
+  </body>
+</html>
