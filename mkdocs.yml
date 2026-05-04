@@ -9,6 +9,15 @@ theme:
   language: zh
   font: false
 
+exclude_docs: |
+  kb_material/**/*.md
+  kb_material/**/*.json
+  kb_material/**/*_model.json
+  kb_material/**/*_content_list.json
+  kb_material/**/block_list.json
+  kb_material/**/content_list_v2.json
+  kb_material/**/layout.json
+
 plugins:
   - search
 
