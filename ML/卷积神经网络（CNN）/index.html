@@ -1,0 +1,2201 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="信号处理、FPGA 与机器学习学习笔记">
+      
+      
+        <meta name="author" content="你自己">
+      
+      
+      
+        <link rel="prev" href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+      
+      
+        <link rel="next" href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/DDC/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>卷积神经网络（CNN） - 我的知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cnn" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="我的知识库" class="md-header__button md-logo" aria-label="我的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              卷积神经网络（CNN）
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="我的知识库" class="md-nav__button md-logo" aria-label="我的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    我的知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    机器学习
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    机器学习
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    神经网络
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积神经网络（CNN）
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积神经网络（CNN）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思维框图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题引入
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="问题引入">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全连接网络处理图像的灾难
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卷积如何解决问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="卷积如何解决问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两大杀手锏
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卷积操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        输出尺寸公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Padding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Padding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#padding_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么需要 Padding？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padding_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Padding 怎么做？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卷积多通道
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="卷积多通道">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        计算方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多个卷积核 = 多个特征
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        激活函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="激活函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cnn-relu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么 CNN 用 ReLU？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relu-vs-sigmoid-vs-tanh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReLU vs Sigmoid vs Tanh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReLU 的核心优势
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卷积总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        池化层
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="池化层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        池化 vs 卷积的步长区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最大值池化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        平均值池化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        池化性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全连接层
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="全连接层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从卷积到全连接的转换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fcn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全卷积神经网络（FCN）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卷积神经网络进阶
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="卷积神经网络进阶">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cnn_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        经典 CNN 演进路线
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模型的进化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alexnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AlexNet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dropout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dropout 层
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vggnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VGGNet
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VGGNet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么要堆叠 3×3？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        网络结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        训练技巧
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ResNet
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ResNet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        退化问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        残差连接的解决思路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么有效？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号处理
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号处理
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/DDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E4%B8%AD%E9%A2%91%E6%8E%A5%E6%94%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达数字信号中频接收
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E6%A3%80%E6%B5%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达信号检测
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E8%B0%83%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达信号调制类型识别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    矩阵分解
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3/%E5%B9%B6%E8%A1%8C%E5%8F%8C%E8%BE%B9Jacobi%E6%97%8B%E8%BD%AC%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并行双边Jacobi旋转特征值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FPGA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        思维框图
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题引入
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="问题引入">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全连接网络处理图像的灾难
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卷积如何解决问题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="卷积如何解决问题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两大杀手锏
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卷积操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        输出尺寸公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Padding
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Padding">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#padding_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么需要 Padding？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padding_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Padding 怎么做？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卷积多通道
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="卷积多通道">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        计算方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多个卷积核 = 多个特征
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        激活函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="激活函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cnn-relu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么 CNN 用 ReLU？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relu-vs-sigmoid-vs-tanh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReLU vs Sigmoid vs Tanh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReLU 的核心优势
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卷积总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        池化层
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="池化层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        池化 vs 卷积的步长区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最大值池化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        平均值池化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        池化性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全连接层
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="全连接层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从卷积到全连接的转换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fcn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全卷积神经网络（FCN）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卷积神经网络进阶
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="卷积神经网络进阶">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cnn_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        经典 CNN 演进路线
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模型的进化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alexnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AlexNet
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dropout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dropout 层
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vggnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VGGNet
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VGGNet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么要堆叠 3×3？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        网络结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        训练技巧
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resnet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ResNet
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ResNet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        退化问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        残差连接的解决思路
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么有效？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="cnn">卷积神经网络（CNN）<a class="headerlink" href="#cnn" title="Permanent link">&para;</a></h1>
+<p>CNN 是专门为图像设计的神经网络。核心思路：<strong>与其让每个像素和所有神经元全连接（参数爆炸），不如用一个小窗口在图像上滑动，每次只关注局部，且所有位置共享同一组参数。</strong></p>
+<p>这就像人眼看图——你不会同时看清整张图的所有像素，而是通过一系列局部观察来理解整体。</p>
+<hr />
+<h2 id="_1">思维框图<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>CNN 的整体流程：</p>
+<pre><code>输入图像 → [卷积 → 激活]×N → 池化 → ... → 全连接 → 输出分类
+</code></pre>
+<p>卷积负责提取特征，池化负责压缩尺寸，最后全连接负责分类决策。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509112018.png]]</p>
+<hr />
+<h2 id="_2">问题引入<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">全连接网络处理图像的灾难<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>假设一张 <span class="arithmatex">\(224 \times 224 \times 3\)</span>（RGB）的图片：</p>
+<ul>
+<li>展开为向量 = <span class="arithmatex">\(224 \times 224 \times 3 = 150,528\)</span> 个输入</li>
+<li>如果第一隐藏层有 1000 个神经元</li>
+<li>仅第一层的权重参数：<span class="arithmatex">\(150{,}528 \times 1000 \approx \mathbf{1.5 亿}\)</span> 个！</li>
+</ul>
+<p>而且这还没考虑：
+1. <strong>丢失空间信息</strong>：展开成向量后，相邻像素的空间关系被破坏了——左上角的像素和右下角的像素在向量里可能隔了十万八千里
+2. <strong>平移不变性缺失</strong>：猫在图片中间还是左边，对全连接网络来说是完全不同的输入，需要分别学</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509110034.png]]</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509110148.png]]</p>
+<hr />
+<h2 id="_4">卷积如何解决问题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="_5">两大杀手锏<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>1. 局部连接（稀疏连接）</strong></p>
+<p>每个神经元不再看整张图，只看当前卷积核覆盖的小区域（感受野）。一个 <span class="arithmatex">\(3 \times 3\)</span> 的卷积核一次只看 9 个像素。</p>
+<p><strong>2. 参数共享</strong></p>
+<p>同一个卷积核在整个图像上滑动时使用同样的权重。一个能检测"竖边"的卷积核，无论放在图的哪个位置，都能检测竖边。这极大地减少了参数量。</p>
+<p><strong>算一笔账</strong>：上述 224×224 图像，如果用 64 个 3×3 卷积核：</p>
+<ul>
+<li>参数数 = <span class="arithmatex">\(64 \times (3 \times 3 \times 3 + 1) = 64 \times 28 = \mathbf{1,792}\)</span> 个</li>
+<li>对比全连接需要的 <strong>1.5 亿</strong>个——减少了约 <strong>10 万倍</strong>！</li>
+</ul>
+<p>![[../kb_material/ML_image/Pasted image 20260509110438.png]]</p>
+<h3 id="_6">卷积操作<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>卷积核（也叫滤波器）在输入上滑动，每个位置计算逐元素相乘再求和：</p>
+<div class="arithmatex">\[(I * K)(i, j) = \sum_{m=0}^{k-1}\sum_{n=0}^{k-1} I(i+m, j+n) \cdot K(m, n)\]</div>
+<p><strong>具体例子</strong>：</p>
+<p>输入（3×3 灰度图）：</p>
+<pre><code>  1  2  0
+  3  1  2
+  0  2  1
+</code></pre>
+<p>卷积核（2×2，检测右下方向边缘）：</p>
+<pre><code>  1   0
+  0  -1
+</code></pre>
+<p>在位置 (0,0) 处卷积：
+$<span class="arithmatex">\(1 \times 1 + 2 \times 0 + 3 \times 0 + 1 \times (-1) = 1 - 1 = 0\)</span>$</p>
+<p>在位置 (0,1) 处卷积：
+$<span class="arithmatex">\(2 \times 1 + 0 \times 0 + 1 \times 0 + 2 \times (-1) = 2 - 2 = 0\)</span>$</p>
+<p>输出（2×2）：</p>
+<pre><code>  0   0
+  3   1
+</code></pre>
+<p>![[../kb_material/ML_image/Pasted image 20260509110326.png]]
+![[../kb_material/ML_image/Pasted image 20260509110812.png]]
+![[../kb_material/ML_image/Pasted image 20260509110830.png]]</p>
+<h3 id="_7">输出尺寸公式<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[W_{out} = \left\lfloor \frac{W_{in} + 2P - K}{S} \right\rfloor + 1\]</div>
+<p>其中：
+- <span class="arithmatex">\(W_{in}\)</span> — 输入尺寸
+- <span class="arithmatex">\(K\)</span> — 卷积核大小
+- <span class="arithmatex">\(P\)</span> — padding 大小
+- <span class="arithmatex">\(S\)</span> — 步长（stride）
+- <span class="arithmatex">\(\lfloor \cdot \rfloor\)</span> — 向下取整</p>
+<p><strong>举例</strong>：输入 32×32，卷积核 3×3，padding=0，stride=1</p>
+<p>输出尺寸 = <span class="arithmatex">\((32 + 0 - 3) / 1 + 1 = 30\)</span> → 30×30，缩小了 2 个像素。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509110956.png]]</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509111158.png]]
+![[../kb_material/ML_image/Pasted image 20260509111413.png]]</p>
+<h3 id="padding">Padding<a class="headerlink" href="#padding" title="Permanent link">&para;</a></h3>
+<h4 id="padding_1">为什么需要 Padding？<a class="headerlink" href="#padding_1" title="Permanent link">&para;</a></h4>
+<p>每次卷积，输出都会比输入缩小 <span class="arithmatex">\(K-1\)</span> 个像素。如果不做 padding：
+- 卷积几次后图片就缩没了
+- 边缘像素参与计算的次数远少于中心像素（边缘信息丢失）</p>
+<h4 id="padding_2">Padding 怎么做？<a class="headerlink" href="#padding_2" title="Permanent link">&para;</a></h4>
+<p>在图像四周补一圈 0，让输出尺寸可以和输入保持一致。</p>
+<p><strong>same padding</strong>（保持尺寸不变）需要的 padding 量：
+$<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
+<p>对于 3×3 卷积核，<span class="arithmatex">\(P = (3-1)/2 = 1\)</span>，即四周各补 1 个像素的 0。</p>
+<p><strong>举例</strong>：输入 32×32，3×3 卷积，加 padding=1，stride=1
+输出 = <span class="arithmatex">\((32 + 2 - 3) / 1 + 1 = 32\)</span> → 尺寸不变！</p>
+<blockquote>
+<p>padding 的 size 和卷积核的 size 是有关系的——想保持尺寸不变，padding 必须是 <span class="arithmatex">\((K-1)/2\)</span>。</p>
+</blockquote>
+<p>![[../kb_material/ML_image/Pasted image 20260509111549.png]]</p>
+<hr />
+<h2 id="_8">卷积多通道<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>真实图像有多个通道（RGB = 3 通道），卷积核也必须有同样深度的通道。</p>
+<h3 id="_9">计算方式<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>如果有 RGB 三通道输入，则卷积核也是 3×3×3（高×宽×通道）。每个通道分别做卷积，然后把三个通道的结果<strong>加在一起</strong>，得到一个二维的特征图。</p>
+<div class="arithmatex">\[输出(i, j) = \sum_{c=0}^{C-1} \sum_{m=0}^{K-1} \sum_{n=0}^{K-1} 输入(i+m, j+n, c) \cdot 卷积核(m, n, c) + b\]</div>
+<h3 id="_10">多个卷积核 = 多个特征<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>一个卷积核提取一种特征（如"水平边"）。要想同时提取多种特征（如"水平边"+"竖边"+"斜边"+"角点"），就得用多个卷积核。每个卷积核输出一个特征图，N 个卷积核 = N 个输出通道。</p>
+<p><strong>举例</strong>：输入 32×32×3，64 个 3×3 卷积核 → 输出 32×32×64（64 个特征图）</p>
+<blockquote>
+<p>加多个卷积核的物理含义是提取多个特征——就像雇 64 个专家，每人负责识别一种不同的图案。</p>
+</blockquote>
+<p>![[../kb_material/ML_image/Pasted image 20260509112054.png]]</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509112158.png]]</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509112503.png]]</p>
+<hr />
+<h2 id="_11">激活函数<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="cnn-relu">为什么 CNN 用 ReLU？<a class="headerlink" href="#cnn-relu" title="Permanent link">&para;</a></h3>
+<p>ReLU 公式很简单：<span class="arithmatex">\(f(x) = \max(0, x)\)</span></p>
+<p>即把所有负数变成 0，正数保持不变。</p>
+<h3 id="relu-vs-sigmoid-vs-tanh">ReLU vs Sigmoid vs Tanh<a class="headerlink" href="#relu-vs-sigmoid-vs-tanh" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>激活函数</th>
+<th>公式</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sigmoid</td>
+<td><span class="arithmatex">\(S(x) = \frac{1}{1+e^{-x}}\)</span></td>
+<td><span class="arithmatex">\(x\)</span> 很大/很小时导数趋近于 0（梯度消失），且输出不以 0 为中心</td>
+</tr>
+<tr>
+<td>Tanh</td>
+<td><span class="arithmatex">\(\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}\)</span></td>
+<td><span class="arithmatex">\(x\)</span> 很大/很小时同样导数趋近 0</td>
+</tr>
+<tr>
+<td><strong>ReLU</strong></td>
+<td><span class="arithmatex">\(f(x) = \max(0, x)\)</span></td>
+<td>正区间导数恒为 1，不会消失；计算只需比较和取最大</td>
+</tr>
+</tbody>
+</table>
+<h3 id="relu">ReLU 的核心优势<a class="headerlink" href="#relu" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>解决梯度消失</strong>：正区间导数恒为 1，反向传播时梯度不会越乘越小</li>
+<li><strong>计算快</strong>：只需 <code>max(0, x)</code>，Sigmoid 需要做指数运算</li>
+<li><strong>诱导稀疏性</strong>：负半区直接输出 0，网络中约 50% 神经元同时激活，更接近生物神经元的工作方式</li>
+</ol>
+<p>![[../kb_material/ML_image/Pasted image 20260509144748.png]]</p>
+<hr />
+<h2 id="_12">卷积总结<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p>用一个表来回顾卷积层的核心概念：</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>含义</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>局部连接</td>
+<td>神经元只看小区域</td>
+<td>减少参数，保留空间结构</td>
+</tr>
+<tr>
+<td>参数共享</td>
+<td>同一卷积核权重在整张图上复用</td>
+<td>进一步减少参数，实现平移等变性</td>
+</tr>
+<tr>
+<td>多卷积核</td>
+<td>每个核学一种特征模式</td>
+<td>丰富的特征表达</td>
+</tr>
+<tr>
+<td>Padding</td>
+<td>图像四周补 0</td>
+<td>控制输出尺寸，保护边缘信息</td>
+</tr>
+<tr>
+<td>Stride</td>
+<td>卷积核滑动步长</td>
+<td>控制下采样程度</td>
+</tr>
+</tbody>
+</table>
+<p>卷积层通过<strong>局部连接 + 参数共享</strong>，将全连接需要的亿级参数降到千级。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509145539.png]]</p>
+<hr />
+<h2 id="_13">池化层<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p>池化层的核心作用：<strong>降低特征图尺寸</strong>，从而减少后续层的计算量。同时提供一定的平移不变性——只要关键特征还在池化窗口内，输出就不变。</p>
+<h3 id="vs">池化 vs 卷积的步长区别<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>做卷积时，卷积核的 padding 默认是 1（保持尺寸）；但做池化时，池化核的步长默认等于它的 size（直接缩小）。</p>
+</blockquote>
+<p>例如 2×2 池化，stride 默认也是 2，相当于把 2×2 区域的 4 个数压缩成 1 个数。</p>
+<h3 id="_14">最大值池化<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>取池化窗口内的最大值：</p>
+<div class="arithmatex">\[P(i, j) = \max_{m,n \in window} I(i+m, j+n)\]</div>
+<p><strong>举例</strong>：2×2 窗口，输入：</p>
+<pre><code>  1  3  2  4
+  5  2  1  8
+  3  6  2  1
+  9  2  4  7
+</code></pre>
+<p>输出：</p>
+<pre><code>  5  8
+  9  7
+</code></pre>
+<p>最大值池化<strong>保留最强特征</strong>（如边缘的高响应值），丢弃弱信号，简单有效，是 CNN 中最常用的池化方式。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509145639.png]]</p>
+<h3 id="_15">平均值池化<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>取池化窗口内的平均值：</p>
+<div class="arithmatex">\[P(i, j) = \frac{1}{k^2}\sum_{m,n \in window} I(i+m, j+n)\]</div>
+<p>用上面同样的输入：</p>
+<pre><code>  1  3  2  4
+  5  2  1  8     →  平均值池化  →
+  3  6  2  1
+  9  2  4  7
+</code></pre>
+<p>输出：</p>
+<pre><code>  (1+3+5+2)/4 = 2.75    (2+4+1+8)/4 = 3.75
+  (3+6+9+2)/4 = 5.0     (2+1+4+7)/4 = 3.5
+</code></pre>
+<p>平均值池化更平滑，不会过度强调某个极端值。现在 CNN 中多数场景已用最大值池化替代。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509145857.png]]</p>
+<h3 id="_16">池化性质<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>无学习参数</strong>：纯数学操作，不做梯度更新</li>
+<li><strong>通道独立</strong>：每个通道单独池化，输出通道数和输入一样</li>
+<li><strong>平移不变性</strong>：输入微小偏移（1-2 个像素）基本不影响池化输出</li>
+<li><strong>尺寸缩减</strong>：<span class="arithmatex">\(k \times k\)</span> 池化（stride=k）将尺寸缩小 <span class="arithmatex">\(k\)</span> 倍</li>
+</ul>
+<p>![[../kb_material/ML_image/Pasted image 20260509150447.png]]</p>
+<hr />
+<h2 id="_17">全连接层<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
+<p>CNN 的最后几层通常是全连接层，作用是：<strong>把卷积/池化提取的分布式特征汇总映射到最终的类别概率</strong>。</p>
+<h3 id="_18">从卷积到全连接的转换<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>假设最后一个池化层输出是 7×7×512：</p>
+<ol>
+<li>把三维张量<strong>展平（flatten）</strong>为一个向量：<span class="arithmatex">\(7 \times 7 \times 512 = 25{,}088\)</span> 维</li>
+<li>这个向量接入一个或多个全连接层</li>
+<li>最后一层用 Softmax 输出每个类别的概率</li>
+</ol>
+<div class="arithmatex">\[Softmax(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}\]</div>
+<blockquote>
+<p>全连接层后面再也没有卷积层和池化层了——全连接层之后直接输出分类结果。</p>
+</blockquote>
+<p>![[../kb_material/ML_image/Pasted image 20260509151546.png]]</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509151605.png]]</p>
+<h3 id="fcn">全卷积神经网络（FCN）<a class="headerlink" href="#fcn" title="Permanent link">&para;</a></h3>
+<p>用 <strong>1×1 卷积</strong>替代全连接层的好处：可以接受任意尺寸的输入！</p>
+<ul>
+<li>全连接层要求固定尺寸输入（因为权重矩阵维度是固定的）</li>
+<li>1×1 卷积的参数量只取决于通道数，与图像尺寸无关</li>
+</ul>
+<p>图像经过多次池化层层缩小后，需要用<strong>反卷积</strong>（也称转置卷积）逐步放大回原始尺寸——反卷积步长为小数（实际上是插值扩尺寸再卷积），类似于信号处理中的插值/上采样。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509152051.png]]</p>
+<hr />
+<h2 id="_19">卷积神经网络进阶<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<h3 id="cnn_1">经典 CNN 演进路线<a class="headerlink" href="#cnn_1" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\text{LeNet} \rightarrow \text{AlexNet} \rightarrow \text{VGGNet} \rightarrow \text{GoogLeNet} \rightarrow \text{ResNet}\]</div>
+<p>核心趋势：<strong>网络越来越深</strong>，同时用各种技术创新解决"更深但更难训练"的矛盾。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509152622.png]]
+![[../kb_material/ML_image/Pasted image 20260509152735.png]]</p>
+<h3 id="_20">模型的进化<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>年份</th>
+<th>层数</th>
+<th>核心创新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LeNet</td>
+<td>1998</td>
+<td>5</td>
+<td>CNN 鼻祖，用于手写数字识别</td>
+</tr>
+<tr>
+<td><strong>AlexNet</strong></td>
+<td>2012</td>
+<td>8</td>
+<td>ReLU + Dropout + GPU，深度学习里程碑</td>
+</tr>
+<tr>
+<td>VGGNet</td>
+<td>2014</td>
+<td>16/19</td>
+<td>全用 3×3 小卷积核堆叠，结构简洁</td>
+</tr>
+<tr>
+<td>GoogLeNet</td>
+<td>2014</td>
+<td>22</td>
+<td>Inception 模块，多尺度并行卷积</td>
+</tr>
+<tr>
+<td><strong>ResNet</strong></td>
+<td>2015</td>
+<td>152</td>
+<td>残差连接，解决深层退化问题</td>
+</tr>
+</tbody>
+</table>
+<p>![[../kb_material/ML_image/Pasted image 20260509152951.png]]</p>
+<h3 id="alexnet">AlexNet<a class="headerlink" href="#alexnet" title="Permanent link">&para;</a></h3>
+<p>2012 年 ImageNet 冠军，首次证明了"大数据 + 大网络 + GPU"可行：</p>
+<ul>
+<li><strong>ReLU 激活函数</strong>：比 Tanh 快 6 倍，且缓解梯度消失</li>
+<li><strong>Dropout</strong>：在全连接层后随机丢弃 50% 神经元，防过拟合</li>
+<li><strong>数据增强</strong>：随机裁剪、水平翻转扩充训练数据</li>
+<li><strong>双 GPU</strong>：第一层分两组卷积核，各自跑一块 GPU</li>
+</ul>
+<p>AlexNet 是深度学习爆发的起点——在那之前大家不相信大网络能训出来。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509153309.png]]</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509153447.png]]
+![[../kb_material/ML_image/Pasted image 20260509153800.png]]</p>
+<h3 id="dropout">Dropout 层<a class="headerlink" href="#dropout" title="Permanent link">&para;</a></h3>
+<p>训练时以概率 <span class="arithmatex">\(p\)</span>（通常 <span class="arithmatex">\(p=0.5\)</span>）随机将一部分神经元输出置 0。直观理解：</p>
+<ul>
+<li><strong>相当于每次训练一个不同的子网络</strong>，不同子网络的权重互相适应</li>
+<li>测试时关闭 Dropout，相当于<strong>集成了所有子网络</strong></li>
+<li>防止神经元之间形成"共谋"——某个神经元不能依赖另一个特定神经元的存在</li>
+</ul>
+<p><strong>公式</strong>：</p>
+<p>训练时：<span class="arithmatex">\(y = f(x) \cdot mask\)</span>，其中 <span class="arithmatex">\(mask_i \sim Bernoulli(1-p)\)</span></p>
+<p>测试时：<span class="arithmatex">\(y = (1-p) \cdot f(x)\)</span>，对输出做放缩补偿</p>
+<blockquote>
+<p>Dropout 只在训练时开启，推理/测试时关闭。</p>
+</blockquote>
+<p>![[../kb_material/ML_image/Pasted image 20260509154252.png]]</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509154349.png]]
+![[../kb_material/ML_image/Pasted image 20260509154639.png]]
+![[../kb_material/ML_image/Pasted image 20260509154809.png]]</p>
+<hr />
+<h2 id="vggnet">VGGNet<a class="headerlink" href="#vggnet" title="Permanent link">&para;</a></h2>
+<p>VGG 的核心理念：<strong>用多个 3×3 小卷积核堆叠替代一个大卷积核</strong>。</p>
+<h3 id="33">为什么要堆叠 3×3？<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>两个 3×3 卷积堆叠的感受野 = 一个 5×5 卷积的感受野（效果等价），但：</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>参数量</th>
+<th>非线性次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一个 5×5 卷积核</td>
+<td><span class="arithmatex">\(C \times 25\)</span></td>
+<td>1 次 ReLU</td>
+</tr>
+<tr>
+<td>两个 3×3 卷积核堆叠</td>
+<td><span class="arithmatex">\(C \times 18\)</span></td>
+<td>2 次 ReLU</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>参数少了 28%</li>
+<li>多一层非线性 = 更强的表达能力</li>
+<li>三个 3×3 堆叠相当于一个 7×7</li>
+</ul>
+<h3 id="_21">网络结构<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>VGG16 结构非常规整：</p>
+<pre><code>输入 224×224×3
+→ [3×3 conv, 64] × 2  → 2×2 maxpool
+→ [3×3 conv, 128] × 2 → 2×2 maxpool
+→ [3×3 conv, 256] × 3 → 2×2 maxpool
+→ [3×3 conv, 512] × 3 → 2×2 maxpool
+→ [3×3 conv, 512] × 3 → 2×2 maxpool
+→ FC 4096 → FC 4096 → FC 1000 → Softmax
+</code></pre>
+<p>特点是<strong>全部使用 3×3 卷积 + 2×2 池化</strong>，设计极其一致。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509164004.png]]
+![[../kb_material/ML_image/Pasted image 20260509164216.png]]</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509170320.png]]</p>
+<h3 id="_22">训练技巧<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>先训练浅层版本（如 11 层），收敛后用其权重初始化深层版本（16/19 层）的对应层，从"已经不错的位置"起步继续训练，比从头开始收敛更快。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509170421.png]]</p>
+<hr />
+<h2 id="resnet">ResNet<a class="headerlink" href="#resnet" title="Permanent link">&para;</a></h2>
+<h3 id="_23">退化问题<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<p>直觉上网络越深应该效果越好，但实验发现：56 层的网络训练误差竟然比 20 层的还高！这不是过拟合（训练误差就不好），而是<strong>退化问题</strong>——太深了训不动，梯度回传困难。</p>
+<h3 id="_24">残差连接的解决思路<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p>ResNet 的核心公式：</p>
+<div class="arithmatex">\[H(x) = F(x) + x\]</div>
+<p>其中：
+- <span class="arithmatex">\(x\)</span> 是输入（恒等映射，identity）
+- <span class="arithmatex">\(F(x)\)</span> 是残差学习部分（几个卷积层）
+- <span class="arithmatex">\(H(x)\)</span> 是最终输出</p>
+<p><strong>思想转变</strong>：不让网络直接学 <span class="arithmatex">\(H(x)\)</span>（目标映射），而是学 <span class="arithmatex">\(F(x) = H(x) - x\)</span>（目标与输入的差值，即残差）。</p>
+<h3 id="_25">为什么有效？<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<p>当残差为 0 时，<span class="arithmatex">\(H(x) = x\)</span>，至少能做到恒等映射——深层网络不会比浅层更差。</p>
+<p>而这个"跳过连接"（skip connection）也成了梯度的<strong>高速公路</strong>：反向传播时，梯度可以通过这条直通路无损地传回浅层，解决梯度消失。</p>
+<p><strong>类比</strong>：你在复制课本笔记时，如果直接抄，错一个字可能后面全错。但 ResNet 的策略是"大部分照抄原文，只在必要处加注释"——原文的梯度始终可以直接传回来，不会丢失。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509170849.png]]
+![[../kb_material/ML_image/Pasted image 20260509170912.png]]
+![[../kb_material/ML_image/Pasted image 20260509171204.png|697]]</p>
+<p>残差块的结构：输入 <span class="arithmatex">\(x\)</span> 走两条路——（1）经过 weight → BN → ReLU → weight → BN；（2）直接跳过。两条路的输出相加后再过 ReLU。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509171216.png]]</p>
+<p>ResNet 的经典配置：
+- <strong>ResNet-18/34</strong>：用简单的两层残差块（3×3→3×3）
+- <strong>ResNet-50/101/152</strong>：用 bottleneck 残差块（1×1→3×3→1×1），1×1 负责压缩和恢复通道，大幅减少计算量</p>
+<p>ResNet-152 以 152 层的深度在 2015 年夺得 ImageNet 冠军，top-5 错误率仅 3.57%，首次超过人类水平。</p>
+<p>![[../kb_material/ML_image/Pasted image 20260509171355.png]]
+![[../kb_material/ML_image/Pasted image 20260509171732.png]]</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/katex.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+    
+  </body>
+</html>
