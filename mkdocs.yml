@@ -18,6 +18,9 @@ exclude_docs: |
   kb_material/**/content_list_v2.json
   kb_material/**/layout.json
 
+hooks:
+  - hooks.py
+
 plugins:
   - search
 
