@@ -1737,7 +1737,7 @@
 <pre><code>输入图像 → [卷积 → 激活]×N → 池化 → ... → 全连接 → 输出分类
 </code></pre>
 <p>卷积负责提取特征，池化负责压缩尺寸，最后全连接负责分类决策。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509112018.png]]</p>
+<p><img alt="Pasted image 20260509112018.png" src="../../kb_material/ML_image/Pasted%20image%2020260509112018.png" /></p>
 <hr />
 <h2 id="_2">问题引入<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">全连接网络处理图像的灾难<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -1750,8 +1750,8 @@
 <p>而且这还没考虑：
 1. <strong>丢失空间信息</strong>：展开成向量后，相邻像素的空间关系被破坏了——左上角的像素和右下角的像素在向量里可能隔了十万八千里
 2. <strong>平移不变性缺失</strong>：猫在图片中间还是左边，对全连接网络来说是完全不同的输入，需要分别学</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509110034.png]]</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509110148.png]]</p>
+<p><img alt="Pasted image 20260509110034.png" src="../../kb_material/ML_image/Pasted%20image%2020260509110034.png" /></p>
+<p><img alt="Pasted image 20260509110148.png" src="../../kb_material/ML_image/Pasted%20image%2020260509110148.png" /></p>
 <hr />
 <h2 id="_4">卷积如何解决问题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="_5">两大杀手锏<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -1764,7 +1764,7 @@
 <li>参数数 = <span class="arithmatex">\(64 \times (3 \times 3 \times 3 + 1) = 64 \times 28 = \mathbf{1,792}\)</span> 个</li>
 <li>对比全连接需要的 <strong>1.5 亿</strong>个——减少了约 <strong>10 万倍</strong>！</li>
 </ul>
-<p>![[../kb_material/ML_image/Pasted image 20260509110438.png]]</p>
+<p><img alt="Pasted image 20260509110438.png" src="../../kb_material/ML_image/Pasted%20image%2020260509110438.png" /></p>
 <h3 id="_6">卷积操作<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>卷积核（也叫滤波器）在输入上滑动，每个位置计算逐元素相乘再求和：</p>
 <div class="arithmatex">\[(I * K)(i, j) = \sum_{m=0}^{k-1}\sum_{n=0}^{k-1} I(i+m, j+n) \cdot K(m, n)\]</div>
@@ -1786,9 +1786,9 @@ $<span class="arithmatex">\(2 \times 1 + 0 \times 0 + 1 \times 0 + 2 \times (-1)
 <pre><code>  0   0
   3   1
 </code></pre>
-<p>![[../kb_material/ML_image/Pasted image 20260509110326.png]]
-![[../kb_material/ML_image/Pasted image 20260509110812.png]]
-![[../kb_material/ML_image/Pasted image 20260509110830.png]]</p>
+<p><img alt="Pasted image 20260509110326.png" src="../../kb_material/ML_image/Pasted%20image%2020260509110326.png" />
+<img alt="Pasted image 20260509110812.png" src="../../kb_material/ML_image/Pasted%20image%2020260509110812.png" />
+<img alt="Pasted image 20260509110830.png" src="../../kb_material/ML_image/Pasted%20image%2020260509110830.png" /></p>
 <h3 id="_7">输出尺寸公式<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[W_{out} = \left\lfloor \frac{W_{in} + 2P - K}{S} \right\rfloor + 1\]</div>
 <p>其中：
@@ -1799,9 +1799,9 @@ $<span class="arithmatex">\(2 \times 1 + 0 \times 0 + 1 \times 0 + 2 \times (-1)
 - <span class="arithmatex">\(\lfloor \cdot \rfloor\)</span> — 向下取整</p>
 <p><strong>举例</strong>：输入 32×32，卷积核 3×3，padding=0，stride=1</p>
 <p>输出尺寸 = <span class="arithmatex">\((32 + 0 - 3) / 1 + 1 = 30\)</span> → 30×30，缩小了 2 个像素。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509110956.png]]</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509111158.png]]
-![[../kb_material/ML_image/Pasted image 20260509111413.png]]</p>
+<p><img alt="Pasted image 20260509110956.png" src="../../kb_material/ML_image/Pasted%20image%2020260509110956.png" /></p>
+<p><img alt="Pasted image 20260509111158.png" src="../../kb_material/ML_image/Pasted%20image%2020260509111158.png" />
+<img alt="Pasted image 20260509111413.png" src="../../kb_material/ML_image/Pasted%20image%2020260509111413.png" /></p>
 <h3 id="padding">Padding<a class="headerlink" href="#padding" title="Permanent link">&para;</a></h3>
 <h4 id="padding_1">为什么需要 Padding？<a class="headerlink" href="#padding_1" title="Permanent link">&para;</a></h4>
 <p>每次卷积，输出都会比输入缩小 <span class="arithmatex">\(K-1\)</span> 个像素。如果不做 padding：
@@ -1817,7 +1817,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <blockquote>
 <p>padding 的 size 和卷积核的 size 是有关系的——想保持尺寸不变，padding 必须是 <span class="arithmatex">\((K-1)/2\)</span>。</p>
 </blockquote>
-<p>![[../kb_material/ML_image/Pasted image 20260509111549.png]]</p>
+<p><img alt="Pasted image 20260509111549.png" src="../../kb_material/ML_image/Pasted%20image%2020260509111549.png" /></p>
 <hr />
 <h2 id="_8">卷积多通道<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>真实图像有多个通道（RGB = 3 通道），卷积核也必须有同样深度的通道。</p>
@@ -1830,9 +1830,9 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <blockquote>
 <p>加多个卷积核的物理含义是提取多个特征——就像雇 64 个专家，每人负责识别一种不同的图案。</p>
 </blockquote>
-<p>![[../kb_material/ML_image/Pasted image 20260509112054.png]]</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509112158.png]]</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509112503.png]]</p>
+<p><img alt="Pasted image 20260509112054.png" src="../../kb_material/ML_image/Pasted%20image%2020260509112054.png" /></p>
+<p><img alt="Pasted image 20260509112158.png" src="../../kb_material/ML_image/Pasted%20image%2020260509112158.png" /></p>
+<p><img alt="Pasted image 20260509112503.png" src="../../kb_material/ML_image/Pasted%20image%2020260509112503.png" /></p>
 <hr />
 <h2 id="_11">激活函数<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <h3 id="cnn-relu">为什么 CNN 用 ReLU？<a class="headerlink" href="#cnn-relu" title="Permanent link">&para;</a></h3>
@@ -1871,7 +1871,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <li><strong>计算快</strong>：只需 <code>max(0, x)</code>，Sigmoid 需要做指数运算</li>
 <li><strong>诱导稀疏性</strong>：负半区直接输出 0，网络中约 50% 神经元同时激活，更接近生物神经元的工作方式</li>
 </ol>
-<p>![[../kb_material/ML_image/Pasted image 20260509144748.png]]</p>
+<p><img alt="Pasted image 20260509144748.png" src="../../kb_material/ML_image/Pasted%20image%2020260509144748.png" /></p>
 <hr />
 <h2 id="_12">卷积总结<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <p>用一个表来回顾卷积层的核心概念：</p>
@@ -1912,7 +1912,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 </tbody>
 </table>
 <p>卷积层通过<strong>局部连接 + 参数共享</strong>，将全连接需要的亿级参数降到千级。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509145539.png]]</p>
+<p><img alt="Pasted image 20260509145539.png" src="../../kb_material/ML_image/Pasted%20image%2020260509145539.png" /></p>
 <hr />
 <h2 id="_13">池化层<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <p>池化层的核心作用：<strong>降低特征图尺寸</strong>，从而减少后续层的计算量。同时提供一定的平移不变性——只要关键特征还在池化窗口内，输出就不变。</p>
@@ -1935,7 +1935,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
   9  7
 </code></pre>
 <p>最大值池化<strong>保留最强特征</strong>（如边缘的高响应值），丢弃弱信号，简单有效，是 CNN 中最常用的池化方式。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509145639.png]]</p>
+<p><img alt="Pasted image 20260509145639.png" src="../../kb_material/ML_image/Pasted%20image%2020260509145639.png" /></p>
 <h3 id="_15">平均值池化<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p>取池化窗口内的平均值：</p>
 <div class="arithmatex">\[P(i, j) = \frac{1}{k^2}\sum_{m,n \in window} I(i+m, j+n)\]</div>
@@ -1950,7 +1950,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
   (3+6+9+2)/4 = 5.0     (2+1+4+7)/4 = 3.5
 </code></pre>
 <p>平均值池化更平滑，不会过度强调某个极端值。现在 CNN 中多数场景已用最大值池化替代。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509145857.png]]</p>
+<p><img alt="Pasted image 20260509145857.png" src="../../kb_material/ML_image/Pasted%20image%2020260509145857.png" /></p>
 <h3 id="_16">池化性质<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>无学习参数</strong>：纯数学操作，不做梯度更新</li>
@@ -1958,7 +1958,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <li><strong>平移不变性</strong>：输入微小偏移（1-2 个像素）基本不影响池化输出</li>
 <li><strong>尺寸缩减</strong>：<span class="arithmatex">\(k \times k\)</span> 池化（stride=k）将尺寸缩小 <span class="arithmatex">\(k\)</span> 倍</li>
 </ul>
-<p>![[../kb_material/ML_image/Pasted image 20260509150447.png]]</p>
+<p><img alt="Pasted image 20260509150447.png" src="../../kb_material/ML_image/Pasted%20image%2020260509150447.png" /></p>
 <hr />
 <h2 id="_17">全连接层<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <p>CNN 的最后几层通常是全连接层，作用是：<strong>把卷积/池化提取的分布式特征汇总映射到最终的类别概率</strong>。</p>
@@ -1973,8 +1973,8 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <blockquote>
 <p>全连接层后面再也没有卷积层和池化层了——全连接层之后直接输出分类结果。</p>
 </blockquote>
-<p>![[../kb_material/ML_image/Pasted image 20260509151546.png]]</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509151605.png]]</p>
+<p><img alt="Pasted image 20260509151546.png" src="../../kb_material/ML_image/Pasted%20image%2020260509151546.png" /></p>
+<p><img alt="Pasted image 20260509151605.png" src="../../kb_material/ML_image/Pasted%20image%2020260509151605.png" /></p>
 <h3 id="fcn">全卷积神经网络（FCN）<a class="headerlink" href="#fcn" title="Permanent link">&para;</a></h3>
 <p>用 <strong>1×1 卷积</strong>替代全连接层的好处：可以接受任意尺寸的输入！</p>
 <ul>
@@ -1982,14 +1982,14 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <li>1×1 卷积的参数量只取决于通道数，与图像尺寸无关</li>
 </ul>
 <p>图像经过多次池化层层缩小后，需要用<strong>反卷积</strong>（也称转置卷积）逐步放大回原始尺寸——反卷积步长为小数（实际上是插值扩尺寸再卷积），类似于信号处理中的插值/上采样。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509152051.png]]</p>
+<p><img alt="Pasted image 20260509152051.png" src="../../kb_material/ML_image/Pasted%20image%2020260509152051.png" /></p>
 <hr />
 <h2 id="_19">卷积神经网络进阶<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
 <h3 id="cnn_1">经典 CNN 演进路线<a class="headerlink" href="#cnn_1" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[\text{LeNet} \rightarrow \text{AlexNet} \rightarrow \text{VGGNet} \rightarrow \text{GoogLeNet} \rightarrow \text{ResNet}\]</div>
 <p>核心趋势：<strong>网络越来越深</strong>，同时用各种技术创新解决"更深但更难训练"的矛盾。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509152622.png]]
-![[../kb_material/ML_image/Pasted image 20260509152735.png]]</p>
+<p><img alt="Pasted image 20260509152622.png" src="../../kb_material/ML_image/Pasted%20image%2020260509152622.png" />
+<img alt="Pasted image 20260509152735.png" src="../../kb_material/ML_image/Pasted%20image%2020260509152735.png" /></p>
 <h3 id="_20">模型的进化<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -2033,7 +2033,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 </tr>
 </tbody>
 </table>
-<p>![[../kb_material/ML_image/Pasted image 20260509152951.png]]</p>
+<p><img alt="Pasted image 20260509152951.png" src="../../kb_material/ML_image/Pasted%20image%2020260509152951.png" /></p>
 <h3 id="alexnet">AlexNet<a class="headerlink" href="#alexnet" title="Permanent link">&para;</a></h3>
 <p>2012 年 ImageNet 冠军，首次证明了"大数据 + 大网络 + GPU"可行：</p>
 <ul>
@@ -2043,9 +2043,9 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <li><strong>双 GPU</strong>：第一层分两组卷积核，各自跑一块 GPU</li>
 </ul>
 <p>AlexNet 是深度学习爆发的起点——在那之前大家不相信大网络能训出来。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509153309.png]]</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509153447.png]]
-![[../kb_material/ML_image/Pasted image 20260509153800.png]]</p>
+<p><img alt="Pasted image 20260509153309.png" src="../../kb_material/ML_image/Pasted%20image%2020260509153309.png" /></p>
+<p><img alt="Pasted image 20260509153447.png" src="../../kb_material/ML_image/Pasted%20image%2020260509153447.png" />
+<img alt="Pasted image 20260509153800.png" src="../../kb_material/ML_image/Pasted%20image%2020260509153800.png" /></p>
 <h3 id="dropout">Dropout 层<a class="headerlink" href="#dropout" title="Permanent link">&para;</a></h3>
 <p>训练时以概率 <span class="arithmatex">\(p\)</span>（通常 <span class="arithmatex">\(p=0.5\)</span>）随机将一部分神经元输出置 0。直观理解：</p>
 <ul>
@@ -2059,10 +2059,10 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <blockquote>
 <p>Dropout 只在训练时开启，推理/测试时关闭。</p>
 </blockquote>
-<p>![[../kb_material/ML_image/Pasted image 20260509154252.png]]</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509154349.png]]
-![[../kb_material/ML_image/Pasted image 20260509154639.png]]
-![[../kb_material/ML_image/Pasted image 20260509154809.png]]</p>
+<p><img alt="Pasted image 20260509154252.png" src="../../kb_material/ML_image/Pasted%20image%2020260509154252.png" /></p>
+<p><img alt="Pasted image 20260509154349.png" src="../../kb_material/ML_image/Pasted%20image%2020260509154349.png" />
+<img alt="Pasted image 20260509154639.png" src="../../kb_material/ML_image/Pasted%20image%2020260509154639.png" />
+<img alt="Pasted image 20260509154809.png" src="../../kb_material/ML_image/Pasted%20image%2020260509154809.png" /></p>
 <hr />
 <h2 id="vggnet">VGGNet<a class="headerlink" href="#vggnet" title="Permanent link">&para;</a></h2>
 <p>VGG 的核心理念：<strong>用多个 3×3 小卷积核堆叠替代一个大卷积核</strong>。</p>
@@ -2105,12 +2105,12 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 → FC 4096 → FC 4096 → FC 1000 → Softmax
 </code></pre>
 <p>特点是<strong>全部使用 3×3 卷积 + 2×2 池化</strong>，设计极其一致。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509164004.png]]
-![[../kb_material/ML_image/Pasted image 20260509164216.png]]</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509170320.png]]</p>
+<p><img alt="Pasted image 20260509164004.png" src="../../kb_material/ML_image/Pasted%20image%2020260509164004.png" />
+<img alt="Pasted image 20260509164216.png" src="../../kb_material/ML_image/Pasted%20image%2020260509164216.png" /></p>
+<p><img alt="Pasted image 20260509170320.png" src="../../kb_material/ML_image/Pasted%20image%2020260509170320.png" /></p>
 <h3 id="_22">训练技巧<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
 <p>先训练浅层版本（如 11 层），收敛后用其权重初始化深层版本（16/19 层）的对应层，从"已经不错的位置"起步继续训练，比从头开始收敛更快。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509170421.png]]</p>
+<p><img alt="Pasted image 20260509170421.png" src="../../kb_material/ML_image/Pasted%20image%2020260509170421.png" /></p>
 <hr />
 <h2 id="resnet">ResNet<a class="headerlink" href="#resnet" title="Permanent link">&para;</a></h2>
 <h3 id="_23">退化问题<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
@@ -2127,17 +2127,17 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <p>当残差为 0 时，<span class="arithmatex">\(H(x) = x\)</span>，至少能做到恒等映射——深层网络不会比浅层更差。</p>
 <p>而这个"跳过连接"（skip connection）也成了梯度的<strong>高速公路</strong>：反向传播时，梯度可以通过这条直通路无损地传回浅层，解决梯度消失。</p>
 <p><strong>类比</strong>：你在复制课本笔记时，如果直接抄，错一个字可能后面全错。但 ResNet 的策略是"大部分照抄原文，只在必要处加注释"——原文的梯度始终可以直接传回来，不会丢失。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509170849.png]]
-![[../kb_material/ML_image/Pasted image 20260509170912.png]]
-![[../kb_material/ML_image/Pasted image 20260509171204.png|697]]</p>
+<p><img alt="Pasted image 20260509170849.png" src="../../kb_material/ML_image/Pasted%20image%2020260509170849.png" />
+<img alt="Pasted image 20260509170912.png" src="../../kb_material/ML_image/Pasted%20image%2020260509170912.png" />
+<img alt="Pasted image 20260509171204.png" src="../../kb_material/ML_image/Pasted%20image%2020260509171204.png" /></p>
 <p>残差块的结构：输入 <span class="arithmatex">\(x\)</span> 走两条路——（1）经过 weight → BN → ReLU → weight → BN；（2）直接跳过。两条路的输出相加后再过 ReLU。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509171216.png]]</p>
+<p><img alt="Pasted image 20260509171216.png" src="../../kb_material/ML_image/Pasted%20image%2020260509171216.png" /></p>
 <p>ResNet 的经典配置：
 - <strong>ResNet-18/34</strong>：用简单的两层残差块（3×3→3×3）
 - <strong>ResNet-50/101/152</strong>：用 bottleneck 残差块（1×1→3×3→1×1），1×1 负责压缩和恢复通道，大幅减少计算量</p>
 <p>ResNet-152 以 152 层的深度在 2015 年夺得 ImageNet 冠军，top-5 错误率仅 3.57%，首次超过人类水平。</p>
-<p>![[../kb_material/ML_image/Pasted image 20260509171355.png]]
-![[../kb_material/ML_image/Pasted image 20260509171732.png]]</p>
+<p><img alt="Pasted image 20260509171355.png" src="../../kb_material/ML_image/Pasted%20image%2020260509171355.png" />
+<img alt="Pasted image 20260509171732.png" src="../../kb_material/ML_image/Pasted%20image%2020260509171732.png" /></p>
 
 
 
