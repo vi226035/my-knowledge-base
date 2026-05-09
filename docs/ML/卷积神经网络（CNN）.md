@@ -16,7 +16,7 @@ CNN 的整体流程：
 
 卷积负责提取特征，池化负责压缩尺寸，最后全连接负责分类决策。
 
-![[../kb_material/ML_image/Pasted image 20260509112018.png]]
+![Pasted image 20260509112018.png](../kb_material/ML_image/Pasted image 20260509112018.png)
 
 ---
 
@@ -34,9 +34,9 @@ CNN 的整体流程：
 1. **丢失空间信息**：展开成向量后，相邻像素的空间关系被破坏了——左上角的像素和右下角的像素在向量里可能隔了十万八千里
 2. **平移不变性缺失**：猫在图片中间还是左边，对全连接网络来说是完全不同的输入，需要分别学
 
-![[../kb_material/ML_image/Pasted image 20260509110034.png]]
+![Pasted image 20260509110034.png](../kb_material/ML_image/Pasted image 20260509110034.png)
 
-![[../kb_material/ML_image/Pasted image 20260509110148.png]]
+![Pasted image 20260509110148.png](../kb_material/ML_image/Pasted image 20260509110148.png)
 
 ---
 
@@ -57,7 +57,7 @@ CNN 的整体流程：
 - 参数数 = $64 \times (3 \times 3 \times 3 + 1) = 64 \times 28 = \mathbf{1,792}$ 个
 - 对比全连接需要的 **1.5 亿**个——减少了约 **10 万倍**！
 
-![[../kb_material/ML_image/Pasted image 20260509110438.png]]
+![Pasted image 20260509110438.png](../kb_material/ML_image/Pasted image 20260509110438.png)
 
 ### 卷积操作
 
@@ -92,9 +92,9 @@ $$2 \times 1 + 0 \times 0 + 1 \times 0 + 2 \times (-1) = 2 - 2 = 0$$
   3   1
 ```
 
-![[../kb_material/ML_image/Pasted image 20260509110326.png]]
-![[../kb_material/ML_image/Pasted image 20260509110812.png]]
-![[../kb_material/ML_image/Pasted image 20260509110830.png]]
+![Pasted image 20260509110326.png](../kb_material/ML_image/Pasted image 20260509110326.png)
+![Pasted image 20260509110812.png](../kb_material/ML_image/Pasted image 20260509110812.png)
+![Pasted image 20260509110830.png](../kb_material/ML_image/Pasted image 20260509110830.png)
 
 ### 输出尺寸公式
 
@@ -111,10 +111,10 @@ $$W_{out} = \left\lfloor \frac{W_{in} + 2P - K}{S} \right\rfloor + 1$$
 
 输出尺寸 = $(32 + 0 - 3) / 1 + 1 = 30$ → 30×30，缩小了 2 个像素。
 
-![[../kb_material/ML_image/Pasted image 20260509110956.png]]
+![Pasted image 20260509110956.png](../kb_material/ML_image/Pasted image 20260509110956.png)
 
-![[../kb_material/ML_image/Pasted image 20260509111158.png]]
-![[../kb_material/ML_image/Pasted image 20260509111413.png]]
+![Pasted image 20260509111158.png](../kb_material/ML_image/Pasted image 20260509111158.png)
+![Pasted image 20260509111413.png](../kb_material/ML_image/Pasted image 20260509111413.png)
 
 ### Padding
 
@@ -138,7 +138,7 @@ $$P = \frac{K-1}{2}$$
 
 > padding 的 size 和卷积核的 size 是有关系的——想保持尺寸不变，padding 必须是 $(K-1)/2$。
 
-![[../kb_material/ML_image/Pasted image 20260509111549.png]]
+![Pasted image 20260509111549.png](../kb_material/ML_image/Pasted image 20260509111549.png)
 
 ---
 
@@ -160,11 +160,11 @@ $$输出(i, j) = \sum_{c=0}^{C-1} \sum_{m=0}^{K-1} \sum_{n=0}^{K-1} 输入(i+m, 
 
 > 加多个卷积核的物理含义是提取多个特征——就像雇 64 个专家，每人负责识别一种不同的图案。
 
-![[../kb_material/ML_image/Pasted image 20260509112054.png]]
+![Pasted image 20260509112054.png](../kb_material/ML_image/Pasted image 20260509112054.png)
 
-![[../kb_material/ML_image/Pasted image 20260509112158.png]]
+![Pasted image 20260509112158.png](../kb_material/ML_image/Pasted image 20260509112158.png)
 
-![[../kb_material/ML_image/Pasted image 20260509112503.png]]
+![Pasted image 20260509112503.png](../kb_material/ML_image/Pasted image 20260509112503.png)
 
 ---
 
@@ -190,7 +190,7 @@ ReLU 公式很简单：$f(x) = \max(0, x)$
 2. **计算快**：只需 `max(0, x)`，Sigmoid 需要做指数运算
 3. **诱导稀疏性**：负半区直接输出 0，网络中约 50% 神经元同时激活，更接近生物神经元的工作方式
 
-![[../kb_material/ML_image/Pasted image 20260509144748.png]]
+![Pasted image 20260509144748.png](../kb_material/ML_image/Pasted image 20260509144748.png)
 
 ---
 
@@ -208,7 +208,7 @@ ReLU 公式很简单：$f(x) = \max(0, x)$
 
 卷积层通过**局部连接 + 参数共享**，将全连接需要的亿级参数降到千级。
 
-![[../kb_material/ML_image/Pasted image 20260509145539.png]]
+![Pasted image 20260509145539.png](../kb_material/ML_image/Pasted image 20260509145539.png)
 
 ---
 
@@ -243,7 +243,7 @@ $$P(i, j) = \max_{m,n \in window} I(i+m, j+n)$$
 
 最大值池化**保留最强特征**（如边缘的高响应值），丢弃弱信号，简单有效，是 CNN 中最常用的池化方式。
 
-![[../kb_material/ML_image/Pasted image 20260509145639.png]]
+![Pasted image 20260509145639.png](../kb_material/ML_image/Pasted image 20260509145639.png)
 
 ### 平均值池化
 
@@ -266,7 +266,7 @@ $$P(i, j) = \frac{1}{k^2}\sum_{m,n \in window} I(i+m, j+n)$$
 
 平均值池化更平滑，不会过度强调某个极端值。现在 CNN 中多数场景已用最大值池化替代。
 
-![[../kb_material/ML_image/Pasted image 20260509145857.png]]
+![Pasted image 20260509145857.png](../kb_material/ML_image/Pasted image 20260509145857.png)
 
 ### 池化性质
 
@@ -275,7 +275,7 @@ $$P(i, j) = \frac{1}{k^2}\sum_{m,n \in window} I(i+m, j+n)$$
 - **平移不变性**：输入微小偏移（1-2 个像素）基本不影响池化输出
 - **尺寸缩减**：$k \times k$ 池化（stride=k）将尺寸缩小 $k$ 倍
 
-![[../kb_material/ML_image/Pasted image 20260509150447.png]]
+![Pasted image 20260509150447.png](../kb_material/ML_image/Pasted image 20260509150447.png)
 
 ---
 
@@ -295,9 +295,9 @@ $$Softmax(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}$$
 
 > 全连接层后面再也没有卷积层和池化层了——全连接层之后直接输出分类结果。
 
-![[../kb_material/ML_image/Pasted image 20260509151546.png]]
+![Pasted image 20260509151546.png](../kb_material/ML_image/Pasted image 20260509151546.png)
 
-![[../kb_material/ML_image/Pasted image 20260509151605.png]]
+![Pasted image 20260509151605.png](../kb_material/ML_image/Pasted image 20260509151605.png)
 
 ### 全卷积神经网络（FCN）
 
@@ -308,7 +308,7 @@ $$Softmax(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}$$
 
 图像经过多次池化层层缩小后，需要用**反卷积**（也称转置卷积）逐步放大回原始尺寸——反卷积步长为小数（实际上是插值扩尺寸再卷积），类似于信号处理中的插值/上采样。
 
-![[../kb_material/ML_image/Pasted image 20260509152051.png]]
+![Pasted image 20260509152051.png](../kb_material/ML_image/Pasted image 20260509152051.png)
 
 ---
 
@@ -320,8 +320,8 @@ $$\text{LeNet} \rightarrow \text{AlexNet} \rightarrow \text{VGGNet} \rightarrow 
 
 核心趋势：**网络越来越深**，同时用各种技术创新解决"更深但更难训练"的矛盾。
 
-![[../kb_material/ML_image/Pasted image 20260509152622.png]]
-![[../kb_material/ML_image/Pasted image 20260509152735.png]]
+![Pasted image 20260509152622.png](../kb_material/ML_image/Pasted image 20260509152622.png)
+![Pasted image 20260509152735.png](../kb_material/ML_image/Pasted image 20260509152735.png)
 
 ### 模型的进化
 
@@ -333,7 +333,7 @@ $$\text{LeNet} \rightarrow \text{AlexNet} \rightarrow \text{VGGNet} \rightarrow 
 | GoogLeNet | 2014 | 22 | Inception 模块，多尺度并行卷积 |
 | **ResNet** | 2015 | 152 | 残差连接，解决深层退化问题 |
 
-![[../kb_material/ML_image/Pasted image 20260509152951.png]]
+![Pasted image 20260509152951.png](../kb_material/ML_image/Pasted image 20260509152951.png)
 
 ### AlexNet
 
@@ -346,10 +346,10 @@ $$\text{LeNet} \rightarrow \text{AlexNet} \rightarrow \text{VGGNet} \rightarrow 
 
 AlexNet 是深度学习爆发的起点——在那之前大家不相信大网络能训出来。
 
-![[../kb_material/ML_image/Pasted image 20260509153309.png]]
+![Pasted image 20260509153309.png](../kb_material/ML_image/Pasted image 20260509153309.png)
 
-![[../kb_material/ML_image/Pasted image 20260509153447.png]]
-![[../kb_material/ML_image/Pasted image 20260509153800.png]]
+![Pasted image 20260509153447.png](../kb_material/ML_image/Pasted image 20260509153447.png)
+![Pasted image 20260509153800.png](../kb_material/ML_image/Pasted image 20260509153800.png)
 
 ### Dropout 层
 
@@ -367,11 +367,11 @@ AlexNet 是深度学习爆发的起点——在那之前大家不相信大网络
 
 > Dropout 只在训练时开启，推理/测试时关闭。
 
-![[../kb_material/ML_image/Pasted image 20260509154252.png]]
+![Pasted image 20260509154252.png](../kb_material/ML_image/Pasted image 20260509154252.png)
 
-![[../kb_material/ML_image/Pasted image 20260509154349.png]]
-![[../kb_material/ML_image/Pasted image 20260509154639.png]]
-![[../kb_material/ML_image/Pasted image 20260509154809.png]]
+![Pasted image 20260509154349.png](../kb_material/ML_image/Pasted image 20260509154349.png)
+![Pasted image 20260509154639.png](../kb_material/ML_image/Pasted image 20260509154639.png)
+![Pasted image 20260509154809.png](../kb_material/ML_image/Pasted image 20260509154809.png)
 
 ---
 
@@ -408,16 +408,16 @@ VGG16 结构非常规整：
 
 特点是**全部使用 3×3 卷积 + 2×2 池化**，设计极其一致。
 
-![[../kb_material/ML_image/Pasted image 20260509164004.png]]
-![[../kb_material/ML_image/Pasted image 20260509164216.png]]
+![Pasted image 20260509164004.png](../kb_material/ML_image/Pasted image 20260509164004.png)
+![Pasted image 20260509164216.png](../kb_material/ML_image/Pasted image 20260509164216.png)
 
-![[../kb_material/ML_image/Pasted image 20260509170320.png]]
+![Pasted image 20260509170320.png](../kb_material/ML_image/Pasted image 20260509170320.png)
 
 ### 训练技巧
 
 先训练浅层版本（如 11 层），收敛后用其权重初始化深层版本（16/19 层）的对应层，从"已经不错的位置"起步继续训练，比从头开始收敛更快。
 
-![[../kb_material/ML_image/Pasted image 20260509170421.png]]
+![Pasted image 20260509170421.png](../kb_material/ML_image/Pasted image 20260509170421.png)
 
 ---
 
@@ -448,13 +448,13 @@ $$H(x) = F(x) + x$$
 
 **类比**：你在复制课本笔记时，如果直接抄，错一个字可能后面全错。但 ResNet 的策略是"大部分照抄原文，只在必要处加注释"——原文的梯度始终可以直接传回来，不会丢失。
 
-![[../kb_material/ML_image/Pasted image 20260509170849.png]]
-![[../kb_material/ML_image/Pasted image 20260509170912.png]]
-![[../kb_material/ML_image/Pasted image 20260509171204.png|697]]
+![Pasted image 20260509170849.png](../kb_material/ML_image/Pasted image 20260509170849.png)
+![Pasted image 20260509170912.png](../kb_material/ML_image/Pasted image 20260509170912.png)
+![Pasted image 20260509171204.png](../kb_material/ML_image/Pasted image 20260509171204.png)
 
 残差块的结构：输入 $x$ 走两条路——（1）经过 weight → BN → ReLU → weight → BN；（2）直接跳过。两条路的输出相加后再过 ReLU。
 
-![[../kb_material/ML_image/Pasted image 20260509171216.png]]
+![Pasted image 20260509171216.png](../kb_material/ML_image/Pasted image 20260509171216.png)
 
 ResNet 的经典配置：
 - **ResNet-18/34**：用简单的两层残差块（3×3→3×3）
@@ -462,5 +462,5 @@ ResNet 的经典配置：
 
 ResNet-152 以 152 层的深度在 2015 年夺得 ImageNet 冠军，top-5 错误率仅 3.57%，首次超过人类水平。
 
-![[../kb_material/ML_image/Pasted image 20260509171355.png]]
-![[../kb_material/ML_image/Pasted image 20260509171732.png]]
+![Pasted image 20260509171355.png](../kb_material/ML_image/Pasted image 20260509171355.png)
+![Pasted image 20260509171732.png](../kb_material/ML_image/Pasted image 20260509171732.png)
