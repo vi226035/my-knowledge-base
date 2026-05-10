@@ -15,21 +15,23 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: indigo
-      accent: deep purple
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-night
         name: 切换深色模式
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: indigo
-      accent: deep purple
+      primary: custom
+      accent: custom
       toggle:
         icon: material/weather-sunny
         name: 切换浅色模式
   features:
     - navigation.instant
+    - navigation.instant.progress
     - navigation.tracking
+    - navigation.tabs
     - navigation.top
     - navigation.indexes
     - toc.follow
@@ -39,6 +41,10 @@ theme:
     - content.code.annotate
   icon:
     repo: fontawesome/brands/github
+  favicon: ''
+
+extra:
+  generator: false
 
 exclude_docs: |
   kb_material/**/*.md

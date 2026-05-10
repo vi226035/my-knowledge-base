@@ -1,168 +1,301 @@
-/* ========================================
-   全局配色与排版
-   ======================================== */
+/* ==========================================
+   自定义 Material 主题 — 现代简约风格
+   ========================================== */
 
 :root {
-  --md-primary-fg-color: #3f51b5;
-  --md-accent-fg-color: #7c4dff;
+  --md-primary-fg-color: #1565c0;
+  --md-primary-fg-color--light: #42a5f5;
+  --md-primary-fg-color--dark: #0d47a1;
+  --md-accent-fg-color: #ff6f00;
+  --md-accent-fg-color--transparent: rgba(255, 111, 0, 0.1);
+  --md-default-bg-color: #fafbfc;
+  --md-code-bg-color: #f0f3f6;
 }
 
-/* 图片居中并统一宽度 */
+/* 深色模式覆盖 */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #0d1117;
+  --md-code-bg-color: #161b22;
+  --md-primary-fg-color: #2196f3;
+  --md-primary-fg-color--dark: #0b0f14;
+  --md-accent-fg-color: #ffab40;
+}
+
+/* ==========================================
+   整体排版
+   ========================================== */
+
+.md-typeset {
+  font-size: .75rem;
+  line-height: 1.75;
+}
+
+.md-content {
+  max-width: 880px;
+}
+
+/* ==========================================
+   图片
+   ========================================== */
+
 .md-content img {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 90%;
-  border-radius: 6px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-  transition: box-shadow 0.2s;
+  margin: 1.6em auto;
+  max-width: 92%;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .md-content img:hover {
-  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12), 0 8px 28px rgba(0,0,0,0.10);
+  transform: translateY(-1px);
 }
 
-/* 包含图片的段落居中 */
 .md-content p:has(img) {
   text-align: center;
 }
 
-/* 图注居中 */
-.md-content p img + br + strong,
-.md-content p:has(img) + p strong {
-  display: block;
-  text-align: center;
-}
-
-/* ========================================
-   公式块
-   ======================================== */
+/* ==========================================
+   KaTeX 公式
+   ========================================== */
 
 .arithmatex {
   overflow-x: auto;
-  margin: 1em 0;
+  margin: 1.2em 0;
+  padding: 0.2em 0;
 }
 
-/* ========================================
-   代码块
-   ======================================== */
+/* ==========================================
+   代码
+   ========================================== */
 
 code {
-  border-radius: 4px;
+  border-radius: 5px;
+  font-size: 0.88em;
+  padding: 0.15em 0.4em;
 }
 
 pre {
-  border-radius: 6px;
+  border-radius: 10px;
 }
 
-/* ========================================
+pre code {
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+}
+
+/* ==========================================
    表格
-   ======================================== */
+   ========================================== */
 
-.md-content table {
-  margin: 1em auto;
-  border-collapse: collapse;
-  border-radius: 6px;
+.md-typeset table:not([class]) {
+  border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  font-size: 0.92em;
 }
 
-.md-content table th {
+.md-typeset table:not([class]) th {
   background: var(--md-primary-fg-color);
   color: #fff;
   font-weight: 600;
+  border: none;
+  padding: 12px 20px;
 }
 
-.md-content table td, .md-content table th {
-  padding: 10px 18px;
-  border: 1px solid #e0e0e0;
+.md-typeset table:not([class]) td {
+  padding: 10px 20px;
+  border-color: #eef0f2;
 }
 
-.md-content table tr:nth-child(even) {
-  background: rgba(63, 81, 181, 0.04);
+.md-typeset table:not([class]) tr:nth-child(even) td {
+  background: rgba(21, 101, 192, 0.025);
 }
 
-/* ========================================
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) td {
+  border-color: #21262d;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tr:nth-child(even) td {
+  background: rgba(33, 150, 243, 0.06);
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background: #1565c0;
+}
+
+/* ==========================================
    引用块
-   ======================================== */
+   ========================================== */
 
-blockquote {
-  border-left: 4px solid var(--md-primary-fg-color);
-  border-radius: 0 6px 6px 0;
-  background: rgba(63, 81, 181, 0.04);
-  padding: 0.8em 1.2em;
+.md-typeset blockquote {
+  border-left: 4px solid var(--md-accent-fg-color);
+  border-radius: 0 8px 8px 0;
+  background: var(--md-accent-fg-color--transparent);
+  padding: 1em 1.4em;
+  font-size: 0.94em;
 }
 
-/* ========================================
+[data-md-color-scheme="slate"] .md-typeset blockquote {
+  border-left-color: var(--md-accent-fg-color);
+  background: rgba(255, 171, 64, 0.06);
+}
+
+/* ==========================================
    标题
-   ======================================== */
+   ========================================== */
 
-.md-content h1 {
+.md-typeset h1 {
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 0.3em;
+}
+
+.md-typeset h2 {
+  margin-top: 2.4em;
   font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
-.md-content h2 {
-  margin-top: 2.2em;
+  letter-spacing: -0.3px;
   border-bottom: 2px solid var(--md-primary-fg-color);
-  padding-bottom: 0.3em;
-  font-weight: 600;
+  padding-bottom: 0.4em;
 }
 
-.md-content h3 {
-  margin-top: 1.6em;
+.md-typeset h3 {
+  margin-top: 1.8em;
   font-weight: 600;
   color: var(--md-primary-fg-color);
 }
 
-.md-content h4 {
+.md-typeset h4 {
   margin-top: 1.4em;
-  color: #555;
   font-weight: 600;
 }
 
-/* ========================================
-   深色模式适配
-   ======================================== */
+/* ==========================================
+   导航栏
+   ========================================== */
 
-[data-md-color-scheme="slate"] blockquote {
-  border-left-color: #7986cb;
-  background: rgba(121, 134, 203, 0.08);
+.md-header {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
 }
 
-[data-md-color-scheme="slate"] .md-content h3 {
-  color: #7986cb;
+/* ==========================================
+   侧边栏
+   ========================================== */
+
+.md-nav__link {
+  border-radius: 6px;
 }
 
-[data-md-color-scheme="slate"] .md-content h2 {
-  border-bottom-color: #7986cb;
+.md-nav__link:hover {
+  background: rgba(21, 101, 192, 0.06);
 }
 
-[data-md-color-scheme="slate"] .md-content table tr:nth-child(even) {
-  background: rgba(121, 134, 203, 0.08);
+.md-nav__link--active {
+  font-weight: 600;
 }
 
-[data-md-color-scheme="slate"] .md-content table th {
-  background: #3949ab;
-}
+/* ==========================================
+   首页卡片 (grid cards)
+   ========================================== */
 
-/* ========================================
-   首页卡片布局
-   ======================================== */
-
-.md-content .grid.cards {
+.grid.cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.2rem;
+  margin: 2em 0;
 }
 
-.md-content .grid.cards > * {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1.2rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+.grid.cards > ul {
+  display: contents;
 }
 
-.md-content .grid.cards > *:hover {
+.grid.cards > ul > li {
+  list-style: none;
+  border: 1px solid #e2e6ea;
+  border-radius: 12px;
+  padding: 1.6rem 1.6rem 1.2rem;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.grid.cards > ul > li:hover {
   border-color: var(--md-primary-fg-color);
-  box-shadow: 0 4px 16px rgba(63, 81, 181, 0.12);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 8px 24px rgba(21, 101, 192, 0.10);
+  transform: translateY(-2px);
+}
+
+.grid.cards > ul > li > p:first-child {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.3em;
+}
+
+.grid.cards > ul > li > p:first-child .lg.middle {
+  font-size: 1.8em;
+  vertical-align: middle;
+  margin-right: 0.25em;
+}
+
+.grid.cards > ul > li a {
+  display: inline-block;
+  font-size: 0.9rem;
+  margin: 0.15em 0.6em 0.15em 0;
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.grid.cards > ul > li a:hover {
+  text-decoration: underline;
+}
+
+.grid.cards hr {
+  border: none;
+  border-top: 1px solid #eef0f2;
+  margin: 0.8em 0;
+}
+
+/* 深色模式卡片 */
+[data-md-color-scheme="slate"] .grid.cards > ul > li {
+  background: #161b22;
+  border-color: #30363d;
+}
+
+[data-md-color-scheme="slate"] .grid.cards > ul > li:hover {
+  border-color: var(--md-primary-fg-color);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2), 0 8px 24px rgba(33, 150, 243, 0.12);
+}
+
+[data-md-color-scheme="slate"] .grid.cards hr {
+  border-top-color: #21262d;
+}
+
+/* ==========================================
+   回到顶部按钮
+   ========================================== */
+
+.md-top {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* ==========================================
+   页脚
+   ========================================== */
+
+.md-footer {
+  background: var(--md-primary-fg-color--dark);
+}
+
+/* ==========================================
+   响应式微调
+   ========================================== */
+
+@media screen and (max-width: 768px) {
+  .grid.cards {
+    grid-template-columns: 1fr;
+  }
 }
