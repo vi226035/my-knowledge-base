@@ -16,6 +16,8 @@ DUC（Digital Up Converter）把低速基带 I/Q 复信号搬移到中频/射频
 - DAC 需要高采样率来减小零阶保持效应、拉开镜像距离
 - 最终发射的是中频/射频**实信号**（天线只能发射实信号）
 
+> **零阶保持效应**：DAC 在两个采样点之间保持上一个值不变（像楼梯台阶），这会在频谱上引入高频衰减（sinc 滚降）。采样率越高，台阶越密，衰减越少。就像用更多像素来描述一条曲线——像素越多锯齿越不明显。
+
 DUC 负责桥接低速基带和高速 DAC——**先升采样，再搬频，最后合成实信号**。
 
 ---
@@ -51,28 +53,29 @@ $$z_{lp}[n] = h_{lp}[n] * z_{up}[n]$$
 阻带起始频率：$\omega_s = 2\pi \cdot f_{s,in} / (2 \cdot f_{s,out}) = \pi / L$（镜像开始处）
 
 > **顺序很重要**：先插零再滤波！这样才能去除插零引入的镜像频谱。实际上插零和滤波可合并为多相结构实现，滤波跑在低采样率一侧。
+>
+> **镜像是什么？** 插零相当于强行提高了"名义采样率"，但新插入的零不包含真实信息，频谱上会在原信号的副本（镜像）出现在新采样率间隔的各个位置。低通滤波就是把这些多余的"影子"信号过滤掉，只保留基带部分的真实信号。
 
 ### 正交上变频
 
-将滤波后的基带复信号与 NCO 混频，搬移到中频 $\omega_c$：
+将滤波后的基带复信号与 NCO 混频，搬移到中频 $\omega_c$。
+
+I/Q 两路分别乘 NCO 的 $\cos$ 和 $-\sin$ 分量，最后相加：
 
 $$\begin{aligned}
-x_I[n] &= I[n] \cdot \cos(\omega_c n) \\
-x_Q[n] &= Q[n] \cdot \sin(\omega_c n)
+x[n] &= I[n] \cdot \cos(\omega_c n) + Q[n] \cdot (-\sin(\omega_c n)) \\
+&= I[n]\cos(\omega_c n) - Q[n]\sin(\omega_c n)
 \end{aligned}$$
 
-**合成实信号**（这是 DUC 的核心最后一步——I/Q 两路合为一路实信号）：
-
-$$x[n] = I[n]\cos(\omega_c n) - Q[n]\sin(\omega_c n)$$
+> 注意：Q 路乘 $-\sin$（不是 $+\sin$），然后 I/Q 两路做**加法**。如果你看到的资料用的是 Q 路乘 $+\sin$ 再**减法**，结果一样——只是约定不同。用加法更直观地对应了复乘的实部提取。
 
 用欧拉公式可验证，上式恰好等于 $\text{Re}\{(I[n] + jQ[n]) \cdot e^{j\omega_c n}\}$，即复基带信号被搬移到了 $\omega_c$ 处。
 
-
 $$\begin{aligned}
-(I + jQ) \cdot (\cos\omega_c + j\sin\omega_c) &= (I\cos\omega_c - Q\sin\omega_c) + j(Q\cos\omega_c + I\sin\omega_c)
+(I + jQ) \cdot (\cos\omega_c + j\sin\omega_c) &= \underbrace{(I\cos\omega_c - Q\sin\omega_c)}_{\text{实部}} + j(Q\cos\omega_c + I\sin\omega_c)
 \end{aligned}$$
 
-取实部：$x[n] = I[n]\cos(\omega_c n) - Q[n]\sin(\omega_c n)$，正是 DAC 需要的实信号。
+取实部：$I[n]\cos(\omega_c n) - Q[n]\sin(\omega_c n)$，正是 DAC 需要的实信号。
 
 ### 输出信号
 
@@ -164,6 +167,8 @@ $$x[n] = I[n] \cdot \cos(\omega_c n) - Q[n] \cdot \sin(\omega_c n)$$
 ```
 
 FPGA 中用 $L$ 个并行子滤波器 + 输出轮询，等效实现了高速内插。
+
+> **通俗理解**：插零后的序列大部分是 0，传统 FIR 要对这些 0 也做乘加——白费力气。多相结构相当于先把滤波器系数按位置分组，每组只在有"真数据"的时钟周期做乘加，然后轮流输出结果。就像一个轮班制的厨师团队，每人只负责一道菜的上菜时刻，而不是所有人守在灶台前等每一次上菜。
 
 ### CIC 内插
 
