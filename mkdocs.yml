@@ -1,13 +1,44 @@
 site_name: 我的知识库
 site_description: 信号处理、FPGA 与机器学习学习笔记
 site_author: 你自己
+site_url: https://vi226035.github.io/my-knowledge-base/
 
 strict: false
+
+repo_name: vi226035/my-knowledge-base
+repo_url: https://github.com/vi226035/my-knowledge-base
 
 theme:
   name: material
   language: zh
   font: false
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/weather-night
+        name: 切换深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/weather-sunny
+        name: 切换浅色模式
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  icon:
+    repo: fontawesome/brands/github
 
 exclude_docs: |
   kb_material/**/*.md
@@ -22,7 +53,8 @@ hooks:
   - hooks.py
 
 plugins:
-  - search
+  - search:
+      lang: zh
 
 markdown_extensions:
   - admonition
@@ -31,6 +63,11 @@ markdown_extensions:
   - md_in_html
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.details
   - toc:
       permalink: true
 
@@ -50,7 +87,8 @@ nav:
       - 循环神经网络（RNN）: ML/循环神经网络（RNN）.md
       - 长短期记忆网络（LSTM）: ML/长短期记忆网络（LSTM）.md
   - 信号处理:
-      - DDC: 信号处理/DDC.md
+      - DDC（数字下变频）: 信号处理/DDC.md
+      - DUC（数字上变频）: 信号处理/DUC.md
       - 雷达数字信号中频接收: 信号处理/雷达数字信号中频接收.md
       - 雷达信号检测: 信号处理/雷达信号检测.md
       - 雷达信号调制类型识别: 信号处理/雷达信号调制类型识别.md
@@ -58,4 +96,3 @@ nav:
       - 并行双边Jacobi旋转特征值分解: 矩阵分解/并行双边Jacobi旋转特征值分解.md
   - FPGA:
       - FPGA: FPGA/index.md
-
