@@ -197,80 +197,89 @@ pre code {
 }
 
 /* ==========================================
-   首页卡片 (grid cards)
+   首页卡片
    ========================================== */
 
-.grid.cards {
+.home-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.2rem;
-  margin: 2em 0;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.5em 0;
 }
 
-.grid.cards > ul {
-  display: contents;
-}
-
-.grid.cards > ul > li {
-  list-style: none;
+.home-card {
   border: 1px solid #e2e6ea;
-  border-radius: 12px;
-  padding: 1.6rem 1.6rem 1.2rem;
+  border-radius: 10px;
+  padding: 1.4rem 1.4rem 1rem;
   background: #fff;
   box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.grid.cards > ul > li:hover {
+.home-card:hover {
   border-color: var(--md-primary-fg-color);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 8px 24px rgba(21, 101, 192, 0.10);
-  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06), 0 8px 20px rgba(21, 101, 192, 0.10);
 }
 
-.grid.cards > ul > li > p:first-child {
+.home-card h3 {
+  margin-top: 0 !important;
   font-weight: 700;
-  font-size: 1.05rem;
-  margin-bottom: 0.3em;
+  font-size: 1.1rem;
+  color: inherit !important;
 }
 
-.grid.cards > ul > li > p:first-child .lg.middle {
-  font-size: 1.8em;
-  vertical-align: middle;
-  margin-right: 0.25em;
+.home-card p {
+  font-size: 0.92rem;
+  color: #666;
+  margin-bottom: 0.8em;
 }
 
-.grid.cards > ul > li a {
+.home-card a {
   display: inline-block;
-  font-size: 0.9rem;
-  margin: 0.15em 0.6em 0.15em 0;
+  font-size: 0.88rem;
+  margin: 0.15em 0.5em 0.15em 0;
+  padding: 3px 10px;
+  border-radius: 5px;
+  background: rgba(21, 101, 192, 0.06);
   color: var(--md-primary-fg-color);
   text-decoration: none;
   font-weight: 500;
+  transition: background 0.15s;
 }
 
-.grid.cards > ul > li a:hover {
-  text-decoration: underline;
+.home-card a:hover {
+  background: rgba(21, 101, 192, 0.14);
+  text-decoration: none;
 }
 
-.grid.cards hr {
-  border: none;
-  border-top: 1px solid #eef0f2;
-  margin: 0.8em 0;
-}
-
-/* 深色模式卡片 */
-[data-md-color-scheme="slate"] .grid.cards > ul > li {
+/* 深色模式 */
+[data-md-color-scheme="slate"] .home-card {
   background: #161b22;
   border-color: #30363d;
 }
 
-[data-md-color-scheme="slate"] .grid.cards > ul > li:hover {
+[data-md-color-scheme="slate"] .home-card:hover {
   border-color: var(--md-primary-fg-color);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2), 0 8px 24px rgba(33, 150, 243, 0.12);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2), 0 8px 20px rgba(33, 150, 243, 0.12);
 }
 
-[data-md-color-scheme="slate"] .grid.cards hr {
-  border-top-color: #21262d;
+[data-md-color-scheme="slate"] .home-card p {
+  color: #8b949e;
+}
+
+[data-md-color-scheme="slate"] .home-card a {
+  background: rgba(33, 150, 243, 0.1);
+}
+
+[data-md-color-scheme="slate"] .home-card a:hover {
+  background: rgba(33, 150, 243, 0.2);
+}
+
+/* 响应式 */
+@media screen and (max-width: 600px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ==========================================
