@@ -5,3 +5,4 @@
 site/
 .claude/
 docs/.obsidian/
+__pycache__/

@@ -464,3 +464,311 @@ ResNet-152 以 152 层的深度在 2015 年夺得 ImageNet 冠军，top-5 错误
 
 ![[../kb_material/ML_image/Pasted image 20260509171355.png]]
 ![[../kb_material/ML_image/Pasted image 20260509171732.png]]
+
+# InceptionNet
+
+GoogLeNet（又称 InceptionNet V1）在 2014 年 ImageNet 竞赛中夺冠。它的核心创新是 **Inception 模块**——与其纠结该用多大的卷积核（3×3？5×5？），不如**在同一层里同时用多个不同尺寸的卷积核，让网络自己"选"**。
+
+核心思想就一句话：**多尺度并行卷积 + 结果拼接**。
+
+---
+
+## V1 结构
+
+### 朴素 Inception 模块
+
+一个 Inception 模块同时有 4 条并行分支，最后在通道维度上拼接：
+
+```
+输入
+ ├── 1×1 卷积
+ ├── 3×3 卷积
+ ├── 5×5 卷积
+ └── 3×3 最大值池化
+           ↓
+      通道拼接（Concat）
+```
+
+![[../kb_material/ML_image/Pasted image 20260510102021.png]]
+
+### 为什么用不同大小卷积核？
+
+不同尺寸的卷积核关注不同尺度的特征：
+
+- **1×1**：精细的逐像素变换，用于升降维
+- **3×3**：捕捉中等范围的空间模式（纹理、边角）
+- **5×5**：捕捉更大范围的模式（轮廓、形状）
+- **池化**：直接保留最显著的信息，与卷积互补
+
+> 类比：同时用显微镜（1×1）、放大镜（3×3）和广角镜（5×5）观察同一场景，然后综合所有视角的信息给出判断。
+
+![[../kb_material/ML_image/Pasted image 20260510102140.png]]
+
+### 整体网络结构（GoogLeNet）
+
+网络共 22 层（含参数层），9 个 Inception 模块堆叠而成。关键设计：
+
+- 前面几层仍用普通卷积 + 池化快速降尺寸
+- 中间堆叠多个 Inception 模块提取多层次特征
+- 最后用**全局平均池化**替代全连接层（大幅减少参数）
+- 中间层加了两个**辅助分类器**，为浅层提供额外梯度（训练时用，推理时去掉）
+
+![[../kb_material/ML_image/Pasted image 20260510102845.png]]
+
+### 辅助分类器
+
+在网络的中间层（Inception 4a 和 4d 之后）各接一个小的分类分支：
+
+- 用中间层的特征直接做分类预测
+- 损失加权（×0.3）加到总损失中
+- **目的**：缓解深层网络的梯度消失——让浅层也直接收到分类信号的监督
+
+> 辅助分类器相当于在"半山腰"也设一个参考点，告诉你走的方向对不对。
+
+![[../kb_material/ML_image/Pasted image 20260510102941.png]]
+
+---
+
+## 优化的 V1 结构（1×1 降维）
+
+### 朴素模块的计算瓶颈
+
+直接 5×5 卷积的计算量很大。假设输入通道 256，5×5 卷积输出 64 通道：
+
+$$计算量 = 256 \times 5 \times 5 \times 64 \times 输出面积 \approx 409{,}600 \times 输出面积$$
+
+### 解决方案：1×1 卷积降维
+
+在 3×3 和 5×5 卷积**之前**，先用 1×1 卷积压缩通道数（如 256 → 64），做完大卷积后再用 1×1 扩展回去：
+
+```
+输入（256通道）
+ ├── 1×1 conv, 64
+ ├── 1×1 conv, 64 → 3×3 conv, 64
+ ├── 1×1 conv, 64 → 5×5 conv, 64
+ └── 3×3 maxpool → 1×1 conv, 64
+              ↓
+         通道拼接
+```
+
+![[../kb_material/ML_image/Pasted image 20260510103445.png]]
+
+**参数量的变化**（以 5×5 分支为例）：
+
+- 降维前：$256 \times 5 \times 5 \times 64 = 409{,}600$
+- 降维后：$\underbrace{256 \times 1 \times 1 \times 64}_{1×1 降维} + \underbrace{64 \times 5 \times 5 \times 64}_{5×5 卷积} = 16{,}384 + 102{,}400 = 118{,}784$
+
+**减少了约 71% 的参数量**，且 1×1 卷积后跟 ReLU 还额外增加了一层非线性。
+
+![[../kb_material/ML_image/Pasted image 20260510103545.png]]
+
+> Inception 模块同时做 1×1、3×3、5×5 卷积**和**池化，四个分支并行提取不同尺度的特征，最后 concat 拼接所有结果。小卷积核提取细节纹理，大卷积核提取宏观轮廓，池化保留最强信号——三管齐下，让网络自己学哪些尺度更重要。
+
+---
+
+## V2 结构
+
+V2 的核心改进：**引入 Batch Normalization（BN）+ 用两个 3×3 替代 5×5**。
+
+### 两个 3×3 替代一个 5×5
+
+受 VGG 启发，两个 3×3 卷积堆叠的感受野 = 一个 5×5，但：
+
+| 方案 | 参数量 | 非线性次数 |
+|------|--------|-----------|
+| 一个 5×5 | $C \times 25$ | 1 次 ReLU |
+| 两个 3×3 堆叠 | $C \times 18$ | 2 次 ReLU |
+
+参数更少，非线性更多，表达能力更强。
+
+### Batch Normalization 的作用
+
+在每一层输出之后、激活函数之前，对每个 mini-batch 做标准化：
+
+$$\hat{x} = \frac{x - \mu_{batch}}{\sqrt{\sigma^2_{batch} + \epsilon}}$$
+
+$$y = \gamma \hat{x} + \beta$$
+
+其中 $\gamma$ 和 $\beta$ 是可学习参数，让网络自己恢复可能丢失的表达能力。
+
+![[../kb_material/ML_image/Pasted image 20260510103912.png]]
+
+### BN 带来的好处
+
+1. **允许更大学习率**：输出被标准化，不会出现极端值
+2. **加速收敛**：减少内部协变量偏移（Internal Covariate Shift）
+3. **有一定正则化效果**：mini-batch 的均值/方差引入了噪声
+4. **减少对初始化的依赖**：不管什么初始值，BN 都会拉回标准分布
+
+---
+
+## V3 结构
+
+V3 的核心改进：**分解卷积**——把大卷积核拆成更小的非对称卷积核，进一步减少参数。
+
+### 非对称卷积分解
+
+把一个 $n \times n$ 卷积分解为一个 $1 \times n$ 和一个 $n \times 1$ 卷积：
+
+- 3×3 卷积 → 1×3 卷积 + 3×1 卷积
+- 参数从 9 个降到 6 个，节省 33%
+
+对于更大的卷积核效果更明显：7×7 → 1×7 + 7×1，参数从 49 降到 14。
+
+![[../kb_material/ML_image/Pasted image 20260510104048.png]]
+
+### 其他 V3 改进
+
+- **RMSProp 优化器**：自适应调整学习率
+- **Label Smoothing**：标签平滑，防止网络对预测过于自信（缓解过拟合）
+- **辅助分类器**中也加了 BN
+
+> 核心精神：能用便宜的小操作组合出大操作的效果，就绝不多花一份算力。
+
+---
+
+## V4 结构（Inception-ResNet）
+
+V4 将 ResNet 的残差连接引入 Inception 模块——每个 Inception 分支的输出与输入相加后再激活。
+
+### Inception + Residual
+
+$$H(x) = F_{inception}(x) + x$$
+
+![[../kb_material/ML_image/Pasted image 20260510104531.png]]
+
+### 残差连接的好处
+
+- **梯度高速公路**：梯度可以通过 skip connection 无损地传回浅层
+- **加速训练**：Inception-ResNet 训练速度显著快于纯 Inception
+- **稳定性**：残差结构让极深网络的训练成为可能
+
+> 这个 skip connection 就是残差网络的核心思想——不直接学 $H(x)$，而学残差 $F(x) = H(x) - x$。
+
+---
+
+# MobileNet
+
+MobileNet 是专为移动端和嵌入式设备设计的轻量级网络。核心思路：**用深度可分离卷积替代标准卷积，大幅减少计算量和参数量**。
+
+![[../kb_material/ML_image/Pasted image 20260510104618.png]]
+
+---
+
+## 引入深度可分离卷积
+
+### 标准卷积做了两件事
+
+标准卷积同时完成：
+1. **空间滤波**：提取局部空间特征（如边缘、纹理）
+2. **通道融合**：将输入通道的信息组合成新通道
+
+深度可分离卷积把这两件事**分开做**，从而大幅减少计算量。
+
+### 分组卷积（前置概念）
+
+分组卷积（Group Convolution）是 AlexNet 中首先使用的技巧：
+
+- 将输入通道分成 $g$ 组
+- 每组用独立的卷积核处理
+- 各组之间不交换信息
+
+![[../kb_material/ML_image/Pasted image 20260510104738.png]]
+
+**计算量减少**：标准卷积 → 分组卷积，计算量变为 $1/g$。
+
+但分组卷积的问题：各组之间信息不流通，输出的每个通道只能看到输入的一部分通道。
+
+### 深度可分离卷积
+
+将标准卷积拆为两步：
+
+**第一步：逐通道卷积（Depthwise Convolution）**
+
+一个卷积核只负责一个输入通道——这是分组卷积的极端情况（$g = C_{in}$）：
+- 输入 $C$ 个通道 → $C$ 个独立的卷积核（每个是 $K \times K \times 1$）
+- 输出仍然是 $C$ 个通道
+- 只做空间滤波，不做通道融合
+
+**第二步：逐点卷积（Pointwise Convolution）**
+
+用 1×1 卷积来融合通道信息：
+- 输入 $C$ 个通道 → 1×1 卷积 → 输出 $C_{out}$ 个通道
+- 只做通道融合，不做空间滤波
+
+![[../kb_material/ML_image/Pasted image 20260510110413.png]]
+
+### 计算量对比
+
+标准卷积（输入 $D_F \times D_F \times M$，输出 $D_F \times D_F \times N$，卷积核 $D_K \times D_K$）：
+
+$$计算量 = D_K \times D_K \times M \times N \times D_F \times D_F$$
+
+深度可分离卷积：
+
+$$计算量 = \underbrace{D_K \times D_K \times M \times D_F \times D_F}_{Depthwise} + \underbrace{M \times N \times D_F \times D_F}_{Pointwise}$$
+
+**压缩比**：
+
+$$\frac{D_K \times D_K \times M \times D_F \times D_F + M \times N \times D_F \times D_F}{D_K \times D_K \times M \times N \times D_F \times D_F} = \frac{1}{N} + \frac{1}{D_K^2}$$
+
+对 3×3 卷积，计算量约为原来的 $\frac{1}{8} \sim \frac{1}{9}$。
+
+![[../kb_material/ML_image/Pasted image 20260510110518.png]]
+
+### MobileNet 两个超参数
+
+1. **宽度乘数 $\alpha$**（Width Multiplier）：统一缩放所有层的通道数，$\alpha \in (0, 1]$
+   - 计算量约变为原来的 $\alpha^2$
+   
+2. **分辨率乘数 $\rho$**（Resolution Multiplier）：缩放输入图像分辨率
+   - 计算量约变为原来的 $\rho^2$
+
+两者叠加，计算量变为原来的 $\alpha^2 \rho^2$，可以灵活适配不同设备的算力预算。
+
+![[../kb_material/ML_image/Pasted image 20260510110653.png]]
+
+---
+
+# 不同神经网络对比
+
+## 效果对比（分类）
+
+ImageNet 上的 Top-5 错误率对比：
+
+| 模型 | Top-5 错误率 | 参数量 | 计算量 (MACs) |
+|------|-------------|--------|--------------|
+| AlexNet | 15.3% | 60M | 720M |
+| VGG16 | 7.3% | 138M | 15.3G |
+| GoogLeNet (Inception V1) | 6.7% | 6.8M | 1.5G |
+| ResNet-50 | 5.3% | 25.6M | 3.8G |
+| ResNet-152 | 4.5% | 60.3M | 11.3G |
+| MobileNet | 10.5% | 4.2M | 569M |
+
+GoogLeNet 用远少于 AlexNet 的参数达到了更好的效果；ResNet 凭借残差学习将错误率降到人类水平以下。
+
+![[../kb_material/ML_image/Pasted image 20260510110752.png]]
+
+## 层数与效果的关系
+
+随着网络层数增加：
+
+- **20~50 层**：效果稳步提升（VGG16/19）
+- **50~100 层**：提升放缓，需要 Batch Normalization 辅助
+- **100~152 层**：必须用残差连接——没有 skip connection 的深网络会出现退化（56 层不如 20 层）
+
+![[../kb_material/ML_image/Pasted image 20260510110857.png]]
+
+## 计算量对比
+
+| 模型 | 计算量 | 适合场景 |
+|------|--------|---------|
+| AlexNet | 720M MACs | 初学者入门 |
+| VGG16 | 15.3G MACs | 特征提取 backbone |
+| GoogLeNet | 1.5G MACs | 算力有限的场景 |
+| ResNet-50 | 3.8G MACs | 通用 backbone（最常用） |
+| MobileNet | 569M MACs | 移动端/嵌入式设备 |
+
+MobileNet 在精度可接受的前提下，计算量仅为 ResNet-50 的约 1/7，适合移动端部署。
+
+![[../kb_material/ML_image/Pasted image 20260510110959.png]]

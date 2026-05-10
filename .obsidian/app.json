@@ -1,3 +1,9 @@
 {
-  "promptDelete": false
+  "promptDelete": false,
+  "userIgnoreFilters": [
+    "docs/kb_material/**",
+    "knowledge_base_material/**",
+    "docs/kb_material/",
+    "knowledge_base_material/"
+  ]
 }
