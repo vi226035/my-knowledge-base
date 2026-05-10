@@ -1869,7 +1869,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <ol>
 <li><strong>解决梯度消失</strong>：正区间导数恒为 1，反向传播时梯度不会越乘越小</li>
 <li><strong>计算快</strong>：只需 <code>max(0, x)</code>，Sigmoid 需要做指数运算</li>
-<li><strong>诱导稀疏性</strong>：负半区直接输出 0，网络中约 50% 神经元同时激活，更接近生物神经元的工作方式</li>
+<li><strong>诱导稀疏性</strong>：负半区直接输出 0，网络中约有一半神经元同时处于非激活状态，更接近生物神经元"多数沉默、少数活跃"的工作方式</li>
 </ol>
 <p><img alt="Pasted image 20260509144748.png" src="../../kb_material/ML_image/Pasted%20image%2020260509144748.png" /></p>
 <hr />
@@ -1918,7 +1918,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <p>池化层的核心作用：<strong>降低特征图尺寸</strong>，从而减少后续层的计算量。同时提供一定的平移不变性——只要关键特征还在池化窗口内，输出就不变。</p>
 <h3 id="vs">池化 vs 卷积的步长区别<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h3>
 <blockquote>
-<p>做卷积时，卷积核的 padding 默认是 1（保持尺寸）；但做池化时，池化核的步长默认等于它的 size（直接缩小）。</p>
+<p>实践中，做卷积时常设 padding=1 来保持尺寸不变；但做池化时，池化核的步长通常等于它的 size（直接缩小），不保留尺寸。</p>
 </blockquote>
 <p>例如 2×2 池化，stride 默认也是 2，相当于把 2×2 区域的 4 个数压缩成 1 个数。</p>
 <h3 id="_14">最大值池化<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
@@ -1981,7 +1981,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <li>全连接层要求固定尺寸输入（因为权重矩阵维度是固定的）</li>
 <li>1×1 卷积的参数量只取决于通道数，与图像尺寸无关</li>
 </ul>
-<p>图像经过多次池化层层缩小后，需要用<strong>反卷积</strong>（也称转置卷积）逐步放大回原始尺寸——反卷积步长为小数（实际上是插值扩尺寸再卷积），类似于信号处理中的插值/上采样。</p>
+<p>图像经过多次池化层层缩小后，需要用<strong>反卷积</strong>（也称转置卷积）逐步放大回原始尺寸。所谓"转置"是指它在数学上等价于普通卷积的逆操作——卷积把 4×4 缩到 2×2（步长 2），转置卷积就能把 2×2 扩回 4×4。</p>
 <p><img alt="Pasted image 20260509152051.png" src="../../kb_material/ML_image/Pasted%20image%2020260509152051.png" /></p>
 <hr />
 <h2 id="_19">卷积神经网络进阶<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>

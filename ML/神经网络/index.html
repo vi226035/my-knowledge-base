@@ -1337,12 +1337,12 @@
 <h3 id="_5">举例<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>假设一个神经元判断"今天适不适合出门"：</p>
 <ul>
-<li><span class="arithmatex">\(x_1\)</span> = 温度 25°C，<span class="arithmatex">\(w_1 = 0.3\)</span></li>
-<li><span class="arithmatex">\(x_2\)</span> = 降雨概率 0.8（80%），<span class="arithmatex">\(w_2 = -0.5\)</span></li>
-<li><span class="arithmatex">\(b = 0.1\)</span></li>
+<li><span class="arithmatex">\(x_1\)</span> = 温度 25°C（归一化到 0~1，25°C → 0.6），<span class="arithmatex">\(w_1 = 0.8\)</span></li>
+<li><span class="arithmatex">\(x_2\)</span> = 降雨概率 0.8（80%），<span class="arithmatex">\(w_2 = -0.6\)</span></li>
+<li><span class="arithmatex">\(b = 0.3\)</span></li>
 </ul>
-<p>加权和 = <span class="arithmatex">\(25 \times 0.3 + 0.8 \times (-0.5) + 0.1 = 7.5 - 0.4 + 0.1 = 7.2\)</span></p>
-<p>再用 Sigmoid 激活：<span class="arithmatex">\(S(7.2) = \frac{1}{1+e^{-7.2}} \approx 0.999\)</span>，基本确定"适合出门"。</p>
+<p>加权和 = <span class="arithmatex">\(0.6 \times 0.8 + 0.8 \times (-0.6) + 0.3 = 0.48 - 0.48 + 0.3 = 0.3\)</span></p>
+<p>再用 Sigmoid 激活：<span class="arithmatex">\(S(0.3) = \frac{1}{1+e^{-0.3}} \approx 0.574\)</span>，偏向"适合出门"但没那么确定——因为温度适中但降雨概率高，两者互相抵消后偏置起了决定作用。</p>
 <p><img alt="Pasted image 20260509102005.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102005.png" /></p>
 <hr />
 <h2 id="_6">神经网络结构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -1388,6 +1388,9 @@ A^{[l]} &amp;= f^{[l]}(Z^{[l]})
 <p>衡量预测值和真实值差距的标尺：</p>
 <p><strong>均方误差（MSE，回归任务）</strong>：
 $<span class="arithmatex">\(L = \frac{1}{2}(y_{pred} - y_{true})^2\)</span>$</p>
+<blockquote>
+<p>标准 MSE 是 <span class="arithmatex">\(\frac{1}{n}\sum(y_{pred} - y_{true})^2\)</span>。这里加了 <span class="arithmatex">\(\frac{1}{2}\)</span> 系数，纯粹是为了求导后消掉平方项的 2，让梯度表达式更简洁——不影响优化方向。</p>
+</blockquote>
 <p><strong>交叉熵（分类任务）</strong>：
 $<span class="arithmatex">\(L = -\sum_{i} y_i \log(\hat{y}_i)\)</span>$</p>
 <h3 id="_15">参数更新<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
