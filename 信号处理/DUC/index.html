@@ -12,13 +12,13 @@
         <meta name="author" content="你自己">
       
       
-        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/DDC/">
+        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/DUC/">
       
       
-        <link rel="prev" href="../../ML/%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%BD%91%E7%BB%9C%EF%BC%88LSTM%EF%BC%89/">
+        <link rel="prev" href="../DDC/">
       
       
-        <link rel="next" href="../DUC/">
+        <link rel="next" href="../%E9%9B%B7%E8%BE%BE%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E4%B8%AD%E9%A2%91%E6%8E%A5%E6%94%B6/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>DDC（数字下变频） - 我的知识库</title>
+        <title>DUC（数字上变频） - 我的知识库</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ddc" class="md-skip">
+        <a href="#duc" class="md-skip">
           跳转至
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              DDC（数字下变频）
+              DUC（数字上变频）
             
           </span>
         </div>
@@ -523,6 +523,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../DDC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDC（数字下变频）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -542,7 +570,7 @@
   <span class="md-ellipsis">
     
   
-    DDC（数字下变频）
+    DUC（数字上变频）
   
 
     
@@ -560,7 +588,7 @@
   <span class="md-ellipsis">
     
   
-    DDC（数字下变频）
+    DUC（数字上变频）
   
 
     
@@ -597,10 +625,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ddc_1" class="md-nav__link">
+  <a href="#duc_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        为什么需要 DDC？
+        为什么需要 DUC？
       
     </span>
   </a>
@@ -631,10 +659,21 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内插（Interpolation）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        正交混频
+        抗镜像滤波
       
     </span>
   </a>
@@ -645,7 +684,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        低通滤波
+        正交上变频
       
     </span>
   </a>
@@ -656,18 +695,7 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        复基带信号
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#decimation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        抽取（Decimation）
+        输出信号
       
     </span>
   </a>
@@ -703,10 +731,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-nco" class="md-nav__link">
+  <a href="#1-interpolator" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. NCO（数控振荡器）
+        1. 内插器（Interpolator）
       
     </span>
   </a>
@@ -714,10 +742,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-mixer" class="md-nav__link">
+  <a href="#2-lpf-image-rejection-filter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 混频器（Mixer）
+        2. 内插滤波器（LPF / Image-Rejection Filter）
       
     </span>
   </a>
@@ -725,10 +753,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-lpf" class="md-nav__link">
+  <a href="#3-nco" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 低通滤波器（LPF）
+        3. NCO（数控振荡器）
       
     </span>
   </a>
@@ -739,7 +767,7 @@
   <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 多级抽取
+        4. 混频与合成
       
     </span>
   </a>
@@ -764,10 +792,32 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#ddc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        位宽规划（与 DDC 对称）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        位宽规划
+        多相内插滤波器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIC 内插
       
     </span>
   </a>
@@ -778,7 +828,7 @@
   <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
-        资源优化
+        资源优化建议
       
     </span>
   </a>
@@ -786,10 +836,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#dac" class="md-nav__link">
     <span class="md-ellipsis">
       
-        时钟域考虑
+        DAC 接口
       
     </span>
   </a>
@@ -802,10 +852,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         关键指标
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddc-vs-duc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DDC vs DUC 对比
       
     </span>
   </a>
@@ -816,34 +877,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../DUC/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    DUC（数字上变频）
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -1128,10 +1161,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#ddc_1" class="md-nav__link">
+  <a href="#duc_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        为什么需要 DDC？
+        为什么需要 DUC？
       
     </span>
   </a>
@@ -1162,10 +1195,21 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        内插（Interpolation）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        正交混频
+        抗镜像滤波
       
     </span>
   </a>
@@ -1176,7 +1220,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        低通滤波
+        正交上变频
       
     </span>
   </a>
@@ -1187,18 +1231,7 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        复基带信号
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#decimation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        抽取（Decimation）
+        输出信号
       
     </span>
   </a>
@@ -1234,10 +1267,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-nco" class="md-nav__link">
+  <a href="#1-interpolator" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. NCO（数控振荡器）
+        1. 内插器（Interpolator）
       
     </span>
   </a>
@@ -1245,10 +1278,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-mixer" class="md-nav__link">
+  <a href="#2-lpf-image-rejection-filter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. 混频器（Mixer）
+        2. 内插滤波器（LPF / Image-Rejection Filter）
       
     </span>
   </a>
@@ -1256,10 +1289,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-lpf" class="md-nav__link">
+  <a href="#3-nco" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 低通滤波器（LPF）
+        3. NCO（数控振荡器）
       
     </span>
   </a>
@@ -1270,7 +1303,7 @@
   <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. 多级抽取
+        4. 混频与合成
       
     </span>
   </a>
@@ -1295,10 +1328,32 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#ddc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        位宽规划（与 DDC 对称）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        位宽规划
+        多相内插滤波器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CIC 内插
       
     </span>
   </a>
@@ -1309,7 +1364,7 @@
   <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
-        资源优化
+        资源优化建议
       
     </span>
   </a>
@@ -1317,10 +1372,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#dac" class="md-nav__link">
     <span class="md-ellipsis">
       
-        时钟域考虑
+        DAC 接口
       
     </span>
   </a>
@@ -1333,10 +1388,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         关键指标
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ddc-vs-duc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DDC vs DUC 对比
       
     </span>
   </a>
@@ -1363,143 +1429,125 @@
   
 
 
-<h1 id="ddc">数字下变频（DDC）<a class="headerlink" href="#ddc" title="Permanent link">&para;</a></h1>
+<h1 id="duc">数字上变频（DUC）<a class="headerlink" href="#duc" title="Permanent link">&para;</a></h1>
 <h2 id="_1">一句话理解<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>DDC（Digital Down Converter）把 ADC 采样后的中高频数字信号搬移到基带（零中频），同时降低数据率，便于后续的滤波、解调等基带处理。</p>
-<p><strong>本质就三步：混频搬频 → 低通滤波 → 抽取降采样</strong>。</p>
+<p>DUC（Digital Up Converter）把低速基带 I/Q 复信号搬移到中频/射频，同时提高采样率，生成适合 DAC 发射的高速实信号。</p>
+<p><strong>本质就三步：内插升采样 → 低通滤波抗镜像 → 混频搬频</strong>。正好是 DDC 的逆过程。</p>
 <hr />
-<h2 id="ddc_1">为什么需要 DDC？<a class="headerlink" href="#ddc_1" title="Permanent link">&para;</a></h2>
-<p>在雷达、通信接收机中，ADC 直接采样中频信号（几十到几百 MHz），数据率很高：</p>
+<h2 id="duc_1">为什么需要 DUC？<a class="headerlink" href="#duc_1" title="Permanent link">&para;</a></h2>
+<p>在雷达发射机、通信发射链路中：</p>
 <ul>
-<li>直接处理这么高速的数据流，FPGA/DSP 资源吃不消</li>
-<li>需要的信息（调制包络）在基带，高频载波只是"运输工具"</li>
+<li>基带处理（调制、脉冲成型）在低采样率下完成，省资源</li>
+<li>DAC 需要高采样率来减小零阶保持效应、拉开镜像距离</li>
+<li>最终发射的是中频/射频<strong>实信号</strong>（天线只能发射实信号）</li>
 </ul>
-<p>DDC 把高频信号搬回基带，同时降低采样率，让后续处理变得可行。</p>
+<p>DUC 负责桥接低速基带和高速 DAC——<strong>先升采样，再搬频，最后合成实信号</strong>。</p>
 <hr />
 <h2 id="_2">数学推导<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">输入信号模型<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>设 ADC 采样后的中频实信号为：</p>
-<div class="arithmatex">\[x[n] = A[n] \cdot \cos(\omega_c n + \phi[n])\]</div>
-<p>其中：
-- <span class="arithmatex">\(A[n]\)</span> — 幅度调制信息（包络）
-- <span class="arithmatex">\(\omega_c = 2\pi f_c / f_s\)</span> — 数字中频角频率
-- <span class="arithmatex">\(\phi[n]\)</span> — 相位/频率调制信息
-- <span class="arithmatex">\(f_s\)</span> — ADC 采样率</p>
-<p>目标：从 <span class="arithmatex">\(x[n]\)</span> 中提取 <span class="arithmatex">\(A[n]\)</span> 和 <span class="arithmatex">\(\phi[n]\)</span>，即恢复复包络 <span class="arithmatex">\(A[n] \cdot e^{j\phi[n]}\)</span>。</p>
-<h3 id="_4">正交混频<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>数字本振 NCO 产生一对正交信号：</p>
-<div class="arithmatex">\[\begin{aligned}
-s_I[n] &amp;= \cos(\omega_c n) \\
-s_Q[n] &amp;= -\sin(\omega_c n)
-\end{aligned}\]</div>
-<p>混频（相乘）：</p>
-<p><strong>I 路</strong>（同相支路）：</p>
-<div class="arithmatex">\[\begin{aligned}
-x_I[n] &amp;= x[n] \cdot \cos(\omega_c n) \\
-&amp;= A[n] \cos(\omega_c n + \phi[n]) \cdot \cos(\omega_c n) \\
-&amp;= \frac{A[n]}{2}\left[\cos(2\omega_c n + \phi[n]) + \cos(\phi[n])\right]
-\end{aligned}\]</div>
-<p><strong>Q 路</strong>（正交支路）：</p>
-<div class="arithmatex">\[\begin{aligned}
-x_Q[n] &amp;= x[n] \cdot (-\sin(\omega_c n)) \\
-&amp;= -A[n] \cos(\omega_c n + \phi[n]) \cdot \sin(\omega_c n) \\
-&amp;= \frac{A[n]}{2}\left[-\sin(2\omega_c n + \phi[n]) + \sin(\phi[n])\right]
-\end{aligned}\]</div>
+<p>基带 I/Q 复信号（低采样率 <span class="arithmatex">\(f_{s,in}\)</span>）：</p>
+<div class="arithmatex">\[z[m] = I[m] + jQ[m] = A[m] \cdot e^{j\phi[m]}\]</div>
+<p>其中 <span class="arithmatex">\(A[m]\)</span> 是幅度，<span class="arithmatex">\(\phi[m]\)</span> 是相位/频率调制。目标采样率 <span class="arithmatex">\(f_{s,out}\)</span>，内插因子 <span class="arithmatex">\(L = f_{s,out} / f_{s,in}\)</span>。</p>
+<h3 id="interpolation">内插（Interpolation）<a class="headerlink" href="#interpolation" title="Permanent link">&para;</a></h3>
+<p>在相邻采样点间插入 <span class="arithmatex">\(L-1\)</span> 个零：</p>
+<div class="arithmatex">\[z_{up}[n] = \begin{cases}
+z[m] &amp; n = mL \\
+0 &amp; \text{otherwise}
+\end{cases}\]</div>
+<p>插零后频谱是原始频谱的 <span class="arithmatex">\(L\)</span> 倍周期延拓（因为采样率名义上提高了 <span class="arithmatex">\(L\)</span> 倍，但实际有效样本没增加）。</p>
+<h3 id="_4">抗镜像滤波<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>插零引入了镜像频谱（images），需要用低通滤波器（也叫内插滤波器）去除：</p>
+<div class="arithmatex">\[z_{lp}[n] = h_{lp}[n] * z_{up}[n]\]</div>
+<p>通带截止频率：<span class="arithmatex">\(\omega_p = 2\pi \cdot B / f_{s,out}\)</span>（基带信号带宽以内）
+阻带起始频率：<span class="arithmatex">\(\omega_s = 2\pi \cdot f_{s,in} / (2 \cdot f_{s,out}) = \pi / L\)</span>（镜像开始处）</p>
 <blockquote>
-<p>关键观察：混频后每路都包含两项——高频项（<span class="arithmatex">\(2\omega_c\)</span>）和基带项（<span class="arithmatex">\(\phi[n]\)</span> 的三角函数）。</p>
+<p><strong>顺序很重要</strong>：先插零再滤波！这样才能去除插零引入的镜像频谱。实际上插零和滤波可合并为多相结构实现，滤波跑在低采样率一侧。</p>
 </blockquote>
-<h3 id="_5">低通滤波<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>用低通滤波器滤除 <span class="arithmatex">\(2\omega_c\)</span> 附近的高频分量，只保留基带信号：</p>
+<h3 id="_5">正交上变频<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>将滤波后的基带复信号与 NCO 混频，搬移到中频 <span class="arithmatex">\(\omega_c\)</span>：</p>
 <div class="arithmatex">\[\begin{aligned}
-I[n] &amp;= \text{LPF}\{x_I[n]\} = \frac{A[n]}{2} \cos(\phi[n]) \\[4pt]
-Q[n] &amp;= \text{LPF}\{x_Q[n]\} = \frac{A[n]}{2} \sin(\phi[n])
+x_I[n] &amp;= I[n] \cdot \cos(\omega_c n) \\
+x_Q[n] &amp;= Q[n] \cdot \sin(\omega_c n)
 \end{aligned}\]</div>
-<h3 id="_6">复基带信号<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>将 I/Q 两路组合为复信号：</p>
-<div class="arithmatex">\[z[n] = I[n] + jQ[n] = \frac{A[n]}{2} \cdot e^{j\phi[n]}\]</div>
-<p>完美！我们成功从实信号 <span class="arithmatex">\(x[n]\)</span> 中恢复出了幅度 <span class="arithmatex">\(A[n]\)</span> 和相位 <span class="arithmatex">\(\phi[n]\)</span>。</p>
-<p>由此可以计算：</p>
+<p><strong>合成实信号</strong>（这是 DUC 的核心最后一步——I/Q 两路合为一路实信号）：</p>
+<div class="arithmatex">\[x[n] = I[n]\cos(\omega_c n) - Q[n]\sin(\omega_c n)\]</div>
+<p>用欧拉公式可验证，上式恰好等于 <span class="arithmatex">\(\text{Re}\{(I[n] + jQ[n]) \cdot e^{j\omega_c n}\}\)</span>，即复基带信号被搬移到了 <span class="arithmatex">\(\omega_c\)</span> 处。</p>
 <div class="arithmatex">\[\begin{aligned}
-A[n] &amp;= 2 \cdot |z[n]| = 2\sqrt{I[n]^2 + Q[n]^2} \\[4pt]
-\phi[n] &amp;= \arg(z[n]) = \arctan2(Q[n], I[n])
+(I + jQ) \cdot (\cos\omega_c + j\sin\omega_c) &amp;= (I\cos\omega_c - Q\sin\omega_c) + j(Q\cos\omega_c + I\sin\omega_c)
 \end{aligned}\]</div>
-<h3 id="decimation">抽取（Decimation）<a class="headerlink" href="#decimation" title="Permanent link">&para;</a></h3>
-<p>基带信号带宽 <span class="arithmatex">\(B\)</span> 远小于采样率 <span class="arithmatex">\(f_s\)</span>，可以降采样。抽取因子 <span class="arithmatex">\(D\)</span> 受限于奈奎斯特：</p>
-<div class="arithmatex">\[D \leq \frac{f_s}{2B}\]</div>
-<p>抽取后采样率 <span class="arithmatex">\(f_s' = f_s / D\)</span>，数据率大幅降低。抽取前必须先做抗混叠滤波（即低通滤波兼做抗混叠），防止抽取后频谱混叠。</p>
-<blockquote>
-<p><strong>顺序很重要</strong>：先滤波再抽取！不滤波直接抽取会导致频谱周期延拓时重叠（混叠），信号就无法恢复了。</p>
-</blockquote>
+<p>取实部：<span class="arithmatex">\(x[n] = I[n]\cos(\omega_c n) - Q[n]\sin(\omega_c n)\)</span>，正是 DAC 需要的实信号。</p>
+<h3 id="_6">输出信号<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[x[n] = \text{Re}\left\{A[n] \cdot e^{j(\omega_c n + \phi[n])}\right\} = A[n] \cdot \cos(\omega_c n + \phi[n])\]</div>
+<p>成功！基带的幅度 <span class="arithmatex">\(A[n]\)</span> 和相位 <span class="arithmatex">\(\phi[n]\)</span> 原封不动地搬到了载波频率 <span class="arithmatex">\(\omega_c\)</span> 上。</p>
 <hr />
 <h2 id="_7">完整信号流程<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ADC 中频信号
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    │
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    ├──→ [× cos(ω_c n)] ──→ [LPF] ──→ [↓D] ──→ I[n]
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    │
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    └──→ [× -sin(ω_c n)] ─→ [LPF] ──→ [↓D] ──→ Q[n]
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            ↑
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>         NCO (数控振荡器)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>I[m] ──→ [↑L] ──→ [LPF] ──→ [× cos(ω_c n)] ──┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                     ↓          ├──→ x[n] → DAC
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Q[m] ──→ [↑L] ──→ [LPF] ──→ [× -sin(ω_c n)] ──┘
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>         ↑
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    内插滤波器             ↑
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                      NCO (数控振荡器)
 </code></pre></div>
 <hr />
 <h2 id="_8">核心组成模块<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<h3 id="1-nco">1. NCO（数控振荡器）<a class="headerlink" href="#1-nco" title="Permanent link">&para;</a></h3>
-<p>产生 <span class="arithmatex">\(\cos(\omega_c n)\)</span> 和 <span class="arithmatex">\(-\sin(\omega_c n)\)</span>。常用实现方式：</p>
-<p><strong>相位累加器 + 查找表（LUT）</strong>：</p>
-<ul>
-<li>相位步进 <span class="arithmatex">\(\Delta\theta = 2\pi \cdot f_c / f_s\)</span></li>
-<li>每时钟周期：<span class="arithmatex">\(\theta \leftarrow \theta + \Delta\theta\)</span>（模 <span class="arithmatex">\(2\pi\)</span>）</li>
-<li>用 <span class="arithmatex">\(\theta\)</span> 的高位查表得到 <span class="arithmatex">\(\sin\)</span> 和 <span class="arithmatex">\(\cos\)</span> 值</li>
-</ul>
-<p><strong>频率分辨率</strong>取决于相位累加器位宽 <span class="arithmatex">\(N\)</span>：</p>
-<div class="arithmatex">\[\Delta f = \frac{f_s}{2^N}\]</div>
-<p><strong>SFDR（无杂散动态范围）</strong>取决于 LUT 深度和输出位宽。常见改进：相位截断加抖动（dither）改善杂散。</p>
-<h3 id="2-mixer">2. 混频器（Mixer）<a class="headerlink" href="#2-mixer" title="Permanent link">&para;</a></h3>
-<p>就是乘法器。在 FPGA 中直接用 DSP48 乘法单元实现。注意：
-- 输入信号位宽 × NCO 输出位宽 → 乘法器输出位宽增长
-- 截位时需要合理选择截位位置，平衡精度和资源</p>
-<h3 id="3-lpf">3. 低通滤波器（LPF）<a class="headerlink" href="#3-lpf" title="Permanent link">&para;</a></h3>
-<p>DDC 中最关键的模块。设计要点：</p>
-<p><strong>滤波器类型选择</strong>：
-- <strong>FIR</strong>：线性相位，稳定，适合 FPGA 实现
-- <strong>半带滤波器（Half-Band）</strong>：约一半系数为 0，计算量减半，特别适合多级抽取
-- <strong>CIC 滤波器</strong>：无乘法器，只用加法器和延迟，适合大倍率抽取的第一级</p>
-<p><strong>通带截止频率</strong>：<span class="arithmatex">\(\omega_p \geq 2\pi \cdot B / f_s\)</span>（信号带宽）
-<strong>阻带起始频率</strong>：<span class="arithmatex">\(\omega_s \leq \pi / D\)</span>（抽取后不混叠）
-<strong>过渡带</strong>：<span class="arithmatex">\(\omega_s - \omega_p\)</span></p>
-<blockquote>
-<p>设计以最苛刻条件约束即可保证抽取后不发生频谱混叠。</p>
-</blockquote>
-<h3 id="4">4. 多级抽取<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<p>大倍率抽取（如 D=1000）直接做一级 FIR 阶数太高。实际中分多级：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>输入 → [CIC ↓D1] → [HB ↓2] → [HB ↓2] → [FIR ↓D4] → 输出
+<h3 id="1-interpolator">1. 内插器（Interpolator）<a class="headerlink" href="#1-interpolator" title="Permanent link">&para;</a></h3>
+<p>内插因子 <span class="arithmatex">\(L\)</span> 的选择依据：</p>
+<div class="arithmatex">\[L = \frac{f_{s,out}}{f_{s,in}} = \frac{\text{DAC采样率}}{\text{基带采样率}}\]</div>
+<p><strong>多相实现</strong>：插零 + 滤波可以用多相滤波器结构高效实现——滤波运算跑在低采样率一侧（<span class="arithmatex">\(f_{s,in}\)</span>），只在高采样率侧输出：</p>
+<div class="arithmatex">\[\begin{aligned}
+y[n] &amp;= \sum_{k} h[k] \cdot x_{up}[n-k] \\
+\text{第 }p\text{ 相输出}: y[mL + p] &amp;= \sum_{r} h[rL + p] \cdot x[m-r]
+\end{aligned}\]</div>
+<p><span class="arithmatex">\(p = 0, 1, ..., L-1\)</span>，每相都是一个工作在 <span class="arithmatex">\(f_{s,in}\)</span> 的子滤波器。</p>
+<h3 id="2-lpf-image-rejection-filter">2. 内插滤波器（LPF / Image-Rejection Filter）<a class="headerlink" href="#2-lpf-image-rejection-filter" title="Permanent link">&para;</a></h3>
+<p>与 DDC 中的抽取滤波器功能对称，用于抑制插零产生的镜像。</p>
+<p><strong>滤波器类型</strong>：
+- <strong>FIR</strong>：线性相位，稳定，最常用
+- <strong>CIC 插值滤波器</strong>：无乘法器，适合大倍率内插的第一级
+- <strong>半带滤波器</strong>：约一半系数为 0，计算量减半</p>
+<p><strong>多级内插</strong>（与 DDC 多级抽取对应）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>输入 → [FIR] → [↑2, HB] → [↑2, HB] → [↑L, CIC] → 输出
 </code></pre></div>
-<ul>
-<li><strong>CIC</strong> 第一级：大倍率抽取，结构简单，无乘法器</li>
-<li><strong>半带滤波器</strong> 中间级：逐级 2 倍抽取，效率高</li>
-<li><strong>补偿 FIR</strong> 最后级：补偿 CIC 的通带衰减，整形最终频谱</li>
-</ul>
-<p>总抽取倍数 <span class="arithmatex">\(D = D_1 \times 2 \times 2 \times D_4\)</span>。</p>
+<p>总内插倍数 <span class="arithmatex">\(L = L_1 \times 2 \times 2 \times L_4\)</span>。顺序与 DDC 相反——先小倍数内插 + FIR 整形，最后大倍数 CIC。</p>
+<h3 id="3-nco">3. NCO（数控振荡器）<a class="headerlink" href="#3-nco" title="Permanent link">&para;</a></h3>
+<p>与 DDC 中的 NCO 完全一致：
+- 相位累加器 + LUT 查找表
+- 同时产生 <span class="arithmatex">\(\cos(\omega_c n)\)</span> 和 <span class="arithmatex">\(\sin(\omega_c n)\)</span>（或 <span class="arithmatex">\(-\sin\)</span>，看约定）
+- 频率步进 <span class="arithmatex">\(\Delta\theta = 2\pi f_c / f_{s,out}\)</span></p>
+<h3 id="4">4. 混频与合成<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>I/Q 两路分别乘 NCO 输出后，再做减法合成：</p>
+<div class="arithmatex">\[x[n] = I[n] \cdot \cos(\omega_c n) - Q[n] \cdot \sin(\omega_c n)\]</div>
+<p>注意这里是<strong>减号</strong>，因为调制公式源于复指数展开。用加号会导致频谱搬移方向相反。</p>
 <hr />
 <h2 id="fpga">FPGA 实现要点<a class="headerlink" href="#fpga" title="Permanent link">&para;</a></h2>
-<h3 id="_9">位宽规划<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>各级信号位宽需要仔细计算，避免溢出或精度损失：</p>
+<h3 id="ddc">位宽规划（与 DDC 对称）<a class="headerlink" href="#ddc" title="Permanent link">&para;</a></h3>
 <ul>
-<li>混频后：输入位宽 + NCO 位宽 + 1</li>
-<li>FIR 滤波后：输入位宽 + <span class="arithmatex">\(\lceil \log_2(\sum |h_k|) \rceil\)</span></li>
-<li>CIC 滤波后：<span class="arithmatex">\(B_{out} = B_{in} + N \cdot \log_2(D)\)</span>（<span class="arithmatex">\(N\)</span> 为 CIC 级数）</li>
-<li>每级截位前先做舍入（rounding）而非直接截断（truncation），避免直流偏置</li>
+<li>内插滤波后位宽：<span class="arithmatex">\(B_{out} = B_{in} + \lceil \log_2(\sum |h_k|) \rceil\)</span></li>
+<li>CIC 内插后位宽：<span class="arithmatex">\(B_{out} = B_{in} + N \cdot \log_2(L)\)</span></li>
+<li>混频后截位送 DAC：需要做舍入（rounding），避免直流偏置</li>
 </ul>
-<h3 id="_10">资源优化<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<h3 id="_9">多相内插滤波器<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>这是 DUC 中最重要的优化技巧，让滤波器运算跑在低采样率一侧：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>传统做法：插零 → 在 f_s_out 时钟下滤波 → 大部分乘法乘的是 0，浪费
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>多相做法：L 个子滤波器并行工作 → 各跑在 f_s_in 时钟 → 输出再拼成 f_s_out
+</code></pre></div>
+<p>FPGA 中用 <span class="arithmatex">\(L\)</span> 个并行子滤波器 + 输出轮询，等效实现了高速内插。</p>
+<h3 id="cic">CIC 内插<a class="headerlink" href="#cic" title="Permanent link">&para;</a></h3>
+<p>Hogenauer 结构的 CIC 内插器：先积分（在低速侧），再梳状差分（在高速侧）。与 CIC 抽取结构互为镜像。</p>
+<h3 id="_10">资源优化建议<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>FIR 对称结构</strong>：系数对称可节省一半乘法器</li>
-<li><strong>CIC Hogenauer 结构</strong>：梳状+积分方式实现，面积小速度快</li>
-<li><strong>多相滤波</strong>：将滤波放在抽取之后，等效降速处理，适合高倍抽取</li>
-<li><strong>DSP48</strong>：利用 Xilinx DSP48 的乘加流水线，合理插入 pipeline 寄存器提升 <span class="arithmatex">\(F_{max}\)</span></li>
+<li>DSP48 乘法器用于 FIR 和非 CIC 滤波</li>
+<li>CIC 仅用加法器 + 寄存器和查找表实现，节省 DSP 资源</li>
+<li>利用 FIR 的系数对称性减少乘法器用量</li>
+<li>合理插入流水线寄存器平衡时序，满足 <span class="arithmatex">\(f_{s,out}\)</span> 的时序需求</li>
 </ul>
-<h3 id="_11">时钟域考虑<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>ADC 采样时钟 → DDC 处理时钟（抽取后降速）需要时钟使能或 FIFO 过渡。</p>
+<h3 id="dac">DAC 接口<a class="headerlink" href="#dac" title="Permanent link">&para;</a></h3>
+<p>DUC 输出直接驱动 DAC。需要注意：
+- 输出位宽匹配 DAC 分辨率
+- 必要时加抖动（dither）改善小信号下的量化杂散
+- 输出速率 = DAC 采样时钟频率</p>
 <hr />
-<h2 id="_12">关键指标<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h2 id="_11">关键指标<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1510,29 +1558,82 @@ A[n] &amp;= 2 \cdot |z[n]| = 2\sqrt{I[n]^2 + Q[n]^2} \\[4pt]
 </thead>
 <tbody>
 <tr>
-<td>输入频率</td>
-<td>ADC 中频</td>
-<td>70~300 MHz</td>
+<td>基带输入率</td>
+<td>I/Q 采样率</td>
+<td>几 MHz ~ 几十 MHz</td>
 </tr>
 <tr>
-<td>信号带宽</td>
-<td>基带信号带宽</td>
-<td>几 kHz ~ 几十 MHz</td>
+<td>输出采样率</td>
+<td>DAC 速率</td>
+<td>100 MHz ~ 数 GHz</td>
 </tr>
 <tr>
-<td>抽取倍数</td>
-<td>降采样率比</td>
+<td>内插倍数</td>
+<td>升采样率比</td>
 <td>10 ~ 10000</td>
+</tr>
+<tr>
+<td>输出频率</td>
+<td>中频/射频</td>
+<td>几十 ~ 几百 MHz</td>
 </tr>
 <tr>
 <td>SFDR</td>
 <td>无杂散动态范围</td>
-<td>&gt; 80 dB</td>
+<td>&gt; 70 dBc</td>
 </tr>
 <tr>
-<td>输出 SNR</td>
-<td>信噪比</td>
-<td>取决于滤波器和位宽</td>
+<td>镜像抑制</td>
+<td>对内插镜像的衰减</td>
+<td>&gt; 80 dB</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ddc-vs-duc">DDC vs DUC 对比<a class="headerlink" href="#ddc-vs-duc" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>DDC（接收）</th>
+<th>DUC（发射）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>信号流向</td>
+<td>ADC → 基带</td>
+<td>基带 → DAC</td>
+</tr>
+<tr>
+<td>采样率变化</td>
+<td>降低（抽取 ↓D）</td>
+<td>提高（内插 ↑L）</td>
+</tr>
+<tr>
+<td>混频方向</td>
+<td>向下搬移</td>
+<td>向上搬移</td>
+</tr>
+<tr>
+<td>滤波目的</td>
+<td>抗混叠（抽取前）</td>
+<td>抗镜像（内插后）</td>
+</tr>
+<tr>
+<td>多相滤波</td>
+<td>抽取后滤波</td>
+<td>内插前滤波</td>
+</tr>
+<tr>
+<td>CIC 级顺序</td>
+<td>先积分后梳状</td>
+<td>先梳状后积分</td>
+</tr>
+<tr>
+<td>输入/出形式</td>
+<td>实信号入，复基带出</td>
+<td>复基带入，实信号出</td>
 </tr>
 </tbody>
 </table>

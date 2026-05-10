@@ -12,6 +12,8 @@
         <meta name="author" content="你自己">
       
       
+        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/ML/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89/">
+      
       
         <link rel="prev" href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
       
@@ -32,6 +34,9 @@
     
     
       <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -57,7 +62,14 @@
   </head>
   
   
-    <body dir="ltr">
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -109,6 +121,32 @@
       </div>
     </div>
     
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="切换深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="deep-purple"  aria-label="切换浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
@@ -139,6 +177,8 @@
         </button>
       </nav>
       
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
@@ -154,6 +194,18 @@
 </div>
       
     
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vi226035/my-knowledge-base" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vi226035/my-knowledge-base
+  </div>
+</a>
+      </div>
     
   </nav>
   
@@ -188,6 +240,18 @@
     </a>
     我的知识库
   </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vi226035/my-knowledge-base" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vi226035/my-knowledge-base
+  </div>
+</a>
+    </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
     
@@ -227,6 +291,16 @@
   
   
     
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
     
@@ -930,6 +1004,18 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
     
     
     
@@ -983,7 +1069,35 @@
   <span class="md-ellipsis">
     
   
-    DDC
+    DDC（数字下变频）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/DUC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DUC（数字上变频）
   
 
     
@@ -1096,6 +1210,10 @@
   
     
     
+      
+        
+      
+    
     
     
     
@@ -1178,6 +1296,12 @@
   
     
     
+      
+        
+          
+        
+      
+    
     
     
     
@@ -1188,8 +1312,9 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
+          <div class="md-nav__link md-nav__container">
+            <a href="../../FPGA/" class="md-nav__link ">
+              
   
   
   <span class="md-ellipsis">
@@ -1203,8 +1328,9 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+          </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -1217,32 +1343,6 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../FPGA/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    FPGA
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
               
             
           </ul>
@@ -1783,6 +1883,9 @@
                   
 
 
+  
+  
+
 
 <h1 id="cnn">卷积神经网络（CNN）<a class="headerlink" href="#cnn" title="Permanent link">&para;</a></h1>
 <p>CNN 是专门为图像设计的神经网络。核心思路：<strong>与其让每个像素和所有神经元全连接（参数爆炸），不如用一个小窗口在图像上滑动，每次只关注局部，且所有位置共享同一组参数。</strong></p>
@@ -1790,8 +1893,8 @@
 <hr />
 <h2 id="_1">思维框图<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>CNN 的整体流程：</p>
-<pre><code>输入图像 → [卷积 → 激活]×N → 池化 → ... → 全连接 → 输出分类
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入图像 → [卷积 → 激活]×N → 池化 → ... → 全连接 → 输出分类
+</code></pre></div>
 <p>卷积负责提取特征，池化负责压缩尺寸，最后全连接负责分类决策。</p>
 <p><img alt="Pasted image 20260509112018.png" src="../../kb_material/ML_image/Pasted%20image%2020260509112018.png" /></p>
 <hr />
@@ -1825,23 +1928,23 @@
 <p>卷积核（也叫滤波器）在输入上滑动，每个位置计算逐元素相乘再求和：</p>
 <div class="arithmatex">\[(I * K)(i, j) = \sum_{m=0}^{k-1}\sum_{n=0}^{k-1} I(i+m, j+n) \cdot K(m, n)\]</div>
 <p><strong>具体例子</strong>：</p>
-<p>输入（3×3 灰度图）：</p>
-<pre><code>  1  2  0
-  3  1  2
-  0  2  1
-</code></pre>
-<p>卷积核（2×2，检测右下方向边缘）：</p>
-<pre><code>  1   0
-  0  -1
-</code></pre>
+<p>输入（3×3 灰度图）：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>  1  2  0
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  3  1  2
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  0  2  1
+</code></pre></div></p>
+<p>卷积核（2×2，检测右下方向边缘）：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>  1   0
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  0  -1
+</code></pre></div></p>
 <p>在位置 (0,0) 处卷积：
 $<span class="arithmatex">\(1 \times 1 + 2 \times 0 + 3 \times 0 + 1 \times (-1) = 1 - 1 = 0\)</span>$</p>
 <p>在位置 (0,1) 处卷积：
 $<span class="arithmatex">\(2 \times 1 + 0 \times 0 + 1 \times 0 + 2 \times (-1) = 2 - 2 = 0\)</span>$</p>
-<p>输出（2×2）：</p>
-<pre><code>  0   0
-  3   1
-</code></pre>
+<p>输出（2×2）：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>  0   0
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  3   1
+</code></pre></div></p>
 <p><img alt="Pasted image 20260509110326.png" src="../../kb_material/ML_image/Pasted%20image%2020260509110326.png" />
 <img alt="Pasted image 20260509110812.png" src="../../kb_material/ML_image/Pasted%20image%2020260509110812.png" />
 <img alt="Pasted image 20260509110830.png" src="../../kb_material/ML_image/Pasted%20image%2020260509110830.png" /></p>
@@ -1980,31 +2083,31 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <h3 id="_14">最大值池化<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>取池化窗口内的最大值：</p>
 <div class="arithmatex">\[P(i, j) = \max_{m,n \in window} I(i+m, j+n)\]</div>
-<p><strong>举例</strong>：2×2 窗口，输入：</p>
-<pre><code>  1  3  2  4
-  5  2  1  8
-  3  6  2  1
-  9  2  4  7
-</code></pre>
-<p>输出：</p>
-<pre><code>  5  8
-  9  7
-</code></pre>
+<p><strong>举例</strong>：2×2 窗口，输入：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>  1  3  2  4
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  5  2  1  8
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  3  6  2  1
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  9  2  4  7
+</code></pre></div>
+输出：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>  5  8
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  9  7
+</code></pre></div></p>
 <p>最大值池化<strong>保留最强特征</strong>（如边缘的高响应值），丢弃弱信号，简单有效，是 CNN 中最常用的池化方式。</p>
 <p><img alt="Pasted image 20260509145639.png" src="../../kb_material/ML_image/Pasted%20image%2020260509145639.png" /></p>
 <h3 id="_15">平均值池化<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p>取池化窗口内的平均值：</p>
 <div class="arithmatex">\[P(i, j) = \frac{1}{k^2}\sum_{m,n \in window} I(i+m, j+n)\]</div>
-<p>用上面同样的输入：</p>
-<pre><code>  1  3  2  4
-  5  2  1  8     →  平均值池化  →
-  3  6  2  1
-  9  2  4  7
-</code></pre>
-<p>输出：</p>
-<pre><code>  (1+3+5+2)/4 = 2.75    (2+4+1+8)/4 = 3.75
-  (3+6+9+2)/4 = 5.0     (2+1+4+7)/4 = 3.5
-</code></pre>
+<p>用上面同样的输入：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>  1  3  2  4
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  5  2  1  8     →  平均值池化  →
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  3  6  2  1
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  9  2  4  7
+</code></pre></div>
+输出：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>  (1+3+5+2)/4 = 2.75    (2+4+1+8)/4 = 3.75
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  (3+6+9+2)/4 = 5.0     (2+1+4+7)/4 = 3.5
+</code></pre></div></p>
 <p>平均值池化更平滑，不会过度强调某个极端值。现在 CNN 中多数场景已用最大值池化替代。</p>
 <p><img alt="Pasted image 20260509145857.png" src="../../kb_material/ML_image/Pasted%20image%2020260509145857.png" /></p>
 <h3 id="_16">池化性质<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
@@ -2152,14 +2255,14 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 </ul>
 <h3 id="_21">网络结构<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
 <p>VGG16 结构非常规整：</p>
-<pre><code>输入 224×224×3
-→ [3×3 conv, 64] × 2  → 2×2 maxpool
-→ [3×3 conv, 128] × 2 → 2×2 maxpool
-→ [3×3 conv, 256] × 3 → 2×2 maxpool
-→ [3×3 conv, 512] × 3 → 2×2 maxpool
-→ [3×3 conv, 512] × 3 → 2×2 maxpool
-→ FC 4096 → FC 4096 → FC 1000 → Softmax
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>输入 224×224×3
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>→ [3×3 conv, 64] × 2  → 2×2 maxpool
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>→ [3×3 conv, 128] × 2 → 2×2 maxpool
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>→ [3×3 conv, 256] × 3 → 2×2 maxpool
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>→ [3×3 conv, 512] × 3 → 2×2 maxpool
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>→ [3×3 conv, 512] × 3 → 2×2 maxpool
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>→ FC 4096 → FC 4096 → FC 1000 → Softmax
+</code></pre></div>
 <p>特点是<strong>全部使用 3×3 卷积 + 2×2 池化</strong>，设计极其一致。</p>
 <p><img alt="Pasted image 20260509164004.png" src="../../kb_material/ML_image/Pasted%20image%2020260509164004.png" />
 <img alt="Pasted image 20260509164216.png" src="../../kb_material/ML_image/Pasted%20image%2020260509164216.png" /></p>
@@ -2201,14 +2304,14 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <h2 id="v1">V1 结构<a class="headerlink" href="#v1" title="Permanent link">&para;</a></h2>
 <h3 id="inception">朴素 Inception 模块<a class="headerlink" href="#inception" title="Permanent link">&para;</a></h3>
 <p>一个 Inception 模块同时有 4 条并行分支，最后在通道维度上拼接：</p>
-<pre><code>输入
- ├── 1×1 卷积
- ├── 3×3 卷积
- ├── 5×5 卷积
- └── 3×3 最大值池化
-           ↓
-      通道拼接（Concat）
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>输入
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a> ├── 1×1 卷积
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a> ├── 3×3 卷积
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a> ├── 5×5 卷积
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a> └── 3×3 最大值池化
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>           ↓
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>      通道拼接（Concat）
+</code></pre></div>
 <p><img alt="Pasted image 20260510102021.png" src="../../kb_material/ML_image/Pasted%20image%2020260510102021.png" /></p>
 <h3 id="_26">为什么用不同大小卷积核？<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
 <p>不同尺寸的卷积核关注不同尺度的特征：</p>
@@ -2249,14 +2352,14 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <div class="arithmatex">\[计算量 = 256 \times 5 \times 5 \times 64 \times 输出面积 \approx 409{,}600 \times 输出面积\]</div>
 <h3 id="11">解决方案：1×1 卷积降维<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <p>在 3×3 和 5×5 卷积<strong>之前</strong>，先用 1×1 卷积压缩通道数（如 256 → 64），做完大卷积后再用 1×1 扩展回去：</p>
-<pre><code>输入（256通道）
- ├── 1×1 conv, 64
- ├── 1×1 conv, 64 → 3×3 conv, 64
- ├── 1×1 conv, 64 → 5×5 conv, 64
- └── 3×3 maxpool → 1×1 conv, 64
-              ↓
-         通道拼接
-</code></pre>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>输入（256通道）
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a> ├── 1×1 conv, 64
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a> ├── 1×1 conv, 64 → 3×3 conv, 64
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a> ├── 1×1 conv, 64 → 5×5 conv, 64
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a> └── 3×3 maxpool → 1×1 conv, 64
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>              ↓
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>         通道拼接
+</code></pre></div>
 <p><img alt="Pasted image 20260510103445.png" src="../../kb_material/ML_image/Pasted%20image%2020260510103445.png" /></p>
 <p><strong>参数量的变化</strong>（以 5×5 分支为例）：</p>
 <ul>
@@ -2519,6 +2622,12 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
       </main>
       
         <footer class="md-footer">
@@ -2548,7 +2657,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
