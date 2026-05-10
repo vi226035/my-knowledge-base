@@ -1441,6 +1441,9 @@
 <li>DAC 需要高采样率来减小零阶保持效应、拉开镜像距离</li>
 <li>最终发射的是中频/射频<strong>实信号</strong>（天线只能发射实信号）</li>
 </ul>
+<blockquote>
+<p><strong>零阶保持效应</strong>：DAC 在两个采样点之间保持上一个值不变（像楼梯台阶），这会在频谱上引入高频衰减（sinc 滚降）。采样率越高，台阶越密，衰减越少。就像用更多像素来描述一条曲线——像素越多锯齿越不明显。</p>
+</blockquote>
 <p>DUC 负责桥接低速基带和高速 DAC——<strong>先升采样，再搬频，最后合成实信号</strong>。</p>
 <hr />
 <h2 id="_2">数学推导<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -1462,20 +1465,23 @@ z[m] &amp; n = mL \\
 阻带起始频率：<span class="arithmatex">\(\omega_s = 2\pi \cdot f_{s,in} / (2 \cdot f_{s,out}) = \pi / L\)</span>（镜像开始处）</p>
 <blockquote>
 <p><strong>顺序很重要</strong>：先插零再滤波！这样才能去除插零引入的镜像频谱。实际上插零和滤波可合并为多相结构实现，滤波跑在低采样率一侧。</p>
+<p><strong>镜像是什么？</strong> 插零相当于强行提高了"名义采样率"，但新插入的零不包含真实信息，频谱上会在原信号的副本（镜像）出现在新采样率间隔的各个位置。低通滤波就是把这些多余的"影子"信号过滤掉，只保留基带部分的真实信号。</p>
 </blockquote>
 <h3 id="_5">正交上变频<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>将滤波后的基带复信号与 NCO 混频，搬移到中频 <span class="arithmatex">\(\omega_c\)</span>：</p>
+<p>将滤波后的基带复信号与 NCO 混频，搬移到中频 <span class="arithmatex">\(\omega_c\)</span>。</p>
+<p>I/Q 两路分别乘 NCO 的 <span class="arithmatex">\(\cos\)</span> 和 <span class="arithmatex">\(-\sin\)</span> 分量，最后相加：</p>
 <div class="arithmatex">\[\begin{aligned}
-x_I[n] &amp;= I[n] \cdot \cos(\omega_c n) \\
-x_Q[n] &amp;= Q[n] \cdot \sin(\omega_c n)
+x[n] &amp;= I[n] \cdot \cos(\omega_c n) + Q[n] \cdot (-\sin(\omega_c n)) \\
+&amp;= I[n]\cos(\omega_c n) - Q[n]\sin(\omega_c n)
 \end{aligned}\]</div>
-<p><strong>合成实信号</strong>（这是 DUC 的核心最后一步——I/Q 两路合为一路实信号）：</p>
-<div class="arithmatex">\[x[n] = I[n]\cos(\omega_c n) - Q[n]\sin(\omega_c n)\]</div>
+<blockquote>
+<p>注意：Q 路乘 <span class="arithmatex">\(-\sin\)</span>（不是 <span class="arithmatex">\(+\sin\)</span>），然后 I/Q 两路做<strong>加法</strong>。如果你看到的资料用的是 Q 路乘 <span class="arithmatex">\(+\sin\)</span> 再<strong>减法</strong>，结果一样——只是约定不同。用加法更直观地对应了复乘的实部提取。</p>
+</blockquote>
 <p>用欧拉公式可验证，上式恰好等于 <span class="arithmatex">\(\text{Re}\{(I[n] + jQ[n]) \cdot e^{j\omega_c n}\}\)</span>，即复基带信号被搬移到了 <span class="arithmatex">\(\omega_c\)</span> 处。</p>
 <div class="arithmatex">\[\begin{aligned}
-(I + jQ) \cdot (\cos\omega_c + j\sin\omega_c) &amp;= (I\cos\omega_c - Q\sin\omega_c) + j(Q\cos\omega_c + I\sin\omega_c)
+(I + jQ) \cdot (\cos\omega_c + j\sin\omega_c) &amp;= \underbrace{(I\cos\omega_c - Q\sin\omega_c)}_{\text{实部}} + j(Q\cos\omega_c + I\sin\omega_c)
 \end{aligned}\]</div>
-<p>取实部：<span class="arithmatex">\(x[n] = I[n]\cos(\omega_c n) - Q[n]\sin(\omega_c n)\)</span>，正是 DAC 需要的实信号。</p>
+<p>取实部：<span class="arithmatex">\(I[n]\cos(\omega_c n) - Q[n]\sin(\omega_c n)\)</span>，正是 DAC 需要的实信号。</p>
 <h3 id="_6">输出信号<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[x[n] = \text{Re}\left\{A[n] \cdot e^{j(\omega_c n + \phi[n])}\right\} = A[n] \cdot \cos(\omega_c n + \phi[n])\]</div>
 <p>成功！基带的幅度 <span class="arithmatex">\(A[n]\)</span> 和相位 <span class="arithmatex">\(\phi[n]\)</span> 原封不动地搬到了载波频率 <span class="arithmatex">\(\omega_c\)</span> 上。</p>
@@ -1532,6 +1538,9 @@ y[n] &amp;= \sum_{k} h[k] \cdot x_{up}[n-k] \\
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>多相做法：L 个子滤波器并行工作 → 各跑在 f_s_in 时钟 → 输出再拼成 f_s_out
 </code></pre></div>
 <p>FPGA 中用 <span class="arithmatex">\(L\)</span> 个并行子滤波器 + 输出轮询，等效实现了高速内插。</p>
+<blockquote>
+<p><strong>通俗理解</strong>：插零后的序列大部分是 0，传统 FIR 要对这些 0 也做乘加——白费力气。多相结构相当于先把滤波器系数按位置分组，每组只在有"真数据"的时钟周期做乘加，然后轮流输出结果。就像一个轮班制的厨师团队，每人只负责一道菜的上菜时刻，而不是所有人守在灶台前等每一次上菜。</p>
+</blockquote>
 <h3 id="cic">CIC 内插<a class="headerlink" href="#cic" title="Permanent link">&para;</a></h3>
 <p>Hogenauer 结构的 CIC 内插器：先积分（在低速侧），再梳状差分（在高速侧）。与 CIC 抽取结构互为镜像。</p>
 <h3 id="_10">资源优化建议<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>

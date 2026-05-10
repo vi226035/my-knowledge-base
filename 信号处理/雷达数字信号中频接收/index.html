@@ -1939,17 +1939,17 @@ X_S(\omega)=\frac{1}{T}\sum_{n=-\infty}^{+\infty}X(\omega-\omega_S n) \tag{2-2}
 - <span class="arithmatex">\(f_s\)</span>：采样频率
 - <span class="arithmatex">\(f_H\)</span>：带通信号上边界频率
 - <span class="arithmatex">\(f_L\)</span>：带通信号下边界频率
-- <span class="arithmatex">\(n\)</span>：自然数，用于选择不同的合法采样区间</p>
-<p>其中：
-- <span class="arithmatex">\(B=f_H-f_L\)</span>
-- <span class="arithmatex">\(n\)</span> 为自然数
-- <span class="arithmatex">\(N\le f_H/B\)</span></p>
+- <span class="arithmatex">\(n\)</span>：自然数，用于选择不同的合法采样区间
+- <span class="arithmatex">\(B=f_H-f_L\)</span> 为信号带宽</p>
 <h4 id="_7">工程理解<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <ul>
 <li>当 <span class="arithmatex">\(n=1\)</span> 时，上式退化为奈奎斯特采样。</li>
-<li>带通采样适合中频接收场景。</li>
+<li>带通采样适合中频接收场景——采样率不需要达到信号最高频率的 2 倍，而是带宽的 2 倍左右即可。</li>
 <li>若多个频带同时存在信号，采样前仍需滤波，否则可能混叠。</li>
 </ul>
+<blockquote>
+<p><strong>通俗理解</strong>：奈奎斯特说"采样率要 ≥ 信号最高频率的 2 倍"。但如果信号是一个很窄的频带（比如 70~72 MHz），那最高频率是 72 MHz，按奈奎斯特得 144 MSPS。带通采样告诉你：不用那么高！信号带宽才 2 MHz，采样率只需 ≥ 4 MSPS（带宽的 2 倍）就够——便宜太多了。</p>
+</blockquote>
 <h4 id="_8">配图记录<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <p><strong>图2.2：带通信号采样前后频谱图</strong>
 - 说明通过合适采样率可以实现欠采样而不失真</p>

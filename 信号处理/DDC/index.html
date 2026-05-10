@@ -605,6 +605,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="为什么需要 DDC？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么需要 I/Q 两路？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1136,6 +1153,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="为什么需要 DDC？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么需要 I/Q 两路？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1375,6 +1409,13 @@
 <li>需要的信息（调制包络）在基带，高频载波只是"运输工具"</li>
 </ul>
 <p>DDC 把高频信号搬回基带，同时降低采样率，让后续处理变得可行。</p>
+<h3 id="iq">为什么需要 I/Q 两路？<a class="headerlink" href="#iq" title="Permanent link">&para;</a></h3>
+<p>一个关键问题：只用一个实数序列，能完整描述一个信号吗？不能。</p>
+<p>考虑一个简单正弦波 <span class="arithmatex">\(\cos(\omega n)\)</span>。如果你只知道每个采样点的实数值，你分不清信号此刻处于上升沿还是下降沿——cos 在同一个值处有两个不同的相位。就像只看到钟摆的<strong>位置</strong>，却不知道它在往左摆还是往右摆。</p>
+<p>I/Q 两路分别采集 <span class="arithmatex">\(\cos\)</span> 和 <span class="arithmatex">\(\sin\)</span> 分量，组合成复数 <span class="arithmatex">\(I+jQ\)</span>，就同时有了"位置"和"速度"信息。好比用 <span class="arithmatex">\((x, y)\)</span> 坐标替代单一角度来描述圆周运动——信息是完备的。</p>
+<blockquote>
+<p>一句话：<strong>实信号只看到影子，复信号（I/Q）看到全貌。</strong></p>
+</blockquote>
 <hr />
 <h2 id="_2">数学推导<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">输入信号模型<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
@@ -1429,6 +1470,7 @@ A[n] &amp;= 2 \cdot |z[n]| = 2\sqrt{I[n]^2 + Q[n]^2} \\[4pt]
 <p>抽取后采样率 <span class="arithmatex">\(f_s' = f_s / D\)</span>，数据率大幅降低。抽取前必须先做抗混叠滤波（即低通滤波兼做抗混叠），防止抽取后频谱混叠。</p>
 <blockquote>
 <p><strong>顺序很重要</strong>：先滤波再抽取！不滤波直接抽取会导致频谱周期延拓时重叠（混叠），信号就无法恢复了。</p>
+<p><strong>混叠的通俗类比</strong>：想象你快速翻一本连环画（高采样率），每页都看。如果每隔 10 页才看一页（抽取 D=10），快速奔跑的小人可能变成了倒退走——因为你的"观察频率"已经跟不上页面的变化频率了。低通滤波相当于先把过快的动作"模糊掉"，只保留你能追踪的慢动作，再抽取就不会出错了。</p>
 </blockquote>
 <hr />
 <h2 id="_7">完整信号流程<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
@@ -1453,10 +1495,16 @@ A[n] &amp;= 2 \cdot |z[n]| = 2\sqrt{I[n]^2 + Q[n]^2} \\[4pt]
 <p><strong>频率分辨率</strong>取决于相位累加器位宽 <span class="arithmatex">\(N\)</span>：</p>
 <div class="arithmatex">\[\Delta f = \frac{f_s}{2^N}\]</div>
 <p><strong>SFDR（无杂散动态范围）</strong>取决于 LUT 深度和输出位宽。常见改进：相位截断加抖动（dither）改善杂散。</p>
+<blockquote>
+<p><strong>LUT 通俗理解</strong>：正弦波的值是事先算好存进一张表里的（就像三角函数表），NCO 不需要每次重新计算 sin/cos，只需按步进翻表取值即可。相位累加器就像一个"指针"，每次前进 <span class="arithmatex">\(\Delta\theta\)</span>，指向表里对应的 sin/cos 值。</p>
+</blockquote>
 <h3 id="2-mixer">2. 混频器（Mixer）<a class="headerlink" href="#2-mixer" title="Permanent link">&para;</a></h3>
 <p>就是乘法器。在 FPGA 中直接用 DSP48 乘法单元实现。注意：
 - 输入信号位宽 × NCO 输出位宽 → 乘法器输出位宽增长
 - 截位时需要合理选择截位位置，平衡精度和资源</p>
+<blockquote>
+<p><strong>截位 vs 舍入</strong>：直接截断（truncation）是把低位丢掉——相当于永远向下取整，长期会积累负的直流偏置。舍入（rounding）是四舍五入取整——偏置在统计上趋近于零。FPGA 中通常加 0.5 LSB 再截位来近似舍入。</p>
+</blockquote>
 <h3 id="3-lpf">3. 低通滤波器（LPF）<a class="headerlink" href="#3-lpf" title="Permanent link">&para;</a></h3>
 <p>DDC 中最关键的模块。设计要点：</p>
 <p><strong>滤波器类型选择</strong>：

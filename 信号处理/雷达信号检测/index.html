@@ -1952,6 +1952,9 @@
 <h3 id="312">3.1.2 自相关检测法<a class="headerlink" href="#312" title="Permanent link">&para;</a></h3>
 <h4 id="_4">核心结论<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
 <p>利用信号的相关性和噪声的不相关性，通过自相关运算增强真脉冲、抑制噪声，是更适合 FPGA 实时实现的检测方法。</p>
+<blockquote>
+<p><strong>自相关是什么？</strong> 把信号的每个点和它前一个点（共轭）相乘，累积 N 个结果取平均。信号有规律——相邻采样点之间存在稳定的相位差关系，乘积累积后会叠加增强；噪声是随机的——相邻点之间没有任何规律，乘积累积后互相抵消接近于 0。所以自相关后信号的对比度就被放大了。</p>
+</blockquote>
 <h4 id="_5">关键公式<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <p>输入信号：</p>
 <div class="arithmatex">\[
