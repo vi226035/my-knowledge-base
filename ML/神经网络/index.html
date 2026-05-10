@@ -1490,7 +1490,7 @@
 <h3 id="_4">直观理解<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>权重 <span class="arithmatex">\(w_i\)</span></strong>：这个输入有多重要（正=促进，负=抑制）</li>
-<li><strong>偏置 <span class="arithmatex">\(b\)</span></strong>：神经元"本来就想激活"的程度（门槛高低）</li>
+<li><strong>偏置 <span class="arithmatex">\(b\)</span></strong>：激活门槛的高低调整——偏置越大，即使输入信号较小也容易激活；偏置越小，需要更大的输入才能激活</li>
 <li><strong>激活函数 <span class="arithmatex">\(f\)</span></strong>：把加权和映射到一个合理范围（比如 0~1 之间，像概率）</li>
 </ul>
 <h3 id="_5">举例<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -1528,7 +1528,7 @@ A^{[l]} &amp;= f^{[l]}(Z^{[l]})
 \end{aligned}\]</div>
 <p>其中 <span class="arithmatex">\(A^{[0]}\)</span> 即输入 <span class="arithmatex">\(X\)</span>，<span class="arithmatex">\(A^{[L]}\)</span> 即最终输出 <span class="arithmatex">\(\hat{Y}\)</span>。</p>
 <h3 id="_11">计算示例<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>一个三输入、两隐藏神经元的简单网络：</p>
+<p>一个两输入、两隐藏神经元的简单网络：</p>
 <ul>
 <li>输入 <span class="arithmatex">\(X = [2, 3]^T\)</span></li>
 <li>隐藏层权重 <span class="arithmatex">\(W^{[1]} = \begin{bmatrix} 0.5 &amp; 0.2 \\\ 0.1 &amp; 0.8 \end{bmatrix}\)</span>，偏置 <span class="arithmatex">\(b^{[1]} = [0.1, 0.1]^T\)</span></li>

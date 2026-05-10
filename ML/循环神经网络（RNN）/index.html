@@ -1388,17 +1388,19 @@
 <h2 id="_6">网络结构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>RNN 的结构非常简洁——在普通全连接网络的基础上，多加了一条"回头路"：当前时刻隐藏层的输出，会作为下一时刻隐藏层的<strong>额外输入</strong>。</p>
 <div class="arithmatex">\[\begin{aligned}
-h_t &amp;= f(W_{xh} x_t + W_{hh} h_{t-1} + b_h) \\
-y_t &amp;= g(W_{hy} h_t + b_y)
+h_t &amp;= \tanh(W_{xh} x_t + W_{hh} h_{t-1} + b_h) \\
+y_t &amp;= \text{softmax}(W_{hy} h_t + b_y)
 \end{aligned}\]</div>
 <p>其中：
 - <span class="arithmatex">\(x_t\)</span> — <span class="arithmatex">\(t\)</span> 时刻的输入
 - <span class="arithmatex">\(h_t\)</span> — <span class="arithmatex">\(t\)</span> 时刻的隐藏状态（RNN 的"记忆"）
 - <span class="arithmatex">\(h_{t-1}\)</span> — 上一时刻的隐藏状态（这就是"循环"的来源！）
-- <span class="arithmatex">\(y_t\)</span> — <span class="arithmatex">\(t\)</span> 时刻的输出
+- <span class="arithmatex">\(y_t\)</span> — <span class="arithmatex">\(t\)</span> 时刻的输出（如分类任务中为每个类别的概率）
 - <span class="arithmatex">\(W_{xh}\)</span> — 输入到隐藏层的权重
 - <span class="arithmatex">\(W_{hh}\)</span> — 隐藏层到隐藏层的权重（<strong>核心</strong>：负责传递历史信息）
-- <span class="arithmatex">\(W_{hy}\)</span> — 隐藏层到输出的权重</p>
+- <span class="arithmatex">\(W_{hy}\)</span> — 隐藏层到输出的权重
+- <span class="arithmatex">\(\tanh\)</span> — 双曲正切激活函数（将输出压缩到 -1~1 之间，让隐状态稳定传递）
+- <span class="arithmatex">\(\text{softmax}\)</span> — 输出层激活函数（多分类将 logits 转为概率）</p>
 <blockquote>
 <p>关键：<span class="arithmatex">\(W_{xh}\)</span>、<span class="arithmatex">\(W_{hh}\)</span>、<span class="arithmatex">\(W_{hy}\)</span> 在所有时间步<strong>共享</strong>——同一套参数处理整个序列。</p>
 </blockquote>
