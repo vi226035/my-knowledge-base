@@ -805,6 +805,73 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
+        第五部分：激活函数的魔法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第五部分：激活函数的魔法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q9：激活函数是干嘛用的？只是压缩输出值吗？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Q9：激活函数是干嘛用的？只是压缩输出值吗？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心使命：引入非线性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附带使命：压缩数值防爆炸（RNN 场景）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见激活函数对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         总结速查
       
     </span>
@@ -1379,6 +1446,73 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
+        第五部分：激活函数的魔法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第五部分：激活函数的魔法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q9：激活函数是干嘛用的？只是压缩输出值吗？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Q9：激活函数是干嘛用的？只是压缩输出值吗？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心使命：引入非线性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        附带使命：压缩数值防爆炸（RNN 场景）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见激活函数对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         总结速查
       
     </span>
@@ -1424,7 +1558,7 @@
 <hr />
 <h3 id="q3-0">Q3：初始权重为什么不能全设为 0？<a class="headerlink" href="#q3-0" title="Permanent link">&para;</a></h3>
 <p><strong>必须打破对称性。全 0 = 所有神经元永远做一模一样的事。</strong></p>
-<p><strong>打个比方</strong>：请了 128 个专家，但初始时全都白纸一张（权重为 0）。你扔一张猫图进去，算出来的误差对 128 个专家的"批评"完全一样（梯度相同）→ 他们每次接收同样的修正 → 训到最后 128 个专家全部一模一样——等于只请了一个人，白花了 127 份工资。</p>
+<p>打个比方：请了 128 个专家，初始时全是白纸一张（权重为 0）。你扔一张猫图进去，算出来的误差对 128 个专家的"批评"完全一样（梯度相同）→ 他们每次接收同样的修正 → 训到最后 128 个专家全部一模一样——等于只请了一个人，白花了 127 份工资。</p>
 <p><strong>给微小的随机初始值</strong>，让专家们起跑线不同，最终各自掌管不同的特征。</p>
 <hr />
 <h2 id="cnn-rnn">第二部分：CNN 和 RNN 的分工<a class="headerlink" href="#cnn-rnn" title="Permanent link">&para;</a></h2>
@@ -1456,28 +1590,52 @@
 </tr>
 </tbody>
 </table>
-<p>RNN 每读一个词，就把理解（隐藏状态 <span class="arithmatex">\(h_t\)</span>）传给下一个时刻——像击鼓传花一样，当前的理解建立在之前所有内容之上。</p>
+<p>RNN 每读一个词，就把理解（<span class="arithmatex">\(h_t\)</span>）传给下一时刻——像击鼓传花，当前的理解建立在之前所有内容之上。</p>
 <hr />
 <h2 id="rnn-lstm">第三部分：从 RNN 到 LSTM<a class="headerlink" href="#rnn-lstm" title="Permanent link">&para;</a></h2>
 <h3 id="q5rnn">Q5：RNN 有什么致命缺点？<a class="headerlink" href="#q5rnn" title="Permanent link">&para;</a></h3>
 <p><strong>长期失忆——梯度消失。</strong></p>
 <p>RNN 每一时刻的记忆传递都要做矩阵连乘。如果乘数小于 1，连乘几十次后梯度趋近于 0——第一页的内容彻底"糊了"。</p>
-<p><strong>打个比方</strong>：复印一份文件，每次复印是前一次的 90% 清晰度。复印 50 次后，第一页的字已经完全看不清了。RNN 实际只能记住约 10~20 步内的信息。</p>
+<p>打个比方：复印一份文件，每次复印是前一次的 90% 清晰度。复印 50 次后，第一页的字已完全看不清。RNN 实际只能记住约 10~20 步内的信息。</p>
 <hr />
 <h3 id="q6lstm">Q6：LSTM 怎么解决失忆？（核心）<a class="headerlink" href="#q6lstm" title="Permanent link">&para;</a></h3>
 <p><strong>LSTM 造了一条"加法高速公路"——细胞状态 <span class="arithmatex">\(C_t\)</span>。</strong></p>
-<p>RNN 的信息更新是<strong>全量覆盖</strong>：<span class="arithmatex">\(h_t = \tanh(W x_t + U h_{t-1})\)</span></p>
-<p>LSTM 的信息更新是<strong>选择性加法</strong>：<span class="arithmatex">\(C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t\)</span></p>
-<p>代入具体符号：
+<table>
+<thead>
+<tr>
+<th></th>
+<th>RNN</th>
+<th>LSTM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>更新方式</td>
+<td><span class="arithmatex">\(h_t = \tanh(W x_t + U h_{t-1})\)</span> 全量覆盖</td>
+<td><span class="arithmatex">\(C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t\)</span> 选择性加法</td>
+</tr>
+<tr>
+<td>梯度传导</td>
+<td>矩阵连乘 ×</td>
+<td>逐元素乘 + 加法 +</td>
+</tr>
+<tr>
+<td>远距离依赖</td>
+<td>10~20 步</td>
+<td>100+ 步</td>
+</tr>
+</tbody>
+</table>
+<p>符号速查：
 - <span class="arithmatex">\(C_{t-1}\)</span>：旧的长期记忆
-- <span class="arithmatex">\(f_t\)</span>：遗忘门（哪些旧记忆要扔掉，0~1 之间的系数）
-- <span class="arithmatex">\(i_t\)</span>：输入门（哪些新信息要写入）
-- <span class="arithmatex">\(\tilde{C}_t\)</span>：候选记忆（本次想写入的新内容）
+- <span class="arithmatex">\(f_t\)</span>：遗忘门（0~1，哪些旧记忆该扔）
+- <span class="arithmatex">\(i_t\)</span>：输入门（哪些新信息该写）
+- <span class="arithmatex">\(\tilde{C}_t\)</span>：候选记忆（本次的新内容）
 - <span class="arithmatex">\(\odot\)</span>：逐元素相乘</p>
-<p>因为是<strong>加法</strong>（+）而不是矩阵连乘（×），梯度可以沿着 <span class="arithmatex">\(C_t\)</span> 无损地传回几十步甚至上百步之前。这就是 LSTM 能记住"远距离依赖关系"的根本原因。</p>
+<p>因为是 <strong>加法</strong>（+）而不是矩阵连乘（×），梯度可以沿 <span class="arithmatex">\(C_t\)</span> 无损地传回几十上百步之前。这就是 LSTM 能记住远距离依赖的根本原因。</p>
 <hr />
 <h3 id="q7lstm">Q7：LSTM 复杂的公式到底在做什么？<a class="headerlink" href="#q7lstm" title="Permanent link">&para;</a></h3>
-<p>用<strong>记课堂笔记</strong>来比喻 LSTM 每个组件：</p>
+<p>用<strong>记课堂笔记</strong>来理解每个组件：</p>
 <table>
 <thead>
 <tr>
@@ -1504,7 +1662,7 @@
 <td>遗忘门</td>
 <td><span class="arithmatex">\(f_t\)</span></td>
 <td>橡皮擦</td>
-<td>把笔记本上过时的旧内容擦掉</td>
+<td>擦掉笔记本上过时的旧内容</td>
 </tr>
 <tr>
 <td>候选状态</td>
@@ -1516,47 +1674,98 @@
 <td>输入门</td>
 <td><span class="arithmatex">\(i_t\)</span></td>
 <td>荧光笔</td>
-<td>判断草稿上的内容有多少值得写入笔记本</td>
+<td>判断草稿上有多少值得写入笔记本</td>
 </tr>
 <tr>
 <td>输出门</td>
 <td><span class="arithmatex">\(o_t\)</span></td>
 <td>聚光灯</td>
-<td>从笔记本里挑出当前时刻最需要的内容输出</td>
+<td>从笔记本挑出当前时刻最需要的内容</td>
 </tr>
 </tbody>
 </table>
-<p>四步流程一目了然：</p>
+<p>四步流程：</p>
 <ol>
-<li><strong>擦旧</strong>：<span class="arithmatex">\(f_t\)</span> 擦掉笔记本上该忘的东西 → <span class="arithmatex">\(f_t \odot C_{t-1}\)</span></li>
-<li><strong>写新</strong>：<span class="arithmatex">\(i_t\)</span> 判断草稿本 <span class="arithmatex">\(\tilde{C}_t\)</span> 有多少值得写 → <span class="arithmatex">\(i_t \odot \tilde{C}_t\)</span></li>
-<li><strong>更新</strong>：旧的 + 新的 = 当前笔记本 → <span class="arithmatex">\(C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t\)</span></li>
-<li><strong>输出</strong>：<span class="arithmatex">\(o_t\)</span> 聚光灯照笔记本，提取当前需要的部分 → <span class="arithmatex">\(h_t = o_t \odot \tanh(C_t)\)</span></li>
+<li><strong>擦旧</strong>：橡皮擦 <span class="arithmatex">\(f_t\)</span> 擦掉该忘的 → <span class="arithmatex">\(f_t \odot C_{t-1}\)</span></li>
+<li><strong>写新</strong>：荧光笔 <span class="arithmatex">\(i_t\)</span> 判断草稿精华值不值得写 → <span class="arithmatex">\(i_t \odot \tilde{C}_t\)</span></li>
+<li><strong>更新</strong>：旧的 + 新的 = 此刻笔记 → <span class="arithmatex">\(C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t\)</span></li>
+<li><strong>输出</strong>：聚光灯 <span class="arithmatex">\(o_t\)</span> 照笔记本，提取当前需要的 → <span class="arithmatex">\(h_t = o_t \odot \tanh(C_t)\)</span></li>
 </ol>
 <hr />
 <h2 id="_3">第四部分：训练四步曲<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="q8loss-zero_grad-backward-step">Q8：<code>loss → zero_grad → backward → step</code> 到底在干什么？<a class="headerlink" href="#q8loss-zero_grad-backward-step" title="Permanent link">&para;</a></h3>
 <p>这是模型从瞎蒙进化到精准的全部秘密。用<strong>厨师做菜</strong>来理解：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>  <span class="c1"># 第1步：尝菜，给差评</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>              <span class="c1"># 第2步：撕掉昨天的记过本</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>                    <span class="c1"># 第3步：反向追责，精准定锅</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>                   <span class="c1"># 第4步：执行处分，修改配方</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>  <span class="c1"># ① 尝菜，给差评</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>              <span class="c1"># ② 撕掉昨天的记过本</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>                    <span class="c1"># ③ 反向追责，精准定锅</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>                   <span class="c1"># ④ 执行处分，修改配方</span>
 </code></pre></div>
-<p><strong>第 1 步 <code>loss = ...</code> — 顾客尝菜，给出差评</strong></p>
-<p>算网络的瞎猜答案和正确答案差多少。得分越高 = 越难吃 = 错得越离谱。</p>
-<p><strong>第 2 步 <code>optimizer.zero_grad()</code> — 先撕掉昨天的记过本</strong></p>
-<p>PyTorch 的梯度默认<strong>累加</strong>！不清空的话这批的失误会和上批的混在一起。所以必须先清零，只算当前这批的账。</p>
-<p><strong>第 3 步 <code>loss.backward()</code> — 反向追责，精准定锅</strong></p>
+<p><strong>① <code>loss = ...</code> — 顾客尝菜，给出差评</strong></p>
+<p>算网络瞎猜和正确答案差多少。分数越高 = 错得越离谱。</p>
+<p><strong>② <code>optimizer.zero_grad()</code> — 先撕掉昨天的记过本</strong></p>
+<p>PyTorch 的梯度默认<strong>累加</strong>！不清空的话这批失误会和上批混在一起。先清零，只算当前这批的账。</p>
+<p><strong>③ <code>loss.backward()</code> — 反向追责，精准定锅</strong></p>
 <p>系统顺着流水线往回倒推（链式求导），算出每个参数"多调 1 单位能让差评减多少"——这叫<strong>梯度</strong>。</p>
-<p>比如算出来"糖的参数多 0.1 能大大降低差评"，就给糖的参数标一个负梯度（说明该加糖了）；"盐的参数多 0.1 让差评暴增"，就给盐标一个正梯度（说明盐放多了）。</p>
-<p><strong>注意</strong>：执行完这行时，参数本身<strong>还没被修改</strong>——只是拿到了修改建议书。</p>
-<p><strong>第 4 步 <code>optimizer.step()</code> — 执行处分，修改配方</strong></p>
-<p>真正修改权重的时刻。厨师拿着建议书（梯度）× 学习率（比如 0.001），正式更新每个参数：</p>
+<p>比如：糖多 0.1 能大幅降差评 → 给糖标负梯度（该加糖了）；盐多 0.1 让差评暴增 → 给盐标正梯度（盐放多了）。</p>
+<blockquote>
+<p>执行完这行时参数<strong>还没被改</strong>——只是拿到了修改建议书。</p>
+</blockquote>
+<p><strong>④ <code>optimizer.step()</code> — 执行处分，修改配方</strong></p>
+<p>真正修改权重的时刻：</p>
 <div class="arithmatex">\[W_{new} = W_{old} - \eta \cdot \frac{\partial L}{\partial W}\]</div>
-<p>其中 <span class="arithmatex">\(\eta\)</span> 是学习率，<span class="arithmatex">\(\frac{\partial L}{\partial W}\)</span> 是梯度。</p>
-<p>一次改动极小，但几万个回合下来，瞎猜变成神准。</p>
+<p><span class="arithmatex">\(\eta\)</span> 是学习率（比如 0.001），<span class="arithmatex">\(\frac{\partial L}{\partial W}\)</span> 是梯度。一次改动极小，但几万个回合下来，瞎猜变成神准。</p>
 <hr />
-<h2 id="_4">总结速查<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_4">第五部分：激活函数的魔法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="q9">Q9：激活函数是干嘛用的？只是压缩输出值吗？<a class="headerlink" href="#q9" title="Permanent link">&para;</a></h3>
+<p><strong>首要任务是"把直线掰弯"（引入非线性），次要任务才是"压缩数值防爆炸"。</strong></p>
+<h4 id="_5">核心使命：引入非线性<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>没有激活函数的话，不管网络叠多少层，本质上都在做简单的乘法和加法——只能画出直线。但现实世界中猫和狗的边界是弯弯曲曲的，直线根本分不开。</p>
+<p>激活函数就是一个<strong>掰线器</strong>：数据流过时被折断（ReLU 遇负数直接归零）或揉弯（Sigmoid/Tanh 压成 S 形）。几百个带折角的数据线交织在一起，就能拼出任意复杂的分界线。</p>
+<blockquote>
+<p>没有激活函数，深度学习 = 小学一次方程。激活函数是让"深度"有意义的灵魂。</p>
+</blockquote>
+<h4 id="rnn">附带使命：压缩数值防爆炸（RNN 场景）<a class="headerlink" href="#rnn" title="Permanent link">&para;</a></h4>
+<p>在 RNN 里，新特征和老记忆每个时间步都在累加。循环 28 步后，如果不加限制，数值像滚雪球一样膨胀成天文数字——这就叫<strong>梯度爆炸</strong>。</p>
+<p><strong>Tanh</strong> 就是一台压路机：不管进来多大，统统压到 <span class="arithmatex">\([-1, 1]\)</span> 之间。记忆雪球不管滚多少圈都能安全流转。</p>
+<h4 id="_6">常见激活函数对比<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>公式</th>
+<th>输出范围</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sigmoid</td>
+<td><span class="arithmatex">\(\frac{1}{1+e^{-x}}\)</span></td>
+<td><span class="arithmatex">\((0, 1)\)</span></td>
+<td>两端梯度趋近 0</td>
+<td>二分类输出、LSTM 门控</td>
+</tr>
+<tr>
+<td>Tanh</td>
+<td><span class="arithmatex">\(\frac{e^x-e^{-x}}{e^x+e^{-x}}\)</span></td>
+<td><span class="arithmatex">\((-1, 1)\)</span></td>
+<td>以 0 为中心、两端饱和</td>
+<td>RNN 隐藏状态、LSTM 候选状态</td>
+</tr>
+<tr>
+<td>ReLU</td>
+<td><span class="arithmatex">\(\max(0, x)\)</span></td>
+<td><span class="arithmatex">\([0, \infty)\)</span></td>
+<td>正区间梯度恒 1、计算快</td>
+<td>CNN 卷积层、全连接层</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么 LSTM 门控用 Sigmoid？</strong> 门控需要 0~1 的"开关"信号——0 = 完全关，1 = 完全开，中间值 = 部分开。Sigmoid 天然输出这个范围。</p>
+<p><strong>为什么候选状态用 Tanh？</strong> 候选记忆 <span class="arithmatex">\(\tilde{C}_t\)</span> 是"可能写入的新信息"，需要正负值都有（-1 = 强烈抑制，+1 = 强烈激活），在 0 附近对称。Tanh 天然满足。</p>
+<hr />
+<h2 id="_7">总结速查<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1575,7 +1784,7 @@
 </tr>
 <tr>
 <td>权重能初始化为 0 吗？</td>
-<td>不能，会打破不了对称性</td>
+<td>不能，打不破对称性，所有神经元永远一样</td>
 </tr>
 <tr>
 <td>CNN vs RNN？</td>
@@ -1587,11 +1796,19 @@
 </tr>
 <tr>
 <td>LSTM 怎么治的？</td>
-<td>加法更新 <span class="arithmatex">\(C_t\)</span>，梯度可以无损远传</td>
+<td>加法更新 <span class="arithmatex">\(C_t\)</span>，梯度可无损远传</td>
 </tr>
 <tr>
 <td>backward vs step？</td>
 <td>backward 只是算建议，step 才真正改参数</td>
+</tr>
+<tr>
+<td>激活函数为什么要非线性？</td>
+<td>没有它网络就是一条直线，什么都分不开</td>
+</tr>
+<tr>
+<td>为什么门控用 Sigmoid？</td>
+<td>天然输出 0~1，完美模拟开关信号</td>
 </tr>
 </tbody>
 </table>
