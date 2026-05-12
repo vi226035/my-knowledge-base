@@ -12,6 +12,7 @@
 - [卷积神经网络 (CNN)](ML/卷积神经网络（CNN）.md) — 图像识别、InceptionNet 到 MobileNet
 - [循环神经网络 (RNN)](ML/循环神经网络（RNN）.md) — 序列建模与 BPTT 反向传播
 - [长短期记忆网络 (LSTM)](ML/长短期记忆网络（LSTM）.md) — 三门控制、细胞状态与梯度消失解法
+- [深度学习常见疑惑解答](ML/一些疑惑解答.md) — 大白话讲懂 batch、初始化、RNN/LSTM、训练四步曲
 
 ---
 
