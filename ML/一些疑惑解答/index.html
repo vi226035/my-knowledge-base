@@ -805,42 +805,31 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        第五部分：激活函数的魔法
+        第五部分：激活函数
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="第五部分：激活函数的魔法">
+    <nav class="md-nav" aria-label="第五部分：激活函数">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#q9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q9：激活函数是干嘛用的？只是压缩输出值吗？
+        Q9：激活函数到底在干嘛？为什么不能直接去掉？
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Q9：激活函数是干嘛用的？只是压缩输出值吗？">
+    <nav class="md-nav" aria-label="Q9：激活函数到底在干嘛？为什么不能直接去掉？">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        核心使命：引入非线性
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rnn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        附带使命：压缩数值防爆炸（RNN 场景）
+        没有激活函数会怎样？
       
     </span>
   </a>
@@ -851,7 +840,29 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        常见激活函数对比
+        加了激活函数后呢？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三大激活函数怎么选？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lstm-sigmoid-tanh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么 LSTM 门控用 Sigmoid，候选状态用 Tanh？
       
     </span>
   </a>
@@ -869,7 +880,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         总结速查
@@ -1446,42 +1457,31 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        第五部分：激活函数的魔法
+        第五部分：激活函数
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="第五部分：激活函数的魔法">
+    <nav class="md-nav" aria-label="第五部分：激活函数">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#q9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Q9：激活函数是干嘛用的？只是压缩输出值吗？
+        Q9：激活函数到底在干嘛？为什么不能直接去掉？
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Q9：激活函数是干嘛用的？只是压缩输出值吗？">
+    <nav class="md-nav" aria-label="Q9：激活函数到底在干嘛？为什么不能直接去掉？">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        核心使命：引入非线性
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rnn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        附带使命：压缩数值防爆炸（RNN 场景）
+        没有激活函数会怎样？
       
     </span>
   </a>
@@ -1492,7 +1492,29 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        常见激活函数对比
+        加了激活函数后呢？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三大激活函数怎么选？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lstm-sigmoid-tanh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么 LSTM 门控用 Sigmoid，候选状态用 Tanh？
       
     </span>
   </a>
@@ -1510,7 +1532,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         总结速查
@@ -1715,57 +1737,110 @@
 <div class="arithmatex">\[W_{new} = W_{old} - \eta \cdot \frac{\partial L}{\partial W}\]</div>
 <p><span class="arithmatex">\(\eta\)</span> 是学习率（比如 0.001），<span class="arithmatex">\(\frac{\partial L}{\partial W}\)</span> 是梯度。一次改动极小，但几万个回合下来，瞎猜变成神准。</p>
 <hr />
-<h2 id="_4">第五部分：激活函数的魔法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="q9">Q9：激活函数是干嘛用的？只是压缩输出值吗？<a class="headerlink" href="#q9" title="Permanent link">&para;</a></h3>
-<p><strong>首要任务是"把直线掰弯"（引入非线性），次要任务才是"压缩数值防爆炸"。</strong></p>
-<h4 id="_5">核心使命：引入非线性<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
-<p>没有激活函数的话，不管网络叠多少层，本质上都在做简单的乘法和加法——只能画出直线。但现实世界中猫和狗的边界是弯弯曲曲的，直线根本分不开。</p>
-<p>激活函数就是一个<strong>掰线器</strong>：数据流过时被折断（ReLU 遇负数直接归零）或揉弯（Sigmoid/Tanh 压成 S 形）。几百个带折角的数据线交织在一起，就能拼出任意复杂的分界线。</p>
-<blockquote>
-<p>没有激活函数，深度学习 = 小学一次方程。激活函数是让"深度"有意义的灵魂。</p>
-</blockquote>
-<h4 id="rnn">附带使命：压缩数值防爆炸（RNN 场景）<a class="headerlink" href="#rnn" title="Permanent link">&para;</a></h4>
-<p>在 RNN 里，新特征和老记忆每个时间步都在累加。循环 28 步后，如果不加限制，数值像滚雪球一样膨胀成天文数字——这就叫<strong>梯度爆炸</strong>。</p>
-<p><strong>Tanh</strong> 就是一台压路机：不管进来多大，统统压到 <span class="arithmatex">\([-1, 1]\)</span> 之间。记忆雪球不管滚多少圈都能安全流转。</p>
-<h4 id="_6">常见激活函数对比<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<h2 id="_4">第五部分：激活函数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="q9">Q9：激活函数到底在干嘛？为什么不能直接去掉？<a class="headerlink" href="#q9" title="Permanent link">&para;</a></h3>
+<p>来看一个具体例子。假设你要区分两种水果——苹果和橙子：</p>
+<ul>
+<li>苹果：直径 7cm，重 180g</li>
+<li>橙子：直径 7cm，重 200g</li>
+</ul>
+<p>如果只看直径，分不出来。如果只看重量，也分不太准。但如果你能同时看 <span class="arithmatex">\(\text{直径}^2 + \text{重量}^2\)</span>、<span class="arithmatex">\(\text{直径} \times \text{重量}\)</span>、<span class="arithmatex">\(\sin(\text{直径})\)</span> 这样<strong>弯弯绕绕的组合</strong>，一下子就分开了。</p>
+<p><strong>激活函数的作用就一句话：把输入"揉变形"，让简单的东西变复杂，从而能表达任意形状的分界线。</strong></p>
+<hr />
+<h4 id="_5">没有激活函数会怎样？<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>假设一个三层的网络：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>输入 x → 乘 W1 → 乘 W2 → 乘 W3 → 输出 y
+</code></pre></div>
+<p>无论叠多少层，最终都等于：<span class="arithmatex">\(y = (W_3 \times W_2 \times W_1) \times x = W_{总} \times x\)</span></p>
+<p><strong>就是一条直线！</strong> 一百层的网络 = 一层。深度完全浪费了。</p>
+<p><strong>打个比方</strong>：你叠了 100 张透明的直线图纸，透过它们看下面的曲线——曲线还是曲线，叠多少层直线都不可能变成曲线。</p>
+<h4 id="_6">加了激活函数后呢？<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>输入 x → 乘 W1 → [ReLU 掰弯] → 乘 W2 → [ReLU 掰弯] → 乘 W3 → 输出 y
+</code></pre></div>
+<p>每层之间加一个 ReLU（把负数全掐断），数据就不再是简单的直线变换了。一百层叠加 = 一百次掰弯 = 可以表达<strong>极其复杂的分界线</strong>。</p>
+<p><strong>打个比方</strong>：用一根铁丝（直线），你只能做一根针。但有了"掰弯器"（激活函数），每次弯一下，弯 100 次之后——你能拧出一朵花。</p>
+<hr />
+<h4 id="_7">三大激活函数怎么选？<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<p>先说最简单的理解方式：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>你可以想象成…</th>
+<th>什么时候用它</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ReLU</strong></td>
+<td>一把铡刀——正数放行，负数砍掉</td>
+<td>CNN 卷积层、全连接层（95% 的情况）</td>
+</tr>
+<tr>
+<td><strong>Sigmoid</strong></td>
+<td>一个阀门——输出永远在 0 到 1 之间</td>
+<td>二分类输出、LSTM 的门控开关</td>
+</tr>
+<tr>
+<td><strong>Tanh</strong></td>
+<td>一台压路机——输出永远在 -1 到 1 之间</td>
+<td>RNN 隐藏状态、LSTM 候选记忆</td>
+</tr>
+</tbody>
+</table>
+<p>具体公式和特点：</p>
 <table>
 <thead>
 <tr>
 <th>函数</th>
 <th>公式</th>
 <th>输出范围</th>
-<th>特点</th>
-<th>适用场景</th>
+<th>为什么好</th>
+<th>为什么有时候不好</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>ReLU</td>
+<td><span class="arithmatex">\(\max(0, x)\)</span></td>
+<td><span class="arithmatex">\([0, \infty)\)</span></td>
+<td>正区间梯度恒为 1，不会消失；计算最快</td>
+<td>负数全部归零，"神经元死亡"</td>
+</tr>
+<tr>
 <td>Sigmoid</td>
 <td><span class="arithmatex">\(\frac{1}{1+e^{-x}}\)</span></td>
 <td><span class="arithmatex">\((0, 1)\)</span></td>
-<td>两端梯度趋近 0</td>
-<td>二分类输出、LSTM 门控</td>
+<td>天生适合做 0/1 开关</td>
+<td>x 很大或很小时梯度趋近 0（梯度消失）</td>
 </tr>
 <tr>
 <td>Tanh</td>
 <td><span class="arithmatex">\(\frac{e^x-e^{-x}}{e^x+e^{-x}}\)</span></td>
 <td><span class="arithmatex">\((-1, 1)\)</span></td>
-<td>以 0 为中心、两端饱和</td>
-<td>RNN 隐藏状态、LSTM 候选状态</td>
-</tr>
-<tr>
-<td>ReLU</td>
-<td><span class="arithmatex">\(\max(0, x)\)</span></td>
-<td><span class="arithmatex">\([0, \infty)\)</span></td>
-<td>正区间梯度恒 1、计算快</td>
-<td>CNN 卷积层、全连接层</td>
+<td>0 中心对称，梯度比 Sigmoid 大</td>
+<td>两端同样会梯度消失</td>
 </tr>
 </tbody>
 </table>
-<p><strong>为什么 LSTM 门控用 Sigmoid？</strong> 门控需要 0~1 的"开关"信号——0 = 完全关，1 = 完全开，中间值 = 部分开。Sigmoid 天然输出这个范围。</p>
-<p><strong>为什么候选状态用 Tanh？</strong> 候选记忆 <span class="arithmatex">\(\tilde{C}_t\)</span> 是"可能写入的新信息"，需要正负值都有（-1 = 强烈抑制，+1 = 强烈激活），在 0 附近对称。Tanh 天然满足。</p>
 <hr />
-<h2 id="_7">总结速查<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h4 id="lstm-sigmoid-tanh">为什么 LSTM 门控用 Sigmoid，候选状态用 Tanh？<a class="headerlink" href="#lstm-sigmoid-tanh" title="Permanent link">&para;</a></h4>
+<p>这是一个新手常问的好问题——同样的 LSTM，不同位置选了不同的激活函数，不是拍脑袋定的。</p>
+<p><strong>门控用 Sigmoid</strong>：因为门的本质是"开关"，需要输出 0~1：
+- 0 = 全关（遗忘门说"这段记忆全扔了"）
+- 1 = 全开（输入门说"这条信息全写进去"）
+- 0.5 = 半开（折中）
+- Sigmoid 天然输出 0~1，完美契合。</p>
+<p><strong>候选状态用 Tanh</strong>：因为候选记忆是"新知识本身"，需要正和负：
+- 正数 = "这条特征支持这个结论"
+- 负数 = "这条特征反对这个结论"
+- 0 = "无关"
+- Tanh 输出 -1~1，以 0 为中心对称，完美契合。</p>
+<blockquote>
+<p>一句话：Sigmoid 管"要不要"，Tanh 管"是什么"。</p>
+</blockquote>
+<hr />
+<h2 id="_8">总结速查<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
