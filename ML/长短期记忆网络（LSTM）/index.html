@@ -421,6 +421,8 @@
       
         
       
+        
+      
     
     
     
@@ -740,7 +742,68 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ---
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lstm-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSTM 如何处理文本：Embedding 层
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="LSTM 如何处理文本：Embedding 层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从文字到向量的三步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embedding 层的本质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lstm_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        送入 LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         总结对比
@@ -774,6 +837,34 @@
     
   
     常见疑惑解答
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%80%89%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    应用场景与选型
   
 
     
@@ -1308,7 +1399,68 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ---
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lstm-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSTM 如何处理文本：Embedding 层
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="LSTM 如何处理文本：Embedding 层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从文字到向量的三步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embedding 层的本质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lstm_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        送入 LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         总结对比
@@ -1447,8 +1599,31 @@ h_t &amp;= o_t \odot \tanh(C_t)
 <p><strong>类比</strong>：
 - RNN = 每次更新把旧记忆全部揉碎再掺进新信息（翻拍照片，几十次后糊成渣）
 - LSTM = 选择性地保留旧记忆的有用部分，在新信息上做加法（在笔记上添加批注，原文还在）</p>
-<hr />
-<h2 id="_6">总结对比<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="-">---<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
+<h2 id="lstm-embedding">LSTM 如何处理文本：Embedding 层<a class="headerlink" href="#lstm-embedding" title="Permanent link">&para;</a></h2>
+<p>LSTM 不能直接吃汉字或英文单词，它只认数字（向量）。<strong>Embedding（词嵌入）就是把"词"翻译成"数字向量"的转换层。</strong></p>
+<h3 id="_6">从文字到向量的三步<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><strong>第 1 步：分词（Tokenization）</strong></p>
+<p>把一句话切成一个个"词片"。比如"我爱你" → <code>['我', '爱', '你']</code>。</p>
+<p><strong>第 2 步：编号（Indexing）</strong></p>
+<p>建立词典，给每个词一个整数编号。比如 <code>{'我': 1, '爱': 10, '你': 8}</code>。"我爱你"变成 <code>[1, 10, 8]</code>。</p>
+<p><strong>第 3 步：映射到向量（Embedding）</strong></p>
+<p>查表！每个整数编号对应一个向量。网络里维护一张"词向量表"——每行是一个词的向量表示，训练时会不断微调这些向量值。</p>
+<p><img alt="Pasted image 20260513103006.png" src="../../kb_material/ML_image/Pasted%20image%2020260513103006.png" /></p>
+<h3 id="embedding">Embedding 层的本质<a class="headerlink" href="#embedding" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">词表大小</span><span class="p">,</span> <span class="n">向量维度</span><span class="p">)</span>
+</code></pre></div>
+<p>比如 <code>nn.Embedding(5000, 128)</code> 创建了一张 5000 行 × 128 列的表。输入词编号 <code>[1, 10, 8]</code>，输出 3 个 128 维的向量。</p>
+<blockquote>
+<p>这些向量不是随机不变的——训练时会根据任务调整：意思相近的词，向量会靠得很近。"猫"和"猫咪"的向量在空间里挨着，"猫"和"汽车"则隔得很远。</p>
+</blockquote>
+<h3 id="lstm_5">送入 LSTM<a class="headerlink" href="#lstm_5" title="Permanent link">&para;</a></h3>
+<p>Embedding 之后，每个词变成了一个固定长度的向量。LSTM 按顺序读这些向量，更新细胞状态和隐藏状态，最终输出预测结果。</p>
+<p><img alt="Pasted image 20260513103429.png" src="../../kb_material/ML_image/Pasted%20image%2020260513103429.png" /></p>
+<blockquote>
+<p>完整流程：原始文本 → 分词 → 编号 → Embedding 查表得向量 → 送入 LSTM 按时间步处理 → 输出预测。</p>
+</blockquote>
+<h2 id="_7">总结对比<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
