@@ -231,7 +231,7 @@
   
     
   
-  首页
+  知识库索引
 
       </a>
     </li>
@@ -387,7 +387,7 @@
   <span class="md-ellipsis">
     
   
-    首页
+    知识库索引
   
 
     
@@ -720,12 +720,12 @@
   <a href="#1-sgd" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. SGD（随机梯度下降）
+        1. SGD（随机梯度下降）— 原始且诚实
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. SGD（随机梯度下降）">
+    <nav class="md-nav" aria-label="1. SGD（随机梯度下降）— 原始且诚实">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -765,7 +765,18 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        优点
+        训练过程详解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数 \(\eta\)（学习率）是怎么影响训练的？
       
     </span>
   </a>
@@ -774,6 +785,39 @@
         
           <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        优点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -789,19 +833,19 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-momentum" class="md-nav__link">
+  <a href="#2-momentum-sgd" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Momentum（动量法）
+        2. Momentum（动量法）— 给 SGD 装上惯性轮
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Momentum（动量法）">
+    <nav class="md-nav" aria-label="2. Momentum（动量法）— 给 SGD 装上惯性轮">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -812,7 +856,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         大白话
@@ -823,7 +867,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         打个比方
@@ -834,7 +878,51 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(\beta\) 是怎么影响训练的？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么能抑制震荡？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       
         优点
@@ -845,7 +933,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_17" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -864,16 +952,16 @@
   <a href="#3-nagnesterov" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. NAG（Nesterov 加速梯度）
+        3. NAG（Nesterov 加速梯度）— 先探路再迈步
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. NAG（Nesterov 加速梯度）">
+    <nav class="md-nav" aria-label="3. NAG（Nesterov 加速梯度）— 先探路再迈步">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_18" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -884,7 +972,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_19" class="md-nav__link">
     <span class="md-ellipsis">
       
         大白话
@@ -895,7 +983,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_20" class="md-nav__link">
     <span class="md-ellipsis">
       
         打个比方
@@ -906,7 +994,40 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么"探头位置"的梯度比当前位置的好？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数作用同 Momentum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
     <span class="md-ellipsis">
       
         优点
@@ -917,7 +1038,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_24" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -936,16 +1057,16 @@
   <a href="#4-adagrad" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. AdaGrad（自适应梯度）
+        4. AdaGrad（自适应梯度）— 每个参数单独配学习率
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. AdaGrad（自适应梯度）">
+    <nav class="md-nav" aria-label="4. AdaGrad（自适应梯度）— 每个参数单独配学习率">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
+  <a href="#_25" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -956,7 +1077,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
+  <a href="#_26" class="md-nav__link">
     <span class="md-ellipsis">
       
         大白话
@@ -967,7 +1088,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
+  <a href="#_27" class="md-nav__link">
     <span class="md-ellipsis">
       
         打个比方
@@ -978,7 +1099,51 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么对稀疏特征特别友好？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心致命缺点：学习率单调递减
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
     <span class="md-ellipsis">
       
         优点
@@ -989,7 +1154,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_21" class="md-nav__link">
+  <a href="#_33" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -1005,19 +1170,19 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-rmsprop" class="md-nav__link">
+  <a href="#5-rmsprop-adagrad-bug" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. RMSprop
+        5. RMSprop — 解决 AdaGrad"越走越慢"的 bug
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. RMSprop">
+    <nav class="md-nav" aria-label="5. RMSprop — 解决 AdaGrad&#34;越走越慢&#34;的 bug">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_22" class="md-nav__link">
+  <a href="#_34" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -1028,7 +1193,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_23" class="md-nav__link">
+  <a href="#_35" class="md-nav__link">
     <span class="md-ellipsis">
       
         大白话
@@ -1039,7 +1204,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_24" class="md-nav__link">
+  <a href="#_36" class="md-nav__link">
     <span class="md-ellipsis">
       
         打个比方
@@ -1050,7 +1215,51 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_25" class="md-nav__link">
+  <a href="#beta_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(\beta\) 的影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnnlstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么是 RNN/LSTM 训练的经典选择？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
     <span class="md-ellipsis">
       
         优点
@@ -1061,7 +1270,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_26" class="md-nav__link">
+  <a href="#_40" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -1080,16 +1289,16 @@
   <a href="#6-adam" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Adam（自适应矩估计）⭐
+        6. Adam（自适应矩估计）— 当下的绝对王者 ⭐
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6. Adam（自适应矩估计）⭐">
+    <nav class="md-nav" aria-label="6. Adam（自适应矩估计）— 当下的绝对王者 ⭐">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_27" class="md-nav__link">
+  <a href="#_41" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -1100,7 +1309,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_28" class="md-nav__link">
+  <a href="#_42" class="md-nav__link">
     <span class="md-ellipsis">
       
         大白话
@@ -1111,7 +1320,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_29" class="md-nav__link">
+  <a href="#_43" class="md-nav__link">
     <span class="md-ellipsis">
       
         打个比方
@@ -1122,7 +1331,40 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_30" class="md-nav__link">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四个超参数怎么调？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不适用场景（极少数）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
     <span class="md-ellipsis">
       
         优点
@@ -1133,7 +1375,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_31" class="md-nav__link">
+  <a href="#_48" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -1149,7 +1391,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_32" class="md-nav__link">
+  <a href="#_49" class="md-nav__link">
     <span class="md-ellipsis">
       
         综合对比
@@ -1160,10 +1402,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_33" class="md-nav__link">
+  <a href="#_50" class="md-nav__link">
     <span class="md-ellipsis">
       
-        实际怎么选？
+        实际怎么选？场景速查
       
     </span>
   </a>
@@ -1171,10 +1413,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_34" class="md-nav__link">
+  <a href="#_51" class="md-nav__link">
     <span class="md-ellipsis">
       
-        关键超参数速查
+        超参数速查
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adamw-adam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AdamW 和 Adam 有何区别？（附注）
       
     </span>
   </a>
@@ -1603,12 +1856,12 @@
   <a href="#1-sgd" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. SGD（随机梯度下降）
+        1. SGD（随机梯度下降）— 原始且诚实
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. SGD（随机梯度下降）">
+    <nav class="md-nav" aria-label="1. SGD（随机梯度下降）— 原始且诚实">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1648,7 +1901,18 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        优点
+        训练过程详解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数 \(\eta\)（学习率）是怎么影响训练的？
       
     </span>
   </a>
@@ -1657,6 +1921,39 @@
         
           <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        优点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -1672,19 +1969,19 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-momentum" class="md-nav__link">
+  <a href="#2-momentum-sgd" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Momentum（动量法）
+        2. Momentum（动量法）— 给 SGD 装上惯性轮
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Momentum（动量法）">
+    <nav class="md-nav" aria-label="2. Momentum（动量法）— 给 SGD 装上惯性轮">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -1695,7 +1992,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         大白话
@@ -1706,7 +2003,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         打个比方
@@ -1717,7 +2014,51 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(\beta\) 是怎么影响训练的？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么能抑制震荡？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
     <span class="md-ellipsis">
       
         优点
@@ -1728,7 +2069,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_17" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -1747,16 +2088,16 @@
   <a href="#3-nagnesterov" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. NAG（Nesterov 加速梯度）
+        3. NAG（Nesterov 加速梯度）— 先探路再迈步
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. NAG（Nesterov 加速梯度）">
+    <nav class="md-nav" aria-label="3. NAG（Nesterov 加速梯度）— 先探路再迈步">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_18" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -1767,7 +2108,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_19" class="md-nav__link">
     <span class="md-ellipsis">
       
         大白话
@@ -1778,7 +2119,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_20" class="md-nav__link">
     <span class="md-ellipsis">
       
         打个比方
@@ -1789,7 +2130,40 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么"探头位置"的梯度比当前位置的好？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#momentum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数作用同 Momentum
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
     <span class="md-ellipsis">
       
         优点
@@ -1800,7 +2174,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#_24" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -1819,16 +2193,16 @@
   <a href="#4-adagrad" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. AdaGrad（自适应梯度）
+        4. AdaGrad（自适应梯度）— 每个参数单独配学习率
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. AdaGrad（自适应梯度）">
+    <nav class="md-nav" aria-label="4. AdaGrad（自适应梯度）— 每个参数单独配学习率">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
+  <a href="#_25" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -1839,7 +2213,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
+  <a href="#_26" class="md-nav__link">
     <span class="md-ellipsis">
       
         大白话
@@ -1850,7 +2224,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
+  <a href="#_27" class="md-nav__link">
     <span class="md-ellipsis">
       
         打个比方
@@ -1861,7 +2235,51 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么对稀疏特征特别友好？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心致命缺点：学习率单调递减
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
     <span class="md-ellipsis">
       
         优点
@@ -1872,7 +2290,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_21" class="md-nav__link">
+  <a href="#_33" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -1888,19 +2306,19 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-rmsprop" class="md-nav__link">
+  <a href="#5-rmsprop-adagrad-bug" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. RMSprop
+        5. RMSprop — 解决 AdaGrad"越走越慢"的 bug
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. RMSprop">
+    <nav class="md-nav" aria-label="5. RMSprop — 解决 AdaGrad&#34;越走越慢&#34;的 bug">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_22" class="md-nav__link">
+  <a href="#_34" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -1911,7 +2329,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_23" class="md-nav__link">
+  <a href="#_35" class="md-nav__link">
     <span class="md-ellipsis">
       
         大白话
@@ -1922,7 +2340,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_24" class="md-nav__link">
+  <a href="#_36" class="md-nav__link">
     <span class="md-ellipsis">
       
         打个比方
@@ -1933,7 +2351,51 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_25" class="md-nav__link">
+  <a href="#beta_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(\beta\) 的影响
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnnlstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么是 RNN/LSTM 训练的经典选择？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
     <span class="md-ellipsis">
       
         优点
@@ -1944,7 +2406,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_26" class="md-nav__link">
+  <a href="#_40" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -1963,16 +2425,16 @@
   <a href="#6-adam" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Adam（自适应矩估计）⭐
+        6. Adam（自适应矩估计）— 当下的绝对王者 ⭐
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="6. Adam（自适应矩估计）⭐">
+    <nav class="md-nav" aria-label="6. Adam（自适应矩估计）— 当下的绝对王者 ⭐">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_27" class="md-nav__link">
+  <a href="#_41" class="md-nav__link">
     <span class="md-ellipsis">
       
         公式
@@ -1983,7 +2445,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_28" class="md-nav__link">
+  <a href="#_42" class="md-nav__link">
     <span class="md-ellipsis">
       
         大白话
@@ -1994,7 +2456,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_29" class="md-nav__link">
+  <a href="#_43" class="md-nav__link">
     <span class="md-ellipsis">
       
         打个比方
@@ -2005,7 +2467,40 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_30" class="md-nav__link">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四个超参数怎么调？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        适用场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不适用场景（极少数）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
     <span class="md-ellipsis">
       
         优点
@@ -2016,7 +2511,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_31" class="md-nav__link">
+  <a href="#_48" class="md-nav__link">
     <span class="md-ellipsis">
       
         缺点
@@ -2032,7 +2527,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_32" class="md-nav__link">
+  <a href="#_49" class="md-nav__link">
     <span class="md-ellipsis">
       
         综合对比
@@ -2043,10 +2538,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_33" class="md-nav__link">
+  <a href="#_50" class="md-nav__link">
     <span class="md-ellipsis">
       
-        实际怎么选？
+        实际怎么选？场景速查
       
     </span>
   </a>
@@ -2054,10 +2549,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_34" class="md-nav__link">
+  <a href="#_51" class="md-nav__link">
     <span class="md-ellipsis">
       
-        关键超参数速查
+        超参数速查
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adamw-adam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AdamW 和 Adam 有何区别？（附注）
       
     </span>
   </a>
@@ -2086,8 +2592,9 @@
 
 <h1 id="_1">梯度下降优化算法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>训练神经网络的目标就一件事：<strong>找到让 Loss 最小的那组参数</strong>。但怎么找？从一个随机点出发，每步朝下山的方向挪一点。</p>
-<p>所有优化器的本质都是：<span class="arithmatex">\(w_{new} = w_{old} - \eta \cdot \text{（某种修正过的方向）}\)</span></p>
-<p>区别在于"方向"怎么算——有些原样照搬梯度，有些加惯性，有些每个参数单独调步长。</p>
+<p>所有优化器的本质都是：</p>
+<div class="arithmatex">\[w_{new} = w_{old} - \eta \cdot \text{（某种修正过的方向）}\]</div>
+<p>区别在于"方向"怎么算——有些原样照搬梯度，有些加惯性，有些每个参数单独调步长。这些"怎么算"的差异，直接决定了训练是几十秒收敛还是几小时还在原地踏步。</p>
 <hr />
 <h2 id="6">速查：6 种优化器一句话<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <table>
@@ -2132,144 +2639,270 @@
 </tbody>
 </table>
 <hr />
-<h2 id="1-sgd">1. SGD（随机梯度下降）<a class="headerlink" href="#1-sgd" title="Permanent link">&para;</a></h2>
+<h2 id="1-sgd">1. SGD（随机梯度下降）— 原始且诚实<a class="headerlink" href="#1-sgd" title="Permanent link">&para;</a></h2>
 <h3 id="_2">公式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[w_{t+1} = w_t - \eta \cdot \nabla L(w_t)\]</div>
+<p>符号说明：
+- <span class="arithmatex">\(w_t\)</span>：当前参数（第 <span class="arithmatex">\(t\)</span> 步时）
+- <span class="arithmatex">\(\eta\)</span>：学习率（每一步迈多大脚）
+- <span class="arithmatex">\(\nabla L(w_t)\)</span>：损失函数对 <span class="arithmatex">\(w\)</span> 的梯度（脚底当下的坡度）</p>
 <h3 id="_3">大白话<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>每一步沿着最陡的斜坡方向往下走。简单粗暴。</p>
+<p>每一步沿着最陡的方向往下走。不拐弯、不加惯性、不预设——完完全全听当前脚下坡度的。</p>
 <h3 id="_4">打个比方<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>你闭着眼睛站在山坡上，每走一步都蹲下来摸一下脚底，然后朝脚底最歪的方向迈一步。</p>
-<h3 id="_5">优点<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>你闭着眼睛站在山坡上，每走一步都蹲下来摸一下脚底感受坡度，然后朝脚底最歪的方向迈一步。走到哪算哪。</p>
+<h3 id="_5">训练过程详解<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>SGD 每次随机取一个 mini-batch 的数据算梯度。因为是随机抽的，这个梯度不是全局最准确的方向，只是一个"大概对"的方向。噪音很大，但噪音也是好事——噪音足够大时，能帮你从鞍点附近"抖"出去。</p>
+<p><strong>为什么叫随机</strong>？因为每次只随机取一小部分数据（比如 64 张图）算梯度，而不是在所有数据上算精确梯度。</p>
+<h3 id="eta">参数 <span class="arithmatex">\(\eta\)</span>（学习率）是怎么影响训练的？<a class="headerlink" href="#eta" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(\eta\)</span> 是 SGD 唯一的超参数，但它极其敏感：</p>
+<p>| <span class="arithmatex">\(\eta\)</span> 太大 | 一步跨过谷底，出现震荡甚至发散，Loss 忽大忽小 |
+| <span class="arithmatex">\(\eta\)</span> 太小 | 乌龟爬，收敛极慢，可能训到世界末日 Loss 还没到底 |
+| <span class="arithmatex">\(\eta\)</span> 刚好 | 平滑下降，Loss 曲线稳定往下走 |</p>
+<h3 id="_6">适用场景<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <ul>
-<li>简单到不能再简单</li>
-<li>收敛到最优解的理论保证（凸函数）</li>
+<li>教学演示（代码最少，最容易理解什么叫"梯度下降"）</li>
+<li>作为 baseline 对比其他优化器的效果</li>
+<li>配合学习率衰减做最终精调（一些论文追求极致精度时用）</li>
 </ul>
-<h3 id="_6">缺点<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h3 id="_7">不适用场景<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <ul>
-<li>一步一探，龟速</li>
-<li>遇到峡谷（一个方向陡、另一个方向平），会像乒乓球一样左右震荡，迟迟下不去</li>
-<li>学习率要手动调，调大了震荡、调小了太慢</li>
-<li>容易被困在鞍点（四周都是平的）</li>
+<li>RNN/LSTM：梯度在时间轴上变化剧烈，固定 <span class="arithmatex">\(\eta\)</span> 完全应付不了</li>
+<li>稀疏数据：每个特征出现频率不同，一个全局学习率不公平</li>
+<li>深度网络：浅层梯度小、深层梯度大，一个 <span class="arithmatex">\(\eta\)</span> 管不了所有层</li>
+</ul>
+<h3 id="_8">优点<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>简单到极致，一行代码</li>
+<li>收敛到最优解有理论保证（对于凸函数）</li>
+<li>噪音本身是一种隐式正则化，有时泛化更好</li>
+</ul>
+<h3 id="_9">缺点<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>一步一停，走不快</li>
+<li>遇到峡谷地形（一个方向极陡、另一个方向极平），会在陡壁上反复震荡——就像乒乓球在两面墙之间弹来弹去，沿峡谷底部的方向反而走不动</li>
+<li>学习率要精细调，调大了震荡、调小了太慢</li>
+<li>容易被困在鞍点（高维空间中鞍点远比局部极小值常见）：四周都是平的，梯度 = 0，SGD 原地不动</li>
 </ul>
 <hr />
-<h2 id="2-momentum">2. Momentum（动量法）<a class="headerlink" href="#2-momentum" title="Permanent link">&para;</a></h2>
-<h3 id="_7">公式<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h2 id="2-momentum-sgd">2. Momentum（动量法）— 给 SGD 装上惯性轮<a class="headerlink" href="#2-momentum-sgd" title="Permanent link">&para;</a></h2>
+<h3 id="_10">公式<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[\begin{aligned}
 v_t &amp;= \beta v_{t-1} + \eta \cdot \nabla L(w_t) \\
 w_{t+1} &amp;= w_t - v_t
 \end{aligned}\]</div>
-<p><span class="arithmatex">\(\beta\)</span> 通常在 0.9 左右，控制"惯性"有多大。</p>
-<h3 id="_8">大白话<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>不光看当前的坡度，还带着上一步的速度惯性。像滚雪球——之前往下冲的速度不会被立刻抵消，越滚越快。</p>
-<h3 id="_9">打个比方<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>SGD 是每步停住重新摸地。Momentum 是你推着一个有惯性的大铁球下山——它自己会越滚越快，小的坑洼直接碾过去。</p>
-<h3 id="_10">优点<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>符号说明：
+- <span class="arithmatex">\(v_t\)</span>：当前速度（累积的动量），单位与梯度相同
+- <span class="arithmatex">\(v_{t-1}\)</span>：上一步的速度
+- <span class="arithmatex">\(\beta\)</span>：动量系数（0~1 之间），<span class="arithmatex">\(\beta\)</span> 越接近 1，惯性越大、旧速度衰减越慢</p>
+<h3 id="_11">大白话<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>不光看当前脚底的坡度，还带着上一步的速度惯性。像推一个铁球下山——如果连续几步都往一个方向，速度会越叠越快；如果梯度左右摇摆，惯性会把两边的摆动互相抵消掉。</p>
+<h3 id="_12">打个比方<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>SGD 是每步停住重新摸地再走。Momentum 是你推着一个有惯性的大铁球下山——它自己越滚越快，小的坑洼石子直接碾过去，不会被小障碍拦住。</p>
+<h3 id="beta"><span class="arithmatex">\(\beta\)</span> 是怎么影响训练的？<a class="headerlink" href="#beta" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(\beta\)</span> 决定了"惯性记忆"有多长。以 <span class="arithmatex">\(\beta=0.9\)</span> 为例，过去 10 步的梯度各有权重（最近的占 0.1，上一步 0.09，再上步 0.081...），而 30 步以前的梯度贡献已趋近于 0。</p>
+<p>| <span class="arithmatex">\(\beta=0\)</span> | 退化为 SGD，没有惯性 |
+| <span class="arithmatex">\(\beta=0.5\)</span> | 只记近 2~3 步，惯性很弱 |
+| <span class="arithmatex">\(\beta=0.9\)</span> | 经典值，记近 10 步，工业界标准 |
+| <span class="arithmatex">\(\beta=0.99\)</span> | 惯性接近 100 步，下坡极快但谷底可能刹不住 |
+| <span class="arithmatex">\(\beta\)</span> 太大 | 冲向谷底时速度太快刹不住车，反复冲过头（overshooting） |
+| <span class="arithmatex">\(\beta\)</span> 太小 | 接近 SGD，震荡去不掉 |</p>
+<h3 id="_13">为什么能抑制震荡？<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>震荡方向上的符号不断反转（两次正两次负），累加速度时会互相抵消。而真正下山的方向符号一致，会持续叠加加速。这就是为什么 Momentum 在峡谷地形能比 SGD 快好几倍——它把震荡方向的步给抵消了，有效步只朝下山方向走。</p>
+<h3 id="_14">适用场景<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <ul>
-<li>加速收敛，尤其梯度方向一致时（下坡路）</li>
-<li>抑制震荡——梯度左右摇摆时，惯性会平滑掉锯齿</li>
-<li>更容易冲过鞍点</li>
+<li>CNN 图像分类（配合 SGD，工业界经典组合）</li>
+<li>中等到大 batch size 的训练</li>
+<li>需要快速穿过鞍点区域的任务</li>
 </ul>
-<h3 id="_11">缺点<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<h3 id="_15">不适用场景<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <ul>
-<li>多了一个超参数 <span class="arithmatex">\(\beta\)</span> 要调</li>
-<li>惯性太大可能冲过头，在谷底附近刹不住车</li>
+<li>梯度本身已经很大的情况——叠上惯性直接冲飞</li>
+<li>参数数量极少的小模型——Momentum 的优势体现不出来</li>
+</ul>
+<h3 id="_16">优点<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<ul>
+<li>加速收敛，尤其梯度方向一致时（长下坡）</li>
+<li>自然抑制震荡——梯度左右摇摆时，惯性自动平滑掉锯齿</li>
+<li>更容易冲过鞍点（惯性直接碾过去）</li>
+</ul>
+<h3 id="_17">缺点<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>多了一个超参数 <span class="arithmatex">\(\beta\)</span></li>
+<li>惯性太大可能冲过头，谷底附近反复震荡</li>
+<li>还是全局统一的学习率，不同参数没法用不同步长</li>
 </ul>
 <hr />
-<h2 id="3-nagnesterov">3. NAG（Nesterov 加速梯度）<a class="headerlink" href="#3-nagnesterov" title="Permanent link">&para;</a></h2>
-<h3 id="_12">公式<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<h2 id="3-nagnesterov">3. NAG（Nesterov 加速梯度）— 先探路再迈步<a class="headerlink" href="#3-nagnesterov" title="Permanent link">&para;</a></h2>
+<h3 id="_18">公式<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[\begin{aligned}
 v_t &amp;= \beta v_{t-1} + \eta \cdot \nabla L(w_t - \beta v_{t-1}) \\
 w_{t+1} &amp;= w_t - v_t
 \end{aligned}\]</div>
-<h3 id="_13">大白话<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>Momentum 的改良版——不在这儿算梯度，而是<strong>先按惯性往前探一步，在探头的位置算梯度</strong>。这样当快要冲过头时，探头位置的梯度会往回拉。</p>
-<h3 id="_14">打个比方<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<p>Momentum 是你蒙着眼往下冲，到哪算哪。NAG 是你在冲之前先伸手往前摸一下——"前面是个坑！赶紧刹车拐弯。"</p>
-<h3 id="_15">优点<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>和 Momentum 的唯一区别：梯度不是在当前位置 <span class="arithmatex">\(w_t\)</span> 算的，而是在"按惯性预判下一步会到的位置" <span class="arithmatex">\(w_t - \beta v_{t-1}\)</span> 算的。</p>
+<h3 id="_19">大白话<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>Momentum 的问题——它蒙着眼睛往下冲，冲过头了才知道回头。NAG 在冲之前先往前伸手探一下路："前面如果是坑，我就提前拐。"</p>
+<h3 id="_20">打个比方<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>Momentum 是你闭着眼睛推铁球，到哪算哪。NAG 是你一边推一边睁半只眼往前瞟——看到前面有弯道提前减速调方向。</p>
+<h3 id="_21">为什么"探头位置"的梯度比当前位置的好？<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>当你在谷底附近时，当前位置的梯度几乎是 0（谷底是平的），但探头位置已经能看到"再走就要上坡了"的警告信号——此时当前位置梯度 ≈ 0 不会触发减速，而探头位置的梯度会提前往回拉，避免冲过头。</p>
+<p>这是 Momentum 和 NAG 最关键的差异：Momentum 是在原地看到悬崖才开始刹车（可能来不及），NAG 是提前看到悬崖就减速绕开了。</p>
+<h3 id="momentum">参数作用同 Momentum<a class="headerlink" href="#momentum" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(\beta\)</span> 控制惯性大小，典型值 0.9。</p>
+<h3 id="_22">适用场景<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
 <ul>
-<li>比 Momentum 更稳定，震荡更小</li>
-<li>在谷底附近会自动减速，不会冲过头</li>
-<li>收敛速度通常比 Momentum 快</li>
+<li>需要更稳定收敛时替代 Momentum</li>
+<li>CNN 训练（精度敏感任务中优于 Momentum）</li>
+<li>不希望训练后期因惯性震荡的任务</li>
 </ul>
-<h3 id="_16">缺点<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<h3 id="_23">优点<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
 <ul>
-<li>实现比 Momentum 复杂一点（要先算"探头"位置的梯度）</li>
-<li>还是需要手动调学习率和 <span class="arithmatex">\(\beta\)</span></li>
+<li>比 Momentum 收敛更稳定，振荡更小</li>
+<li>在谷底/最优点附近会自动提前减速</li>
+<li>收敛曲线更平滑，超调（overshoot）更少</li>
+</ul>
+<h3 id="_24">缺点<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<ul>
+<li>实现略微复杂——要算两次（先跑步、再算梯度）</li>
+<li>还是需要手动调 <span class="arithmatex">\(\eta\)</span> 和 <span class="arithmatex">\(\beta\)</span></li>
+<li>仍然是全局学习率，不同参数没有区别对待</li>
 </ul>
 <hr />
-<h2 id="4-adagrad">4. AdaGrad（自适应梯度）<a class="headerlink" href="#4-adagrad" title="Permanent link">&para;</a></h2>
-<h3 id="_17">公式<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<h2 id="4-adagrad">4. AdaGrad（自适应梯度）— 每个参数单独配学习率<a class="headerlink" href="#4-adagrad" title="Permanent link">&para;</a></h2>
+<h3 id="_25">公式<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[\begin{aligned}
 G_t &amp;= G_{t-1} + (\nabla L(w_t))^2 \\
 w_{t+1} &amp;= w_t - \frac{\eta}{\sqrt{G_t + \epsilon}} \cdot \nabla L(w_t)
 \end{aligned}\]</div>
-<h3 id="_18">大白话<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
-<p>给<strong>每个参数</strong>单独配一个学习率。历史上该参数的梯度越大，当前给它的步长就越小。频繁更新的参数会慢慢减速，很少更新的参数会保持大步长。</p>
-<h3 id="_19">打个比方<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
-<p>每个参数都有一张"履历表"，记录它历史上的活跃程度。活跃的参数（频繁大梯度）说明它已经"很有主见"了，给它小步微调；不活跃的参数还"没想明白"，给它大步探索。</p>
-<h3 id="_20">优点<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>符号说明：
+- <span class="arithmatex">\(G_t\)</span>：所有历史梯度平方的累加和（每个参数一个独立的 <span class="arithmatex">\(G_t\)</span>）
+- <span class="arithmatex">\(\epsilon\)</span>：极小常数（如 <span class="arithmatex">\(10^{-8}\)</span>），防止除以零
+- <span class="arithmatex">\(G_t\)</span> 越来越大 → 分母越来越大 → 该参数的有效步长越来越小</p>
+<h3 id="_26">大白话<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p>SGD/Momentum/NAG 的问题是：所有参数共用同一个学习率。但实际网络里，有些参数（如高频词的 embedding）每步都在更新，梯度很大；有些参数（如低频词）几乎不动。给它们同样的步长不公平。</p>
+<p>AdaGrad 的做法：给<strong>每个参数</strong>单独记录它历史上总共更新了多大。该参数历史上越活跃 → 有效步长缩小越多 → 防止它"学过头"。不活跃的参数 → 分母小 → 保持大步长继续探索。</p>
+<h3 id="_27">打个比方<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<p>每个参数都有一张"履历表"。频繁被大梯度更新的参数（如高频词"的"）——已经见多识广了，给它小步微调；很少被更新的参数（低频词"貔貅"）——还没想明白呢，给它大步激进学习。</p>
+<h3 id="_28">为什么对稀疏特征特别友好？<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<p>在 NLP 任务中，"的"这个字每句话都出现，如果学习率相同，"的"的词向量很快被各种梯度来回拉扯、最后烂掉。而"貔貅"只出现了几次，学习率相同的话几乎训不到。</p>
+<p>AdaGrad 自动给"的"很小步长、给"貔貅"很大步长——低频特征得到充分训练，这是 SGD 做不到的。</p>
+<h3 id="_29">核心致命缺点：学习率单调递减<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(G_t\)</span> 不断累加正数（平方），从不减少。分母 <span class="arithmatex">\(\sqrt{G_t}\)</span> 随着训练越来越大，有效学习率越来越小。训练时间长了，所有参数的有效步长都趋近于 0——<strong>网络还没收敛就先"冻死了"</strong>。这就是为什么 AdaGrad 不适合深度网络长时间训练。</p>
+<h3 id="_30">适用场景<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
 <ul>
-<li>每个参数自适应学习率，不需要手动精细调整</li>
-<li>对稀疏特征特别友好——低频词也能得到充分训练</li>
+<li>稀疏特征突出（NLP 词袋模型、推荐系统的 user/item embedding）</li>
+<li>浅层网络（训不久就停了，不会冻死）</li>
+<li>数据分布极不均衡（长尾分布）时</li>
 </ul>
-<h3 id="_21">缺点<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<h3 id="_31">不适用场景<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
 <ul>
-<li><span class="arithmatex">\(G_t\)</span> 是单调递增的累加 → 学习率只能越来越小 → 训到后期步长趋近于零，完全走不动</li>
-<li>不适合深度网络长时间训练</li>
+<li>深度网络（50+ 层）——没训完学习率就 0 了</li>
+<li>长时间训练——后期完全学不动</li>
+</ul>
+<h3 id="_32">优点<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<ul>
+<li>每个参数自适应学习率，不需要手动精细调</li>
+<li>对稀疏特征极度友好，低频特征训练充分</li>
+<li>超参数少（只有初始 <span class="arithmatex">\(\eta\)</span>）</li>
+</ul>
+<h3 id="_33">缺点<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<ul>
+<li>学习率单调递减到 0，后期网络完全"冻住"</li>
+<li>不适合深度网络</li>
+<li>不适合非凸优化（会被困在不好的局部极小值）</li>
 </ul>
 <hr />
-<h2 id="5-rmsprop">5. RMSprop<a class="headerlink" href="#5-rmsprop" title="Permanent link">&para;</a></h2>
-<h3 id="_22">公式<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<h2 id="5-rmsprop-adagrad-bug">5. RMSprop — 解决 AdaGrad"越走越慢"的 bug<a class="headerlink" href="#5-rmsprop-adagrad-bug" title="Permanent link">&para;</a></h2>
+<h3 id="_34">公式<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[\begin{aligned}
 G_t &amp;= \beta G_{t-1} + (1-\beta)(\nabla L(w_t))^2 \\
 w_{t+1} &amp;= w_t - \frac{\eta}{\sqrt{G_t + \epsilon}} \cdot \nabla L(w_t)
 \end{aligned}\]</div>
 <p><span class="arithmatex">\(\beta\)</span> 通常设 0.9。</p>
-<h3 id="_23">大白话<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
-<p>修了 AdaGrad 的致命 bug——<span class="arithmatex">\(G_t\)</span> 不再是无脑累加，而是<strong>指数移动平均</strong>。旧的梯度历史会逐渐"遗忘"，学习率不会无限趋零。</p>
-<h3 id="_24">打个比方<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
-<p>AdaGrad 是把从小到大的每一笔账都记着，欠 100 年前的旧账也要影响今天。RMSprop 只关心最近一段时间的——旧账过期自动作废，始终保持合理的"活跃度评估"。</p>
-<h3 id="_25">优点<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<h3 id="_35">大白话<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<p>和 AdaGrad 唯一区别：<span class="arithmatex">\(G_t\)</span> 不再是累加所有历史梯度平方，而是用<strong>指数移动平均</strong>——新的梯度权重 <span class="arithmatex">\(1-\beta=0.1\)</span>，旧历史以 <span class="arithmatex">\(\beta=0.9\)</span> 的比率逐次衰减。</p>
+<p>效果：最近 10 步左右的梯度大小决定当前步长，几十步以前的旧梯度影响逐渐归零。学习率不会无限趋零，而是随梯度变化动态调整。</p>
+<h3 id="_36">打个比方<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<p>AdaGrad 是把从小到大的每一笔收支都记录在案，200 年前的旧账也要拿出来当证据限制今天的花销。RMSprop 只保留最近一段时间的账单——旧的过期作废，始终保持对"当前状态"的合理评估。</p>
+<h3 id="beta_1"><span class="arithmatex">\(\beta\)</span> 的影响<a class="headerlink" href="#beta_1" title="Permanent link">&para;</a></h3>
+<p>| <span class="arithmatex">\(\beta=0.9\)</span>（默认） | 窗口约 10 步，平滑适中 |
+| <span class="arithmatex">\(\beta=0.99\)</span> | 窗口约 100 步，极度平滑但响应慢——梯度突然变化时步长调整迟钝 |
+| <span class="arithmatex">\(\beta=0.5\)</span> | 窗口约 2 步，跟随快但毛刺多——步长忽大忽小 |</p>
+<h3 id="rnnlstm">为什么是 RNN/LSTM 训练的经典选择？<a class="headerlink" href="#rnnlstm" title="Permanent link">&para;</a></h3>
+<p>RNN 的梯度在不同时间步差异极大——刚开头几步梯度很小，越往后梯度越大。如果用固定学习率，后期参数会被巨大梯度假摔死，前期又走不动。RMSprop 自动给大梯度时刻用小步长、给小梯度时刻用大步长，完美适配"梯度幅度变化剧烈"的场景。</p>
+<h3 id="_37">适用场景<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
 <ul>
-<li>解决了 AdaGrad 学习率衰减到 0 的问题</li>
-<li>每个参数自适应，对非平稳目标（如 RNN）效果很好</li>
-<li>RNN / LSTM 训练的经典选择</li>
+<li><strong>RNN / LSTM</strong> 训练（经典首选，至今仍很多 paper 在用）</li>
+<li>非平稳目标函数（在线学习、强化学习）</li>
+<li>梯度幅度在不同时刻/不同层差异很大的情况</li>
 </ul>
-<h3 id="_26">缺点<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<h3 id="_38">不适用场景<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
 <ul>
-<li>多了一个衰减参数 <span class="arithmatex">\(\beta\)</span></li>
-<li>不如 Adam 那样完全无脑</li>
+<li>追求极简（多了一个 <span class="arithmatex">\(\beta\)</span>，不如 Adam 全能）</li>
+</ul>
+<h3 id="_39">优点<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h3>
+<ul>
+<li>解决了 AdaGrad 学习率衰减到 0 的致命问题</li>
+<li>每个参数自适应步长，梯度剧烈变化时稳得住</li>
+<li>RNN/LSTM 训练久经考验</li>
+</ul>
+<h3 id="_40">缺点<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h3>
+<ul>
+<li>多了一个衰减参数 <span class="arithmatex">\(\beta\)</span> 需要设定</li>
+<li>没有动量（虽然没有大碍，但收敛速度不如 Adam）</li>
+<li>不如 Adam 开箱即用（<span class="arithmatex">\(\beta\)</span> 设错了会影响效果）</li>
 </ul>
 <hr />
-<h2 id="6-adam">6. Adam（自适应矩估计）⭐<a class="headerlink" href="#6-adam" title="Permanent link">&para;</a></h2>
-<h3 id="_27">公式<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<h2 id="6-adam">6. Adam（自适应矩估计）— 当下的绝对王者 ⭐<a class="headerlink" href="#6-adam" title="Permanent link">&para;</a></h2>
+<h3 id="_41">公式<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[\begin{aligned}
-m_t &amp;= \beta_1 m_{t-1} + (1-\beta_1) \nabla L(w_t) \qquad \text{（一阶矩，带惯性）} \\
-v_t &amp;= \beta_2 v_{t-1} + (1-\beta_2) (\nabla L(w_t))^2 \qquad \text{（二阶矩，自适应步长）} \\
-\hat{m}_t &amp;= \frac{m_t}{1-\beta_1^t} \qquad \text{（偏差校正）} \\
-\hat{v}_t &amp;= \frac{v_t}{1-\beta_2^t} \\
+m_t &amp;= \beta_1 m_{t-1} + (1-\beta_1) \nabla L(w_t) &amp;&amp;\text{（一阶矩估计，类似 Momentum 的惯性方向）} \\
+v_t &amp;= \beta_2 v_{t-1} + (1-\beta_2) (\nabla L(w_t))^2 &amp;&amp;\text{（二阶矩估计，类似 RMSprop 的自适步长）} \\
+\hat{m}_t &amp;= \frac{m_t}{1-\beta_1^t} &amp;&amp;\text{（$m_t$ 的偏差校正）} \\
+\hat{v}_t &amp;= \frac{v_t}{1-\beta_2^t} &amp;&amp;\text{（$v_t$ 的偏差校正）} \\
 w_{t+1} &amp;= w_t - \frac{\eta \cdot \hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
 \end{aligned}\]</div>
-<p>默认值：<span class="arithmatex">\(\beta_1=0.9\)</span>，<span class="arithmatex">\(\beta_2=0.999\)</span>，<span class="arithmatex">\(\epsilon=10^{-8}\)</span>。</p>
-<h3 id="_28">大白话<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
-<p>Momentum 的思想（<span class="arithmatex">\(m_t\)</span>，惯性方向）+ RMSprop 的思想（<span class="arithmatex">\(v_t\)</span>，每个参数自适应步长），合二为一。再加一个<strong>偏差校正</strong>，让训练初期更稳定。</p>
-<h3 id="_29">打个比方<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
-<p>Adam 是一个全能司机：既有预判能力（Momentum——知道该往哪冲），又会根据路况随时调整油门大小（RMSprop——颠簸路段踩小点），而且刚上路时不会因为不认路而猛打方向盘（偏差校正）。</p>
-<h3 id="_30">优点<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<p><strong>默认值</strong>：<span class="arithmatex">\(\eta=0.001\)</span>，<span class="arithmatex">\(\beta_1=0.9\)</span>，<span class="arithmatex">\(\beta_2=0.999\)</span>，<span class="arithmatex">\(\epsilon=10^{-8}\)</span></p>
+<h3 id="_42">大白话<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h3>
+<p>把 <strong>Momentum 的惯性</strong>（<span class="arithmatex">\(m_t\)</span>）和 <strong>RMSprop 的自适应步长</strong>（<span class="arithmatex">\(v_t\)</span>）焊在一起。再加一个<strong>偏差校正</strong>——因为 <span class="arithmatex">\(m_t\)</span> 和 <span class="arithmatex">\(v_t\)</span> 初始都是 0，训练前几步会被"偏压"得比真实值小，除以 <span class="arithmatex">\(1-\beta_1^t\)</span> 就是放大补偿。训了几步之后 <span class="arithmatex">\(1-\beta_1^t\)</span> 趋近 1，校正自然消失。四个模块各司其职：</p>
+<p>| 一阶矩 <span class="arithmatex">\(m_t\)</span> | 记住方向惯性，平滑震荡（Momentum 贡献） |
+| 二阶矩 <span class="arithmatex">\(v_t\)</span> | 给每个参数调独立步长（RMSprop 贡献） |
+| <span class="arithmatex">\(\hat{m}_t,\,\hat{v}_t\)</span> | 偏差校正，防训练初期 <span class="arithmatex">\(m_t/v_t\)</span> 被初始 0 压扁 |
+| 最终分子分母 | 方向用 <span class="arithmatex">\(m_t\)</span>，步长用 <span class="arithmatex">\(1/\sqrt{v_t}\)</span>，两全其美 |</p>
+<h3 id="_43">打个比方<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h3>
+<p>Adam 是一个全能司机：有预判力（Momentum——知道该往哪冲），会看路踩油门（RMSprop——平坦路猛踩、颠簸路轻踩），而且刚启动时不会因为不知道车况就猛打方向盘（偏差校正——温柔起步）。</p>
+<h3 id="_44">四个超参数怎么调？<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h3>
+<p><strong><span class="arithmatex">\(\eta\)</span>（学习率）</strong>：Adam 的默认 0.001 对 90% 的任务都 OK。如果 Loss 震荡得厉害 → 降至 0.0001。如果 Loss 下降太慢 → 试 0.003 或 0.01。这是最值得调的参数。</p>
+<p><strong><span class="arithmatex">\(\beta_1\)</span>（一阶矩衰减）</strong>：控制"惯性"有多大。默认 0.9。如果训练曲线毛刺太多 → 提至 0.95（更强的平滑）。如果模型被过去的梯度影响太久、反应迟钝 → 降至 0.8。</p>
+<p><strong><span class="arithmatex">\(\beta_2\)</span>（二阶矩衰减）</strong>：控制"步长自适应"有多平滑。默认 0.999 意味着过去约 1000 步的梯度平方都在影响当前步长。如果训练后期不稳定 → 降至 0.99 或 0.9（只关心近期梯度变化，灵活调步长）。</p>
+<p><strong><span class="arithmatex">\(\epsilon\)</span>（防止除零）</strong>：基本不用动。除非你在做半精度（float16）训练，可以改大到 <span class="arithmatex">\(10^{-4}\)</span> 防溢出。</p>
+<h3 id="_45">适用场景<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>开箱即用</strong>：默认超参数几乎不需要调，绝大多数任务直接跑</li>
-<li>自适应学习率，每个参数各走各的节奏</li>
-<li>训练稳定，收敛快</li>
-<li>目前最通用的优化器，95% 的场景首选</li>
+<li><strong>所有场景</strong>。CNN、RNN、LSTM、Transformer、GAN、RL 几乎任何神经网络架构</li>
+<li>新手首选（默认参数直接跑，不用调）</li>
+<li>快速实验和原型验证</li>
 </ul>
-<h3 id="_31">缺点<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<h3 id="_46">不适用场景（极少数）<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h3>
 <ul>
-<li>有时泛化能力不如精心调参的 SGD+Momentum（论文有报道）</li>
-<li>在极深的 Transformer 训练中可能不稳定（需用 AdamW 等变体）</li>
-<li>四个超参数（虽然默认值基本够用）</li>
+<li>追求极致泛化精度时，精心调参的 SGD+Momentum + 学习率衰减可能略胜（论文有过报道，但差距通常很小）</li>
+<li>超大 batch（&gt;4096）时可能不稳定</li>
+<li>极深 Transformer 大模型（BERT/GPT 规模）推荐用 AdamW</li>
+</ul>
+<h3 id="_47">优点<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>开箱即用</strong>：默认超参数几乎不需要调</li>
+<li>每个参数自适应步长，各走各的节奏</li>
+<li>有惯性、不易困鞍点</li>
+<li>目前工业界和学术界的绝对标准</li>
+</ul>
+<h3 id="_48">缺点<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h3>
+<ul>
+<li>泛化质量有时不如精心调参的 SGD+Momentum</li>
+<li>极深 Transformer 需要 AdamW 等变体</li>
+<li>四个超参数（虽然默认值够用了）</li>
+<li>内存比 SGD 大（要存 <span class="arithmatex">\(m_t\)</span> 和 <span class="arithmatex">\(v_t\)</span>，每个参数配两个缓存，内存 ≈ 3× 纯 SGD）</li>
 </ul>
 <hr />
-<h2 id="_32">综合对比<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h2>
+<h2 id="_49">综合对比<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2278,7 +2911,7 @@ w_{t+1} &amp;= w_t - \frac{\eta \cdot \hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
 <th style="text-align: center;">动量</th>
 <th style="text-align: center;">需调参</th>
 <th style="text-align: center;">收敛速度</th>
-<th style="text-align: center;">稳定性</th>
+<th style="text-align: center;">内存</th>
 <th>适用场景</th>
 </tr>
 </thead>
@@ -2289,7 +2922,7 @@ w_{t+1} &amp;= w_t - \frac{\eta \cdot \hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
 <td style="text-align: center;">✗</td>
 <td style="text-align: center;">多</td>
 <td style="text-align: center;">慢</td>
-<td style="text-align: center;">中</td>
+<td style="text-align: center;">基准</td>
 <td>教学、baseline</td>
 </tr>
 <tr>
@@ -2298,7 +2931,7 @@ w_{t+1} &amp;= w_t - \frac{\eta \cdot \hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
 <td style="text-align: center;">✓</td>
 <td style="text-align: center;">中</td>
 <td style="text-align: center;">较快</td>
-<td style="text-align: center;">中</td>
+<td style="text-align: center;">2x SGD</td>
 <td>CNN 图像任务</td>
 </tr>
 <tr>
@@ -2307,7 +2940,7 @@ w_{t+1} &amp;= w_t - \frac{\eta \cdot \hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
 <td style="text-align: center;">✓</td>
 <td style="text-align: center;">中</td>
 <td style="text-align: center;">较快</td>
-<td style="text-align: center;">较好</td>
+<td style="text-align: center;">2x SGD</td>
 <td>CNN，替代 Momentum</td>
 </tr>
 <tr>
@@ -2315,8 +2948,8 @@ w_{t+1} &amp;= w_t - \frac{\eta \cdot \hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
 <td style="text-align: center;">✓</td>
 <td style="text-align: center;">✗</td>
 <td style="text-align: center;">少</td>
-<td style="text-align: center;">中（前期快后期停）</td>
-<td style="text-align: center;">较好</td>
+<td style="text-align: center;">前期快后期停</td>
+<td style="text-align: center;">2x SGD</td>
 <td>稀疏数据</td>
 </tr>
 <tr>
@@ -2325,7 +2958,7 @@ w_{t+1} &amp;= w_t - \frac{\eta \cdot \hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
 <td style="text-align: center;">✗</td>
 <td style="text-align: center;">少</td>
 <td style="text-align: center;">快</td>
-<td style="text-align: center;">好</td>
+<td style="text-align: center;">2x SGD</td>
 <td>RNN/LSTM</td>
 </tr>
 <tr>
@@ -2334,66 +2967,158 @@ w_{t+1} &amp;= w_t - \frac{\eta \cdot \hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
 <td style="text-align: center;"><strong>✓</strong></td>
 <td style="text-align: center;"><strong>极少</strong></td>
 <td style="text-align: center;"><strong>快</strong></td>
-<td style="text-align: center;"><strong>好</strong></td>
+<td style="text-align: center;"><strong>3x SGD</strong></td>
 <td><strong>通用首选</strong></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_33">实际怎么选？<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>新手 / 不想调参 → Adam（默认参数直接用）
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>训练 CNN → SGD + Momentum 或 Adam
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>训练 RNN / LSTM → Adam 或 RMSprop
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>稀疏数据（NLP词频等） → AdaGrad 或 Adam
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>追求终极精度 → SGD + Momentum + 学习率衰减（需要耐心调参）
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>Transformer 大模型 → AdamW（Adam 的改进版）
-</code></pre></div>
+<h2 id="_50">实际怎么选？场景速查<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>你是什么情况</th>
+<th>用什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>刚入门学深度学习</td>
+<td>Adam，默认参数不要动</td>
+</tr>
+<tr>
+<td>训练 CNN 分类图片</td>
+<td>SGD + Momentum（老派）或 Adam（省事）</td>
+</tr>
+<tr>
+<td>训练 RNN / LSTM 文本/序列</td>
+<td>Adam 或 RMSprop</td>
+</tr>
+<tr>
+<td>词嵌入训练（NLP）</td>
+<td>AdaGrad 或 Adam</td>
+</tr>
+<tr>
+<td>Transformer 大模型（BERT/GPT）</td>
+<td>AdamW</td>
+</tr>
+<tr>
+<td>GAN 训练</td>
+<td>Adam（<span class="arithmatex">\(\beta_1=0.5\)</span> 降惯性，<span class="arithmatex">\(\beta_2=0.999\)</span>）</td>
+</tr>
+<tr>
+<td>强化学习</td>
+<td>RMSprop 或 Adam</td>
+</tr>
+<tr>
+<td>强实时嵌入式推理</td>
+<td>SGD + Momentum（内存最小）</td>
+</tr>
+<tr>
+<td>精度竞赛，追求那 0.1%</td>
+<td>SGD + Momentum + Cosine 衰减 + 网格搜参</td>
+</tr>
+<tr>
+<td>不知道该用哪个</td>
+<td>Adam，不解释</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
-<p>一句话：<strong>先上 Adam 跑通，如果效果不满意，再考虑 SGD + Momentum + 精细调参。</strong></p>
+<p><strong>一句话金句</strong>：先用 Adam 跑通。不满意效果，再换 SGD + Momentum + 学习率衰减精调。</p>
 </blockquote>
 <hr />
-<h2 id="_34">关键超参数速查<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h2>
+<h2 id="_51">超参数速查<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>优化器</th>
-<th>核心超参数</th>
-<th>推荐默认值</th>
+<th>参数</th>
+<th>推荐值</th>
+<th>怎么调</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>SGD</td>
-<td><span class="arithmatex">\(\eta\)</span>（学习率）</td>
+<td><span class="arithmatex">\(\eta\)</span></td>
 <td>0.01 ~ 0.1</td>
+<td>震荡就降，太慢就加</td>
 </tr>
 <tr>
 <td>Momentum</td>
-<td><span class="arithmatex">\(\eta\)</span>, <span class="arithmatex">\(\beta\)</span></td>
-<td><span class="arithmatex">\(\eta=0.01\)</span>, <span class="arithmatex">\(\beta=0.9\)</span></td>
+<td><span class="arithmatex">\(\eta\)</span></td>
+<td>0.01</td>
+<td>同上</td>
+</tr>
+<tr>
+<td></td>
+<td><span class="arithmatex">\(\beta\)</span></td>
+<td>0.9</td>
+<td>震荡多就提至 0.95</td>
 </tr>
 <tr>
 <td>NAG</td>
-<td><span class="arithmatex">\(\eta\)</span>, <span class="arithmatex">\(\beta\)</span></td>
+<td><span class="arithmatex">\(\eta\)</span></td>
+<td>0.01</td>
+<td>同 Momentum</td>
+</tr>
+<tr>
+<td></td>
+<td><span class="arithmatex">\(\beta\)</span></td>
+<td>0.9</td>
 <td>同 Momentum</td>
 </tr>
 <tr>
 <td>AdaGrad</td>
 <td><span class="arithmatex">\(\eta\)</span></td>
-<td>0.01（初始）</td>
+<td>0.01</td>
+<td>初始值，会自衰减</td>
 </tr>
 <tr>
 <td>RMSprop</td>
-<td><span class="arithmatex">\(\eta\)</span>, <span class="arithmatex">\(\beta\)</span></td>
-<td><span class="arithmatex">\(\eta=0.001\)</span>, <span class="arithmatex">\(\beta=0.9\)</span></td>
+<td><span class="arithmatex">\(\eta\)</span></td>
+<td>0.001</td>
+<td>调法与 SGD 类似</td>
 </tr>
 <tr>
-<td>Adam</td>
-<td><span class="arithmatex">\(\eta\)</span>, <span class="arithmatex">\(\beta_1\)</span>, <span class="arithmatex">\(\beta_2\)</span></td>
-<td><span class="arithmatex">\(\eta=0.001\)</span>, <span class="arithmatex">\(\beta_1=0.9\)</span>, <span class="arithmatex">\(\beta_2=0.999\)</span></td>
+<td></td>
+<td><span class="arithmatex">\(\beta\)</span></td>
+<td>0.9</td>
+<td>梯度变化快就提至 0.99</td>
+</tr>
+<tr>
+<td><strong>Adam</strong></td>
+<td><span class="arithmatex">\(\eta\)</span></td>
+<td><strong>0.001</strong></td>
+<td><strong>最值得调的参数</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><span class="arithmatex">\(\beta_1\)</span></td>
+<td>0.9</td>
+<td>一般不动，train 曲线上蹿下跳才提</td>
+</tr>
+<tr>
+<td></td>
+<td><span class="arithmatex">\(\beta_2\)</span></td>
+<td>0.999</td>
+<td>后期不稳定才降（0.99 或 0.9）</td>
+</tr>
+<tr>
+<td></td>
+<td><span class="arithmatex">\(\epsilon\)</span></td>
+<td><span class="arithmatex">\(10^{-8}\)</span></td>
+<td>基本不动</td>
 </tr>
 </tbody>
 </table>
+<hr />
+<h2 id="adamw-adam">AdamW 和 Adam 有何区别？（附注）<a class="headerlink" href="#adamw-adam" title="Permanent link">&para;</a></h2>
+<p>AdamW 是修复版的 Adam。原始 Adam 把 L2 正则化（权重衰减）放在了梯度里一起算，这导致自适应学习率和正则化互相干扰——步长大的参数正则化弱，步长小的参数正则化强。</p>
+<p>AdamW 把权重衰减<strong>直接加在参数上</strong>，与梯度解耦：</p>
+<div class="arithmatex">\[w_{t+1} = w_t - \eta \cdot \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon} - \eta \lambda w_t\]</div>
+<p>最后一项 <span class="arithmatex">\(\eta \lambda w_t\)</span> 就是解耦后的权重衰减。效果比 Adam + L2 好，是目前 Transformer 训练的标准配置。</p>
 
 
 
