@@ -890,6 +890,56 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第六部分：反向传播和梯度下降的底层数学
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第六部分：反向传播和梯度下降的底层数学">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q10：反向传播到底在算什么？求导到底有什么用？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q11：为什么叫”梯度下降”？瞎子下山比喻
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结速查
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1542,6 +1592,56 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第六部分：反向传播和梯度下降的底层数学
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="第六部分：反向传播和梯度下降的底层数学">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q10：反向传播到底在算什么？求导到底有什么用？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Q11：为什么叫”梯度下降”？瞎子下山比喻
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结速查
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1884,6 +1984,127 @@
 <tr>
 <td>为什么门控用 Sigmoid？</td>
 <td>天然输出 0~1，完美模拟开关信号</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_9">第六部分：反向传播和梯度下降的底层数学<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p>前面 Q8 讲了训练四步曲的流程，这里扎进数学底层，看清 <code>backward()</code> 和 <code>step()</code> 到底在算什么东西。</p>
+<hr />
+<h3 id="q10">Q10：反向传播到底在算什么？求导到底有什么用？<a class="headerlink" href="#q10" title="Permanent link">&para;</a></h3>
+<p>用一个极简的例子——只一个参数 <span class="arithmatex">\(w\)</span>，Loss 是 <span class="arithmatex">\(w\)</span> 的平方：</p>
+<div class="arithmatex">\[L(w) = w^2\]</div>
+<p>目标：找到让 <span class="arithmatex">\(L\)</span> 最小的 <span class="arithmatex">\(w\)</span>（显然答案是 <span class="arithmatex">\(w=0\)</span>，但计算机不知道，要一步一步试）。</p>
+<hr />
+<p><strong>第 1 步：前向传播（Forward）— 算当前有多差</strong></p>
+<p>假设 <span class="arithmatex">\(w\)</span> 当前值是 <span class="arithmatex">\(3\)</span>，代入公式：</p>
+<div class="arithmatex">\[L = 3^2 = 9\]</div>
+<p>误差是 9，有点大。接下来怎么调 <span class="arithmatex">\(w\)</span> 才能让 9 变小？</p>
+<hr />
+<p><strong>第 2 步：反向传播（<code>loss.backward()</code>）— 算”斜率”</strong></p>
+<p>对公式求导：<span class="arithmatex">\(L = w^2\)</span> 的导数是 <span class="arithmatex">\(2w\)</span>。代入 <span class="arithmatex">\(w=3\)</span>：</p>
+<div class="arithmatex">\[\frac{dL}{dw} = 2 \times 3 = 6\]</div>
+<p><strong>这就是 <code>backward()</code> 唯一做的事：算出此时此刻的倾斜度是 6。</strong></p>
+<blockquote>
+<p>正数 6 意味着：如果你把 <span class="arithmatex">\(w\)</span> 往正方向（变大）推，<span class="arithmatex">\(L\)</span> 会跟着变大（误差加大）。所以你得反着走——把 <span class="arithmatex">\(w\)</span> 往小了调。</p>
+</blockquote>
+<hr />
+<p><strong>第 3 步：更新参数（<code>optimizer.step()</code>）— 往反方向挪一步</strong></p>
+<div class="arithmatex">\[w_{new} = w_{old} - \eta \cdot \frac{dL}{dw}\]</div>
+<p>设学习率 <span class="arithmatex">\(\eta = 0.01\)</span>：</p>
+<div class="arithmatex">\[w_{new} = 3 - 0.01 \times 6 = 3 - 0.06 = 2.94\]</div>
+<p><span class="arithmatex">\(w\)</span> 减小了 0.06。</p>
+<hr />
+<p><strong>第 4 步：重复——误差越来越小</strong></p>
+<p>新参数 <span class="arithmatex">\(w = 2.94\)</span>，再算一遍 <span class="arithmatex">\(L\)</span>：</p>
+<div class="arithmatex">\[L = 2.94^2 = 8.6436\]</div>
+<p>误差从 9 降到了 8.64！接着算新梯度 <span class="arithmatex">\(2 \times 2.94 = 5.88\)</span>，再减 <span class="arithmatex">\(0.01 \times 5.88\)</span>，<span class="arithmatex">\(w\)</span> 继续往 0 靠近……</p>
+<p>重复几千次后，<span class="arithmatex">\(w \approx 0\)</span>，<span class="arithmatex">\(L \approx 0\)</span>。模型就这样从一个”瞎蒙”的状态，一步一步蹭到了最优解。</p>
+<blockquote>
+<p>成百上千万的参数，干的都是同一件事——各自朝着”让 Loss 变小”的方向，每次蠕动一丁点。</p>
+</blockquote>
+<hr />
+<h3 id="q11">Q11：为什么叫”梯度下降”？瞎子下山比喻<a class="headerlink" href="#q11" title="Permanent link">&para;</a></h3>
+<p>刚才的 <span class="arithmatex">\(L = w^2\)</span> 是一条简单的抛物线，计算机一眼能看全貌。但真实网络有千万个参数，Loss 的图形复杂到根本无法想象——计算机连”长什么样”都不知道，更不知道谷底在哪。</p>
+<p><strong>那它怎么知道往哪走是下坡？</strong></p>
+<hr />
+<p><strong>瞎子下山法</strong>：把你蒙上眼睛，丢在一座大山里。要走到谷底，你怎么做？</p>
+<p>你虽然看不见全景，但只要<strong>蹲下来摸一下脚底的地面</strong>，就能感觉出脚下是往左歪还是往右歪：</p>
+<ul>
+<li>脚底往右翘 → 右边高、左边低 → 往左走一步</li>
+<li>脚底往左翘 → 左边高、右边低 → 往右走一步</li>
+</ul>
+<p><strong>求导就是”摸脚底”</strong>——只告诉你当前这一个点的倾斜方向，不告诉你整座山的全貌。</p>
+<hr />
+<p><strong>为什么算出正梯度要减、负梯度要加？</strong></p>
+<p>规定：往右走 = <span class="arithmatex">\(w\)</span> 增加，往左走 = <span class="arithmatex">\(w\)</span> 减少。</p>
+<ul>
+<li><strong>梯度 &gt; 0（正数）</strong>：脚下是 <code>/</code> 形斜坡，右边高、左边低。往右走 = 上山（误差变大），所以得<strong>往左</strong>：<span class="arithmatex">\(w_{new} = w_{old} - 正数\)</span>。</li>
+<li><strong>梯度 &lt; 0（负数）</strong>：脚下是 <code>\</code> 形斜坡，左边高、右边低。往右走 = 下山，所以得<strong>往右</strong>：<span class="arithmatex">\(w_{new} = w_{old} - 负数 = w_{old} + |梯度|\)</span>。</li>
+</ul>
+<p>公式 <span class="arithmatex">\(w_{new} = w_{old} - \eta \cdot \nabla\)</span> 已经自动处理了方向。</p>
+<hr />
+<p><strong>为什么学习率那么小（0.001 这种级别）？</strong></p>
+<p>瞎子只知道脚底下这一厘米是 <code>/</code> 形状——他完全不知道两步之外是平地还是悬崖。</p>
+<p>大步走 = 赌博：可能一脚跨过谷底到了对面山坡（震荡），甚至直接踩进悬崖（Loss 爆炸）。小步走 = 安全，代价是慢。</p>
+<hr />
+<p><strong>为什么需要成千上万个 Epoch？</strong></p>
+<p>每次只挪微不足道的半步。挪完这半步后，脚底的感觉（梯度）就过期了——必须重新蹲下摸一次（再跑一次 <code>backward()</code>），再挪半步……循环千万次，瞎子终于一步一步蹭到了谷底。</p>
+<blockquote>
+<p>梯度是一个绝对”短视”的东西——只看当前点的斜率。我们就是靠极其微小的局部感知 + 大量计算资源，硬把参数”蠕动”到最优解的。</p>
+</blockquote>
+<hr />
+<h2 id="_10">总结速查<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>一句话答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Batch size 影响参数数量？</td>
+<td>不影响，参数只由网络结构决定</td>
+</tr>
+<tr>
+<td>四个相同 Linear 是废工吗？</td>
+<td>不是，初始值不同，训出来各自不同</td>
+</tr>
+<tr>
+<td>权重能初始化为 0 吗？</td>
+<td>不能，打不破对称性，所有神经元永远一样</td>
+</tr>
+<tr>
+<td>CNN vs RNN？</td>
+<td>CNN 处理独立图片，RNN 处理序列</td>
+</tr>
+<tr>
+<td>RNN 致命缺点？</td>
+<td>梯度消失，记不住远距离信息</td>
+</tr>
+<tr>
+<td>LSTM 怎么治的？</td>
+<td>加法更新 <span class="arithmatex">\(C_t\)</span>，梯度可无损远传</td>
+</tr>
+<tr>
+<td>backward vs step？</td>
+<td>backward 只是算斜率，step 才真正改参数</td>
+</tr>
+<tr>
+<td>激活函数为什么要非线性？</td>
+<td>没有它网络就是一条直线，什么都分不开</td>
+</tr>
+<tr>
+<td>为什么门控用 Sigmoid？</td>
+<td>天然输出 0~1，完美模拟开关信号</td>
+</tr>
+<tr>
+<td>backward 在算什么？</td>
+<td>算 Loss 对每个参数的局部斜率（导数）</td>
+</tr>
+<tr>
+<td>为什么叫梯度下降？</td>
+<td>沿着脚下最陡的方向，瞎子摸黑一步步蹭到谷底</td>
 </tr>
 </tbody>
 </table>
