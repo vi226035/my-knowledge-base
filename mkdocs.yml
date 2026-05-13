@@ -86,7 +86,7 @@ extra_css:
   - stylesheets/extra.css
 
 nav:
-  - 知识库索引: index.md
+  - 首页: index.md
   - 机器学习:
       - 神经网络: ML/神经网络.md
       - 卷积神经网络（CNN）: ML/卷积神经网络（CNN）.md
