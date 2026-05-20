@@ -12,13 +12,13 @@
         <meta name="author" content="你自己">
       
       
-        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/ML/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/ML/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/">
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/">
       
       
-        <link rel="next" href="../%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89/">
+        <link rel="next" href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/DDC/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>神经网络 - 我的知识库</title>
+        <title>时域卷积网络（TCN） - 我的知识库</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#tcn" class="md-skip">
           跳转至
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              神经网络
+              时域卷积网络（TCN）
             
           </span>
         </div>
@@ -248,7 +248,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-tabs__link">
           
   
   
@@ -477,37 +477,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    神经网络
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-nav__link">
         
   
   
@@ -523,310 +496,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        神经元
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="神经元">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        数学定义
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        直观理解
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        举例
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        神经网络结构
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="神经网络结构">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        三层结构
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        为什么需要多层？
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        正向传播
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="正向传播">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        矩阵形式
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        计算示例
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        反向传播
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="反向传播">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        为什么叫"反向"？
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        损失函数
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        参数更新
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        直观类比
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        链式法则
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        神经网络训练优化
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="神经网络训练优化">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        问题：全量梯度下降太慢
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mini-batch" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mini-Batch 梯度下降
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Mini-Batch 梯度下降">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mini-batch_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mini-Batch 的问题与对策
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sgd" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SGD 动量梯度下降
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="SGD 动量梯度下降">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        动量法的效果
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1004,10 +673,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时域卷积网络（TCN）
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1023,6 +719,443 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tcn_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么会有 TCN？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="为什么会有 TCN？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rnn-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        先有了 RNN / LSTM，但它们有两个痛点
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcn_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 的核心思想
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 一维卷积：把 CNN 搬到时间轴上
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 一维卷积：把 CNN 搬到时间轴上">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通俗理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 因果卷积：不能偷看未来
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 因果卷积：不能偷看未来">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        普通卷积的问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        因果卷积的做法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通俗理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 膨胀卷积：跳着看，快速扩大视野
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 膨胀卷积：跳着看，快速扩大视野">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法 1：把卷积核做大
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法 2：堆很多层
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcn-dilated-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 的解决方案：膨胀卷积（Dilated Convolution）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通俗理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么这么厉害？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcn_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 的整体结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TCN 的整体结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么还要残差连接？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通俗理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcn-rnn-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 和 RNN / LSTM 到底差在哪？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TCN 和 RNN / LSTM 到底差在哪？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        直观理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcn_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 为什么在实时序列预测中很有吸引力？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TCN 为什么在实时序列预测中很有吸引力？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 并行快
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 感受野可控
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 训练稳定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcn_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        什么时候实时预测优先考虑 TCN？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcn_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 的缺点是什么？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TCN 的缺点是什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 感受野是设计出来的，不是自动记忆的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 对非常长的依赖，结构设计要仔细
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 局部模式很强，但灵活记忆稍弱
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对初学者的最终理解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="对初学者的最终理解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        你可以这样对比它们
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcn_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 适合哪些应用场景？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1427,22 +1560,100 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#tcn_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        神经元
+        为什么会有 TCN？
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="神经元">
+    <nav class="md-nav" aria-label="为什么会有 TCN？">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rnn-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        先有了 RNN / LSTM，但它们有两个痛点
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcn_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 的核心思想
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-cnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 一维卷积：把 CNN 搬到时间轴上
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 一维卷积：把 CNN 搬到时间轴上">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通俗理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 因果卷积：不能偷看未来
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 因果卷积：不能偷看未来">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        普通卷积的问题
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        数学定义
+        因果卷积的做法
       
     </span>
   </a>
@@ -1453,7 +1664,57 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        直观理解
+        通俗理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 膨胀卷积：跳着看，快速扩大视野
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 膨胀卷积：跳着看，快速扩大视野">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法 1：把卷积核做大
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法 2：堆很多层
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcn-dilated-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 的解决方案：膨胀卷积（Dilated Convolution）
       
     </span>
   </a>
@@ -1464,7 +1725,18 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        举例
+        通俗理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么这么厉害？
       
     </span>
   </a>
@@ -1477,22 +1749,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#tcn_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        神经网络结构
+        TCN 的整体结构
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="神经网络结构">
+    <nav class="md-nav" aria-label="TCN 的整体结构">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三层结构
+        为什么还要残差连接？
       
     </span>
   </a>
@@ -1503,7 +1775,7 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        为什么需要多层？
+        通俗理解
       
     </span>
   </a>
@@ -1516,33 +1788,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#tcn-rnn-lstm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        正向传播
+        TCN 和 RNN / LSTM 到底差在哪？
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="正向传播">
+    <nav class="md-nav" aria-label="TCN 和 RNN / LSTM 到底差在哪？">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        矩阵形式
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        计算示例
+        直观理解
       
     </span>
   </a>
@@ -1551,6 +1812,156 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcn_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 为什么在实时序列预测中很有吸引力？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TCN 为什么在实时序列预测中很有吸引力？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 并行快
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 感受野可控
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 训练稳定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tcn_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        什么时候实时预测优先考虑 TCN？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcn_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 的缺点是什么？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TCN 的缺点是什么？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 感受野是设计出来的，不是自动记忆的
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 对非常长的依赖，结构设计要仔细
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 局部模式很强，但灵活记忆稍弱
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对初学者的最终理解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="对初学者的最终理解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        你可以这样对比它们
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tcn_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TCN 适合哪些应用场景？
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1558,155 +1969,10 @@
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        反向传播
+        总结对比
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="反向传播">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        为什么叫"反向"？
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        损失函数
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        参数更新
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        直观类比
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        链式法则
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        神经网络训练优化
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="神经网络训练优化">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        问题：全量梯度下降太慢
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mini-batch" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mini-Batch 梯度下降
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Mini-Batch 梯度下降">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mini-batch_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mini-Batch 的问题与对策
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sgd" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SGD 动量梯度下降
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="SGD 动量梯度下降">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        动量法的效果
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1730,178 +1996,374 @@
   
 
 
-<h1 id="_1">神经网络<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>神经网络本质上是一个万能函数逼近器：给它大量输入-输出样本，它能自动"学"出一个函数来拟合这种映射关系。</p>
-<p>举个例子——给你一堆房子的面积、卧室数、位置，要你预测房价。你可以手动写一个线性公式 <code>房价 = w1×面积 + w2×卧室数 + w3×位置 + b</code>，但神经网络做的事情差不多，只是它能学更复杂的非线性关系。</p>
-<p>核心思想就三步：<strong>（1）前向算结果 →（2）跟答案比差距 →（3）根据差距调参数</strong>，反复循环直到足够好。</p>
+<h1 id="tcn">时域卷积网络（TCN）<a class="headerlink" href="#tcn" title="Permanent link">&para;</a></h1>
+<p>TCN（Temporal Convolutional Network，时域卷积网络）是一种<strong>专门处理序列数据</strong>的神经网络。它看起来像 CNN，但不是拿来扫图片，而是拿来扫<strong>时间序列</strong>——比如语音、传感器数据、股价、文本序列。</p>
+<p>你可以把它理解成：<strong>把卷积神经网络搬到时间轴上，用来替代 RNN / LSTM。</strong></p>
 <hr />
-<h2 id="_2">神经元<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>神经元是神经网络的最小计算单元，模拟生物神经元"接收信号→汇总→决定是否激活"的过程。</p>
-<h3 id="_3">数学定义<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>一个神经元接收 <span class="arithmatex">\(n\)</span> 个输入 <span class="arithmatex">\(x_1, x_2, ..., x_n\)</span>，每个输入有一个权重 <span class="arithmatex">\(w_i\)</span>，加上一个偏置 <span class="arithmatex">\(b\)</span>，经过激活函数 <span class="arithmatex">\(f\)</span> 输出：</p>
-<div class="arithmatex">\[y = f\left(\sum_{i=1}^{n} w_i x_i + b\right)\]</div>
-<h3 id="_4">直观理解<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>权重 <span class="arithmatex">\(w_i\)</span></strong>：这个输入有多重要（正=促进，负=抑制）</li>
-<li><strong>偏置 <span class="arithmatex">\(b\)</span></strong>：激活门槛的高低调整——偏置越大，即使输入信号较小也容易激活；偏置越小，需要更大的输入才能激活</li>
-<li><strong>激活函数 <span class="arithmatex">\(f\)</span></strong>：把加权和映射到一个合理范围（比如 0~1 之间，像概率）</li>
-</ul>
-<h3 id="_5">举例<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>假设一个神经元判断"今天适不适合出门"：</p>
-<ul>
-<li><span class="arithmatex">\(x_1\)</span> = 温度 25°C（归一化到 0~1，25°C → 0.6），<span class="arithmatex">\(w_1 = 0.8\)</span></li>
-<li><span class="arithmatex">\(x_2\)</span> = 降雨概率 0.8（80%），<span class="arithmatex">\(w_2 = -0.6\)</span></li>
-<li><span class="arithmatex">\(b = 0.3\)</span></li>
-</ul>
-<p>加权和 = <span class="arithmatex">\(0.6 \times 0.8 + 0.8 \times (-0.6) + 0.3 = 0.48 - 0.48 + 0.3 = 0.3\)</span></p>
-<p>再用 Sigmoid 激活：<span class="arithmatex">\(S(0.3) = \frac{1}{1+e^{-0.3}} \approx 0.574\)</span>，偏向"适合出门"但没那么确定——因为温度适中但降雨概率高，两者互相抵消后偏置起了决定作用。</p>
-<p><img alt="Pasted image 20260509102005.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102005.png" /></p>
-<hr />
-<h2 id="_6">神经网络结构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>多个神经元按层组织，前一层的输出作为后一层的输入，形成"多层感知机"。</p>
-<h3 id="_7">三层结构<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>输入层</strong>：接收原始数据（不计算，只是占位），神经元数 = 特征数</li>
-<li><strong>隐藏层</strong>：核心计算层，可以有多个，每层提取不同层次的特征</li>
-<li><strong>输出层</strong>：给出最终结果，神经元数 = 要预测的值的个数</li>
-</ul>
-<p><strong>全连接</strong>意味着：当前层的每个神经元都和上一层的所有神经元相连。</p>
-<h3 id="_8">为什么需要多层？<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>单层只能表达线性关系。堆叠多层 + 非线性激活函数 = 能表达任意复杂函数。</p>
-<p>类比：一层 = 只能画直线分割数据；两层 = 能画折线；三层以上 ≈ 能画任意形状的边界。</p>
-<p><img alt="Pasted image 20260509102332.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102332.png" /></p>
-<hr />
-<h2 id="_9">正向传播<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<p>从输入 → 隐藏层 → 输出，逐层计算，最终得到预测值的过程。</p>
-<h3 id="_10">矩阵形式<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>设第 <span class="arithmatex">\(l\)</span> 层的权重矩阵为 <span class="arithmatex">\(W^{[l]}\)</span>，偏置向量为 <span class="arithmatex">\(b^{[l]}\)</span>，激活函数为 <span class="arithmatex">\(f^{[l]}\)</span>：</p>
-<div class="arithmatex">\[\begin{aligned}
-Z^{[l]} &amp;= W^{[l]} A^{[l-1]} + b^{[l]} \\
-A^{[l]} &amp;= f^{[l]}(Z^{[l]})
-\end{aligned}\]</div>
-<p>其中 <span class="arithmatex">\(A^{[0]}\)</span> 即输入 <span class="arithmatex">\(X\)</span>，<span class="arithmatex">\(A^{[L]}\)</span> 即最终输出 <span class="arithmatex">\(\hat{Y}\)</span>。</p>
-<h3 id="_11">计算示例<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>一个两输入、两隐藏神经元的简单网络：</p>
-<ul>
-<li>输入 <span class="arithmatex">\(X = [2, 3]^T\)</span></li>
-<li>隐藏层权重 <span class="arithmatex">\(W^{[1]} = \begin{bmatrix} 0.5 &amp; 0.2 \\\ 0.1 &amp; 0.8 \end{bmatrix}\)</span>，偏置 <span class="arithmatex">\(b^{[1]} = [0.1, 0.1]^T\)</span></li>
-<li><span class="arithmatex">\(Z^{[1]} = W^{[1]} X + b^{[1]} = \begin{bmatrix} 0.5 \times 2 + 0.2 \times 3 + 0.1 \\\ 0.1 \times 2 + 0.8 \times 3 + 0.1 \end{bmatrix} = \begin{bmatrix} 1.7 \\\ 2.7 \end{bmatrix}\)</span></li>
-<li>经 Sigmoid：<span class="arithmatex">\(A^{[1]} = [S(1.7), S(2.7)]^T \approx [0.846, 0.937]^T\)</span></li>
-</ul>
-<p>然后 <span class="arithmatex">\(A^{[1]}\)</span> 继续向后传播，直到输出层。</p>
-<p><img alt="Pasted image 20260509102321.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102321.png" />
-<img alt="Pasted image 20260509151348.png" src="../../kb_material/ML_image/Pasted%20image%2020260509151348.png" /></p>
-<hr />
-<h2 id="_12">反向传播<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
-<p>正向传播给出预测值后，需要衡量"差了多少"，然后把这个误差反向传回去，指导每个参数该调多少。</p>
-<h3 id="_13">为什么叫"反向"？<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>误差从输出层开始，利用链式法则逐层往回计算梯度，所以叫反向传播。</p>
-<h3 id="_14">损失函数<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<p>衡量预测值和真实值差距的标尺：</p>
-<p><strong>均方误差（MSE，回归任务）</strong>：
-$<span class="arithmatex">\(L = \frac{1}{2}(y_{pred} - y_{true})^2\)</span>$</p>
+<h2 id="tcn_1">为什么会有 TCN？<a class="headerlink" href="#tcn_1" title="Permanent link">&para;</a></h2>
+<h3 id="rnn-lstm">先有了 RNN / LSTM，但它们有两个痛点<a class="headerlink" href="#rnn-lstm" title="Permanent link">&para;</a></h3>
+<p>RNN 和 LSTM 是处理序列的老牌选手，但它们有两个天然缺点：</p>
+<ol>
+<li><strong>串行计算，慢</strong></li>
+<li>RNN 必须先算完第 1 个时间步，才能算第 2 个，再算第 3 个……</li>
+<li>这就像排队打饭，一个人不打完，下一个人不能上。</li>
+<li>
+<p>GPU 最擅长并行，但 RNN 这个结构天生不太好并行。</p>
+</li>
+<li>
+<p><strong>长距离依赖依然难学</strong></p>
+</li>
+<li>虽然 LSTM 比 RNN 强很多，但序列很长时（上百步、上千步），记忆还是会变差。</li>
+<li>而且门控结构比较重，参数多，训练慢。</li>
+</ol>
+<p>于是大家就想：</p>
 <blockquote>
-<p>标准 MSE 是 <span class="arithmatex">\(\frac{1}{n}\sum(y_{pred} - y_{true})^2\)</span>。这里加了 <span class="arithmatex">\(\frac{1}{2}\)</span> 系数，纯粹是为了求导后消掉平方项的 2，让梯度表达式更简洁——不影响优化方向。</p>
+<p>能不能不用"一步一步往后传"的 RNN 结构，而直接像 CNN 那样并行处理整个序列？</p>
 </blockquote>
-<p><strong>交叉熵（分类任务）</strong>：
-$<span class="arithmatex">\(L = -\sum_{i} y_i \log(\hat{y}_i)\)</span>$</p>
-<h3 id="_15">参数更新<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
-<p>算出每个参数的梯度 <span class="arithmatex">\(\frac{\partial L}{\partial w}\)</span> 后，沿着梯度的<strong>反方向</strong>更新：</p>
-<div class="arithmatex">\[w := w - \eta \cdot \frac{\partial L}{\partial w}\]</div>
-<p>其中 <span class="arithmatex">\(\eta\)</span> 是<strong>学习率</strong>，控制每步走多大——太大容易跳过最优点（振荡），太小训练太慢。</p>
-<h3 id="_16">直观类比<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
-<p>你想调出一个完美的吉他音：
-1. 弹一下（正向传播）
-2. 听听差了多少（算损失）
-3. 判断琴弦该拧紧还是拧松（反向传播算梯度）
-4. 稍微拧一点（参数更新）
-5. 重复 1-4 直到音准</p>
-<p><img alt="Pasted image 20260509103713.png" src="../../kb_material/ML_image/Pasted%20image%2020260509103713.png" /></p>
-<p><img alt="Pasted image 20260509102920.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102920.png" /></p>
-<h3 id="_17">链式法则<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
-<p>反向传播的数学基础。对于复合函数 <span class="arithmatex">\(L = f(g(h(x)))\)</span>：</p>
-<div class="arithmatex">\[\frac{dL}{dx} = \frac{dL}{df} \cdot \frac{df}{dg} \cdot \frac{dg}{dh} \cdot \frac{dh}{dx}\]</div>
-<p>每一层都把自己的梯度传递给前一层，就像接力棒一样。</p>
-<p><strong>数值举例</strong>：</p>
-<p><span class="arithmatex">\(L = (3x + 2)^2\)</span>，<span class="arithmatex">\(x=1\)</span></p>
-<p>正向：<span class="arithmatex">\(x=1 → 中间=5 → L=25\)</span></p>
-<p>反向：
-- <span class="arithmatex">\(\frac{\partial L}{\partial 中间} = 2 × 5 = 10\)</span>
-- <span class="arithmatex">\(\frac{\partial 中间}{\partial x} = 3\)</span>
-- <span class="arithmatex">\(\frac{\partial L}{\partial x} = 10 × 3 = 30\)</span> ✓（直接求导：<span class="arithmatex">\(2(3x+2)·3\)</span>，<span class="arithmatex">\(x=1\)</span> 代入 = 30）</p>
-<p><img alt="Pasted image 20260509102958.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102958.png" />
-<img alt="Pasted image 20260509103129.png" src="../../kb_material/ML_image/Pasted%20image%2020260509103129.png" /></p>
+<p>这就是 TCN 出现的核心动机。</p>
 <hr />
-<h2 id="_18">神经网络训练优化<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
-<h3 id="_19">问题：全量梯度下降太慢<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
-<p>每次更新参数需要遍历全部训练数据（几万甚至几百万样本），计算一次梯度代价极大，而且会卡在局部细节里无法"跳过"。</p>
-<div class="arithmatex">\[w := w - \eta \cdot \frac{1}{N}\sum_{i=1}^{N} \nabla L_i(w)\]</div>
-<p>当 <span class="arithmatex">\(N = 100\)</span> 万时，更新一步就要算 100 万次梯度，不现实。</p>
-<p><img alt="Pasted image 20260509104055.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104055.png" /></p>
-<h3 id="mini-batch">Mini-Batch 梯度下降<a class="headerlink" href="#mini-batch" title="Permanent link">&para;</a></h3>
-<p>不每次用全量数据，而是每次随机抽取一小批（如 32、64、128 个样本）来估算梯度。这样更新快，且随机性有助于跳出局部陷阱。</p>
-<div class="arithmatex">\[w := w - \eta \cdot \frac{1}{m}\sum_{i \in batch} \nabla L_i(w)\]</div>
-<p><strong>三种梯度下降对比</strong>：</p>
+<h2 id="tcn_2">TCN 的核心思想<a class="headerlink" href="#tcn_2" title="Permanent link">&para;</a></h2>
+<p>TCN 的目标很简单：</p>
+<p><strong>既要像 CNN 一样并行快，又要像 RNN 一样能看到时间顺序。</strong></p>
+<p>它主要靠 3 个设计实现：</p>
+<ol>
+<li><strong>一维卷积（1D Convolution）</strong>：在时间轴上滑动卷积核</li>
+<li><strong>因果卷积（Causal Convolution）</strong>：预测当前时刻时，绝不能偷看未来</li>
+<li><strong>膨胀卷积（Dilated Convolution）</strong>：跳着看，让感受野迅速变大</li>
+</ol>
+<p>这三件事组合起来，就构成了 TCN 的主体。</p>
+<hr />
+<h2 id="1-cnn">1. 一维卷积：把 CNN 搬到时间轴上<a class="headerlink" href="#1-cnn" title="Permanent link">&para;</a></h2>
+<p>普通 CNN 是在二维图像上滑动卷积核：</p>
+<ul>
+<li>横向看像素</li>
+<li>纵向看像素</li>
+</ul>
+<p>TCN 则是在<strong>一维时间序列</strong>上滑动卷积核：</p>
+<ul>
+<li>只沿时间轴滑动</li>
+<li>每次看一小段历史数据</li>
+</ul>
+<p>比如输入序列：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>x1, x2, x3, x4, x5, x6
+</code></pre></div>
+<p>如果卷积核大小是 3，那么它一次会看：</p>
+<ul>
+<li>第一次看：<code>x1, x2, x3</code></li>
+<li>第二次看：<code>x2, x3, x4</code></li>
+<li>第三次看：<code>x3, x4, x5</code></li>
+</ul>
+<p>这和 CNN 扫图片很像，只不过这里扫的是"时间窗口"。</p>
+<h3 id="_1">通俗理解<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>你可以把 1D 卷积想成：</p>
+<blockquote>
+<p>拿一个小尺子，在时间轴上往右一点一点挪，每次看最近的一小段历史。</p>
+</blockquote>
+<p>比如做心电图分析，卷积核一次只看最近 3 个采样点；做股票预测，一次只看最近 5 天；做传感器监测，一次只看最近 10 帧。</p>
+<hr />
+<h2 id="2">2. 因果卷积：不能偷看未来<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>做时间序列预测时，有一个铁规矩：</p>
+<blockquote>
+<p>预测第 t 时刻时，只能看 t 之前和 t 当前的信息，不能看 t+1、t+2 的未来信息。</p>
+</blockquote>
+<p>不然就作弊了。</p>
+<h3 id="_2">普通卷积的问题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>普通卷积默认会在当前位置左右都看一些值，这样会偷偷看到未来。</p>
+<p>比如要预测 <code>x4</code>，卷积核如果看了 <code>x3, x4, x5</code>，那 <code>x5</code> 就是未来信息——不合法。</p>
+<h3 id="_3">因果卷积的做法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>因果卷积强制规定：</p>
+<ul>
+<li>预测 <code>x_t</code> 时，只能看 <code>x_t</code> 以及它左边的历史</li>
+<li>绝不能看右边未来</li>
+</ul>
+<p>所以它看的是：</p>
+<ul>
+<li>预测 <code>x4</code> 时，只看 <code>x2, x3, x4</code></li>
+<li>不看 <code>x5</code></li>
+</ul>
+<p><img alt="Pasted image 20260520211320.png" src="../../kb_material/ML_image/Pasted%20image%2020260520211320.png" /></p>
+<h3 id="_4">通俗理解<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>普通卷积像考试时偷看后面的答案。</p>
+<p>因果卷积像真正考试：</p>
+<ul>
+<li>只能用前面学过的知识</li>
+<li>不能翻到后面的标准答案</li>
+</ul>
+<p>这就是 TCN 能做<strong>真实预测</strong>的根本原因。</p>
+<hr />
+<h2 id="3">3. 膨胀卷积：跳着看，快速扩大视野<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>如果卷积核大小是 3，那一层普通卷积一次只能看 3 个点。</p>
+<p>如果想看更远历史怎么办？</p>
+<h3 id="1">方法 1：把卷积核做大<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>比如从 3 改成 11。</p>
+<p>问题：
+- 参数变多
+- 计算更慢
+- 不灵活</p>
+<h3 id="2_1">方法 2：堆很多层<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>比如一层看 3 个点，10 层以后总能看很远。</p>
+<p>问题：
+- 网络变深
+- 训练更难</p>
+<h3 id="tcn-dilated-convolution">TCN 的解决方案：膨胀卷积（Dilated Convolution）<a class="headerlink" href="#tcn-dilated-convolution" title="Permanent link">&para;</a></h3>
+<p>膨胀卷积不是连续地看，而是<strong>跳着看</strong>。</p>
+<p>例如卷积核大小为 3：</p>
+<ul>
+<li>膨胀率 = 1：看 <code>x1, x2, x3</code></li>
+<li>膨胀率 = 2：看 <code>x1, x3, x5</code></li>
+<li>膨胀率 = 4：看 <code>x1, x5, x9</code></li>
+</ul>
+<p>中间隔开几个点，但感受野瞬间变大。</p>
+<p><img alt="Pasted image 20260520211223.png" src="../../kb_material/ML_image/Pasted%20image%2020260520211223.png" /></p>
+<h3 id="_5">通俗理解<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>普通卷积像你看书是一页一页翻。</p>
+<p>膨胀卷积像你做速读：</p>
+<ul>
+<li>先每页都看</li>
+<li>然后隔一页看</li>
+<li>再隔三页看</li>
+<li>再隔七页看</li>
+</ul>
+<p>虽然你没有逐页细读，但很快就能把整本书的大致脉络扫到。</p>
+<h3 id="_6">为什么这么厉害？<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>因为膨胀率通常按 1、2、4、8、16 这样指数增长。</p>
+<p>这样只要几层网络，感受野就会非常大。</p>
+<p>举个例子：</p>
+<ul>
+<li>卷积核大小 = 3</li>
+<li>膨胀率依次为 1、2、4、8</li>
+</ul>
+<p>4 层之后，网络就能看到非常长的一段历史。</p>
+<p>这比 RNN 一步一步往前传快得多。</p>
+<hr />
+<h2 id="tcn_3">TCN 的整体结构<a class="headerlink" href="#tcn_3" title="Permanent link">&para;</a></h2>
+<p>一个典型的 TCN 块通常包括：</p>
+<ol>
+<li>因果卷积</li>
+<li>膨胀卷积</li>
+<li>激活函数（如 ReLU）</li>
+<li>Dropout（防过拟合）</li>
+<li>残差连接（Residual Connection）</li>
+</ol>
+<p><img alt="Pasted image 20260520211255.png" src="../../kb_material/ML_image/Pasted%20image%2020260520211255.png" /></p>
+<h3 id="_7">为什么还要残差连接？<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>因为网络一深就容易训练困难。</p>
+<p>残差连接的思想和 ResNet 一样：</p>
+<div class="arithmatex">\[y = F(x) + x\]</div>
+<p>也就是：</p>
+<ul>
+<li>主路去做复杂变换</li>
+<li>旁路把原始输入直接传过去</li>
+</ul>
+<p>这样梯度更容易回传，深层网络更稳定。</p>
+<h3 id="_8">通俗理解<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>残差连接就像你抄课堂笔记时：</p>
+<ul>
+<li>不是把旧笔记全部擦掉重写</li>
+<li>而是在旧笔记旁边补充新内容</li>
+</ul>
+<p>这样不容易丢失原有信息。</p>
+<hr />
+<h2 id="tcn-rnn-lstm">TCN 和 RNN / LSTM 到底差在哪？<a class="headerlink" href="#tcn-rnn-lstm" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>类型</th>
-<th>每步用多少样本</th>
-<th>优缺点</th>
+<th>维度</th>
+<th>RNN / LSTM</th>
+<th>TCN</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>全量(Batch GD)</td>
-<td>全部 <span class="arithmatex">\(N\)</span></td>
-<td>方向最准，但太慢</td>
+<td>处理方式</td>
+<td>一步一步串行处理</td>
+<td>整段并行卷积</td>
 </tr>
 <tr>
-<td>随机(SGD)</td>
-<td>1 个</td>
-<td>很快，但方向极不稳定</td>
+<td>速度</td>
+<td>慢</td>
+<td>快</td>
 </tr>
 <tr>
-<td><strong>Mini-Batch</strong></td>
-<td>32~256 个</td>
-<td>平衡效率和稳定性</td>
+<td>远距离依赖</td>
+<td>依赖记忆传递</td>
+<td>依赖感受野扩大</td>
+</tr>
+<tr>
+<td>训练稳定性</td>
+<td>一般</td>
+<td>较好</td>
+</tr>
+<tr>
+<td>GPU 并行</td>
+<td>差</td>
+<td>很好</td>
+</tr>
+<tr>
+<td>适合实时流式输入</td>
+<td>可以</td>
+<td>也可以</td>
 </tr>
 </tbody>
 </table>
-<p><img alt="Pasted image 20260509104248.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104248.png" /></p>
-<h4 id="mini-batch_1">Mini-Batch 的问题与对策<a class="headerlink" href="#mini-batch_1" title="Permanent link">&para;</a></h4>
-<p><strong>震荡问题</strong>：</p>
-<p>Mini-Batch 的梯度只是真实梯度的估计，有噪声。batch 越小，估计越不准，优化路径越"蛇形走位"。</p>
+<h3 id="_9">直观理解<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <ul>
-<li>batch_size = 1：极致震荡，几乎随机游走</li>
-<li>batch_size = 256：比较平稳，方向可靠</li>
+<li><strong>RNN / LSTM</strong>：像人一句一句听别人说话，前一句没听完，后一句没法理解</li>
+<li><strong>TCN</strong>：像你直接展开整段时间轴，用多个尺子同时扫一遍</li>
 </ul>
-<p><img alt="Pasted image 20260509104447.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104447.png" /></p>
-<p><strong>局部极值</strong>：</p>
-<p>梯度下降到山谷（局部最低点）就停下来了，但可能旁边有更深的谷（全局最低点）。不过实践中，高维空间的"真正的局部极值"其实不多——大部分是鞍点。</p>
-<p><img alt="Pasted image 20260509104718.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104718.png" /></p>
-<p><strong>鞍点</strong>：</p>
-<p>导数为 0，但不是极值点（像马鞍：一个方向凸，一个方向凹）。在高维空间中鞍点远比局部极值常见，这是困扰梯度下降的主要问题——停在鞍点不动了。</p>
-<p><img alt="Pasted image 20260509104908.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104908.png" /></p>
-<h3 id="sgd">SGD 动量梯度下降<a class="headerlink" href="#sgd" title="Permanent link">&para;</a></h3>
-<p>给优化加"惯性"——如果之前一直在往某个方向走，那这次更新时保留一部分这个方向的速度。</p>
-<div class="arithmatex">\[\begin{aligned}
-v_t &amp;= \beta v_{t-1} + (1-\beta)\nabla L(w_t) \\
-w_{t+1} &amp;= w_t - \eta \cdot v_t
-\end{aligned}\]</div>
-<p>其中 <span class="arithmatex">\(\beta \approx 0.9\)</span>，控制"惯性"大小。</p>
-<p><strong>直观类比</strong>：就像从山上滚下来的球——越滚越快，遇到小坑直接冲过去，不会被卡住。</p>
-<p><img alt="Pasted image 20260509105259.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105259.png" /></p>
-<h4 id="_20">动量法的效果<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h4>
+<p>所以 TCN 的最大优势就是：</p>
+<blockquote>
+<p><strong>它不靠记忆链条，而靠大感受野。</strong></p>
+</blockquote>
+<hr />
+<h2 id="tcn_4">TCN 为什么在实时序列预测中很有吸引力？<a class="headerlink" href="#tcn_4" title="Permanent link">&para;</a></h2>
+<p>实时序列预测最怕三件事：</p>
+<ol>
+<li>推理太慢</li>
+<li>记不住远距离信息</li>
+<li>训练不稳定</li>
+</ol>
+<p>TCN 刚好对这三点都比较友好：</p>
+<h3 id="1_1">1. 并行快<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>卷积天然适合 GPU/FPGA 并行。相比 LSTM 一步一步算，TCN 更适合硬件加速。</p>
+<h3 id="2_2">2. 感受野可控<a class="headerlink" href="#2_2" title="Permanent link">&para;</a></h3>
+<p>你想看多远历史，不是交给网络去"自己记住"，而是直接通过层数、卷积核大小、膨胀率设计出来。</p>
+<h3 id="3_1">3. 训练稳定<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p>没有 RNN 那种长链式的时间回传问题，通常更容易训练。</p>
+<h3 id="tcn_5">什么时候实时预测优先考虑 TCN？<a class="headerlink" href="#tcn_5" title="Permanent link">&para;</a></h3>
+<p>如果你的任务是：</p>
 <ul>
-<li>在一致下降的方向上加速（如滚下斜坡）</li>
-<li>在来回震荡的方向上互相抵消（如峡谷两侧）</li>
-<li>更容易冲过鞍点</li>
+<li>传感器序列预测</li>
+<li>异常检测</li>
+<li>振动信号识别</li>
+<li>ECG / EEG 信号分析</li>
+<li>工业设备状态预测</li>
 </ul>
-<p><strong>没有动量时的下降路径</strong>：之字形前进，在横向震荡中浪费大量步数
-<strong>有动量时的下降路径</strong>：横向震荡被平滑，纵向下降被加速，更快到达谷底</p>
-<p><img alt="Pasted image 20260509105521.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105521.png" />
-<img alt="Pasted image 20260509105538.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105538.png" /></p>
+<p>TCN 往往是很好的选择。</p>
+<p>特别是当你：
+- 需要快
+- 序列比较长
+- 希望训练稳定</p>
+<p>那么 TCN 非常值得优先尝试。</p>
+<hr />
+<h2 id="tcn_6">TCN 的缺点是什么？<a class="headerlink" href="#tcn_6" title="Permanent link">&para;</a></h2>
+<p>TCN 并不是万能的，也有几个缺点：</p>
+<h3 id="1_2">1. 感受野是设计出来的，不是自动记忆的<a class="headerlink" href="#1_2" title="Permanent link">&para;</a></h3>
+<p>RNN/LSTM 理论上能一直记下去。</p>
+<p>TCN 能看多远，取决于你设计了多少层、膨胀率怎么设。如果感受野不够大，远处信息还是看不到。</p>
+<h3 id="2_3">2. 对非常长的依赖，结构设计要仔细<a class="headerlink" href="#2_3" title="Permanent link">&para;</a></h3>
+<p>如果序列特别长（比如几千、几万步），你得认真计算感受野够不够，不然模型虽然很快，但其实没看到关键历史信息。</p>
+<h3 id="3_2">3. 局部模式很强，但灵活记忆稍弱<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h3>
+<p>LSTM 的门控机制有点像主动选择记忆。TCN 更像固定结构的扫描器，虽然快，但这种"选择性记忆"不如 LSTM 直观。</p>
+<hr />
+<h2 id="_10">对初学者的最终理解<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>如果你只记一句话，请记这个：</p>
+<blockquote>
+<p><strong>TCN = 用卷积来做时间序列。</strong></p>
+<p>它通过"因果卷积"保证不偷看未来，通过"膨胀卷积"快速看到很长的历史，通过"残差连接"保证深层也能训得动。</p>
+</blockquote>
+<p><img alt="Pasted image 20260520211358.png" src="../../kb_material/ML_image/Pasted%20image%2020260520211358.png" /></p>
+<h3 id="_11">你可以这样对比它们<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>RNN</strong>：一步一步往后传，简单但容易忘</li>
+<li><strong>LSTM</strong>：加了门控，记忆更强，但更慢更重</li>
+<li><strong>TCN</strong>：不用记忆链，直接用卷积和大感受野看整段历史，快而稳</li>
+</ul>
+<p>所以：</p>
+<ul>
+<li>想要<strong>经典序列建模</strong> → 先学 RNN / LSTM</li>
+<li>想要<strong>高效并行、适合实时预测</strong> → 重点看 TCN</li>
+</ul>
+<hr />
+<h2 id="tcn_7">TCN 适合哪些应用场景？<a class="headerlink" href="#tcn_7" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>为什么适合 TCN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工业传感器预测</td>
+<td>序列长、实时性要求高</td>
+</tr>
+<tr>
+<td>ECG / EEG 生理信号分析</td>
+<td>局部模式明显、需要长感受野</td>
+</tr>
+<tr>
+<td>振动故障检测</td>
+<td>卷积擅长抓局部波形特征</td>
+</tr>
+<tr>
+<td>语音序列建模</td>
+<td>时间依赖强，且可并行</td>
+</tr>
+<tr>
+<td>金融时间序列预测</td>
+<td>可通过膨胀卷积看长历史</td>
+</tr>
+<tr>
+<td>文本序列分类</td>
+<td>可替代部分 RNN/LSTM 方案</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_12">总结对比<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>RNN</th>
+<th>LSTM</th>
+<th>TCN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>序列处理方式</td>
+<td>串行</td>
+<td>串行</td>
+<td>并行</td>
+</tr>
+<tr>
+<td>长期依赖能力</td>
+<td>弱</td>
+<td>强</td>
+<td>强（靠大感受野）</td>
+</tr>
+<tr>
+<td>训练速度</td>
+<td>慢</td>
+<td>更慢</td>
+<td>快</td>
+</tr>
+<tr>
+<td>训练稳定性</td>
+<td>一般</td>
+<td>较好</td>
+<td>较好</td>
+</tr>
+<tr>
+<td>结构复杂度</td>
+<td>低</td>
+<td>中</td>
+<td>中</td>
+</tr>
+<tr>
+<td>实时预测推荐度</td>
+<td>★★☆</td>
+<td>★★★☆</td>
+<td>★★★★</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话结论</strong>：</p>
+<blockquote>
+<p>如果你是深度学习初学者，可以把 TCN 理解成：<strong>“一维卷积版的序列模型”，是 RNN/LSTM 的一个很强的替代方案，尤其适合实时序列预测。</strong></p>
+</blockquote>
 
 
 
