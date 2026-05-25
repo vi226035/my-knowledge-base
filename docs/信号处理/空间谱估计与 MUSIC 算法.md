@@ -107,7 +107,7 @@ $$
 | **信号子空间** $\mathbf{U}_s$ | $\mathbf{u}_1,\dots,\mathbf{u}_K$ | $\lambda_1,\dots,\lambda_K$ | $M \times K$ |
 | **噪声子空间** $\mathbf{U}_n$ | $\mathbf{u}_{K+1},\dots,\mathbf{u}_M$ | $\lambda_{K+1},\dots,\lambda_M$ | $M \times (M-K)$ |
 
-> **💡 硬件加速实现**：特征分解是 MUSIC 算法中计算量最大的步骤（$O(M^3)$）。在 FPGA 等硬件平台上，可采用**并行双边 Jacobi 旋转**算法实现高效的特征值分解，相比传统 QR 算法和 CORDIC 方案，LUT 资源减少 40%~65%，时延降低 15%~25%。详见 [[并行双边Jacobi旋转特征值分解]]。
+> **💡 硬件加速实现**：特征分解是 MUSIC 算法中计算量最大的步骤（$O(M^3)$）。在 FPGA 等硬件平台上，可采用**并行双边 Jacobi 旋转**算法实现高效的特征值分解，相比传统 QR 算法和 CORDIC 方案，LUT 资源减少 40%~65%，时延降低 15%~25%。详见 [并行双边 Jacobi 旋转特征值分解](并行双边Jacobi旋转特征值分解.md)。
 
 ---
 
