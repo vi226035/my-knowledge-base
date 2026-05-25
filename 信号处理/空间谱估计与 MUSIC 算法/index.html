@@ -12,13 +12,13 @@
         <meta name="author" content="你自己">
       
       
-        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E8%B0%83%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB/">
+        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E7%A9%BA%E9%97%B4%E8%B0%B1%E4%BC%B0%E8%AE%A1%E4%B8%8E%20MUSIC%20%E7%AE%97%E6%B3%95/">
       
       
-        <link rel="prev" href="../%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E6%A3%80%E6%B5%8B/">
+        <link rel="prev" href="../%E5%B9%B2%E6%B6%89%E4%BB%AA%E5%8E%9F%E7%90%86/">
       
       
-        <link rel="next" href="../%E5%B9%B2%E6%B6%89%E4%BB%AA%E5%8E%9F%E7%90%86/">
+        <link rel="next" href="../%E5%B9%B6%E8%A1%8C%E5%8F%8C%E8%BE%B9Jacobi%E6%97%8B%E8%BD%AC%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E8%A7%A3/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>雷达信号调制类型识别 - 我的知识库</title>
+        <title>空间谱估计与 MUSIC 算法 - 我的知识库</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#music" class="md-skip">
           跳转至
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              雷达信号调制类型识别
+              空间谱估计与 MUSIC 算法
             
           </span>
         </div>
@@ -977,37 +977,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    雷达信号调制类型识别
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E8%B0%83%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB/" class="md-nav__link">
         
   
   
@@ -1023,465 +996,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#41" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1 脉内调制识别方法
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.1 脉内调制识别方法">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#411" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1.1 基于瞬时频率的调制识别方法
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.1.1 基于瞬时频率的调制识别方法">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        核心结论
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        关键公式
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        符号说明
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        粗分类思路
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        图示记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        方法不足
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#412" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1.2 基于瞬时相关和瞬时频率的调制识别方法
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.1.2 基于瞬时相关和瞬时频率的调制识别方法">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        核心结论
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配图记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#psk" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PSK 信号识别
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="PSK 信号识别">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        核心原理
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        关键公式
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        符号说明
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        工程结论
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配图记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        FM 信号识别
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="FM 信号识别">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        核心原理
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        工程结论
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配图记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#42-fpga" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2 信号调制识别的 FPGA 设计
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.2 信号调制识别的 FPGA 设计">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        总体结构
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="总体结构">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配图记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#421-3db" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2.1 3dB 频谱带宽模块设计
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.2.1 3dB 频谱带宽模块设计">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        核心结论
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_21" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        工程点
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_22" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        典型结果
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_23" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配图记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#422-psk-fm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2.2 PSK 与 FM 调制识别模块设计
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.2.2 PSK 与 FM 调制识别模块设计">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#psk_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PSK 支路
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_24" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配图记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fm_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        FM 支路
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_25" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配图记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#43" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.3 本章小结
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1519,10 +1033,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../%E7%A9%BA%E9%97%B4%E8%B0%B1%E4%BC%B0%E8%AE%A1%E4%B8%8E%20MUSIC%20%E7%AE%97%E6%B3%95/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    空间谱估计与 MUSIC 算法
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1538,6 +1079,353 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 背景与问题描述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 阵列信号模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 阵列信号模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 远场窄带假设
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 数学模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-ula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 导向矢量（均匀线阵 ULA）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 协方差矩阵与特征分解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 协方差矩阵与特征分解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 数据协方差矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 特征分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-music" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. MUSIC 算法核心原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. MUSIC 算法核心原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 核心结论
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 正交性条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-music" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. MUSIC 算法步骤（完整流程）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. MUSIC 算法步骤（完整流程）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步骤 1：估计协方差矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步骤 2：特征分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步骤 3：信源数估计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步骤 4：构造噪声子空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-music_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步骤 5：搜索 MUSIC 谱
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-matlab-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. MATLAB / Python 伪代码
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 关键性质与注意事项
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 关键性质与注意事项">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 分辨率优势
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 信源数估计的重要性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 相干信源问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.4 阵列校准
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.5 计算复杂度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 变种与改进算法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-esprit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 与 ESPRIT 的对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 参考文献
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1672,34 +1560,122 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 背景与问题描述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 阵列信号模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 阵列信号模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 远场窄带假设
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 数学模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-ula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 导向矢量（均匀线阵 ULA）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 协方差矩阵与特征分解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 协方差矩阵与特征分解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 数据协方差矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 特征分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-music" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. MUSIC 算法核心原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. MUSIC 算法核心原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#41" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.1 脉内调制识别方法
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.1 脉内调制识别方法">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#411" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1.1 基于瞬时频率的调制识别方法
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.1.1 基于瞬时频率的调制识别方法">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        核心结论
+        4.1 核心结论
       
     </span>
   </a>
@@ -1707,170 +1683,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#42" class="md-nav__link">
     <span class="md-ellipsis">
       
-        关键公式
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        符号说明
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        粗分类思路
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        图示记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        方法不足
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#412" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1.2 基于瞬时相关和瞬时频率的调制识别方法
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.1.2 基于瞬时相关和瞬时频率的调制识别方法">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        核心结论
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配图记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#psk" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PSK 信号识别
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="PSK 信号识别">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        核心原理
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        关键公式
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        符号说明
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        工程结论
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配图记录
+        4.2 正交性条件
       
     </span>
   </a>
@@ -1883,22 +1699,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#fm" class="md-nav__link">
+  <a href="#5-music" class="md-nav__link">
     <span class="md-ellipsis">
       
-        FM 信号识别
+        5. MUSIC 算法步骤（完整流程）
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="FM 信号识别">
+    <nav class="md-nav" aria-label="5. MUSIC 算法步骤（完整流程）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
+  <a href="#1_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        核心原理
+        步骤 1：估计协方差矩阵
       
     </span>
   </a>
@@ -1906,10 +1722,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
+  <a href="#2_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        工程结论
+        步骤 2：特征分解
       
     </span>
   </a>
@@ -1917,10 +1733,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
+  <a href="#3_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        配图记录
+        步骤 3：信源数估计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步骤 4：构造噪声子空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-music_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        步骤 5：搜索 MUSIC 谱
       
     </span>
   </a>
@@ -1933,62 +1771,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#42-fpga" class="md-nav__link">
+  <a href="#6-matlab-python" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 信号调制识别的 FPGA 设计
+        6. MATLAB / Python 伪代码
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4.2 信号调制识别的 FPGA 设计">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 关键性质与注意事项
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 关键性质与注意事项">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
+  <a href="#71" class="md-nav__link">
     <span class="md-ellipsis">
       
-        总体结构
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="总体结构">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配图记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#421-3db" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2.1 3dB 频谱带宽模块设计
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.2.1 3dB 频谱带宽模块设计">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        核心结论
+        7.1 分辨率优势
       
     </span>
   </a>
@@ -1996,10 +1805,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_21" class="md-nav__link">
+  <a href="#72" class="md-nav__link">
     <span class="md-ellipsis">
       
-        工程点
+        7.2 信源数估计的重要性
       
     </span>
   </a>
@@ -2007,10 +1816,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_22" class="md-nav__link">
+  <a href="#73" class="md-nav__link">
     <span class="md-ellipsis">
       
-        典型结果
+        7.3 相干信源问题
       
     </span>
   </a>
@@ -2018,38 +1827,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_23" class="md-nav__link">
+  <a href="#74" class="md-nav__link">
     <span class="md-ellipsis">
       
-        配图记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#422-psk-fm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2.2 PSK 与 FM 调制识别模块设计
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4.2.2 PSK 与 FM 调制识别模块设计">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#psk_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PSK 支路
+        7.4 阵列校准
       
     </span>
   </a>
@@ -2057,40 +1838,13 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_24" class="md-nav__link">
+  <a href="#75" class="md-nav__link">
     <span class="md-ellipsis">
       
-        配图记录
+        7.5 计算复杂度
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fm_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        FM 支路
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_25" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        配图记录
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -2100,10 +1854,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#43" class="md-nav__link">
+  <a href="#8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3 本章小结
+        8. 变种与改进算法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-esprit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. 与 ESPRIT 的对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. 参考文献
       
     </span>
   </a>
@@ -2130,198 +1906,368 @@
   
 
 
-<h1 id="_1">雷达信号调制类型识别<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="music">空间谱估计与 MUSIC 算法<a class="headerlink" href="#music" title="Permanent link">&para;</a></h1>
+<h2 id="1">1. 背景与问题描述<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p><strong>空间谱估计</strong>（Spatial Spectrum Estimation）是指利用天线阵列接收信号，估计不同来波方向（DOA, Direction of Arrival）上信号功率分布的技术。其核心问题是：</p>
 <blockquote>
-<p>本章整理自《基于FPGA多门限时域的数字雷达信号动态检测与调制识别研究》第四章</p>
+<p>给定 <span class="arithmatex">\(M\)</span> 个阵元接收到的数据 <span class="arithmatex">\(\mathbf{x}(t)\)</span>，估计 <span class="arithmatex">\(K\)</span> 个信号源的方向 <span class="arithmatex">\(\{\theta_1,\theta_2,\dots,\theta_K\}\)</span>。</p>
 </blockquote>
-<h2 id="41">4.1 脉内调制识别方法<a class="headerlink" href="#41" title="Permanent link">&para;</a></h2>
-<h3 id="411">4.1.1 基于瞬时频率的调制识别方法<a class="headerlink" href="#411" title="Permanent link">&para;</a></h3>
-<h4 id="_2">核心结论<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
-<p>不同调制方式会产生不同的瞬时频率变化规律，因此可通过提取瞬时频率完成调制识别。</p>
-<h4 id="_3">关键公式<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
-<p>瞬时频率：</p>
+<p>MUSIC（<strong>MU</strong>ltiple <strong>SI</strong>gnal <strong>C</strong>lassification）算法由 Schmidt 于 1979 年提出，是<strong>子空间类方法</strong>的奠基之作，突破了传统波束形成方法的瑞利限（Rayleigh Resolution Limit），实现了<strong>超分辨</strong>测向。</p>
+<hr />
+<h2 id="2">2. 阵列信号模型<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 远场窄带假设<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>远场</strong>：信源距离远大于阵列孔径，入射波可视为平面波</li>
+<li><strong>窄带</strong>：信号带宽远小于载频，包络在各阵元间可视为不变（仅有相移）</li>
+</ul>
+<h3 id="22">2.2 数学模型<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(M\)</span> 个阵元，<span class="arithmatex">\(K\)</span> 个不相关的远场窄带信源（<span class="arithmatex">\(K &lt; M\)</span>），则阵列接收数据为：</p>
 <div class="arithmatex">\[
-f(n)=\frac{1}{2\pi}[\varphi(n)-\varphi(n-1)]f_s \tag{4-1}
+\mathbf{x}(t) = \mathbf{A}(\theta)\,\mathbf{s}(t) + \mathbf{n}(t)
 \]</div>
-<p>瞬时自相关：</p>
+<p>其中：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>维度</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\mathbf{x}(t)\)</span></td>
+<td><span class="arithmatex">\(M \times 1\)</span></td>
+<td>阵列接收数据向量</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbf{A}(\theta) = [\mathbf{a}(\theta_1),\dots,\mathbf{a}(\theta_K)]\)</span></td>
+<td><span class="arithmatex">\(M \times K\)</span></td>
+<td>阵列流型矩阵 (Array Manifold)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbf{a}(\theta_k)\)</span></td>
+<td><span class="arithmatex">\(M \times 1\)</span></td>
+<td>第 <span class="arithmatex">\(k\)</span> 个信源的方向向量/导向矢量 (Steering Vector)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbf{s}(t)\)</span></td>
+<td><span class="arithmatex">\(K \times 1\)</span></td>
+<td>信号复包络向量</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mathbf{n}(t)\)</span></td>
+<td><span class="arithmatex">\(M \times 1\)</span></td>
+<td>加性噪声向量</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-ula">2.3 导向矢量（均匀线阵 ULA）<a class="headerlink" href="#23-ula" title="Permanent link">&para;</a></h3>
+<p>对于 <span class="arithmatex">\(M\)</span> 阵元的均匀线阵（阵元间距 <span class="arithmatex">\(d\)</span>），导向矢量为：</p>
 <div class="arithmatex">\[
-R(n,m)=s^*(n)s(n+m) \tag{4-2}
+\mathbf{a}(\theta) = \begin{bmatrix}
+1 \\
+e^{-j\frac{2\pi}{\lambda}d\sin\theta} \\
+e^{-j\frac{2\pi}{\lambda}2d\sin\theta} \\
+\vdots \\
+e^{-j\frac{2\pi}{\lambda}(M-1)d\sin\theta}
+\end{bmatrix} = \begin{bmatrix}
+1 \\
+e^{-j\omega} \\
+e^{-j2\omega} \\
+\vdots \\
+e^{-j(M-1)\omega}
+\end{bmatrix}
 \]</div>
-<p>瞬时相位：</p>
+<p>其中 <span class="arithmatex">\(\omega = \frac{2\pi}{\lambda}d\sin\theta\)</span> 为空间角频率。</p>
+<hr />
+<h2 id="3">3. 协方差矩阵与特征分解<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 数据协方差矩阵<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>假设信号 <span class="arithmatex">\(\mathbf{s}(t)\)</span> 与噪声 <span class="arithmatex">\(\mathbf{n}(t)\)</span> 统计独立，噪声为空间白噪声（<span class="arithmatex">\(\mathbf{R}_n = \sigma^2\mathbf{I}\)</span>），则：</p>
 <div class="arithmatex">\[
-\theta(n,m)=\arctan\left[\frac{\operatorname{Im}(R_s(n,m))}{\operatorname{Re}(R_s(n,m))}\right] \tag{4-3}
+\mathbf{R} = \mathbb{E}[\mathbf{x}(t)\mathbf{x}^H(t)] = \mathbf{A}\mathbf{R}_s\mathbf{A}^H + \sigma^2\mathbf{I}
 \]</div>
-<p>改写后的瞬时频率：</p>
+<p>其中：
+- <span class="arithmatex">\(\mathbf{R}_s = \mathbb{E}[\mathbf{s}(t)\mathbf{s}^H(t)]\)</span> 为 <span class="arithmatex">\(K \times K\)</span> 信号协方差矩阵（满秩 <span class="arithmatex">\(K\)</span>）
+- <span class="arithmatex">\(\sigma^2\)</span> 为噪声功率</p>
+<p>实际中，用 <span class="arithmatex">\(N\)</span> 次快拍估计：</p>
 <div class="arithmatex">\[
-f(n,m)=\frac{\theta(n,m)f_s}{2\pi} \tag{4-4}
+\hat{\mathbf{R}} = \frac{1}{N}\sum_{t=1}^{N}\mathbf{x}(t)\mathbf{x}^H(t)
 \]</div>
-<h4 id="_4">符号说明<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
-<ul>
-<li><span class="arithmatex">\(f(n)\)</span>：瞬时频率</li>
-<li><span class="arithmatex">\(\varphi(n)\)</span>：第 <span class="arithmatex">\(n\)</span> 个采样点的相位</li>
-<li><span class="arithmatex">\(f_s\)</span>：采样频率</li>
-<li><span class="arithmatex">\(R(n,m)\)</span>：瞬时自相关结果</li>
-<li><span class="arithmatex">\(s(n)\)</span>：输入信号</li>
-<li><span class="arithmatex">\(\theta(n,m)\)</span>：瞬时相位</li>
-<li><span class="arithmatex">\(\operatorname{Re}(\cdot)\)</span>：实部</li>
-<li><span class="arithmatex">\(\operatorname{Im}(\cdot)\)</span>：虚部</li>
-</ul>
-<h4 id="_5">粗分类思路<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
-<p>通过功率谱 3 dB 带宽先把信号分为两类：
-- FM：频谱较宽
-- PSK：频谱较窄</p>
-<h4 id="_6">图示记录<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/b9ae1f2d67939ebd72d7056529434d6e105f5654a96d9723c4bac24705bf6fc9.jpg" /></p>
-<p><strong>图4.1：信号粗识别框图</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/642f4d19460dd918728325eff73a02c5f97a25afe93dce64f4e10614df7ab295.jpg" /></p>
-<p><strong>图4.2：NS、BPSK、QPSK 的瞬时频率图</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/880c64546852fdc3564cba8cfc9a2ca3b638407f4da7517f8b058714275cbf04.jpg" /></p>
-<p><strong>图4.3：LFM、FSK、NLFM 的瞬时频率图</strong></p>
-<h4 id="_7">方法不足<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
-<p>单独依靠瞬时频率时，对频率估计精度依赖较强，低信噪比下识别鲁棒性不足。</p>
-<hr />
-<h3 id="412">4.1.2 基于瞬时相关和瞬时频率的调制识别方法<a class="headerlink" href="#412" title="Permanent link">&para;</a></h3>
-<h4 id="_8">核心结论<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
-<p>本文最终采用组合方法：
-- 前端用 3 dB 带宽进行 FM/PSK 粗分类
-- PSK 用瞬时相关和峰值种类数识别
-- FM 用八点滑动均值测频，再按频率变化趋势识别</p>
-<h4 id="_9">配图记录<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/abe1862a6337bd19a2041c98d7e02931786a734fa147414f0cbbe1348f7fa6e7.jpg" /></p>
-<p><strong>图4.4：调制识别流程图</strong></p>
-<hr />
-<h2 id="psk">PSK 信号识别<a class="headerlink" href="#psk" title="Permanent link">&para;</a></h2>
-<h3 id="_10">核心原理<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>对于调相信号：
-- NS：无峰值
-- BPSK：1 类峰值
-- QPSK：2 类峰值</p>
-<p>为了让峰值在低信噪比下更明显，文中采用汉宁窗滤波对相关输出做幅值修正。</p>
-<h3 id="_11">关键公式<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>汉宁窗：</p>
+<h3 id="32">3.2 特征分解<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>对 <span class="arithmatex">\(\mathbf{R}\)</span> 做特征分解：</p>
 <div class="arithmatex">\[
-\omega(n)=0.5\left[1-\cos\left(\frac{2\pi n}{M+1}\right)\right],\quad 1\le n\le M \tag{4-5}
+\mathbf{R} = \sum_{i=1}^{M}\lambda_i\,\mathbf{u}_i\mathbf{u}_i^H = \mathbf{U}_s\mathbf{\Lambda}_s\mathbf{U}_s^H + \mathbf{U}_n\mathbf{\Lambda}_n\mathbf{U}_n^H
 \]</div>
-<h3 id="_12">符号说明<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<ul>
-<li><span class="arithmatex">\(\omega(n)\)</span>：窗函数系数</li>
-<li><span class="arithmatex">\(n\)</span>：窗内序号</li>
-<li><span class="arithmatex">\(M\)</span>：窗长</li>
-</ul>
-<h3 id="_13">工程结论<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<ul>
-<li>加窗后噪底更平滑</li>
-<li>BPSK 与 QPSK 峰值更突出</li>
-<li>QPSK 第二类峰值更容易从噪声中分离出来</li>
-</ul>
-<h3 id="_14">配图记录<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/f50d9bfdeda905c102bb5f55f631ae1eb7bc19cfdd64a39bcd979cd1d8fc1817.jpg" /></p>
-<p><strong>图4.5：NS、BPSK、QPSK 相关波形</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/5eb36a6fb44c4f4e21caaf475840d04c415901e79e0df92d09af64ef25cd5644.jpg" /></p>
-<p><strong>图4.6：窗函数滤波优化后的实部波形</strong></p>
+<p>将 <span class="arithmatex">\(M\)</span> 个特征值降序排列：</p>
+<div class="arithmatex">\[
+\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_K &gt; \lambda_{K+1} = \dots = \lambda_M = \sigma^2
+\]</div>
+<table>
+<thead>
+<tr>
+<th>子空间</th>
+<th>基向量</th>
+<th>特征值</th>
+<th>维度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>信号子空间</strong> <span class="arithmatex">\(\mathbf{U}_s\)</span></td>
+<td><span class="arithmatex">\(\mathbf{u}_1,\dots,\mathbf{u}_K\)</span></td>
+<td><span class="arithmatex">\(\lambda_1,\dots,\lambda_K\)</span></td>
+<td><span class="arithmatex">\(M \times K\)</span></td>
+</tr>
+<tr>
+<td><strong>噪声子空间</strong> <span class="arithmatex">\(\mathbf{U}_n\)</span></td>
+<td><span class="arithmatex">\(\mathbf{u}_{K+1},\dots,\mathbf{u}_M\)</span></td>
+<td><span class="arithmatex">\(\lambda_{K+1},\dots,\lambda_M\)</span></td>
+<td><span class="arithmatex">\(M \times (M-K)\)</span></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>💡 硬件加速实现</strong>：特征分解是 MUSIC 算法中计算量最大的步骤（<span class="arithmatex">\(O(M^3)\)</span>）。在 FPGA 等硬件平台上，可采用<strong>并行双边 Jacobi 旋转</strong>算法实现高效的特征值分解，相比传统 QR 算法和 CORDIC 方案，LUT 资源减少 40%~65%，时延降低 15%~25%。详见 [[并行双边Jacobi旋转特征值分解]]。</p>
+</blockquote>
 <hr />
-<h2 id="fm">FM 信号识别<a class="headerlink" href="#fm" title="Permanent link">&para;</a></h2>
-<h3 id="_15">核心原理<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
-<p>通过相位差分得到瞬时频率，再进行：
-- 相位解卷绕
-- 相位翻转修正
-- 八点滑动均值降噪</p>
-<p>最终根据频率变化趋势区分：
-- LFM：线性变化
-- FSK：跳变频率
-- NLFM：非线性变化</p>
-<h3 id="_16">工程结论<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
-<ul>
-<li>八点滑动均值的测频精度优于直接法和四点平均法</li>
-<li>在 SNR = 5 dB 时，频率误差可控制在约 0.26% 以内</li>
-<li>随着信噪比提高，频率误差进一步降低</li>
-</ul>
-<h3 id="_17">配图记录<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/d56fd84b43853437b21c82da7fb384fdfbdd4f7651d1496d378745926ebd1abc.jpg" /></p>
-<p><strong>图4.7：调频信号识别流程图</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/b8ae05fafd1aa2d6e2e8962e69c10b5e89dbf612c0e54e178fdee34b31514646.jpg" /></p>
-<p><strong>图4.8：不同测频方法均方误差比较图</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/8b8295f8114f3d843ab49c90fcea9c28a4f240473236138d4495ba4bd942b970.jpg" /></p>
-<p><strong>图4.9：不同信噪比下频率误差图</strong></p>
+<h2 id="4-music">4. MUSIC 算法核心原理<a class="headerlink" href="#4-music" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 核心结论<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>信号导向矢量 <span class="arithmatex">\(\mathbf{a}(\theta_k)\)</span> 与噪声子空间 <span class="arithmatex">\(\mathbf{U}_n\)</span> 正交。</strong></p>
+</blockquote>
+<p>证明思路：
+1. <span class="arithmatex">\(\mathbf{R} = \mathbf{A}\mathbf{R}_s\mathbf{A}^H + \sigma^2\mathbf{I}\)</span>
+2. <span class="arithmatex">\(\mathbf{R}\mathbf{U}_n = \sigma^2\mathbf{U}_n\)</span>（噪声子空间定义）
+3. 代入得 <span class="arithmatex">\(\mathbf{A}\mathbf{R}_s\mathbf{A}^H\mathbf{U}_n = 0\)</span>
+4. 由 <span class="arithmatex">\(\mathbf{A}\)</span> 和 <span class="arithmatex">\(\mathbf{R}_s\)</span> 均满列秩 <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(\mathbf{A}^H\mathbf{U}_n = 0\)</span>
+5. 即 <span class="arithmatex">\(\mathbf{a}^H(\theta_k)\mathbf{U}_n = 0,\quad k=1,\dots,K\)</span></p>
+<h3 id="42">4.2 正交性条件<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\mathbf{a}^H(\theta_k)\,\mathbf{U}_n\mathbf{U}_n^H\,\mathbf{a}(\theta_k) = 0 \quad\Longleftrightarrow\quad \theta = \theta_k
+\]</div>
+<p>因此，<strong>MUSIC 空间谱</strong>定义为：</p>
+<div class="arithmatex">\[
+\boxed{P_{\text{MUSIC}}(\theta) = \frac{1}{\mathbf{a}^H(\theta)\,\mathbf{U}_n\mathbf{U}_n^H\,\mathbf{a}(\theta)}}
+\]</div>
+<p>或等价地：</p>
+<div class="arithmatex">\[
+P_{\text{MUSIC}}(\theta) = \frac{\mathbf{a}^H(\theta)\mathbf{a}(\theta)}{\mathbf{a}^H(\theta)\,\mathbf{U}_n\mathbf{U}_n^H\,\mathbf{a}(\theta)}
+\]</div>
+<p>当 <span class="arithmatex">\(\theta\)</span> 等于真实 DOA 时，分母趋向 0，<span class="arithmatex">\(P_{\text{MUSIC}}(\theta)\)</span> 产生尖锐的<strong>谱峰</strong>。</p>
 <hr />
-<h2 id="42-fpga">4.2 信号调制识别的 FPGA 设计<a class="headerlink" href="#42-fpga" title="Permanent link">&para;</a></h2>
-<h3 id="_18">总体结构<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
-<p>调制识别流程分两部分：
-1. 3 dB 频谱带宽粗识别
-2. PSK 与 FM 两条支路分别细分类识别</p>
-<h4 id="_19">配图记录<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/8669c68176294e307614ae755953de8e149bc1131a528d536f4d2771751c7e9c.jpg" /></p>
-<p><strong>图4.10：调制识别 FPGA 流程图</strong></p>
+<h2 id="5-music">5. MUSIC 算法步骤（完整流程）<a class="headerlink" href="#5-music" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">步骤 1：估计协方差矩阵<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>由 <span class="arithmatex">\(N\)</span> 次快拍数据 <span class="arithmatex">\(\{\mathbf{x}(1),\mathbf{x}(2),\dots,\mathbf{x}(N)\}\)</span> 计算：</p>
+<div class="arithmatex">\[
+\hat{\mathbf{R}} = \frac{1}{N} \sum_{t=1}^{N}\mathbf{x}(t)\mathbf{x}^H(t)
+\]</div>
+<h3 id="2_1">步骤 2：特征分解<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>对 <span class="arithmatex">\(\hat{\mathbf{R}}\)</span> 做特征值分解，得到 <span class="arithmatex">\(M\)</span> 个特征值及对应的特征向量：</p>
+<div class="arithmatex">\[
+\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_M
+\]</div>
+<h3 id="3_1">步骤 3：信源数估计<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p>确定信源数量 <span class="arithmatex">\(K\)</span>。常用准则：</p>
+<ul>
+<li><strong>信息论准则</strong>（AIC / MDL）：</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+\text{AIC}(k) &amp;= -2N(M-k)\ln\frac{g(k)}{a(k)} + 2k(2M-k) \\[6pt]
+\text{MDL}(k) &amp;= -N(M-k)\ln\frac{g(k)}{a(k)} + \frac{1}{2}k(2M-k)\ln N
+\end{aligned}
+\]</div>
+<p>其中 <span class="arithmatex">\(g(k)\)</span> 为特征值几何均值，<span class="arithmatex">\(a(k)\)</span> 为算术均值。取使准则最小的 <span class="arithmatex">\(k\)</span> 作为 <span class="arithmatex">\(\hat{K}\)</span>。</p>
+<ul>
+<li><strong>特征值比值法</strong>：寻找特征值序列中最大的"跳变"点。</li>
+</ul>
+<h3 id="4">步骤 4：构造噪声子空间<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>取最小的 <span class="arithmatex">\(M-K\)</span> 个特征值对应的特征向量构成噪声子空间：</p>
+<div class="arithmatex">\[
+\mathbf{U}_n = [\mathbf{u}_{K+1},\,\mathbf{u}_{K+2},\,\dots,\,\mathbf{u}_M] \in \mathbb{C}^{M \times (M-K)}
+\]</div>
+<h3 id="5-music_1">步骤 5：搜索 MUSIC 谱<a class="headerlink" href="#5-music_1" title="Permanent link">&para;</a></h3>
+<p>在角度搜索范围 <span class="arithmatex">\([\theta_{\min},\theta_{\max}]\)</span> 内，以步长 <span class="arithmatex">\(\Delta\theta\)</span> 遍历：</p>
+<ol>
+<li>对每个 <span class="arithmatex">\(\theta\)</span> 计算导向矢量 <span class="arithmatex">\(\mathbf{a}(\theta)\)</span></li>
+<li>计算 MUSIC 伪谱：</li>
+</ol>
+<div class="arithmatex">\[
+P_{\text{MUSIC}}(\theta) = \frac{1}{\mathbf{a}^H(\theta)\,\mathbf{U}_n\mathbf{U}_n^H\,\mathbf{a}(\theta)}
+\]</div>
+<ol>
+<li>频谱扫描，寻找 <span class="arithmatex">\(K\)</span> 个最大的峰值，其对应的 <span class="arithmatex">\(\theta\)</span> 即为 DOA 估计值。</li>
+</ol>
 <hr />
-<h3 id="421-3db">4.2.1 3dB 频谱带宽模块设计<a class="headerlink" href="#421-3db" title="Permanent link">&para;</a></h3>
-<h4 id="_20">核心结论<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h4>
-<p>对输入 IQ 数据进行：
-- 2048 点截取
-- 加窗
-- FFT
-- CORDIC 求模
-- log 运算
-- 3 dB 带宽统计</p>
-<p>再将结果与阈值比较，完成 FM / PSK 粗分类。</p>
-<h4 id="_21">工程点<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
-<ul>
-<li>基于 FFT IP core 实现</li>
-<li>接口遵循 AXI 握手协议</li>
-<li>以阈值完成粗分类</li>
-</ul>
-<h4 id="_22">典型结果<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
-<ul>
-<li>LFM 的 3 dB 带宽较宽</li>
-<li>NS 的 3 dB 带宽很窄</li>
-<li>因而可以完成可靠粗分类</li>
-</ul>
-<h4 id="_23">配图记录<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h4>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/b83cf23cf165f51aa40ca7cc0b3cae4aebf329c51f5caab3e93eb7b6dbca9dd6.jpg" /></p>
-<p><strong>图4.11：3 dB 带宽测量流程图</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/b85f0a1c891162e00f5139621f2449dbbe891ceb7adbadeaa0827f674ff06b3f.jpg" /></p>
-<p><strong>图4.12：FFT 例化模块</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/dbda9cd193f00b742379870d725f6dc6cf430e7aa6de011700c3fc32e6f8ac2d.jpg" /></p>
-<p><strong>图4.13：3 dB 带宽测量 RTL 视图</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/a2df898b18939e98c93c7d97c982f1e2b0f036951e1292f476a451fe5a8e3561.jpg" /></p>
-<p><strong>图4.14：LFM 与 NS 的粗识别结果</strong></p>
+<h2 id="6-matlab-python">6. MATLAB / Python 伪代码<a class="headerlink" href="#6-matlab-python" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">music_algorithm</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">angle_grid</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sd">    MUSIC 算法实现</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">    参数:</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">        X: 阵列接收数据, shape = (M, N), M阵元数, N快拍数</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">        M: 阵元数</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">        d: 阵元间距</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">        wavelength: 波长</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="sd">        angle_grid: 角度搜索网格 (弧度)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sd">        K: 信源数</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sd">    返回:</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sd">        P_music: MUSIC 伪谱</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">        doa_estimates: 估计的DOA</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="c1"># Step 1: 协方差矩阵估计</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">N</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="n">R_hat</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">X</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">N</span>  <span class="c1"># M × M</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="c1"># Step 2: 特征分解</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">eigenvalues</span><span class="p">,</span> <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">R_hat</span><span class="p">)</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="c1"># eigh 返回升序，需要降序</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">eigenvalues</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="n">eigenvalues</span> <span class="o">=</span> <span class="n">eigenvalues</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="n">eigenvectors</span> <span class="o">=</span> <span class="n">eigenvectors</span><span class="p">[:,</span> <span class="n">idx</span><span class="p">]</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="c1"># Step 3: 信源数 (此处直接使用已知K)</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="c1"># Step 4: 噪声子空间 (最小的 M-K 个特征向量)</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="n">Un</span> <span class="o">=</span> <span class="n">eigenvectors</span><span class="p">[:,</span> <span class="n">K</span><span class="p">:]</span>  <span class="c1"># M × (M-K)</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>    <span class="c1"># Step 5: MUSIC 谱搜索</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="n">P_music</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">angle_grid</span><span class="p">))</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">theta</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">angle_grid</span><span class="p">):</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>        <span class="c1"># 导向矢量</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">d</span> <span class="o">/</span> <span class="n">wavelength</span> 
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>                    <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">M</span><span class="p">))</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>        <span class="c1"># MUSIC 伪谱</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>        <span class="n">denom</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Un</span> <span class="o">@</span> <span class="n">Un</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">a</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>        <span class="n">P_music</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">denom</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    <span class="c1"># 找K个峰值</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    <span class="n">peak_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">P_music</span><span class="p">)[</span><span class="o">-</span><span class="n">K</span><span class="p">:]</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="n">doa_estimates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">angle_grid</span><span class="p">[</span><span class="n">peak_indices</span><span class="p">])</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>    <span class="k">return</span> <span class="n">P_music</span><span class="p">,</span> <span class="n">doa_estimates</span>
+</code></pre></div>
 <hr />
-<h3 id="422-psk-fm">4.2.2 PSK 与 FM 调制识别模块设计<a class="headerlink" href="#422-psk-fm" title="Permanent link">&para;</a></h3>
-<h4 id="psk_1">PSK 支路<a class="headerlink" href="#psk_1" title="Permanent link">&para;</a></h4>
+<h2 id="7">7. 关键性质与注意事项<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 分辨率优势<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
 <ul>
-<li>使用 DSP48E1 级联实现窗函数滤波</li>
-<li>对相关峰值进行增强</li>
-<li>根据峰值种类数判断 NS、BPSK、QPSK</li>
+<li>传统波束形成受<strong>瑞利限</strong>约束（~ 波束宽度）</li>
+<li>MUSIC 的分辨率不受瑞利限限制，取决于<strong>信噪比</strong>和<strong>快拍数</strong></li>
+<li>在高 SNR / 多快拍条件下，可分辨角度差远小于波束宽度的两个信源</li>
 </ul>
-<h4 id="_24">配图记录<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h4>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/33a26d01fd206936767330790d4179267edc57e3e9efa29858cbd5dbc5a9c168.jpg" /></p>
-<p><strong>图4.15：DSP48E1 简化结构图</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/766b29ebc19d25e4523af71e93c828f02368238a0bb950973fe3f3f1fb41d06f.jpg" /></p>
-<p><strong>图4.16：级联 DSP48E1 的滤波实现</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/77c4bb90b70deb80569d4af3045da5a37ce62cfe22c10875d164a1ab557962bf.jpg" /></p>
-<p><strong>图4.17：PSK 脉冲调制信号检测结果</strong></p>
-<h4 id="fm_1">FM 支路<a class="headerlink" href="#fm_1" title="Permanent link">&para;</a></h4>
+<h3 id="72">7.2 信源数估计的重要性<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
 <ul>
-<li>提取相位</li>
-<li>求相位差分</li>
-<li>进行解卷绕和滑动均值</li>
-<li>根据频率曲线区分 LFM、FSK、NLFM</li>
+<li><span class="arithmatex">\(K\)</span> 的估计错误会导致严重后果：</li>
+<li><strong>欠估计</strong>（<span class="arithmatex">\(\hat{K} &lt; K\)</span>）：部分信源被淹没在噪声子空间中 → 漏检</li>
+<li><strong>过估计</strong>（<span class="arithmatex">\(\hat{K} &gt; K\)</span>）：噪声子空间被污染 → 出现虚假谱峰</li>
 </ul>
-<h4 id="_25">配图记录<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h4>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E5%A4%9A%E9%97%A8%E9%99%90%E6%97%B6%E5%9F%9F%E7%9A%84%E6%95%B0%E5%AD%97%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%8A%A8%E6%80%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E8%B0%83%E5%88%B6%E8%AF%86%E5%88%AB%E7%A0%94%E7%A9%B6_%E5%88%98%E6%96%B9%E5%BB%BA.pdf-d8676fd6-609c-4f5c-a98c-58efbfd069cd/images/6549d8d7a655b87d262fbc28db73db020990f6e89e6a7880faac136461bada86.jpg" /></p>
-<p><strong>图4.18：LFM 与 FSK 的频率检测结果</strong></p>
+<h3 id="73">7.3 相干信源问题<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<ul>
+<li>MUSIC <strong>不能直接处理</strong>相干信源（如多径信号）</li>
+<li>相干信源导致信号协方差矩阵 <span class="arithmatex">\(\mathbf{R}_s\)</span> 秩亏损</li>
+<li><strong>解决方案</strong>：空间平滑（Spatial Smoothing）预处理</li>
+</ul>
+<h3 id="74">7.4 阵列校准<a class="headerlink" href="#74" title="Permanent link">&para;</a></h3>
+<ul>
+<li>导向矢量 <span class="arithmatex">\(\mathbf{a}(\theta)\)</span> 依赖精确的阵列几何</li>
+<li>通道幅相不一致、阵元位置误差会导致性能严重下降</li>
+</ul>
+<h3 id="75">7.5 计算复杂度<a class="headerlink" href="#75" title="Permanent link">&para;</a></h3>
+<ul>
+<li>主要开销：协方差估计 <span class="arithmatex">\(O(M^2N)\)</span> + 特征分解 <span class="arithmatex">\(O(M^3)\)</span></li>
+<li>搜索 MUSIC 中引入 <strong>Root-MUSIC</strong>可进一步降低计算开销</li>
+</ul>
 <hr />
-<h2 id="43">4.3 本章小结<a class="headerlink" href="#43" title="Permanent link">&para;</a></h2>
-<p>第四章完成了雷达脉内调制识别方案的理论、仿真与硬件实现：
-- 用 3 dB 带宽完成 FM / PSK 粗分类
-- 用瞬时相关识别 NS、BPSK、QPSK
-- 用改进测频识别 LFM、FSK、NLFM
-- 最终实现 6 类信号的有效识别，并验证了 FPGA 实现可行性</p>
+<h2 id="8">8. 变种与改进算法<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Root-MUSIC</strong></td>
+<td>ULA 下将谱搜索转为多项式求根，计算量小，无网格量化误差</td>
+</tr>
+<tr>
+<td><strong>Cyclic MUSIC</strong></td>
+<td>利用循环平稳特性，可处理多于阵元数的信源</td>
+</tr>
+<tr>
+<td><strong>MUSIC with Spatial Smoothing</strong></td>
+<td>通过子阵平均去相关，解决相干信源问题</td>
+</tr>
+<tr>
+<td><strong>Weighted MUSIC</strong></td>
+<td>在噪声子空间投影中加入加权，改善低 SNR 性能</td>
+</tr>
+<tr>
+<td><strong>Tensor MUSIC</strong></td>
+<td>将阵列数据建模为张量，利用多维结构提高分辨能力</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-esprit">9. 与 ESPRIT 的对比<a class="headerlink" href="#9-esprit" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>MUSIC</th>
+<th>ESPRIT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原理</td>
+<td>噪声子空间正交性</td>
+<td>信号子空间旋转不变性</td>
+</tr>
+<tr>
+<td>计算</td>
+<td>需谱搜索（Root-MUSIC 除外）</td>
+<td>闭式解，无需搜索</td>
+</tr>
+<tr>
+<td>阵列要求</td>
+<td>任意阵列（已知流型）</td>
+<td>需阵列具有平移不变结构</td>
+</tr>
+<tr>
+<td>阵列校准</td>
+<td>需精确校准</td>
+<td>对校准误差更鲁棒</td>
+</tr>
+<tr>
+<td>计算量</td>
+<td>较大（谱搜索）</td>
+<td>较小（直接求解）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10">10. 参考文献<a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Schmidt, R.O., "Multiple Emitter Location and Signal Parameter Estimation," <em>IEEE Trans. AP</em>, 1986.</li>
+<li>Van Trees, H.L., <em>Optimum Array Processing</em>, Wiley, 2002.</li>
+<li>Krim, H. &amp; Viberg, M., "Two Decades of Array Signal Processing Research," <em>IEEE Signal Processing Magazine</em>, 1996.</li>
+<li>Wax, M. &amp; Kailath, T., "Detection of Signals by Information Theoretic Criteria," <em>IEEE Trans. ASSP</em>, 1985.</li>
+</ul>
 
 
 
 
 
 
+
+  
+  
 
 
 
