@@ -54,6 +54,7 @@ exclude_docs: |
   kb_material/**/block_list.json
   kb_material/**/content_list_v2.json
   kb_material/**/layout.json
+  **/*.excalidraw.md
 
 hooks:
   - hooks.py
@@ -92,6 +93,7 @@ nav:
       - 卷积神经网络（CNN）: ML/卷积神经网络（CNN）.md
       - 循环神经网络（RNN）: ML/循环神经网络（RNN）.md
       - 长短期记忆网络（LSTM）: ML/长短期记忆网络（LSTM）.md
+      - 门控循环单元（GRU）: ML/门控循环单元（GRU）.md
       - 常见疑惑解答: ML/一些疑惑解答.md
       - 应用场景与选型: ML/神经网络应用场景与选型.md
       - 梯度下降优化算法: ML/梯度下降优化算法.md
@@ -107,5 +109,9 @@ nav:
       - 干涉仪测向原理: 信号处理/干涉仪原理.md
       - 空间谱估计与 MUSIC 算法: 信号处理/空间谱估计与 MUSIC 算法.md
       - 并行双边 Jacobi 旋转特征值分解: 信号处理/并行双边Jacobi旋转特征值分解.md
+  - 数字对消:
+      - 专业名词与缩写: 数字对消/对消常见专业名词.md
+      - 线性对消方法: 数字对消/线性对消.md
+      - 非线性对消方法: 数字对消/非线性对消.md
   - FPGA:
       - FPGA: FPGA/index.md
