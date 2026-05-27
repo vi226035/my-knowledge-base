@@ -12,13 +12,9 @@
         <meta name="author" content="你自己">
       
       
-        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/ML/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E9%97%A8%E6%8E%A7%E5%BE%AA%E7%8E%AF%E5%8D%95%E5%85%83%EF%BC%88GRU%EF%BC%89/">
       
       
-        <link rel="prev" href="../..">
-      
-      
-        <link rel="next" href="../%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89/">
       
       
         
@@ -29,7 +25,7 @@
     
     
       
-        <title>神经网络 - 我的知识库</title>
+        <title>门控循环单元（GRU） - 我的知识库</title>
       
     
     
@@ -78,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#gru" class="md-skip">
           跳转至
         </a>
       
@@ -112,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              神经网络
+              门控循环单元（GRU）
             
           </span>
         </div>
@@ -242,13 +238,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../ML/神经网络.md" class="md-tabs__link">
           
   
   
@@ -299,6 +293,28 @@
     
   
   信号处理
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E5%AF%B9%E6%B6%88%E5%B8%B8%E8%A7%81%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数字对消
 
         </a>
       </li>
@@ -404,10 +420,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -427,24 +441,23 @@
       
         
       
+        
+      
     
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -462,7 +475,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -477,37 +490,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    神经网络
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../ML/神经网络.md" class="md-nav__link">
         
   
   
@@ -523,310 +509,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        神经元
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="神经元">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        数学定义
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        直观理解
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        举例
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        神经网络结构
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="神经网络结构">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        三层结构
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        为什么需要多层？
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        正向传播
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="正向传播">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        矩阵形式
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        计算示例
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        反向传播
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="反向传播">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        为什么叫"反向"？
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        损失函数
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        参数更新
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        直观类比
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        链式法则
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        神经网络训练优化
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="神经网络训练优化">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        问题：全量梯度下降太慢
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mini-batch" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mini-Batch 梯度下降
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Mini-Batch 梯度下降">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mini-batch_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mini-Batch 的问题与对策
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sgd" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SGD 动量梯度下降
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="SGD 动量梯度下降">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        动量法的效果
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -839,7 +521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89/" class="md-nav__link">
+      <a href="../../ML/卷积神经网络（CNN）.md" class="md-nav__link">
         
   
   
@@ -867,7 +549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89/" class="md-nav__link">
+      <a href="../../ML/循环神经网络（RNN）.md" class="md-nav__link">
         
   
   
@@ -895,7 +577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%BD%91%E7%BB%9C%EF%BC%88LSTM%EF%BC%89/" class="md-nav__link">
+      <a href="../../ML/长短期记忆网络（LSTM）.md" class="md-nav__link">
         
   
   
@@ -923,7 +605,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E4%B8%80%E4%BA%9B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" class="md-nav__link">
+      <a href="../../ML/门控循环单元（GRU）.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    门控循环单元（GRU）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ML/一些疑惑解答.md" class="md-nav__link">
         
   
   
@@ -951,7 +661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%80%89%E5%9E%8B/" class="md-nav__link">
+      <a href="../../ML/神经网络应用场景与选型.md" class="md-nav__link">
         
   
   
@@ -979,7 +689,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" class="md-nav__link">
+      <a href="../../ML/梯度下降优化算法.md" class="md-nav__link">
         
   
   
@@ -1007,7 +717,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/" class="md-nav__link">
+      <a href="../../ML/时域卷积网络（TCN）.md" class="md-nav__link">
         
   
   
@@ -1433,7 +1143,9 @@
     
       
         
-          
+      
+        
+      
         
       
     
@@ -1448,6 +1160,153 @@
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字对消
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数字对消
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E5%AF%B9%E6%B6%88%E5%B8%B8%E8%A7%81%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业名词与缩写
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性对消方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    非线性对消方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -1470,8 +1329,8 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1517,22 +1376,134 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#gru_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        神经元
+        为什么会有 GRU？
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="神经元">
+    <nav class="md-nav" aria-label="为什么会有 GRU？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSTM 很好，但太重了
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gru_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GRU 的思路：合并 + 简化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gru_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GRU 的核心：两个门
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GRU 的核心：两个门">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-reset-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 重置门（Reset Gate）：决定"忽略多少过去"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 重置门（Reset Gate）：决定&#34;忽略多少过去&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通俗理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-update-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 更新门（Update Gate）：决定"保留多少旧信息"
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 更新门（Update Gate）：决定&#34;保留多少旧信息&#34;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通俗理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gru_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GRU 的信息流：一步步走一遍
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GRU 的信息流：一步步走一遍">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        数学定义
+        第一步：计算门控信号
       
     </span>
   </a>
@@ -1543,7 +1514,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        直观理解
+        第二步：根据重置门，算出"候选新状态"
       
     </span>
   </a>
@@ -1554,7 +1525,29 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        举例
+        第三步：用更新门，混合旧状态和新候选
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#h_t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第四步：输出 \(h_t\)，传给下一个时间步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通俗理解整个流程
       
     </span>
   </a>
@@ -1567,22 +1560,150 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#gru-vs-lstm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        神经网络结构
+        GRU vs LSTM：差在哪？
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="神经网络结构">
+    <nav class="md-nav" aria-label="GRU vs LSTM：差在哪？">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#lstm-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSTM 的遗忘门 + 输入门 ≈ GRU 的更新门
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gru_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GRU 的优点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GRU 的优点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 结构简单，参数少
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 训练稳定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 实践中效果不输 LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gru_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GRU 的缺点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="GRU 的缺点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-lstm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 极端长距离依赖可能不如 LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 灵活性略低
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 没有"本质突破"
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三层结构
+        对初学者的最终理解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="对初学者的最终理解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RNN 家族的"进化树"
       
     </span>
   </a>
@@ -1593,7 +1714,7 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        为什么需要多层？
+        实际操作建议
       
     </span>
   </a>
@@ -1602,6 +1723,28 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gru_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GRU 适合哪些应用场景？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rnn-vs-lstm-vs-gru" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结对比：RNN vs LSTM vs GRU
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1609,194 +1752,10 @@
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        正向传播
+        参考关系
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="正向传播">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        矩阵形式
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        计算示例
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        反向传播
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="反向传播">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        为什么叫"反向"？
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        损失函数
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_15" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        参数更新
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_16" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        直观类比
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_17" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        链式法则
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_18" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        神经网络训练优化
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="神经网络训练优化">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_19" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        问题：全量梯度下降太慢
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mini-batch" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mini-Batch 梯度下降
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Mini-Batch 梯度下降">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mini-batch_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mini-Batch 的问题与对策
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sgd" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SGD 动量梯度下降
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="SGD 动量梯度下降">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_20" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        动量法的效果
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1820,178 +1779,307 @@
   
 
 
-<h1 id="_1">神经网络<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>神经网络本质上是一个万能函数逼近器：给它大量输入-输出样本，它能自动"学"出一个函数来拟合这种映射关系。</p>
-<p>举个例子——给你一堆房子的面积、卧室数、位置，要你预测房价。你可以手动写一个线性公式 <code>房价 = w1×面积 + w2×卧室数 + w3×位置 + b</code>，但神经网络做的事情差不多，只是它能学更复杂的非线性关系。</p>
-<p>核心思想就三步：<strong>（1）前向算结果 →（2）跟答案比差距 →（3）根据差距调参数</strong>，反复循环直到足够好。</p>
+<h1 id="gru">门控循环单元（GRU）<a class="headerlink" href="#gru" title="Permanent link">&para;</a></h1>
+<p>GRU（Gated Recurrent Unit，门控循环单元）是 LSTM 的一种<strong>简化版</strong>。它把 LSTM 的三个门砍成两个门，把两个状态合并成一个，参数更少、训练更快，但效果往往和 LSTM 差不多。</p>
+<p>你可以把它理解成：<strong>LSTM 的"轻量青春版"——更便宜，但战斗力基本不减。</strong></p>
 <hr />
-<h2 id="_2">神经元<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>神经元是神经网络的最小计算单元，模拟生物神经元"接收信号→汇总→决定是否激活"的过程。</p>
-<h3 id="_3">数学定义<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>一个神经元接收 <span class="arithmatex">\(n\)</span> 个输入 <span class="arithmatex">\(x_1, x_2, ..., x_n\)</span>，每个输入有一个权重 <span class="arithmatex">\(w_i\)</span>，加上一个偏置 <span class="arithmatex">\(b\)</span>，经过激活函数 <span class="arithmatex">\(f\)</span> 输出：</p>
-<div class="arithmatex">\[y = f\left(\sum_{i=1}^{n} w_i x_i + b\right)\]</div>
-<h3 id="_4">直观理解<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>权重 <span class="arithmatex">\(w_i\)</span></strong>：这个输入有多重要（正=促进，负=抑制）</li>
-<li><strong>偏置 <span class="arithmatex">\(b\)</span></strong>：激活门槛的高低调整——偏置越大，即使输入信号较小也容易激活；偏置越小，需要更大的输入才能激活</li>
-<li><strong>激活函数 <span class="arithmatex">\(f\)</span></strong>：把加权和映射到一个合理范围（比如 0~1 之间，像概率）</li>
-</ul>
-<h3 id="_5">举例<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>假设一个神经元判断"今天适不适合出门"：</p>
-<ul>
-<li><span class="arithmatex">\(x_1\)</span> = 温度 25°C（归一化到 0~1，25°C → 0.6），<span class="arithmatex">\(w_1 = 0.8\)</span></li>
-<li><span class="arithmatex">\(x_2\)</span> = 降雨概率 0.8（80%），<span class="arithmatex">\(w_2 = -0.6\)</span></li>
-<li><span class="arithmatex">\(b = 0.3\)</span></li>
-</ul>
-<p>加权和 = <span class="arithmatex">\(0.6 \times 0.8 + 0.8 \times (-0.6) + 0.3 = 0.48 - 0.48 + 0.3 = 0.3\)</span></p>
-<p>再用 Sigmoid 激活：<span class="arithmatex">\(S(0.3) = \frac{1}{1+e^{-0.3}} \approx 0.574\)</span>，偏向"适合出门"但没那么确定——因为温度适中但降雨概率高，两者互相抵消后偏置起了决定作用。</p>
-<p><img alt="Pasted image 20260509102005.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102005.png" /></p>
-<hr />
-<h2 id="_6">神经网络结构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>多个神经元按层组织，前一层的输出作为后一层的输入，形成"多层感知机"。</p>
-<h3 id="_7">三层结构<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>输入层</strong>：接收原始数据（不计算，只是占位），神经元数 = 特征数</li>
-<li><strong>隐藏层</strong>：核心计算层，可以有多个，每层提取不同层次的特征</li>
-<li><strong>输出层</strong>：给出最终结果，神经元数 = 要预测的值的个数</li>
-</ul>
-<p><strong>全连接</strong>意味着：当前层的每个神经元都和上一层的所有神经元相连。</p>
-<h3 id="_8">为什么需要多层？<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>单层只能表达线性关系。堆叠多层 + 非线性激活函数 = 能表达任意复杂函数。</p>
-<p>类比：一层 = 只能画直线分割数据；两层 = 能画折线；三层以上 ≈ 能画任意形状的边界。</p>
-<p><img alt="Pasted image 20260509102332.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102332.png" /></p>
-<hr />
-<h2 id="_9">正向传播<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<p>从输入 → 隐藏层 → 输出，逐层计算，最终得到预测值的过程。</p>
-<h3 id="_10">矩阵形式<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>设第 <span class="arithmatex">\(l\)</span> 层的权重矩阵为 <span class="arithmatex">\(W^{[l]}\)</span>，偏置向量为 <span class="arithmatex">\(b^{[l]}\)</span>，激活函数为 <span class="arithmatex">\(f^{[l]}\)</span>：</p>
-<div class="arithmatex">\[\begin{aligned}
-Z^{[l]} &amp;= W^{[l]} A^{[l-1]} + b^{[l]} \\
-A^{[l]} &amp;= f^{[l]}(Z^{[l]})
-\end{aligned}\]</div>
-<p>其中 <span class="arithmatex">\(A^{[0]}\)</span> 即输入 <span class="arithmatex">\(X\)</span>，<span class="arithmatex">\(A^{[L]}\)</span> 即最终输出 <span class="arithmatex">\(\hat{Y}\)</span>。</p>
-<h3 id="_11">计算示例<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>一个两输入、两隐藏神经元的简单网络：</p>
-<ul>
-<li>输入 <span class="arithmatex">\(X = [2, 3]^T\)</span></li>
-<li>隐藏层权重 <span class="arithmatex">\(W^{[1]} = \begin{bmatrix} 0.5 &amp; 0.2 \\\ 0.1 &amp; 0.8 \end{bmatrix}\)</span>，偏置 <span class="arithmatex">\(b^{[1]} = [0.1, 0.1]^T\)</span></li>
-<li><span class="arithmatex">\(Z^{[1]} = W^{[1]} X + b^{[1]} = \begin{bmatrix} 0.5 \times 2 + 0.2 \times 3 + 0.1 \\\ 0.1 \times 2 + 0.8 \times 3 + 0.1 \end{bmatrix} = \begin{bmatrix} 1.7 \\\ 2.7 \end{bmatrix}\)</span></li>
-<li>经 Sigmoid：<span class="arithmatex">\(A^{[1]} = [S(1.7), S(2.7)]^T \approx [0.846, 0.937]^T\)</span></li>
-</ul>
-<p>然后 <span class="arithmatex">\(A^{[1]}\)</span> 继续向后传播，直到输出层。</p>
-<p><img alt="Pasted image 20260509102321.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102321.png" />
-<img alt="Pasted image 20260509151348.png" src="../../kb_material/ML_image/Pasted%20image%2020260509151348.png" /></p>
-<hr />
-<h2 id="_12">反向传播<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
-<p>正向传播给出预测值后，需要衡量"差了多少"，然后把这个误差反向传回去，指导每个参数该调多少。</p>
-<h3 id="_13">为什么叫"反向"？<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>误差从输出层开始，利用链式法则逐层往回计算梯度，所以叫反向传播。</p>
-<h3 id="_14">损失函数<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<p>衡量预测值和真实值差距的标尺：</p>
-<p><strong>均方误差（MSE，回归任务）</strong>：
-$<span class="arithmatex">\(L = \frac{1}{2}(y_{pred} - y_{true})^2\)</span>$</p>
+<h2 id="gru_1">为什么会有 GRU？<a class="headerlink" href="#gru_1" title="Permanent link">&para;</a></h2>
+<h3 id="lstm">LSTM 很好，但太重了<a class="headerlink" href="#lstm" title="Permanent link">&para;</a></h3>
+<p>LSTM 的设计非常成功——它用细胞状态 <span class="arithmatex">\(C_t\)</span> 的加法更新替代 RNN 的乘法连乘，基本解决了 RNN 的两大痛点（梯度消失、长距离依赖学不到）。但它有一个明显缺点：</p>
+<p><strong>结构太复杂。</strong></p>
+<p>LSTM 里有三个门（遗忘门、输入门、输出门），外加一个独立的长时记忆 <span class="arithmatex">\(c_t\)</span>（细胞状态），和一个输出用的隐藏状态 <span class="arithmatex">\(h_t\)</span>：</p>
+<p><img alt="Pasted image 20260510110752.png" src="../../kb_material/ML_image/Pasted%20image%2020260510110752.png" /></p>
+<p>这导致 LSTM 的参数很多，训练和推理都比较慢。</p>
+<p>于是研究者就想：</p>
 <blockquote>
-<p>标准 MSE 是 <span class="arithmatex">\(\frac{1}{n}\sum(y_{pred} - y_{true})^2\)</span>。这里加了 <span class="arithmatex">\(\frac{1}{2}\)</span> 系数，纯粹是为了求导后消掉平方项的 2，让梯度表达式更简洁——不影响优化方向。</p>
+<p>能不能把 LSTM 精简一下？去掉一些门、合并一些状态，但保留核心能力？</p>
 </blockquote>
-<p><strong>交叉熵（分类任务）</strong>：
-$<span class="arithmatex">\(L = -\sum_{i} y_i \log(\hat{y}_i)\)</span>$</p>
-<h3 id="_15">参数更新<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
-<p>算出每个参数的梯度 <span class="arithmatex">\(\frac{\partial L}{\partial w}\)</span> 后，沿着梯度的<strong>反方向</strong>更新：</p>
-<div class="arithmatex">\[w := w - \eta \cdot \frac{\partial L}{\partial w}\]</div>
-<p>其中 <span class="arithmatex">\(\eta\)</span> 是<strong>学习率</strong>，控制每步走多大——太大容易跳过最优点（振荡），太小训练太慢。</p>
-<h3 id="_16">直观类比<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
-<p>你想调出一个完美的吉他音：
-1. 弹一下（正向传播）
-2. 听听差了多少（算损失）
-3. 判断琴弦该拧紧还是拧松（反向传播算梯度）
-4. 稍微拧一点（参数更新）
-5. 重复 1-4 直到音准</p>
-<p><img alt="Pasted image 20260509103713.png" src="../../kb_material/ML_image/Pasted%20image%2020260509103713.png" /></p>
-<p><img alt="Pasted image 20260509102920.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102920.png" /></p>
-<h3 id="_17">链式法则<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
-<p>反向传播的数学基础。对于复合函数 <span class="arithmatex">\(L = f(g(h(x)))\)</span>：</p>
-<div class="arithmatex">\[\frac{dL}{dx} = \frac{dL}{df} \cdot \frac{df}{dg} \cdot \frac{dg}{dh} \cdot \frac{dh}{dx}\]</div>
-<p>每一层都把自己的梯度传递给前一层，就像接力棒一样。</p>
-<p><strong>数值举例</strong>：</p>
-<p><span class="arithmatex">\(L = (3x + 2)^2\)</span>，<span class="arithmatex">\(x=1\)</span></p>
-<p>正向：<span class="arithmatex">\(x=1 → 中间=5 → L=25\)</span></p>
-<p>反向：
-- <span class="arithmatex">\(\frac{\partial L}{\partial 中间} = 2 × 5 = 10\)</span>
-- <span class="arithmatex">\(\frac{\partial 中间}{\partial x} = 3\)</span>
-- <span class="arithmatex">\(\frac{\partial L}{\partial x} = 10 × 3 = 30\)</span> ✓（直接求导：<span class="arithmatex">\(2(3x+2)·3\)</span>，<span class="arithmatex">\(x=1\)</span> 代入 = 30）</p>
-<p><img alt="Pasted image 20260509102958.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102958.png" />
-<img alt="Pasted image 20260509103129.png" src="../../kb_material/ML_image/Pasted%20image%2020260509103129.png" /></p>
+<p>这就诞生了 GRU。</p>
+<h3 id="gru_2">GRU 的思路：合并 + 简化<a class="headerlink" href="#gru_2" title="Permanent link">&para;</a></h3>
+<p>GRU 做了两件关键的事：</p>
+<ol>
+<li><strong>三个门 → 两个门</strong>：砍掉了 LSTM 的输出门，只保留"更新门"和"重置门"</li>
+<li><strong>两个状态 → 一个状态</strong>：把 LSTM 的细胞状态 <span class="arithmatex">\(c_t\)</span> 和隐藏状态 <span class="arithmatex">\(h_t\)</span> 合并成一个 <span class="arithmatex">\(h_t\)</span></li>
+</ol>
+<p>结果是：</p>
+<ul>
+<li>参数减少约 <strong>25%</strong></li>
+<li>结构更简单</li>
+<li>训练更快</li>
+<li>效果在很多任务上和 LSTM <strong>持平甚至更好</strong></li>
+</ul>
 <hr />
-<h2 id="_18">神经网络训练优化<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
-<h3 id="_19">问题：全量梯度下降太慢<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
-<p>每次更新参数需要遍历全部训练数据（几万甚至几百万样本），计算一次梯度代价极大，而且会卡在局部细节里无法"跳过"。</p>
-<div class="arithmatex">\[w := w - \eta \cdot \frac{1}{N}\sum_{i=1}^{N} \nabla L_i(w)\]</div>
-<p>当 <span class="arithmatex">\(N = 100\)</span> 万时，更新一步就要算 100 万次梯度，不现实。</p>
-<p><img alt="Pasted image 20260509104055.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104055.png" /></p>
-<h3 id="mini-batch">Mini-Batch 梯度下降<a class="headerlink" href="#mini-batch" title="Permanent link">&para;</a></h3>
-<p>不每次用全量数据，而是每次随机抽取一小批（如 32、64、128 个样本）来估算梯度。这样更新快，且随机性有助于跳出局部陷阱。</p>
-<div class="arithmatex">\[w := w - \eta \cdot \frac{1}{m}\sum_{i \in batch} \nabla L_i(w)\]</div>
-<p><strong>三种梯度下降对比</strong>：</p>
+<h2 id="gru_3">GRU 的核心：两个门<a class="headerlink" href="#gru_3" title="Permanent link">&para;</a></h2>
+<p>GRU 只有两个门，一个管"更新"，一个管"重置"。</p>
+<h3 id="1-reset-gate">1. 重置门（Reset Gate）：决定"忽略多少过去"<a class="headerlink" href="#1-reset-gate" title="Permanent link">&para;</a></h3>
+<p>重置门的输出 <span class="arithmatex">\(r_t\)</span> 是一个 0 到 1 之间的数：</p>
+<div class="arithmatex">\[r_t = \sigma(W_r \cdot [h_{t-1}, x_t])\]</div>
+<ul>
+<li>当 <span class="arithmatex">\(r_t \to 0\)</span>：忽略历史信息，像一个全新的开始</li>
+<li>当 <span class="arithmatex">\(r_t \to 1\)</span>：保留完整的过去信息</li>
+</ul>
+<h4 id="_1">通俗理解<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
+<p>重置门就像你<strong>看一本新书时，决定要不要把之前那本书的内容忘掉</strong>：</p>
+<ul>
+<li>如果新书和旧书完全无关（比如从小说换到微积分），那就重置——把旧记忆清空</li>
+<li>如果新书是旧书的续集，那就不要重置——留着旧记忆</li>
+</ul>
+<p>在实际任务中，如果当前输入 <span class="arithmatex">\(x_t\)</span> 和前面的序列突然断了关系（比如一句话结束、新话题开始），重置门就会自动变小，帮网络"清缓存"。</p>
+<hr />
+<h3 id="2-update-gate">2. 更新门（Update Gate）：决定"保留多少旧信息"<a class="headerlink" href="#2-update-gate" title="Permanent link">&para;</a></h3>
+<p>更新门的输出 <span class="arithmatex">\(z_t\)</span> 也是一个 0 到 1 之间的数：</p>
+<div class="arithmatex">\[z_t = \sigma(W_z \cdot [h_{t-1}, x_t])\]</div>
+<ul>
+<li>当 <span class="arithmatex">\(z_t \to 0\)</span>：多采用新信息，少保留过去</li>
+<li>当 <span class="arithmatex">\(z_t \to 1\)</span>：多保留过去，少采用新信息</li>
+</ul>
+<h4 id="_2">通俗理解<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<p>更新门像你<strong>决定要不要更新你脑子里的观点</strong>：</p>
+<ul>
+<li>你原来觉得火锅最好吃，今天吃了寿司觉得也不错 → 更新门中等，新旧观点混合</li>
+<li>你原来觉得某个朋友很靠谱，今天他突然借了你钱不还 → 更新门偏大，保留大部分旧记忆，但也会融入新观察</li>
+</ul>
+<p>更新门是 GRU 里<strong>最核心的机制</strong>，它直接控制长期记忆如何在时间轴上流动。</p>
+<hr />
+<h2 id="gru_4">GRU 的信息流：一步步走一遍<a class="headerlink" href="#gru_4" title="Permanent link">&para;</a></h2>
+<p>用公式来看，GRU 在每个时间步做以下四件事：</p>
+<h3 id="_3">第一步：计算门控信号<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>根据上一时刻的隐藏状态 <span class="arithmatex">\(h_{t-1}\)</span> 和当前输入 <span class="arithmatex">\(x_t\)</span>，算出两个门的开关程度：</p>
+<div class="arithmatex">\[z_t = \sigma(W_z \cdot [h_{t-1}, x_t]) \quad \text{(更新门)}$$
+$$r_t = \sigma(W_r \cdot [h_{t-1}, x_t]) \quad \text{(重置门)}\]</div>
+<h3 id="_4">第二步：根据重置门，算出"候选新状态"<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>用重置门先洗掉一部分旧记忆，再结合新输入，生成一个候选状态 <span class="arithmatex">\(\tilde{h}_t\)</span>：</p>
+<div class="arithmatex">\[\tilde{h}_t = \tanh(W \cdot [r_t \odot h_{t-1}, x_t])\]</div>
+<p>这里的 <span class="arithmatex">\(\odot\)</span> 表示逐元素乘法。<span class="arithmatex">\(r_t\)</span> 越接近 0，<span class="arithmatex">\(h_{t-1}\)</span> 被"洗掉"得越多。</p>
+<h3 id="_5">第三步：用更新门，混合旧状态和新候选<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>这是 GRU 最精妙的地方——用一个<strong>线性插值</strong>同时完成"遗忘"和"记忆"：</p>
+<div class="arithmatex">\[h_t = (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t\]</div>
+<ul>
+<li><span class="arithmatex">\((1 - z_t) \odot h_{t-1}\)</span>：保留一部分旧状态</li>
+<li><span class="arithmatex">\(z_t \odot \tilde{h}_t\)</span>：加入一部分新信息</li>
+</ul>
+<h3 id="h_t">第四步：输出 <span class="arithmatex">\(h_t\)</span>，传给下一个时间步<a class="headerlink" href="#h_t" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(h_t\)</span> 既是这一时刻的"输出"，又是下一时刻的"记忆"。和 LSTM 需要分开管理 <span class="arithmatex">\(c_t\)</span> 和 <span class="arithmatex">\(h_t\)</span> 不同，GRU 一个状态搞定一切。</p>
+<h3 id="_6">通俗理解整个流程<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>GRU 的每一步就像这样一个决策过程：</p>
+<ol>
+<li><strong>看看现在和过去</strong> → 算出"我应该忘多少？"（重置门 <span class="arithmatex">\(r_t\)</span>）和"我应该更新多少？"（更新门 <span class="arithmatex">\(z_t\)</span>）</li>
+<li><strong>暂存一个新版本的想法</strong> → 根据重置门的指示，结合当前输入生成候选 <span class="arithmatex">\(\tilde{h}_t\)</span></li>
+<li><strong>把新旧想法按比例混合</strong> → 用更新门做加权平均，得到最终状态 <span class="arithmatex">\(h_t\)</span></li>
+</ol>
+<p>整个过程优雅而高效，没有多余的操作。</p>
+<hr />
+<h2 id="gru-vs-lstm">GRU vs LSTM：差在哪？<a class="headerlink" href="#gru-vs-lstm" title="Permanent link">&para;</a></h2>
+<p>GRU 和 LSTM 的关系可以这样理解：</p>
+<blockquote>
+<p>GRU = LSTM 去掉"输出门"，再把"遗忘门"和"输入门"合并成"更新门"，同时把两个状态向量合成一个。</p>
+</blockquote>
+<p>具体对比：</p>
 <table>
 <thead>
 <tr>
-<th>类型</th>
-<th>每步用多少样本</th>
-<th>优缺点</th>
+<th>维度</th>
+<th>LSTM</th>
+<th>GRU</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>全量(Batch GD)</td>
-<td>全部 <span class="arithmatex">\(N\)</span></td>
-<td>方向最准，但太慢</td>
+<td>门控数量</td>
+<td>3（遗忘、输入、输出）</td>
+<td>2（更新、重置）</td>
 </tr>
 <tr>
-<td>随机(SGD)</td>
-<td>1 个</td>
-<td>很快，但方向极不稳定</td>
+<td>状态数量</td>
+<td>2（<span class="arithmatex">\(c_t\)</span> 和 <span class="arithmatex">\(h_t\)</span>）</td>
+<td>1（只有 <span class="arithmatex">\(h_t\)</span>）</td>
 </tr>
 <tr>
-<td><strong>Mini-Batch</strong></td>
-<td>32~256 个</td>
-<td>平衡效率和稳定性</td>
+<td>参数量</td>
+<td>较多</td>
+<td>少约 25%</td>
+</tr>
+<tr>
+<td>训练速度</td>
+<td>较慢</td>
+<td>较快</td>
+</tr>
+<tr>
+<td>表达能力</td>
+<td>理论上更强</td>
+<td>实践中常常不输</td>
+</tr>
+<tr>
+<td>长距离依赖</td>
+<td>强（有独立记忆单元）</td>
+<td>也强（靠更新门维持）</td>
 </tr>
 </tbody>
 </table>
-<p><img alt="Pasted image 20260509104248.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104248.png" /></p>
-<h4 id="mini-batch_1">Mini-Batch 的问题与对策<a class="headerlink" href="#mini-batch_1" title="Permanent link">&para;</a></h4>
-<p><strong>震荡问题</strong>：</p>
-<p>Mini-Batch 的梯度只是真实梯度的估计，有噪声。batch 越小，估计越不准，优化路径越"蛇形走位"。</p>
+<h3 id="lstm-gru">LSTM 的遗忘门 + 输入门 ≈ GRU 的更新门<a class="headerlink" href="#lstm-gru" title="Permanent link">&para;</a></h3>
+<p>这是 GRU 最关键的设计洞察：</p>
+<p>LSTM 里，"遗忘"用遗忘门，"写入"用输入门，两个门各管各的：</p>
+<div class="arithmatex">\[c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t\]</div>
+<p>GRU 发现：反正遗忘和写入是互补的——忘了多少旧的就等于给新的腾了多少地方——所以用一个门就够了：</p>
+<div class="arithmatex">\[h_t = (1 - z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t\]</div>
+<p><span class="arithmatex">\(z_t\)</span> 大 = 多写入新、多忘旧。<span class="arithmatex">\(z_t\)</span> 小 = 多保留旧、少写入新。</p>
+<p><strong>一个门同时完成了 LSTM 两个门的事。</strong></p>
+<hr />
+<h2 id="gru_5">GRU 的优点<a class="headerlink" href="#gru_5" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 结构简单，参数少<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>比 LSTM 少了约 25% 的参数，意味着：</p>
 <ul>
-<li>batch_size = 1：极致震荡，几乎随机游走</li>
-<li>batch_size = 256：比较平稳，方向可靠</li>
+<li>训练更快</li>
+<li>更容易收敛</li>
+<li>对数据量的要求略低</li>
+<li>在嵌入式设备 / 边缘部署时更友好</li>
 </ul>
-<p><img alt="Pasted image 20260509104447.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104447.png" /></p>
-<p><strong>局部极值</strong>：</p>
-<p>梯度下降到山谷（局部最低点）就停下来了，但可能旁边有更深的谷（全局最低点）。不过实践中，高维空间的"真正的局部极值"其实不多——大部分是鞍点。</p>
-<p><img alt="Pasted image 20260509104718.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104718.png" /></p>
-<p><strong>鞍点</strong>：</p>
-<p>导数为 0，但不是极值点（像马鞍：一个方向凸，一个方向凹）。在高维空间中鞍点远比局部极值常见，这是困扰梯度下降的主要问题——停在鞍点不动了。</p>
-<p><img alt="Pasted image 20260509104908.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104908.png" /></p>
-<h3 id="sgd">SGD 动量梯度下降<a class="headerlink" href="#sgd" title="Permanent link">&para;</a></h3>
-<p>给优化加"惯性"——如果之前一直在往某个方向走，那这次更新时保留一部分这个方向的速度。</p>
-<div class="arithmatex">\[\begin{aligned}
-v_t &amp;= \beta v_{t-1} + (1-\beta)\nabla L(w_t) \\
-w_{t+1} &amp;= w_t - \eta \cdot v_t
-\end{aligned}\]</div>
-<p>其中 <span class="arithmatex">\(\beta \approx 0.9\)</span>，控制"惯性"大小。</p>
-<p><strong>直观类比</strong>：就像从山上滚下来的球——越滚越快，遇到小坑直接冲过去，不会被卡住。</p>
-<p><img alt="Pasted image 20260509105259.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105259.png" /></p>
-<h4 id="_20">动量法的效果<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h4>
+<h3 id="2">2. 训练稳定<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>虽然比 RNN 复杂，但比 LSTM 简单。在很多任务中，GRU 比 LSTM <strong>更容易调参</strong>。</p>
+<h3 id="3-lstm">3. 实践中效果不输 LSTM<a class="headerlink" href="#3-lstm" title="Permanent link">&para;</a></h3>
+<p>大量实验表明：GRU 和 LSTM 在大多数序列任务上<strong>效果非常接近</strong>，有时 GRU 还略好。这让很多人直接选择 GRU 作为"默认 RNN 方案"。</p>
+<hr />
+<h2 id="gru_6">GRU 的缺点<a class="headerlink" href="#gru_6" title="Permanent link">&para;</a></h2>
+<h3 id="1-lstm">1. 极端长距离依赖可能不如 LSTM<a class="headerlink" href="#1-lstm" title="Permanent link">&para;</a></h3>
+<p>LSTM 有独立的细胞状态 <span class="arithmatex">\(c_t\)</span>，像一个专门的"长期记忆保险箱"。GRU 只有一个 <span class="arithmatex">\(h_t\)</span>，长期记忆和短期输出混在一起。序列非常长时，这个"混合存储"可能不如 LSTM 的"双轨制"精细。</p>
+<h3 id="2_1">2. 灵活性略低<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>少了一个门，也就少了一点控制维度。在某些需要精细记忆控制的场景下，LSTM 的三门结构更有优势。</p>
+<h3 id="3">3. 没有"本质突破"<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>GRU 本质上是 LSTM 的变体，不是全新的架构。它的改进是"精简"而非"重构"。真正想打破 RNN 串行瓶颈，还是得看 [[时域卷积网络（TCN）]] 或 [[Transformer]] 这类并行架构。</p>
+<hr />
+<h2 id="_7">对初学者的最终理解<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>如果你只记一句话，请记这个：</p>
+<blockquote>
+<p><strong>GRU = LSTM 的精简版。</strong></p>
+<p>两个门（更新门、重置门）替代三个门，一个状态替代两个状态。参数更少、训练更快，效果却不差。</p>
+</blockquote>
+<h3 id="rnn">RNN 家族的"进化树"<a class="headerlink" href="#rnn" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>RNN（基础版）
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  ├── 太简单，长序列记不住
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  ├── LSTM（豪华版）
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  │     ├── 三个门，两个状态
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  │     ├── 记忆能力强，但参数多
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  │     │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  │     └── GRU（精简版） ← 你在这里
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  │           ├── 两个门，一个状态
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  │           └── 效果相近，但更轻更快
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  │
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  └── 但你也可以跳出 RNN 框架……
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        ├── TCN（卷积做序列）
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        └── Transformer（注意力机制）
+</code></pre></div>
+<h3 id="_8">实际操作建议<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <ul>
-<li>在一致下降的方向上加速（如滚下斜坡）</li>
-<li>在来回震荡的方向上互相抵消（如峡谷两侧）</li>
-<li>更容易冲过鞍点</li>
+<li><strong>数据少、设备弱</strong> → 优先 GRU</li>
+<li><strong>数据多、追求极致</strong> → LSTM 和 GRU 都试试，差别通常不大</li>
+<li><strong>序列极长（几千步）</strong> → 考虑 [[时域卷积网络（TCN）|TCN]] 或 Transformer</li>
+<li><strong>入门学习</strong> → 先学 RNN 理解原理 → 学 LSTM 理解门控 → 学 GRU 理解简化</li>
 </ul>
-<p><strong>没有动量时的下降路径</strong>：之字形前进，在横向震荡中浪费大量步数
-<strong>有动量时的下降路径</strong>：横向震荡被平滑，纵向下降被加速，更快到达谷底</p>
-<p><img alt="Pasted image 20260509105521.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105521.png" />
-<img alt="Pasted image 20260509105538.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105538.png" /></p>
+<hr />
+<h2 id="gru_7">GRU 适合哪些应用场景？<a class="headerlink" href="#gru_7" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>为什么适合 GRU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>短文本分类 / 情感分析</td>
+<td>序列不长，GRU 足够，训练快</td>
+</tr>
+<tr>
+<td>语音识别</td>
+<td>效果和 LSTM 接近，参数量更少</td>
+</tr>
+<tr>
+<td>时序预测（中小规模）</td>
+<td>结构简单，调参友好</td>
+</tr>
+<tr>
+<td>机器翻译（轻量版）</td>
+<td>编解码结构中最常用 GRU</td>
+</tr>
+<tr>
+<td>嵌入式/移动端部署</td>
+<td>参数少，推理快</td>
+</tr>
+<tr>
+<td>快速原型验证</td>
+<td>训练快，能快速验证想法</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="rnn-vs-lstm-vs-gru">总结对比：RNN vs LSTM vs GRU<a class="headerlink" href="#rnn-vs-lstm-vs-gru" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>RNN</th>
+<th>LSTM</th>
+<th>GRU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>门控数量</td>
+<td>0</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>参数量</td>
+<td>最少</td>
+<td>最多</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>长距离依赖</td>
+<td>弱</td>
+<td>强</td>
+<td>强</td>
+</tr>
+<tr>
+<td>训练速度</td>
+<td>快但易崩</td>
+<td>慢</td>
+<td>较快</td>
+</tr>
+<tr>
+<td>调参难度</td>
+<td>低</td>
+<td>高</td>
+<td>中等</td>
+</tr>
+<tr>
+<td>梯度消失</td>
+<td>严重</td>
+<td>基本解决</td>
+<td>基本解决</td>
+</tr>
+<tr>
+<td>实时预测推荐度</td>
+<td>★★☆</td>
+<td>★★★☆</td>
+<td>★★★★</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话结论</strong>：</p>
+<blockquote>
+<p>GRU 是 LSTM 的"性价比之选"——如果你觉得 LSTM 太重，但又需要门控记忆能力，GRU 往往是最好的平衡点。</p>
+</blockquote>
+<hr />
+<h2 id="_9">参考关系<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ul>
+<li>[[循环神经网络（RNN）]] — GRU 的前身，先理解 RNN 才能理解为什么需要门控</li>
+<li>[[长短期记忆网络（LSTM）]] — GRU 的"豪华版"，理解了 LSTM 再看 GRU 会觉得豁然开朗</li>
+<li>[[时域卷积网络（TCN）]] — 如果 RNN 家族还不够快，试试用卷积做序列</li>
+<li>[[神经网络应用场景与选型]] — 实际任务中该选哪个模型</li>
+</ul>
 
 
 
