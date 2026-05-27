@@ -15,6 +15,10 @@
         <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%BD%91%E7%BB%9C%EF%BC%88LSTM%EF%BC%89/">
       
       
+        <link rel="prev" href="../%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89/">
+      
+      
+        <link rel="next" href="../%E9%97%A8%E6%8E%A7%E5%BE%AA%E7%8E%AF%E5%8D%95%E5%85%83%EF%BC%88GRU%EF%BC%89/">
       
       
         
@@ -238,11 +242,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../ML/神经网络.md" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-tabs__link">
           
   
   
@@ -420,8 +426,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -447,17 +455,20 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -475,7 +486,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -493,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/神经网络.md" class="md-nav__link">
+      <a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-nav__link">
         
   
   
@@ -521,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/卷积神经网络（CNN）.md" class="md-nav__link">
+      <a href="../%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -549,7 +560,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/循环神经网络（RNN）.md" class="md-nav__link">
+      <a href="../%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -574,10 +585,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../ML/长短期记忆网络（LSTM）.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    长短期记忆网络（LSTM）
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -593,6 +631,220 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rnn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么 RNN 的普通记忆不够
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lstm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSTM 模型结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="LSTM 模型结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        详细结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lstm_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSTM 的逐步计算
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="LSTM 的逐步计算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第一步：遗忘门——决定扔掉什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第二步：输入门——决定记什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第三步：更新细胞状态
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        第四步：输出门——决定输出什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lstm_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSTM 完整公式总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lstm_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSTM 为什么能解决梯度消失
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ---
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lstm-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSTM 如何处理文本：Embedding 层
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="LSTM 如何处理文本：Embedding 层">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从文字到向量的三步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Embedding 层的本质
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lstm_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        送入 LSTM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        总结对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -605,7 +857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/门控循环单元（GRU）.md" class="md-nav__link">
+      <a href="../%E9%97%A8%E6%8E%A7%E5%BE%AA%E7%8E%AF%E5%8D%95%E5%85%83%EF%BC%88GRU%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -633,7 +885,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/一些疑惑解答.md" class="md-nav__link">
+      <a href="../%E4%B8%80%E4%BA%9B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" class="md-nav__link">
         
   
   
@@ -661,7 +913,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/神经网络应用场景与选型.md" class="md-nav__link">
+      <a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%80%89%E5%9E%8B/" class="md-nav__link">
         
   
   
@@ -689,7 +941,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/梯度下降优化算法.md" class="md-nav__link">
+      <a href="../%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -717,7 +969,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/时域卷积网络（TCN）.md" class="md-nav__link">
+      <a href="../%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -1627,7 +1879,7 @@
 <p>RNN 的信息就存在一个简单的隐藏状态 <span class="arithmatex">\(h_t\)</span> 里，每次更新时旧信息被新信息<strong>全量覆盖</strong>：</p>
 <div class="arithmatex">\[h_t = \tanh(W_{xh} x_t + W_{hh} h_{t-1} + b_h)\]</div>
 <p>没有"选择性保留"的能力——重要的旧信息和不重要的旧信息被一视同仁地洗掉了。</p>
-<p><img alt="Pasted image 20260510160246.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160246.png" /></p>
+<p><img alt="Pasted image 20260510160246.png" src="../../kb_material/ML_image/Pasted image 20260510160246.png" /></p>
 <hr />
 <h2 id="lstm_1">LSTM 模型结构<a class="headerlink" href="#lstm_1" title="Permanent link">&para;</a></h2>
 <p>LSTM 的核心创新是引入了<strong>细胞状态（Cell State）</strong> <span class="arithmatex">\(C_t\)</span>，它是一条贯穿所有时间步的"记忆高速公路"，只做少量的线性运算。</p>
@@ -1658,9 +1910,9 @@
 </tr>
 </tbody>
 </table>
-<p><img alt="Pasted image 20260510160344.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160344.png" /></p>
+<p><img alt="Pasted image 20260510160344.png" src="../../kb_material/ML_image/Pasted image 20260510160344.png" /></p>
 <h3 id="_1">详细结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p><img alt="Pasted image 20260510160455.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160455.png" /></p>
+<p><img alt="Pasted image 20260510160455.png" src="../../kb_material/ML_image/Pasted image 20260510160455.png" /></p>
 <hr />
 <h2 id="lstm_2">LSTM 的逐步计算<a class="headerlink" href="#lstm_2" title="Permanent link">&para;</a></h2>
 <h3 id="_2">第一步：遗忘门——决定扔掉什么<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
@@ -1672,7 +1924,7 @@
 <li>Sigmoid（<span class="arithmatex">\(\sigma\)</span>）确保输出在 0~1 之间</li>
 </ul>
 <p><strong>直观理解</strong>：读到一个句号时，遗忘门可能把"主语是单数还是复数"这类信息清零，因为下一句不受此约束。</p>
-<p><img alt="Pasted image 20260510160644.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160644.png" /></p>
+<p><img alt="Pasted image 20260510160644.png" src="../../kb_material/ML_image/Pasted image 20260510160644.png" /></p>
 <h3 id="_3">第二步：输入门——决定记什么<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>输入门分两路，共同决定要往记忆里添加什么新内容：</p>
 <p><strong>（A）要更新什么（输入门 <span class="arithmatex">\(i_t\)</span>）</strong>：
@@ -1684,7 +1936,7 @@ $<span class="arithmatex">\(\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)\
 <blockquote>
 <p>输入门 <span class="arithmatex">\(i_t\)</span> 是"门卫"——它判断哪些新信息值得写进记忆；候选记忆 <span class="arithmatex">\(\tilde{C}_t\)</span> 是写进去的内容本身。</p>
 </blockquote>
-<p><img alt="Pasted image 20260510160650.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160650.png" /></p>
+<p><img alt="Pasted image 20260510160650.png" src="../../kb_material/ML_image/Pasted image 20260510160650.png" /></p>
 <h3 id="_4">第三步：更新细胞状态<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>结合遗忘门和输入门的结果，更新细胞状态：</p>
 <div class="arithmatex">\[C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t\]</div>
@@ -1694,7 +1946,7 @@ $<span class="arithmatex">\(\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)\
 <li>旧记忆 + 新记忆 = 新的细胞状态</li>
 </ul>
 <p>这就是 LSTM 最精妙的设计：<strong>遗忘和写入都是选择性的</strong>，<span class="arithmatex">\(C_t\)</span> 的信息可以沿着时间轴几乎无损地流动——这正是解决 RNN 梯度消失的关键。</p>
-<p><img alt="Pasted image 20260510160746.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160746.png" /></p>
+<p><img alt="Pasted image 20260510160746.png" src="../../kb_material/ML_image/Pasted image 20260510160746.png" /></p>
 <h3 id="_5">第四步：输出门——决定输出什么<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>输出门决定 <span class="arithmatex">\(C_t\)</span> 中有多少信息应该暴露给当前时刻的输出：</p>
 <div class="arithmatex">\[o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)\]</div>
@@ -1706,7 +1958,7 @@ $<span class="arithmatex">\(\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)\
 <blockquote>
 <p>类比：你在考试时记得整本书的内容（<span class="arithmatex">\(C_t\)</span>），但当前这道题只需要其中的几个知识点——输出门帮你提取需要的那部分。</p>
 </blockquote>
-<p><img alt="Pasted image 20260510160943.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160943.png" /></p>
+<p><img alt="Pasted image 20260510160943.png" src="../../kb_material/ML_image/Pasted image 20260510160943.png" /></p>
 <hr />
 <h2 id="lstm_3">LSTM 完整公式总结<a class="headerlink" href="#lstm_3" title="Permanent link">&para;</a></h2>
 <div class="arithmatex">\[\begin{aligned}
@@ -1718,7 +1970,7 @@ o_t &amp;= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \\[4pt]
 h_t &amp;= o_t \odot \tanh(C_t)
 \end{aligned}\]</div>
 <p>每个门都有自己的权重矩阵（<span class="arithmatex">\(W_f, W_i, W_C, W_o\)</span>），这些参数在所有时间步上共享。</p>
-<p><img alt="Pasted image 20260510161012.png" src="../../kb_material/ML_image/Pasted%20image%2020260510161012.png" /></p>
+<p><img alt="Pasted image 20260510161012.png" src="../../kb_material/ML_image/Pasted image 20260510161012.png" /></p>
 <hr />
 <h2 id="lstm_4">LSTM 为什么能解决梯度消失<a class="headerlink" href="#lstm_4" title="Permanent link">&para;</a></h2>
 <p>核心在于细胞状态的更新方式：</p>
@@ -1738,7 +1990,7 @@ h_t &amp;= o_t \odot \tanh(C_t)
 <p>建立词典，给每个词一个整数编号。比如 <code>{'我': 1, '爱': 10, '你': 8}</code>。"我爱你"变成 <code>[1, 10, 8]</code>。</p>
 <p><strong>第 3 步：映射到向量（Embedding）</strong></p>
 <p>查表！每个整数编号对应一个向量。网络里维护一张"词向量表"——每行是一个词的向量表示，训练时会不断微调这些向量值。</p>
-<p><img alt="Pasted image 20260513103006.png" src="../../kb_material/ML_image/Pasted%20image%2020260513103006.png" /></p>
+<p><img alt="Pasted image 20260513103006.png" src="../../kb_material/ML_image/Pasted image 20260513103006.png" /></p>
 <h3 id="embedding">Embedding 层的本质<a class="headerlink" href="#embedding" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">词表大小</span><span class="p">,</span> <span class="n">向量维度</span><span class="p">)</span>
 </code></pre></div>
@@ -1748,7 +2000,7 @@ h_t &amp;= o_t \odot \tanh(C_t)
 </blockquote>
 <h3 id="lstm_5">送入 LSTM<a class="headerlink" href="#lstm_5" title="Permanent link">&para;</a></h3>
 <p>Embedding 之后，每个词变成了一个固定长度的向量。LSTM 按顺序读这些向量，更新细胞状态和隐藏状态，最终输出预测结果。</p>
-<p><img alt="Pasted image 20260513103429.png" src="../../kb_material/ML_image/Pasted%20image%2020260513103429.png" /></p>
+<p><img alt="Pasted image 20260513103429.png" src="../../kb_material/ML_image/Pasted image 20260513103429.png" /></p>
 <blockquote>
 <p>完整流程：原始文本 → 分词 → 编号 → Embedding 查表得向量 → 送入 LSTM 按时间步处理 → 输出预测。</p>
 </blockquote>

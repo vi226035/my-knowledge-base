@@ -15,6 +15,10 @@
         <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
       
       
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89/">
       
       
         
@@ -238,11 +242,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../ML/神经网络.md" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -420,8 +426,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -447,17 +455,20 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -475,7 +486,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -490,10 +501,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../ML/神经网络.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    神经网络
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -509,6 +547,310 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        神经元
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="神经元">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数学定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        直观理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        举例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        神经网络结构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="神经网络结构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三层结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么需要多层？
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正向传播
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="正向传播">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        矩阵形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        计算示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        反向传播
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="反向传播">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么叫"反向"？
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        损失函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参数更新
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        直观类比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        链式法则
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        神经网络训练优化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="神经网络训练优化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题：全量梯度下降太慢
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mini-batch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mini-Batch 梯度下降
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mini-Batch 梯度下降">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mini-batch_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mini-Batch 的问题与对策
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sgd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SGD 动量梯度下降
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SGD 动量梯度下降">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        动量法的效果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -521,7 +863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/卷积神经网络（CNN）.md" class="md-nav__link">
+      <a href="../%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -549,7 +891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/循环神经网络（RNN）.md" class="md-nav__link">
+      <a href="../%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -577,7 +919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/长短期记忆网络（LSTM）.md" class="md-nav__link">
+      <a href="../%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%BD%91%E7%BB%9C%EF%BC%88LSTM%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -605,7 +947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/门控循环单元（GRU）.md" class="md-nav__link">
+      <a href="../%E9%97%A8%E6%8E%A7%E5%BE%AA%E7%8E%AF%E5%8D%95%E5%85%83%EF%BC%88GRU%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -633,7 +975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/一些疑惑解答.md" class="md-nav__link">
+      <a href="../%E4%B8%80%E4%BA%9B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" class="md-nav__link">
         
   
   
@@ -661,7 +1003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/神经网络应用场景与选型.md" class="md-nav__link">
+      <a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%80%89%E5%9E%8B/" class="md-nav__link">
         
   
   
@@ -689,7 +1031,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/梯度下降优化算法.md" class="md-nav__link">
+      <a href="../%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -717,7 +1059,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ML/时域卷积网络（TCN）.md" class="md-nav__link">
+      <a href="../%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -1734,7 +2076,7 @@
 </ul>
 <p>加权和 = <span class="arithmatex">\(0.6 \times 0.8 + 0.8 \times (-0.6) + 0.3 = 0.48 - 0.48 + 0.3 = 0.3\)</span></p>
 <p>再用 Sigmoid 激活：<span class="arithmatex">\(S(0.3) = \frac{1}{1+e^{-0.3}} \approx 0.574\)</span>，偏向"适合出门"但没那么确定——因为温度适中但降雨概率高，两者互相抵消后偏置起了决定作用。</p>
-<p><img alt="Pasted image 20260509102005.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102005.png" /></p>
+<p><img alt="Pasted image 20260509102005.png" src="../../kb_material/ML_image/Pasted image 20260509102005.png" /></p>
 <hr />
 <h2 id="_6">神经网络结构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>多个神经元按层组织，前一层的输出作为后一层的输入，形成"多层感知机"。</p>
@@ -1748,7 +2090,7 @@
 <h3 id="_8">为什么需要多层？<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>单层只能表达线性关系。堆叠多层 + 非线性激活函数 = 能表达任意复杂函数。</p>
 <p>类比：一层 = 只能画直线分割数据；两层 = 能画折线；三层以上 ≈ 能画任意形状的边界。</p>
-<p><img alt="Pasted image 20260509102332.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102332.png" /></p>
+<p><img alt="Pasted image 20260509102332.png" src="../../kb_material/ML_image/Pasted image 20260509102332.png" /></p>
 <hr />
 <h2 id="_9">正向传播<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>从输入 → 隐藏层 → 输出，逐层计算，最终得到预测值的过程。</p>
@@ -1768,8 +2110,8 @@ A^{[l]} &amp;= f^{[l]}(Z^{[l]})
 <li>经 Sigmoid：<span class="arithmatex">\(A^{[1]} = [S(1.7), S(2.7)]^T \approx [0.846, 0.937]^T\)</span></li>
 </ul>
 <p>然后 <span class="arithmatex">\(A^{[1]}\)</span> 继续向后传播，直到输出层。</p>
-<p><img alt="Pasted image 20260509102321.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102321.png" />
-<img alt="Pasted image 20260509151348.png" src="../../kb_material/ML_image/Pasted%20image%2020260509151348.png" /></p>
+<p><img alt="Pasted image 20260509102321.png" src="../../kb_material/ML_image/Pasted image 20260509102321.png" />
+<img alt="Pasted image 20260509151348.png" src="../../kb_material/ML_image/Pasted image 20260509151348.png" /></p>
 <hr />
 <h2 id="_12">反向传播<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <p>正向传播给出预测值后，需要衡量"差了多少"，然后把这个误差反向传回去，指导每个参数该调多少。</p>
@@ -1795,8 +2137,8 @@ $<span class="arithmatex">\(L = -\sum_{i} y_i \log(\hat{y}_i)\)</span>$</p>
 3. 判断琴弦该拧紧还是拧松（反向传播算梯度）
 4. 稍微拧一点（参数更新）
 5. 重复 1-4 直到音准</p>
-<p><img alt="Pasted image 20260509103713.png" src="../../kb_material/ML_image/Pasted%20image%2020260509103713.png" /></p>
-<p><img alt="Pasted image 20260509102920.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102920.png" /></p>
+<p><img alt="Pasted image 20260509103713.png" src="../../kb_material/ML_image/Pasted image 20260509103713.png" /></p>
+<p><img alt="Pasted image 20260509102920.png" src="../../kb_material/ML_image/Pasted image 20260509102920.png" /></p>
 <h3 id="_17">链式法则<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <p>反向传播的数学基础。对于复合函数 <span class="arithmatex">\(L = f(g(h(x)))\)</span>：</p>
 <div class="arithmatex">\[\frac{dL}{dx} = \frac{dL}{df} \cdot \frac{df}{dg} \cdot \frac{dg}{dh} \cdot \frac{dh}{dx}\]</div>
@@ -1808,15 +2150,15 @@ $<span class="arithmatex">\(L = -\sum_{i} y_i \log(\hat{y}_i)\)</span>$</p>
 - <span class="arithmatex">\(\frac{\partial L}{\partial 中间} = 2 × 5 = 10\)</span>
 - <span class="arithmatex">\(\frac{\partial 中间}{\partial x} = 3\)</span>
 - <span class="arithmatex">\(\frac{\partial L}{\partial x} = 10 × 3 = 30\)</span> ✓（直接求导：<span class="arithmatex">\(2(3x+2)·3\)</span>，<span class="arithmatex">\(x=1\)</span> 代入 = 30）</p>
-<p><img alt="Pasted image 20260509102958.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102958.png" />
-<img alt="Pasted image 20260509103129.png" src="../../kb_material/ML_image/Pasted%20image%2020260509103129.png" /></p>
+<p><img alt="Pasted image 20260509102958.png" src="../../kb_material/ML_image/Pasted image 20260509102958.png" />
+<img alt="Pasted image 20260509103129.png" src="../../kb_material/ML_image/Pasted image 20260509103129.png" /></p>
 <hr />
 <h2 id="_18">神经网络训练优化<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
 <h3 id="_19">问题：全量梯度下降太慢<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
 <p>每次更新参数需要遍历全部训练数据（几万甚至几百万样本），计算一次梯度代价极大，而且会卡在局部细节里无法"跳过"。</p>
 <div class="arithmatex">\[w := w - \eta \cdot \frac{1}{N}\sum_{i=1}^{N} \nabla L_i(w)\]</div>
 <p>当 <span class="arithmatex">\(N = 100\)</span> 万时，更新一步就要算 100 万次梯度，不现实。</p>
-<p><img alt="Pasted image 20260509104055.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104055.png" /></p>
+<p><img alt="Pasted image 20260509104055.png" src="../../kb_material/ML_image/Pasted image 20260509104055.png" /></p>
 <h3 id="mini-batch">Mini-Batch 梯度下降<a class="headerlink" href="#mini-batch" title="Permanent link">&para;</a></h3>
 <p>不每次用全量数据，而是每次随机抽取一小批（如 32、64、128 个样本）来估算梯度。这样更新快，且随机性有助于跳出局部陷阱。</p>
 <div class="arithmatex">\[w := w - \eta \cdot \frac{1}{m}\sum_{i \in batch} \nabla L_i(w)\]</div>
@@ -1847,7 +2189,7 @@ $<span class="arithmatex">\(L = -\sum_{i} y_i \log(\hat{y}_i)\)</span>$</p>
 </tr>
 </tbody>
 </table>
-<p><img alt="Pasted image 20260509104248.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104248.png" /></p>
+<p><img alt="Pasted image 20260509104248.png" src="../../kb_material/ML_image/Pasted image 20260509104248.png" /></p>
 <h4 id="mini-batch_1">Mini-Batch 的问题与对策<a class="headerlink" href="#mini-batch_1" title="Permanent link">&para;</a></h4>
 <p><strong>震荡问题</strong>：</p>
 <p>Mini-Batch 的梯度只是真实梯度的估计，有噪声。batch 越小，估计越不准，优化路径越"蛇形走位"。</p>
@@ -1855,13 +2197,13 @@ $<span class="arithmatex">\(L = -\sum_{i} y_i \log(\hat{y}_i)\)</span>$</p>
 <li>batch_size = 1：极致震荡，几乎随机游走</li>
 <li>batch_size = 256：比较平稳，方向可靠</li>
 </ul>
-<p><img alt="Pasted image 20260509104447.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104447.png" /></p>
+<p><img alt="Pasted image 20260509104447.png" src="../../kb_material/ML_image/Pasted image 20260509104447.png" /></p>
 <p><strong>局部极值</strong>：</p>
 <p>梯度下降到山谷（局部最低点）就停下来了，但可能旁边有更深的谷（全局最低点）。不过实践中，高维空间的"真正的局部极值"其实不多——大部分是鞍点。</p>
-<p><img alt="Pasted image 20260509104718.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104718.png" /></p>
+<p><img alt="Pasted image 20260509104718.png" src="../../kb_material/ML_image/Pasted image 20260509104718.png" /></p>
 <p><strong>鞍点</strong>：</p>
 <p>导数为 0，但不是极值点（像马鞍：一个方向凸，一个方向凹）。在高维空间中鞍点远比局部极值常见，这是困扰梯度下降的主要问题——停在鞍点不动了。</p>
-<p><img alt="Pasted image 20260509104908.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104908.png" /></p>
+<p><img alt="Pasted image 20260509104908.png" src="../../kb_material/ML_image/Pasted image 20260509104908.png" /></p>
 <h3 id="sgd">SGD 动量梯度下降<a class="headerlink" href="#sgd" title="Permanent link">&para;</a></h3>
 <p>给优化加"惯性"——如果之前一直在往某个方向走，那这次更新时保留一部分这个方向的速度。</p>
 <div class="arithmatex">\[\begin{aligned}
@@ -1870,7 +2212,7 @@ w_{t+1} &amp;= w_t - \eta \cdot v_t
 \end{aligned}\]</div>
 <p>其中 <span class="arithmatex">\(\beta \approx 0.9\)</span>，控制"惯性"大小。</p>
 <p><strong>直观类比</strong>：就像从山上滚下来的球——越滚越快，遇到小坑直接冲过去，不会被卡住。</p>
-<p><img alt="Pasted image 20260509105259.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105259.png" /></p>
+<p><img alt="Pasted image 20260509105259.png" src="../../kb_material/ML_image/Pasted image 20260509105259.png" /></p>
 <h4 id="_20">动量法的效果<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h4>
 <ul>
 <li>在一致下降的方向上加速（如滚下斜坡）</li>
@@ -1879,8 +2221,8 @@ w_{t+1} &amp;= w_t - \eta \cdot v_t
 </ul>
 <p><strong>没有动量时的下降路径</strong>：之字形前进，在横向震荡中浪费大量步数
 <strong>有动量时的下降路径</strong>：横向震荡被平滑，纵向下降被加速，更快到达谷底</p>
-<p><img alt="Pasted image 20260509105521.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105521.png" />
-<img alt="Pasted image 20260509105538.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105538.png" /></p>
+<p><img alt="Pasted image 20260509105521.png" src="../../kb_material/ML_image/Pasted image 20260509105521.png" />
+<img alt="Pasted image 20260509105538.png" src="../../kb_material/ML_image/Pasted image 20260509105538.png" /></p>
 
 
 
