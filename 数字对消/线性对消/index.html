@@ -1156,6 +1156,8 @@
       
         
       
+        
+      
     
     
     
@@ -1432,6 +1434,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%95%B0%E5%AD%97%E5%9F%9F%E8%87%AA%E5%B9%B2%E6%89%B0%E5%AF%B9%E6%B6%88%E4%BD%93%E7%B3%BB%E5%9B%BE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    体系思维导图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1655,30 +1685,30 @@
 <h1 id="_1">常用的自适应滤波算法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>自适应滤波器可以通过自动调节滤波器权系数去适应不同的环境而广泛应用在信号处理场景中，譬如有源噪声对消、语音回声对消、阵列的波束成形、数字预失真（Digital Predistortion, DPD）领域、信道估计（Channel Estimation）以及同频同时全双工领域等等。</p>
 <p>一个 <span class="arithmatex">\(N\)</span> 抽头的自适应滤波器的框图如下：</p>
-<p><img alt="Pasted image 20260527155451.png" src="../../kb_material/Some_Photo/Pasted%20image%2020260527155451.png" /></p>
+<p><img alt="Pasted image 20260527155451.png" src="../img/Pasted%20image%2020260527155451.png" /></p>
 <blockquote>
 <p>图 1：<span class="arithmatex">\(N\)</span> 抽头自适应滤波器结构。输入 <span class="arithmatex">\(u(n)\)</span> 经过延时链形成抽头向量，各支路乘以权系数 <span class="arithmatex">\(w_0(n), w_1(n), \ldots, w_{N-1}(n)\)</span> 后求和得到输出 <span class="arithmatex">\(y(n)\)</span>。</p>
 </blockquote>
 <p>假设滤波器的输入信号为 <span class="arithmatex">\(u(n)\)</span>，期望的输出信号为 <span class="arithmatex">\(d(n)\)</span>，那么滤波器的输出信号就为：</p>
-<p><img alt="Pasted image 20260527155507.png" src="../../kb_material/Some_Photo/Pasted%20image%2020260527155507.png" /></p>
+<p><img alt="Pasted image 20260527155507.png" src="../img/Pasted%20image%2020260527155507.png" /></p>
 <blockquote>
 <p>图 2：滤波器输出由各抽头权系数 <span class="arithmatex">\(w_i(n)\)</span> 与延时输入 <span class="arithmatex">\(u(n-i+1)\)</span> 加权求和得到。</p>
 </blockquote>
 <p>其中，滤波器抽头权系数为 <span class="arithmatex">\(w_i(n)\)</span>。选择合适的权系数使得误差信号：</p>
-<p><img alt="Pasted image 20260527155522.png" src="../../kb_material/Some_Photo/Pasted%20image%2020260527155522.png" /></p>
+<p><img alt="Pasted image 20260527155522.png" src="../img/Pasted%20image%2020260527155522.png" /></p>
 <blockquote>
 <p>图 3：误差信号定义为 <span class="arithmatex">\(e(n)=d(n)-y(n)\)</span>。</p>
 </blockquote>
 <p>在某种准则下最小。而在自适应滤波器中，抽头权系数一直在不断调整，是时变的。</p>
 <p>在仿真实验中，为了衡量一个算法的性能，我们将采用蒙特卡洛（Monte Carlo）仿真手段来评价非平稳环境下的自适应滤波算法。借助该手段不仅可以了解算法，而且可以在不同条件下将不同的自适应滤波算法加以对比。需要注意的是运行的蒙特卡洛仿真次数要足够大，以使得仿真结果在统计意义上是可靠的。</p>
 <p>本章中将采用均方偏差（Mean Square Deviation, MSD）曲线和自适应滤波器的抽头权系数来表征算法的收敛速度、跟踪性能和稳态误差。MSD 表示如下：</p>
-<p><img alt="Pasted image 20260527155625.png" src="../../kb_material/Some_Photo/Pasted%20image%2020260527155625.png" /></p>
+<p><img alt="Pasted image 20260527155625.png" src="../img/Pasted%20image%2020260527155625.png" /></p>
 <blockquote>
 <p>图 4：MSD = <span class="arithmatex">\(E[\|\hat{\mathbf{w}}(n)-\mathbf{w}_o\|^2]\)</span>，其中 <span class="arithmatex">\(\mathbf{w}_o\)</span> 为最优权系数，<span class="arithmatex">\(\hat{\mathbf{w}}(n)\)</span> 为第 <span class="arithmatex">\(n\)</span> 次迭代的实际权值估计。</p>
 </blockquote>
 <hr />
 <h2 id="lms">LMS 算法<a class="headerlink" href="#lms" title="Permanent link">&para;</a></h2>
-<p><img alt="Pasted image 20260527155717.png" src="../../kb_material/Some_Photo/Pasted%20image%2020260527155717.png" /></p>
+<p><img alt="Pasted image 20260527155717.png" src="../img/Pasted%20image%2020260527155717.png" /></p>
 <blockquote>
 <p><strong>图 5：LMS 算法总结</strong> —— LMS（Least Mean Square，最小均方）使用瞬时平方误差 <span class="arithmatex">\(|e(n)|^2\)</span> 作为 <span class="arithmatex">\(E[|e(n)|^2]\)</span> 的估计，沿最陡下降方向迭代搜索 Wiener 最优解。</p>
 </blockquote>
@@ -1738,7 +1768,7 @@
 </table>
 <hr />
 <h2 id="rls">RLS 算法<a class="headerlink" href="#rls" title="Permanent link">&para;</a></h2>
-<p><img alt="Pasted image 20260527155748.png" src="../../kb_material/Some_Photo/Pasted%20image%2020260527155748.png" /></p>
+<p><img alt="Pasted image 20260527155748.png" src="../img/Pasted%20image%2020260527155748.png" /></p>
 <blockquote>
 <p><strong>图 6：RLS 算法总结</strong> —— RLS（Recursive Least Squares，递归最小二乘）最小化加权累积误差 <span class="arithmatex">\(J(n)=\sum_{i=1}^{n}\lambda^{\,n-i}|e(i)|^2\)</span>，收敛速度显著快于 LMS。</p>
 </blockquote>
@@ -1790,7 +1820,7 @@
 </table>
 <hr />
 <h2 id="ap">AP 算法<a class="headerlink" href="#ap" title="Permanent link">&para;</a></h2>
-<p><img alt="Pasted image 20260527155734.png" src="../../kb_material/Some_Photo/Pasted%20image%2020260527155734.png" /></p>
+<p><img alt="Pasted image 20260527155734.png" src="../img/Pasted%20image%2020260527155734.png" /></p>
 <blockquote>
 <p><strong>图 7：AP 算法总结</strong> —— AP（Affine Projection，仿射投影）是 NLMS 的推广：使用最近 <strong><span class="arithmatex">\(K\)</span> 个</strong>输入向量联合更新权值，收敛速度介于 NLMS 和 RLS 之间。</p>
 </blockquote>
