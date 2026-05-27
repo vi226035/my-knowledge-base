@@ -1,10 +1,45 @@
 import re
+import os
 
 
 def on_page_markdown(markdown, page, config, files):
-    """Convert Obsidian ![[path]] embed syntax to standard Markdown ![alt](path)."""
-    return re.sub(
+    """Convert Obsidian ![[embed]] and [[wikilink]] syntax to standard Markdown."""
+
+    # Current page directory relative to docs root
+    page_dir = os.path.dirname(page.file.src_path) if page.file.src_path else ""
+
+    def make_relative(target, is_image=False):
+        """Compute relative path from current page to target."""
+        if not page_dir:
+            return target
+        return os.path.relpath(target, page_dir).replace("\\", "/")
+
+    # 1. Convert image embeds: ![[path.png]] -> ![alt](relative_path)
+    def convert_image(m):
+        target = m.group(1)
+        return f"![{target.rsplit('/', 1)[-1]}]({make_relative(target, True)})"
+
+    markdown = re.sub(
         r"!\[\[(.+?\.(?:png|jpg|jpeg|gif|svg|webp))(?:\|\d+)?\]\]",
-        lambda m: f"![{m.group(1).rsplit('/', 1)[-1]}]({m.group(1)})",
+        convert_image,
         markdown,
     )
+
+    # 2. Convert wiki-links: [[target|alias]] -> [alias](relative_path.md)
+    def convert_wikilink(m):
+        target = m.group(1).strip()
+        alias = m.group(2) or target.rsplit("/", 1)[-1]
+        if target.startswith(("http://", "https://")):
+            return f"[{alias}]({target})"
+        # Only add .md if target doesn't already have an extension
+        if "." not in target.rsplit("/", 1)[-1]:
+            target += ".md"
+        return f"[{alias}]({make_relative(target)})"
+
+    markdown = re.sub(
+        r"(?<!!)\[\[([^\]|]+?)(?:\|([^\]]+?))?\]\]",
+        convert_wikilink,
+        markdown,
+    )
+
+    return markdown
