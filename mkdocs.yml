@@ -100,6 +100,7 @@ nav:
       - 时域卷积网络（TCN）: 深度学习/时域卷积网络（TCN）.md
   - PyTorch 入门:
       - PyTorch 入门: Pytorch入门/Pytorch入门.md
+      - Python 语法全览: Pytorch入门/Python语法.md
   - 信号处理:
       - DDC（数字下变频）: 信号处理/数字下变频（DDC）.md
       - DUC（数字上变频）: 信号处理/数字上变频（DUC）.md

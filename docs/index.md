@@ -45,6 +45,7 @@ created: 2026-05-25
 ## PyTorch 入门
 
 - [PyTorch 入门](Pytorch入门/Pytorch入门.md) — 从零开始的 PyTorch 深度学习实践
+- [Python 语法全览](Pytorch入门/Python语法.md) — 43 项语法速查，生活比喻 + 项目实例
 
 ---
 
