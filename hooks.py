@@ -10,6 +10,10 @@ def on_page_markdown(markdown, page, config, files):
 
     def make_relative(target, is_image=False):
         """Compute relative path from current page to target."""
+        # Targets that are already relative to the current note should not be
+        # re-relativized, otherwise ../kb_material/... becomes ../../kb_material/...
+        if target.startswith(("../", "./")):
+            return target
         if not page_dir:
             return target
         return os.path.relpath(target, page_dir).replace("\\", "/")
