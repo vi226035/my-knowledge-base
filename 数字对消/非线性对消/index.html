@@ -18,7 +18,7 @@
         <link rel="prev" href="../%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88/">
       
       
-        <link rel="next" href="../%E6%95%B0%E5%AD%97%E5%9F%9F%E8%87%AA%E5%B9%B2%E6%89%B0%E5%AF%B9%E6%B6%88%E4%BD%93%E7%B3%BB%E5%9B%BE/">
+        <link rel="next" href="../../FPGA/">
       
       
         
@@ -76,6 +76,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -1181,8 +1186,6 @@
       
         
       
-        
-      
     
     
     
@@ -1299,6 +1302,24 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    非线性对消方法
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1316,34 +1337,67 @@
 
       </a>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../%E6%95%B0%E5%AD%97%E5%9F%9F%E8%87%AA%E5%B9%B2%E6%89%B0%E5%AF%B9%E6%B6%88%E4%BD%93%E7%B3%BB%E5%9B%BE/" class="md-nav__link">
         
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    体系思维导图
-  
 
-    
-  </span>
+<nav class="md-nav md-nav--secondary" aria-label="目录">
   
   
-
-      </a>
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        非线性自干扰对消的研究意义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        非线性建模方法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        代表性研究
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1441,6 +1495,58 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        非线性自干扰对消的研究意义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        非线性建模方法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        代表性研究
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1461,7 +1567,43 @@
 
   <h1>非线性对消方法</h1>
 
-<p>待更新</p>
+<h2 id="_1">非线性自干扰对消的研究意义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>除了最主要的信道对自干扰产生的影响外，由于实际器件达不到理想的工作状态，有很多环节不可避免地会给收发链路引入各种失真与杂散，使得传统自适应对消方法还原的自干扰信号与真实自干扰信号存在一定偏差，当非线性较为严重时，更是明显制约数字域的自干扰对消性能。</p>
+<p>目前一般认为链路中非线性器件的影响需要包括：</p>
+<ul>
+<li>功放非线性失真 [21, 30, 31]</li>
+<li>ADC 量化噪声 [32]</li>
+<li>相位噪声 [33, 34]</li>
+<li>IQ 不平衡 [35-37]</li>
+</ul>
+<p>其中以功率放大器的非线性失真最为严重。</p>
+<h2 id="_2">非线性建模方法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>对于这些实际非线性因素，现有文献提出了多种模型来表征其在干扰对消中的影响。针对现在越来越普遍的宽带调制信号对消场景，宽带记忆效应在非线性中的影响不可忽视，因此大多研究采用记忆的非线性模型。</p>
+<p>主要模型包括：</p>
+<ul>
+<li>以 <strong>Volterra 级数模型</strong> 为基础的记忆级数模型</li>
+<li><strong>Hammerstein 模型</strong>、<strong>Wiener 模型</strong> 为代表的多盒模型</li>
+</ul>
+<h2 id="_3">代表性研究<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>文献 [38]</strong>：基于功率放大器引起的非线性信号的特性，使用记忆多项式（Memory Polynomial, MP）模型对其进行建模。并提出了一种新颖的数字对消结构以实现更好的效率，先对线性部分进行预对消处理，再针对非线性部分进行精确对消，能实现更短的收敛时间和更低的均方误差。</p>
+</li>
+<li>
+<p><strong>文献 [21]</strong>：基于增强的 Hammerstein 模型，其中非线性部分对发射机的非理想性进行建模，然后是对自干扰信道进行建模的线性滤波器。非线性部分包括：</p>
+</li>
+<li>用于非线性功率放大器的基于样条的模型</li>
+<li>用于基带非线性的多项式模型</li>
+<li>
+<p>用于 I/Q 不平衡的模型
+  在 FPGA 平台上实测，可以将自干扰抑制在接收机本底噪声的 1~2dB 以内，数字域对消比高达 46dB。</p>
+</li>
+<li>
+<p><strong>文献 [31]</strong>：提出并检验了一种基于 Hammerstein 自适应滤波器的新型数字自干扰消除器，所提出的系统由一个样条插值查找表组成。在 20MHz、40MHz 和 80MHz 信道带宽下，测得的数字自干扰消除值分别为 45dB、43dB 和 38dB。</p>
+</li>
+</ul>
+<h2 id="_4">小结<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>相较于线性自干扰，非线性自干扰对消使用设定的非线性模型来描述接收机收到的自干扰，除了线性信道部分外，模型还包含表征非线性失真的部分，之后的工作与线性对消类似，采用自适应滤波等算法解算出模型系数。因此针对实际的复杂非线性，自干扰对消的性能水平取决于模型建立与系数解算是否准确。</p>
 
 
 

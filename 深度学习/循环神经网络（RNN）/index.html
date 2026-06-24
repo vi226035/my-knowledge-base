@@ -1464,8 +1464,6 @@
       
         
       
-        
-      
     
     
     
@@ -1580,34 +1578,6 @@
     
   
     非线性对消方法
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E6%95%B0%E5%AD%97%E5%9F%9F%E8%87%AA%E5%B9%B2%E6%89%B0%E5%AF%B9%E6%B6%88%E4%BD%93%E7%B3%BB%E5%9B%BE/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    体系思维导图
   
 
     
@@ -1987,7 +1957,7 @@
 <li><strong>不实时（Seq2Seq）</strong>：读完整个输入序列再生成输出。例如：机器翻译——读完整句英文，再输出整句中文。</li>
 <li><strong>实时</strong>：每读一个输入就立刻输出一个结果。例如：视频逐帧标注——每一帧画面都要判断里面有什么。</li>
 </ul>
-<p><img alt="Pasted image 20260510152411.png" src="../../kb_material/ML_image/Pasted image 20260510152411.png" /></p>
+<p><img alt="Pasted image 20260510152411.png" src="../../kb_material/ML_image/Pasted%20image%2020260510152411.png" /></p>
 <hr />
 <h2 id="_6">网络结构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>RNN 的结构非常简洁——在普通全连接网络的基础上，多加了一条"回头路"：当前时刻隐藏层的输出，会作为下一时刻隐藏层的<strong>额外输入</strong>。</p>
@@ -2008,7 +1978,7 @@ y_t &amp;= \text{softmax}(W_{hy} h_t + b_y)
 <blockquote>
 <p>关键：<span class="arithmatex">\(W_{xh}\)</span>、<span class="arithmatex">\(W_{hh}\)</span>、<span class="arithmatex">\(W_{hy}\)</span> 在所有时间步<strong>共享</strong>——同一套参数处理整个序列。</p>
 </blockquote>
-<p><img alt="Pasted image 20260510153233.png" src="../../kb_material/ML_image/Pasted image 20260510153233.png" /></p>
+<p><img alt="Pasted image 20260510153233.png" src="../../kb_material/ML_image/Pasted%20image%2020260510153233.png" /></p>
 <hr />
 <h2 id="rnn_1">最简单 RNN 的工作方式<a class="headerlink" href="#rnn_1" title="Permanent link">&para;</a></h2>
 <p>以一个最简 RNN 为例，输入 <span class="arithmatex">\(x_t\)</span> 和上一个隐藏状态 <span class="arithmatex">\(h_{t-1}\)</span> 送入隐藏层，输出 <span class="arithmatex">\(y_t\)</span> 和新的隐藏状态 <span class="arithmatex">\(h_t\)</span>：</p>
@@ -2017,7 +1987,7 @@ y_t &amp;= \text{softmax}(W_{hy} h_t + b_y)
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                    ↓
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                            传递给时刻 t+1
 </code></pre></div>
-<p><img alt="Pasted image 20260510153341.png" src="../../kb_material/ML_image/Pasted image 20260510153341.png" /></p>
+<p><img alt="Pasted image 20260510153341.png" src="../../kb_material/ML_image/Pasted%20image%2020260510153341.png" /></p>
 <h3 id="_7">字符级语言模型示例<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>假设我们要训练一个 RNN 来预测下一个字符。输入序列是 <code>"hello"</code>，词汇表是 <code>{h, e, l, o}</code>：</p>
 <p><strong>训练过程</strong>：
@@ -2025,14 +1995,14 @@ y_t &amp;= \text{softmax}(W_{hy} h_t + b_y)
 - 输入 <code>e</code>，期望输出 <code>l</code>（e 后面大概率是 l）
 - 输入 <code>l</code>，期望输出 <code>l</code>（第一个 l 后面可能还是 l）
 - 输入 <code>l</code>，期望输出 <code>o</code>（第二个 l 后可能是 o）</p>
-<p><img alt="Pasted image 20260510153704.png" src="../../kb_material/ML_image/Pasted image 20260510153704.png" /></p>
+<p><img alt="Pasted image 20260510153704.png" src="../../kb_material/ML_image/Pasted%20image%2020260510153704.png" /></p>
 <p>每个时刻，RNN 输出的是<strong>整个词汇表的概率分布</strong>。以输入 <code>l</code> 第二个为例，模型综合了前文 <code>"hel"</code> 的信息：
 - 输出层给出每个字母的概率：<code>h: 0.03, e: 0.05, l: 0.28, o: 0.64</code>
 - 选概率最大的 <code>o</code> 作为预测</p>
 <blockquote>
 <p>注意：<span class="arithmatex">\(h_t\)</span> 是当前时刻的隐藏状态（综合了从 <span class="arithmatex">\(t=0\)</span> 到现在的所有信息），<span class="arithmatex">\(y_t\)</span> 是从 <span class="arithmatex">\(h_t\)</span> 推出的输出。</p>
 </blockquote>
-<p><img alt="Pasted image 20260510153715.png" src="../../kb_material/ML_image/Pasted image 20260510153715.png" /></p>
+<p><img alt="Pasted image 20260510153715.png" src="../../kb_material/ML_image/Pasted%20image%2020260510153715.png" /></p>
 <hr />
 <h2 id="_8">正向传播<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>RNN 的正向传播就是在每个时间步重复同样的计算。</p>
@@ -2043,7 +2013,7 @@ y_t &amp;= \text{softmax}(W_{hy} h_t + b_y)
 <li>计算当前输出：<span class="arithmatex">\(y_t = \text{softmax}(W_{hy} h_t + b_y)\)</span>（分类任务）</li>
 </ol>
 <p>然后 <span class="arithmatex">\(h_t\)</span> 传给 <span class="arithmatex">\(t+1\)</span> 步，循环往复。</p>
-<p><img alt="Pasted image 20260510153836.png" src="../../kb_material/ML_image/Pasted image 20260510153836.png" /></p>
+<p><img alt="Pasted image 20260510153836.png" src="../../kb_material/ML_image/Pasted%20image%2020260510153836.png" /></p>
 <h3 id="_9">直观理解<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>就像一个学生听课记笔记：
 - <strong><span class="arithmatex">\(h_t\)</span></strong> = 当前大脑里的理解（结合刚听到的 <span class="arithmatex">\(x_t\)</span> + 之前已理解的内容 <span class="arithmatex">\(h_{t-1}\)</span>）
@@ -2057,26 +2027,26 @@ y_t &amp;= \text{softmax}(W_{hy} h_t + b_y)
 <blockquote>
 <p>了解这大概流程即可：复合函数 + 链式法则沿时间展开。编程时框架会自动处理。</p>
 </blockquote>
-<p><img alt="Pasted image 20260510154036.png" src="../../kb_material/ML_image/Pasted image 20260510154036.png" />
-<img alt="Pasted image 20260510154500.png" src="../../kb_material/ML_image/Pasted image 20260510154500.png" /></p>
+<p><img alt="Pasted image 20260510154036.png" src="../../kb_material/ML_image/Pasted%20image%2020260510154036.png" />
+<img alt="Pasted image 20260510154500.png" src="../../kb_material/ML_image/Pasted%20image%2020260510154500.png" /></p>
 <h3 id="_11">展开的计算图<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>把 RNN 按时间展开后就像一个很深的网络——长度为 T 的序列，展开后就是 T 层的"伪深度网络"。每一层共享同样的参数，但梯度要穿过的路径很长，这就埋下了梯度消失的隐患。</p>
-<p><img alt="Pasted image 20260510154522.png" src="../../kb_material/ML_image/Pasted image 20260510154522.png" /></p>
-<p><img alt="Pasted image 20260510154922.png" src="../../kb_material/ML_image/Pasted image 20260510154922.png" /></p>
+<p><img alt="Pasted image 20260510154522.png" src="../../kb_material/ML_image/Pasted%20image%2020260510154522.png" /></p>
+<p><img alt="Pasted image 20260510154922.png" src="../../kb_material/ML_image/Pasted%20image%2020260510154922.png" /></p>
 <h3 id="bptt_1">截断 BPTT<a class="headerlink" href="#bptt_1" title="Permanent link">&para;</a></h3>
 <p>序列很长时（如一段几百词的文本），梯度从头传到尾代价太大，而且序列开头的词和末尾的词关联可能很小。实际做法：<strong>分块计算</strong>——把长序列切成长度固定的小块（如 100 步），在每块内做完整的 BPTT，块之间断开梯度流。</p>
 <p>这样做既节省计算，也避免了不相关的远距离依赖干扰当前训练。</p>
-<p><img alt="Pasted image 20260510155045.png" src="../../kb_material/ML_image/Pasted image 20260510155045.png" />
-<img alt="Pasted image 20260510155124.png" src="../../kb_material/ML_image/Pasted image 20260510155124.png" /></p>
+<p><img alt="Pasted image 20260510155045.png" src="../../kb_material/ML_image/Pasted%20image%2020260510155045.png" />
+<img alt="Pasted image 20260510155124.png" src="../../kb_material/ML_image/Pasted%20image%2020260510155124.png" /></p>
 <hr />
 <h2 id="rnn_2">多层 RNN<a class="headerlink" href="#rnn_2" title="Permanent link">&para;</a></h2>
 <p>就像 CNN 可以堆叠多层，RNN 也可以——把第一层 RNN 的输出作为第二层 RNN 的输入：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>输入 → RNN层1 → RNN层2 → RNN层3 → 输出
 </code></pre></div>
 <p>每一层的每个时间步都有自己独立的隐藏状态。多层 RNN 能学到不同时间尺度的特征——浅层抓短期模式，深层抓长期模式。但通常 2~3 层就足够，再多反而容易过拟合。</p>
-<p><img alt="Pasted image 20260510155428.png" src="../../kb_material/ML_image/Pasted image 20260510155428.png" /></p>
-<p><img alt="Pasted image 20260510155435.png" src="../../kb_material/ML_image/Pasted image 20260510155435.png" /></p>
-<p><img alt="Pasted image 20260510155638.png" src="../../kb_material/ML_image/Pasted image 20260510155638.png" /></p>
+<p><img alt="Pasted image 20260510155428.png" src="../../kb_material/ML_image/Pasted%20image%2020260510155428.png" /></p>
+<p><img alt="Pasted image 20260510155435.png" src="../../kb_material/ML_image/Pasted%20image%2020260510155435.png" /></p>
+<p><img alt="Pasted image 20260510155638.png" src="../../kb_material/ML_image/Pasted%20image%2020260510155638.png" /></p>
 <hr />
 <h2 id="rnn_3">双向 RNN<a class="headerlink" href="#rnn_3" title="Permanent link">&para;</a></h2>
 <p>普通 RNN 的问题是：<span class="arithmatex">\(h_t\)</span> 只包含<strong>过去</strong>的信息（<span class="arithmatex">\(h_0\)</span> 到 <span class="arithmatex">\(h_{t-1}\)</span>），看不到未来。</p>
@@ -2089,7 +2059,7 @@ y_t &amp;= \text{softmax}(W_{hy} h_t + b_y)
 <li>最终输出：<span class="arithmatex">\(h_t = [h_t^{\rightarrow}; h_t^{\leftarrow}]\)</span>（拼接）</li>
 </ul>
 <p>这样就可以同时利用前后文信息了。<strong>代价</strong>：无法实时处理——必须读完整个序列才能跑后向 RNN。</p>
-<p><img alt="Pasted image 20260510155825.png" src="../../kb_material/ML_image/Pasted image 20260510155825.png" /></p>
+<p><img alt="Pasted image 20260510155825.png" src="../../kb_material/ML_image/Pasted%20image%2020260510155825.png" /></p>
 <hr />
 <h2 id="rnn_4">RNN 的核心问题：梯度消失<a class="headerlink" href="#rnn_4" title="Permanent link">&para;</a></h2>
 <p>记得 RNN 的 <span class="arithmatex">\(W_{hh}\)</span> 在每个时间步都会被乘一次。经过 <span class="arithmatex">\(T\)</span> 步后，梯度中会出现 <span class="arithmatex">\(W_{hh}^T\)</span> 项：</p>

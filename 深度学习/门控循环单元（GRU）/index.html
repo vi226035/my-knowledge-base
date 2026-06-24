@@ -1620,8 +1620,6 @@
       
         
       
-        
-      
     
     
     
@@ -1736,34 +1734,6 @@
     
   
     非线性对消方法
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E6%95%B0%E5%AD%97%E5%9F%9F%E8%87%AA%E5%B9%B2%E6%89%B0%E5%AF%B9%E6%B6%88%E4%BD%93%E7%B3%BB%E5%9B%BE/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    体系思维导图
   
 
     
@@ -2290,7 +2260,7 @@
 <p>LSTM 的设计非常成功——它用细胞状态 <span class="arithmatex">\(C_t\)</span> 的加法更新替代 RNN 的乘法连乘，基本解决了 RNN 的两大痛点（梯度消失、长距离依赖学不到）。但它有一个明显缺点：</p>
 <p><strong>结构太复杂。</strong></p>
 <p>LSTM 里有三个门（遗忘门、输入门、输出门），外加一个独立的长时记忆 <span class="arithmatex">\(c_t\)</span>（细胞状态），和一个输出用的隐藏状态 <span class="arithmatex">\(h_t\)</span>：</p>
-<p><img alt="Pasted image 20260510110752.png" src="../../kb_material/ML_image/Pasted image 20260510110752.png" /></p>
+<p><img alt="Pasted image 20260510110752.png" src="../../kb_material/ML_image/Pasted%20image%2020260510110752.png" /></p>
 <p>这导致 LSTM 的参数很多，训练和推理都比较慢。</p>
 <p>于是研究者就想：</p>
 <blockquote>
@@ -2447,7 +2417,7 @@ $$r_t = \sigma(W_r \cdot [h_{t-1}, x_t]) \quad \text{(重置门)}\]</div>
 <h3 id="2_1">2. 灵活性略低<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
 <p>少了一个门，也就少了一点控制维度。在某些需要精细记忆控制的场景下，LSTM 的三门结构更有优势。</p>
 <h3 id="3">3. 没有"本质突破"<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<p>GRU 本质上是 LSTM 的变体，不是全新的架构。它的改进是"精简"而非"重构"。真正想打破 RNN 串行瓶颈，还是得看 <a href="../时域卷积网络（TCN）.md">时域卷积网络（TCN）</a> 或 <a href="../Transformer.md">Transformer</a> 这类并行架构。</p>
+<p>GRU 本质上是 LSTM 的变体，不是全新的架构。它的改进是"精简"而非"重构"。真正想打破 RNN 串行瓶颈，还是得看 <a href="../%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/">时域卷积网络（TCN）</a> 或 Transformer 这类并行架构。</p>
 <hr />
 <h2 id="_7">对初学者的最终理解<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>如果你只记一句话，请记这个：</p>
@@ -2475,7 +2445,7 @@ $$r_t = \sigma(W_r \cdot [h_{t-1}, x_t]) \quad \text{(重置门)}\]</div>
 <ul>
 <li><strong>数据少、设备弱</strong> → 优先 GRU</li>
 <li><strong>数据多、追求极致</strong> → LSTM 和 GRU 都试试，差别通常不大</li>
-<li><strong>序列极长（几千步）</strong> → 考虑 <a href="../时域卷积网络（TCN）.md">TCN</a> 或 Transformer</li>
+<li><strong>序列极长（几千步）</strong> → 考虑 <a href="../%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/">TCN</a> 或 Transformer</li>
 <li><strong>入门学习</strong> → 先学 RNN 理解原理 → 学 LSTM 理解门控 → 学 GRU 理解简化</li>
 </ul>
 <hr />
@@ -2577,10 +2547,10 @@ $$r_t = \sigma(W_r \cdot [h_{t-1}, x_t]) \quad \text{(重置门)}\]</div>
 <hr />
 <h2 id="_9">参考关系<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../循环神经网络（RNN）.md">循环神经网络（RNN）</a> — GRU 的前身，先理解 RNN 才能理解为什么需要门控</li>
-<li><a href="../长短期记忆网络（LSTM）.md">长短期记忆网络（LSTM）</a> — GRU 的"豪华版"，理解了 LSTM 再看 GRU 会觉得豁然开朗</li>
-<li><a href="../时域卷积网络（TCN）.md">时域卷积网络（TCN）</a> — 如果 RNN 家族还不够快，试试用卷积做序列</li>
-<li><a href="../神经网络应用场景与选型.md">神经网络应用场景与选型</a> — 实际任务中该选哪个模型</li>
+<li><a href="../%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89/">循环神经网络（RNN）</a> — GRU 的前身，先理解 RNN 才能理解为什么需要门控</li>
+<li><a href="../%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%BD%91%E7%BB%9C%EF%BC%88LSTM%EF%BC%89/">长短期记忆网络（LSTM）</a> — GRU 的"豪华版"，理解了 LSTM 再看 GRU 会觉得豁然开朗</li>
+<li><a href="../%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/">时域卷积网络（TCN）</a> — 如果 RNN 家族还不够快，试试用卷积做序列</li>
+<li><a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%80%89%E5%9E%8B/">神经网络应用场景与选型</a> — 实际任务中该选哪个模型</li>
 </ul>
 
 

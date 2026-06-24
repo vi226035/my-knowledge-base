@@ -1430,8 +1430,6 @@
       
         
       
-        
-      
     
     
     
@@ -1546,34 +1544,6 @@
     
   
     非线性对消方法
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E6%95%B0%E5%AD%97%E5%9F%9F%E8%87%AA%E5%B9%B2%E6%89%B0%E5%AF%B9%E6%B6%88%E4%BD%93%E7%B3%BB%E5%9B%BE/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    体系思维导图
   
 
     
@@ -1909,7 +1879,7 @@
 <p>RNN 的信息就存在一个简单的隐藏状态 <span class="arithmatex">\(h_t\)</span> 里，每次更新时旧信息被新信息<strong>全量覆盖</strong>：</p>
 <div class="arithmatex">\[h_t = \tanh(W_{xh} x_t + W_{hh} h_{t-1} + b_h)\]</div>
 <p>没有"选择性保留"的能力——重要的旧信息和不重要的旧信息被一视同仁地洗掉了。</p>
-<p><img alt="Pasted image 20260510160246.png" src="../../kb_material/ML_image/Pasted image 20260510160246.png" /></p>
+<p><img alt="Pasted image 20260510160246.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160246.png" /></p>
 <hr />
 <h2 id="lstm_1">LSTM 模型结构<a class="headerlink" href="#lstm_1" title="Permanent link">&para;</a></h2>
 <p>LSTM 的核心创新是引入了<strong>细胞状态（Cell State）</strong> <span class="arithmatex">\(C_t\)</span>，它是一条贯穿所有时间步的"记忆高速公路"，只做少量的线性运算。</p>
@@ -1940,9 +1910,9 @@
 </tr>
 </tbody>
 </table>
-<p><img alt="Pasted image 20260510160344.png" src="../../kb_material/ML_image/Pasted image 20260510160344.png" /></p>
+<p><img alt="Pasted image 20260510160344.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160344.png" /></p>
 <h3 id="_1">详细结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p><img alt="Pasted image 20260510160455.png" src="../../kb_material/ML_image/Pasted image 20260510160455.png" /></p>
+<p><img alt="Pasted image 20260510160455.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160455.png" /></p>
 <hr />
 <h2 id="lstm_2">LSTM 的逐步计算<a class="headerlink" href="#lstm_2" title="Permanent link">&para;</a></h2>
 <h3 id="_2">第一步：遗忘门——决定扔掉什么<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
@@ -1954,7 +1924,7 @@
 <li>Sigmoid（<span class="arithmatex">\(\sigma\)</span>）确保输出在 0~1 之间</li>
 </ul>
 <p><strong>直观理解</strong>：读到一个句号时，遗忘门可能把"主语是单数还是复数"这类信息清零，因为下一句不受此约束。</p>
-<p><img alt="Pasted image 20260510160644.png" src="../../kb_material/ML_image/Pasted image 20260510160644.png" /></p>
+<p><img alt="Pasted image 20260510160644.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160644.png" /></p>
 <h3 id="_3">第二步：输入门——决定记什么<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>输入门分两路，共同决定要往记忆里添加什么新内容：</p>
 <p><strong>（A）要更新什么（输入门 <span class="arithmatex">\(i_t\)</span>）</strong>：
@@ -1966,7 +1936,7 @@ $<span class="arithmatex">\(\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)\
 <blockquote>
 <p>输入门 <span class="arithmatex">\(i_t\)</span> 是"门卫"——它判断哪些新信息值得写进记忆；候选记忆 <span class="arithmatex">\(\tilde{C}_t\)</span> 是写进去的内容本身。</p>
 </blockquote>
-<p><img alt="Pasted image 20260510160650.png" src="../../kb_material/ML_image/Pasted image 20260510160650.png" /></p>
+<p><img alt="Pasted image 20260510160650.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160650.png" /></p>
 <h3 id="_4">第三步：更新细胞状态<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>结合遗忘门和输入门的结果，更新细胞状态：</p>
 <div class="arithmatex">\[C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t\]</div>
@@ -1976,7 +1946,7 @@ $<span class="arithmatex">\(\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)\
 <li>旧记忆 + 新记忆 = 新的细胞状态</li>
 </ul>
 <p>这就是 LSTM 最精妙的设计：<strong>遗忘和写入都是选择性的</strong>，<span class="arithmatex">\(C_t\)</span> 的信息可以沿着时间轴几乎无损地流动——这正是解决 RNN 梯度消失的关键。</p>
-<p><img alt="Pasted image 20260510160746.png" src="../../kb_material/ML_image/Pasted image 20260510160746.png" /></p>
+<p><img alt="Pasted image 20260510160746.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160746.png" /></p>
 <h3 id="_5">第四步：输出门——决定输出什么<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>输出门决定 <span class="arithmatex">\(C_t\)</span> 中有多少信息应该暴露给当前时刻的输出：</p>
 <div class="arithmatex">\[o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)\]</div>
@@ -1988,7 +1958,7 @@ $<span class="arithmatex">\(\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)\
 <blockquote>
 <p>类比：你在考试时记得整本书的内容（<span class="arithmatex">\(C_t\)</span>），但当前这道题只需要其中的几个知识点——输出门帮你提取需要的那部分。</p>
 </blockquote>
-<p><img alt="Pasted image 20260510160943.png" src="../../kb_material/ML_image/Pasted image 20260510160943.png" /></p>
+<p><img alt="Pasted image 20260510160943.png" src="../../kb_material/ML_image/Pasted%20image%2020260510160943.png" /></p>
 <hr />
 <h2 id="lstm_3">LSTM 完整公式总结<a class="headerlink" href="#lstm_3" title="Permanent link">&para;</a></h2>
 <div class="arithmatex">\[\begin{aligned}
@@ -2000,7 +1970,7 @@ o_t &amp;= \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \\[4pt]
 h_t &amp;= o_t \odot \tanh(C_t)
 \end{aligned}\]</div>
 <p>每个门都有自己的权重矩阵（<span class="arithmatex">\(W_f, W_i, W_C, W_o\)</span>），这些参数在所有时间步上共享。</p>
-<p><img alt="Pasted image 20260510161012.png" src="../../kb_material/ML_image/Pasted image 20260510161012.png" /></p>
+<p><img alt="Pasted image 20260510161012.png" src="../../kb_material/ML_image/Pasted%20image%2020260510161012.png" /></p>
 <hr />
 <h2 id="lstm_4">LSTM 为什么能解决梯度消失<a class="headerlink" href="#lstm_4" title="Permanent link">&para;</a></h2>
 <p>核心在于细胞状态的更新方式：</p>
@@ -2020,7 +1990,7 @@ h_t &amp;= o_t \odot \tanh(C_t)
 <p>建立词典，给每个词一个整数编号。比如 <code>{'我': 1, '爱': 10, '你': 8}</code>。"我爱你"变成 <code>[1, 10, 8]</code>。</p>
 <p><strong>第 3 步：映射到向量（Embedding）</strong></p>
 <p>查表！每个整数编号对应一个向量。网络里维护一张"词向量表"——每行是一个词的向量表示，训练时会不断微调这些向量值。</p>
-<p><img alt="Pasted image 20260513103006.png" src="../../kb_material/ML_image/Pasted image 20260513103006.png" /></p>
+<p><img alt="Pasted image 20260513103006.png" src="../../kb_material/ML_image/Pasted%20image%2020260513103006.png" /></p>
 <h3 id="embedding">Embedding 层的本质<a class="headerlink" href="#embedding" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">词表大小</span><span class="p">,</span> <span class="n">向量维度</span><span class="p">)</span>
 </code></pre></div>
@@ -2030,7 +2000,7 @@ h_t &amp;= o_t \odot \tanh(C_t)
 </blockquote>
 <h3 id="lstm_5">送入 LSTM<a class="headerlink" href="#lstm_5" title="Permanent link">&para;</a></h3>
 <p>Embedding 之后，每个词变成了一个固定长度的向量。LSTM 按顺序读这些向量，更新细胞状态和隐藏状态，最终输出预测结果。</p>
-<p><img alt="Pasted image 20260513103429.png" src="../../kb_material/ML_image/Pasted image 20260513103429.png" /></p>
+<p><img alt="Pasted image 20260513103429.png" src="../../kb_material/ML_image/Pasted%20image%2020260513103429.png" /></p>
 <blockquote>
 <p>完整流程：原始文本 → 分词 → 编号 → Embedding 查表得向量 → 送入 LSTM 按时间步处理 → 输出预测。</p>
 </blockquote>
