@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /my-knowledge-base/
+
+Sitemap: https://vi226035.github.io/my-knowledge-base/sitemap.xml
