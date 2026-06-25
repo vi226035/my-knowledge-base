@@ -1,6 +1,6 @@
-site_name: 我的知识库
+site_name: 信号·FPGA·深度学习笔记
 site_description: 信号处理、FPGA 与机器学习学习笔记
-site_author: 你自己
+site_author: vi226035
 site_url: https://vi226035.github.io/my-knowledge-base/
 
 strict: false
@@ -12,6 +12,7 @@ theme:
   name: material
   language: zh
   font: false
+  custom_dir: docs/overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -41,10 +42,13 @@ theme:
     - content.code.annotate
   icon:
     repo: fontawesome/brands/github
-  favicon: ''
+  favicon: assets/favicon.png
 
 extra:
   generator: false
+  analytics:
+    provider: google
+    property: G-S17BB74PGE
 
 exclude_docs: |
   kb_material/**/*.md
@@ -62,6 +66,13 @@ hooks:
 plugins:
   - search:
       lang: zh
+  - social:
+      cards_layout_options:
+        font_family: Noto Sans SC
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: date
+      locale: zh
 
 markdown_extensions:
   - admonition

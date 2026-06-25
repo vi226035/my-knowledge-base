@@ -6,3 +6,8 @@ site/
 .claude/
 docs/.obsidian/
 __pycache__/
+.cache/
+node_modules/
+package.json
+package-lock.json
+docs/.claudian/
