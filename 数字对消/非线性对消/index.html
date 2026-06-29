@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="除了最主要的信道对自干扰产生的影响外，由于实际器件达不到理想的工作状态，有很多环节不可避免地会给收发链路引入各种失真与杂散，使得传统自适应对消方法还原的自干扰信号与真实自干扰信号存在一定偏差，当非线性较为严重时，更是明显制约数字域的自干扰对消性能。">
+        <meta name="description" content="非线性对消是指：假设接收端自干扰不再只是发射参考信号的线性卷积，而是包含由功放、混频器、滤波器、ADC、IQ 不平衡、器件饱和等因素引入的非线性失真分量。这时，自干扰不能只用线性滤波器表示，而需要建立非线性模型来估计。">
       
       
         <meta name="author" content="vi226035">
@@ -76,7 +76,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "非线性对消方法",
-    "description": "除了最主要的信道对自干扰产生的影响外，由于实际器件达不到理想的工作状态，有很多环节不可避免地会给收发链路引入各种失真与杂散，使得传统自适应对消方法还原的自干扰信号与真实自干扰信号存在一定偏差，当非线性较为严重时，更是明显制约数字域的自干扰对消性能。",
+    "description": "非线性对消是指：假设接收端自干扰不再只是发射参考信号的线性卷积，而是包含由功放、混频器、滤波器、ADC、IQ 不平衡、器件饱和等因素引入的非线性失真分量。这时，自干扰不能只用线性滤波器表示，而需要建立非线性模型来估计。",
     "author": {
       "@type": "Person",
       "name": "vi226035"
@@ -91,7 +91,7 @@
   
 <meta property="og:type" content="website" />
 <meta property="og:title" content="非线性对消方法 - 信号·FPGA·深度学习笔记" />
-<meta property="og:description" content="除了最主要的信道对自干扰产生的影响外，由于实际器件达不到理想的工作状态，有很多环节不可避免地会给收发链路引入各种失真与杂散，使得传统自适应对消方法还原的自干扰信号与真实自干扰信号存在一定偏差，当非线性较为严重时，更是明显制约数字域的自干扰对消性能。" />
+<meta property="og:description" content="非线性对消是指：假设接收端自干扰不再只是发射参考信号的线性卷积，而是包含由功放、混频器、滤波器、ADC、IQ 不平衡、器件饱和等因素引入的非线性失真分量。这时，自干扰不能只用线性滤波器表示，而需要建立非线性模型来估计。" />
 <meta property="og:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
@@ -99,7 +99,7 @@
 <meta property="og:url" content="https://vi226035.github.io/my-knowledge-base/%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88/" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="非线性对消方法 - 信号·FPGA·深度学习笔记" />
-<meta property="twitter:description" content="除了最主要的信道对自干扰产生的影响外，由于实际器件达不到理想的工作状态，有很多环节不可避免地会给收发链路引入各种失真与杂散，使得传统自适应对消方法还原的自干扰信号与真实自干扰信号存在一定偏差，当非线性较为严重时，更是明显制约数字域的自干扰对消性能。" />
+<meta property="twitter:description" content="非线性对消是指：假设接收端自干扰不再只是发射参考信号的线性卷积，而是包含由功放、混频器、滤波器、ADC、IQ 不平衡、器件饱和等因素引入的非线性失真分量。这时，自干扰不能只用线性滤波器表示，而需要建立非线性模型来估计。" />
 <meta property="twitter:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88.png" />
 </head>
   
@@ -1426,6 +1426,45 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
+        非线性对消的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="非线性对消的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        收发同时干扰机中的非线性来源
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        记忆多项式模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         非线性自干扰对消的研究意义
       
     </span>
@@ -1434,7 +1473,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         非线性建模方法
@@ -1442,13 +1481,52 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="非线性建模方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基于记忆多项式的研究
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hammerstein" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基于样条 Hammerstein 模型的研究
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基于神经网络的非线性对消
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        代表性研究
+        小结
       
     </span>
   </a>
@@ -1456,10 +1534,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        小结
+        线性对消与非线性对消的本质区别
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="线性对消与非线性对消的本质区别">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对比总览
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文献
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相关笔记
       
     </span>
   </a>
@@ -1577,6 +1705,45 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
+        非线性对消的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="非线性对消的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        收发同时干扰机中的非线性来源
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        记忆多项式模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         非线性自干扰对消的研究意义
       
     </span>
@@ -1585,7 +1752,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         非线性建模方法
@@ -1593,13 +1760,52 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="非线性建模方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基于记忆多项式的研究
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hammerstein" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基于样条 Hammerstein 模型的研究
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基于神经网络的非线性对消
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        代表性研究
+        小结
       
     </span>
   </a>
@@ -1607,10 +1813,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        小结
+        线性对消与非线性对消的本质区别
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="线性对消与非线性对消的本质区别">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对比总览
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一句话总结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        参考文献
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相关笔记
       
     </span>
   </a>
@@ -1639,7 +1895,57 @@
 
   <h1>非线性对消方法</h1>
 
-<h2 id="_1">非线性自干扰对消的研究意义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_1">非线性对消的定义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>非线性对消是指：假设接收端自干扰不再只是发射参考信号的线性卷积，而是包含由<strong>功放、混频器、滤波器、ADC、IQ 不平衡、器件饱和</strong>等因素引入的非线性失真分量。这时，自干扰不能只用线性滤波器表示，而需要建立非线性模型来估计。</p>
+<h3 id="_2">收发同时干扰机中的非线性来源<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>在收发同时干扰机中，发射端通常功率较大，干扰信号可能经过功率放大器。功放在高功率工作时会产生 <strong>AM-AM、AM-PM 失真</strong>，也就是幅度和相位都会发生非线性变化。此时接收端泄漏的自干扰中不仅有原始参考信号的线性分量，还会出现高阶非线性项，例如三阶、五阶、七阶互调分量。</p>
+<p>非线性对消可以看成<strong>在线性对消基础上增加了高阶非线性基函数</strong>。网络或滤波器不仅估计线性泄漏，还估计由器件非线性产生的失真泄漏。</p>
+<h3 id="_3">记忆多项式模型<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>一个常见的非线性自干扰模型是<strong>记忆多项式（Memory Polynomial, MP）模型</strong>：</p>
+<div class="arithmatex">\[d(n) = \sum_{p \in P} \sum_{k=0}^{M-1} h_p(k)\; x(n-k)\,|x(n-k)|^{p-1} + v(n)\]</div>
+<p>其中：</p>
+<ul>
+<li><span class="arithmatex">\(p\)</span> —— 非线性阶数，通常取 <span class="arithmatex">\(1, 3, 5, 7, \ldots\)</span></li>
+<li><span class="arithmatex">\(k\)</span> —— 记忆抽头</li>
+<li><span class="arithmatex">\(h_p(k)\)</span> —— 第 <span class="arithmatex">\(p\)</span> 阶、第 <span class="arithmatex">\(k\)</span> 个延迟抽头的系数</li>
+<li><span class="arithmatex">\(x(n-k)\,|x(n-k)|^{p-1}\)</span> —— 非线性基函数</li>
+</ul>
+<p>各阶含义：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">阶数 <span class="arithmatex">\(p\)</span></th>
+<th style="text-align: left;">基函数</th>
+<th style="text-align: left;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(p=1\)</span></td>
+<td style="text-align: left;">$x(n-k)\,</td>
+<td style="text-align: left;">x(n-k)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(p=3\)</span></td>
+<td style="text-align: left;">$x(n-k)\,</td>
+<td style="text-align: left;">x(n-k)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(p=5\)</span></td>
+<td style="text-align: left;">$x(n-k)\,</td>
+<td style="text-align: left;">x(n-k)</td>
+</tr>
+</tbody>
+</table>
+<p>非线性对消的重构过程可以写成：</p>
+<div class="arithmatex">\[\hat{d}(n) = F\big[x(n),\, x(n-1),\, \ldots,\, x(n-M+1)\big]\]</div>
+<p>这里的 <span class="arithmatex">\(F\)</span> 不再是简单线性函数，而是<strong>非线性函数</strong>。然后仍然执行：</p>
+<div class="arithmatex">\[y_{\text{cancel}}(n) = y(n) - \hat{d}(n)\]</div>
+<blockquote>
+<p>因此，非线性对消的核心定义为：<strong>在自干扰建模过程中考虑功放、模拟器件和信道引入的非线性失真，通过非线性模型重构自干扰分量，并从接收混合信号中相减的对消方法。</strong></p>
+</blockquote>
+<hr />
+<h2 id="_4">非线性自干扰对消的研究意义<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>除了最主要的信道对自干扰产生的影响外，由于实际器件达不到理想的工作状态，有很多环节不可避免地会给收发链路引入各种失真与杂散，使得传统自适应对消方法还原的自干扰信号与真实自干扰信号存在一定偏差，当非线性较为严重时，更是明显制约数字域的自干扰对消性能。</p>
 <p>目前一般认为链路中非线性器件的影响需要包括：</p>
 <ul>
@@ -1649,21 +1955,23 @@
 <li>IQ 不平衡 [35-37]</li>
 </ul>
 <p>其中以功率放大器的非线性失真最为严重。</p>
-<h2 id="_2">非线性建模方法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="_5">非线性建模方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>对于这些实际非线性因素，现有文献提出了多种模型来表征其在干扰对消中的影响。针对现在越来越普遍的宽带调制信号对消场景，宽带记忆效应在非线性中的影响不可忽视，因此大多研究采用记忆的非线性模型。</p>
 <p>主要模型包括：</p>
 <ul>
 <li>以 <strong>Volterra 级数模型</strong> 为基础的记忆级数模型</li>
 <li><strong>Hammerstein 模型</strong>、<strong>Wiener 模型</strong> 为代表的多盒模型</li>
+<li><strong>广义记忆多项式（GMP）</strong> 模型</li>
+<li>基于<strong>神经网络</strong>的黑盒模型（CNN、LSTM、TCN、Transformer 等）</li>
 </ul>
-<h2 id="_3">代表性研究<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_6">基于记忆多项式的研究<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p><strong>文献 [38]</strong>：基于功率放大器引起的非线性信号的特性，使用记忆多项式（Memory Polynomial, MP）模型对其进行建模。并提出了一种新颖的数字对消结构以实现更好的效率，先对线性部分进行预对消处理，再针对非线性部分进行精确对消，能实现更短的收敛时间和更低的均方误差。</p>
-</li>
-<li>
-<p><strong>文献 [21]</strong>：基于增强的 Hammerstein 模型，其中非线性部分对发射机的非理想性进行建模，然后是对自干扰信道进行建模的线性滤波器。非线性部分包括：</p>
-</li>
+<li><strong>文献 [38]</strong>：基于功率放大器引起的非线性信号的特性，使用记忆多项式（Memory Polynomial, MP）模型对其进行建模。并提出了一种新颖的数字对消结构以实现更好的效率，先对线性部分进行预对消处理，再针对非线性部分进行精确对消，能实现更短的收敛时间和更低的均方误差。</li>
+</ul>
+<h3 id="hammerstein">基于样条 Hammerstein 模型的研究<a class="headerlink" href="#hammerstein" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>文献 [21]</strong>：基于增强的 Hammerstein 模型，其中非线性部分对发射机的非理想性进行建模，然后是对自干扰信道进行建模的线性滤波器。非线性部分包括：</li>
 <li>用于非线性功率放大器的基于样条的模型</li>
 <li>用于基带非线性的多项式模型</li>
 <li>
@@ -1674,8 +1982,161 @@
 <p><strong>文献 [31]</strong>：提出并检验了一种基于 Hammerstein 自适应滤波器的新型数字自干扰消除器，所提出的系统由一个样条插值查找表组成。在 20MHz、40MHz 和 80MHz 信道带宽下，测得的数字自干扰消除值分别为 45dB、43dB 和 38dB。</p>
 </li>
 </ul>
-<h2 id="_4">小结<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="_7">基于神经网络的非线性对消<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>如果用神经网络做非线性对消，本质上是让网络学习从参考信号历史窗口到非线性自干扰估计的映射：</p>
+<div class="arithmatex">\[[x(n),\, x(n-1),\, \ldots,\, x(n-M+1)] \;\longrightarrow\; \hat{d}(n)\]</div>
+<p>输入特征可以扩展为包括：</p>
+<ul>
+<li>原始 I/Q 样本</li>
+<li>包络、相位差分</li>
+<li>瞬时功率</li>
+<li>高阶非线性项</li>
+<li>延迟项</li>
+</ul>
+<p>网络输出 <span class="arithmatex">\(\hat{d}(n)\)</span> 后，仍然执行减法对消：</p>
+<div class="arithmatex">\[y_{\text{cancel}}(n) = y(n) - \hat{d}(n)\]</div>
+<p>可用于非线性对消的网络结构包括：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">网络结构</th>
+<th style="text-align: left;">特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Volterra 滤波器</strong></td>
+<td style="text-align: left;">经典非线性级数展开</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>记忆多项式 MP</strong></td>
+<td style="text-align: left;">简化的 Volterra，降低参数量</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>广义记忆多项式 GMP</strong></td>
+<td style="text-align: left;">含交叉记忆项，建模能力更强</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Hammerstein 模型</strong></td>
+<td style="text-align: left;">非线性无记忆 + 线性有记忆级联</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Wiener 模型</strong></td>
+<td style="text-align: left;">线性有记忆 + 非线性无记忆级联</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Wiener-Hammerstein 模型</strong></td>
+<td style="text-align: left;">线性-非线性-线性三明治结构</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>CNN</strong></td>
+<td style="text-align: left;">局部感受野，适合捕捉短时非线性</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>LSTM</strong></td>
+<td style="text-align: left;">门控机制，适合长程记忆效应</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>TCN</strong></td>
+<td style="text-align: left;">膨胀因果卷积，并行度高，适合实时部署</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Transformer</strong></td>
+<td style="text-align: left;">自注意力机制，建模能力强但参数多</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>轻量化深度网络</strong></td>
+<td style="text-align: left;">参数量少，适合 FPGA/嵌入式部署</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_8">小结<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>相较于线性自干扰，非线性自干扰对消使用设定的非线性模型来描述接收机收到的自干扰，除了线性信道部分外，模型还包含表征非线性失真的部分，之后的工作与线性对消类似，采用自适应滤波等算法解算出模型系数。因此针对实际的复杂非线性，自干扰对消的性能水平取决于模型建立与系数解算是否准确。</p>
+<hr />
+<h2 id="_9">线性对消与非线性对消的本质区别<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p>最核心区别是<strong>模型假设不同</strong>。</p>
+<p><strong>线性对消假设</strong>：自干扰 = 参考信号经过线性通道</p>
+<div class="arithmatex">\[d(n) = H\{x(n)\}\]</div>
+<p>其中 <span class="arithmatex">\(H\)</span> 是线性系统。</p>
+<p><strong>非线性对消假设</strong>：自干扰 = 参考信号经过非线性功放 + 记忆效应 + 耦合信道</p>
+<div class="arithmatex">\[d(n) = F\{x(n)\}\]</div>
+<p>其中 <span class="arithmatex">\(F\)</span> 是非线性系统。</p>
+<p>更直观地说：</p>
+<ul>
+<li><strong>线性对消</strong>：只处理 <span class="arithmatex">\(x(n), x(n-1), x(n-2), \ldots\)</span> 这些线性延迟项</li>
+<li><strong>非线性对消</strong>：还处理 <span class="arithmatex">\(x|x|^2, x|x|^4, x|x|^6, \ldots\)</span> 等高阶失真项</li>
+</ul>
+<h3 id="_10">对比总览<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">对比项</th>
+<th style="text-align: left;">线性对消</th>
+<th style="text-align: left;">非线性对消</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">基本假设</td>
+<td style="text-align: left;">自干扰由线性耦合产生</td>
+<td style="text-align: left;">自干扰包含器件非线性失真</td>
+</tr>
+<tr>
+<td style="text-align: left;">数学模型</td>
+<td style="text-align: left;">线性卷积 / FIR 滤波</td>
+<td style="text-align: left;">Volterra、MP、GMP、神经网络</td>
+</tr>
+<tr>
+<td style="text-align: left;">输入特征</td>
+<td style="text-align: left;">参考信号延迟抽头</td>
+<td style="text-align: left;">参考信号延迟抽头 + 高阶非线性项</td>
+</tr>
+<tr>
+<td style="text-align: left;">能否处理功放失真</td>
+<td style="text-align: left;">较弱</td>
+<td style="text-align: left;">较强</td>
+</tr>
+<tr>
+<td style="text-align: left;">复杂度</td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;">较高</td>
+</tr>
+<tr>
+<td style="text-align: left;">参数量</td>
+<td style="text-align: left;">少</td>
+<td style="text-align: left;">多</td>
+</tr>
+<tr>
+<td style="text-align: left;">部署难度</td>
+<td style="text-align: left;">低</td>
+<td style="text-align: left;">较高</td>
+</tr>
+<tr>
+<td style="text-align: left;">适合轻量化研究吗</td>
+<td style="text-align: left;">适合做基线</td>
+<td style="text-align: left;">更适合作为创新重点</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_11">一句话总结<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>线性对消解决的是"参考信号经过线性耦合泄漏到接收端"的问题；非线性对消解决的是"参考信号经过功放和器件非线性失真后泄漏到接收端"的问题。对于收发同时干扰机，由于发射功率高、链路非理想明显，单纯线性对消往往不足，非线性对消和轻量级神经网络建模更有研究价值。</p>
+</blockquote>
+<hr />
+<h2 id="_12">参考文献<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<ol>
+<li>鲁人杰, "干扰机的数字域自干扰对消技术研究", 哈尔滨工程大学硕士学位论文, 2023.</li>
+<li>赵忠凯, 关泽越, 李虎, "基于样条插值的非线性自干扰对消技术", 《系统工程与电子技术》, 2024, 46(9): 2916-2925.</li>
+<li>赵忠凯, 毛蓓, 鲁人杰, "基于 VSSAP 算法的自适应干扰对消技术研究", 《现代雷达》, 2023, 45(11): 74-79.</li>
+<li>Haykin S., <em>Adaptive Filter Theory</em>, 5th ed., Pearson, 2013.</li>
+</ol>
+<hr />
+<h2 id="_13">相关笔记<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../%E5%AF%B9%E6%B6%88%E5%B8%B8%E8%A7%81%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D/">对消常见专业名词</a>：完整术语表与缩写对照</li>
+<li><a href="../%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88/">线性对消方法</a>：Wiener/LMS/NLMS/RLS/AP/VSSAP 公式、结构与步骤</li>
+</ul>
 
 
 
@@ -1698,7 +2159,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年6月4日 14:14:32 UTC">2026年6月4日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年6月29日 06:59:28 UTC">2026年6月29日</span>
   </span>
 
     

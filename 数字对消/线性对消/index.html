@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="线性自干扰建模主要考虑多径信道的影响，即自干扰从发射机发出至抵达接收机的所有路径，其中包括主要的近距离直射路径，以及各反射、散射路径。">
+        <meta name="description" content="线性对消与非线性对消的划分，本质上不是按算法名字分，而是按自干扰通道模型是否只包含线性叠加关系来分。">
       
       
         <meta name="author" content="vi226035">
@@ -76,7 +76,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "线性对消方法",
-    "description": "线性自干扰建模主要考虑多径信道的影响，即自干扰从发射机发出至抵达接收机的所有路径，其中包括主要的近距离直射路径，以及各反射、散射路径。",
+    "description": "线性对消与非线性对消的划分，本质上不是按算法名字分，而是按自干扰通道模型是否只包含线性叠加关系来分。",
     "author": {
       "@type": "Person",
       "name": "vi226035"
@@ -91,7 +91,7 @@
   
 <meta property="og:type" content="website" />
 <meta property="og:title" content="线性对消方法 - 信号·FPGA·深度学习笔记" />
-<meta property="og:description" content="线性自干扰建模主要考虑多径信道的影响，即自干扰从发射机发出至抵达接收机的所有路径，其中包括主要的近距离直射路径，以及各反射、散射路径。" />
+<meta property="og:description" content="线性对消与非线性对消的划分，本质上不是按算法名字分，而是按自干扰通道模型是否只包含线性叠加关系来分。" />
 <meta property="og:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
@@ -99,7 +99,7 @@
 <meta property="og:url" content="https://vi226035.github.io/my-knowledge-base/%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88/" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="线性对消方法 - 信号·FPGA·深度学习笔记" />
-<meta property="twitter:description" content="线性自干扰建模主要考虑多径信道的影响，即自干扰从发射机发出至抵达接收机的所有路径，其中包括主要的近距离直射路径，以及各反射、散射路径。" />
+<meta property="twitter:description" content="线性对消与非线性对消的划分，本质上不是按算法名字分，而是按自干扰通道模型是否只包含线性叠加关系来分。" />
 <meta property="twitter:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88.png" />
 </head>
   
@@ -1398,16 +1398,43 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        线性自干扰建模与自适应滤波对消：研究现状
+        线性对消的定义
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="线性自干扰建模与自适应滤波对消：研究现状">
+    <nav class="md-nav" aria-label="线性对消的定义">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        收发同时干扰机场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        线性对消适用的情况
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         物理信道模型
@@ -1416,9 +1443,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         等效数学模型
@@ -1427,9 +1454,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         对消原理
@@ -1438,9 +1465,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         核心挑战
@@ -1449,9 +1476,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         自适应滤波算法研究现状
@@ -1485,7 +1512,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         小结
@@ -1499,14 +1526,9 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         常用的自适应滤波算法
@@ -1514,10 +1536,9 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="常用的自适应滤波算法">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lms_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1527,8 +1548,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#nlms" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1538,8 +1559,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#rls_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1549,8 +1570,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#ap" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1560,8 +1581,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#vssap" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1571,9 +1592,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         噪声训练法
@@ -1582,9 +1603,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         算法性能综合对比
@@ -1593,9 +1614,20 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型线性对消算法汇总
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
         参考文献
@@ -1604,20 +1636,15 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       
         相关笔记
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1760,16 +1787,43 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        线性自干扰建模与自适应滤波对消：研究现状
+        线性对消的定义
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="线性自干扰建模与自适应滤波对消：研究现状">
+    <nav class="md-nav" aria-label="线性对消的定义">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        收发同时干扰机场景
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        线性对消适用的情况
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         物理信道模型
@@ -1778,9 +1832,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         等效数学模型
@@ -1789,9 +1843,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         对消原理
@@ -1800,9 +1854,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
         核心挑战
@@ -1811,9 +1865,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         自适应滤波算法研究现状
@@ -1847,7 +1901,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         小结
@@ -1861,14 +1915,9 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         常用的自适应滤波算法
@@ -1876,10 +1925,9 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="常用的自适应滤波算法">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#lms_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1889,8 +1937,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#nlms" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1900,8 +1948,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#rls_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1911,8 +1959,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#ap" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1922,8 +1970,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#vssap" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1933,9 +1981,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         噪声训练法
@@ -1944,9 +1992,9 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         算法性能综合对比
@@ -1955,9 +2003,20 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型线性对消算法汇总
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
         参考文献
@@ -1966,20 +2025,15 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       
         相关笔记
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2003,38 +2057,81 @@
   
 
 
-<h2 id="_1">线性自干扰建模与自适应滤波对消：研究现状<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<h3 id="_2">物理信道模型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+  <h1>线性对消方法</h1>
+
+<h2 id="_1">线性对消的定义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>线性对消与非线性对消的划分，本质上不是按算法名字分，而是按<strong>自干扰通道模型是否只包含线性叠加关系</strong>来分。</p>
+<p>线性对消是指：假设接收端泄漏进来的自干扰信号，可以由发射端参考信号经过一个<strong>线性系统</strong>得到。也就是说，接收端自干扰只包含幅度缩放、相位旋转、时延、多径叠加、频率选择性衰落等线性效应，不考虑功放、混频器、ADC 等器件引入的非线性失真。</p>
+<h3 id="_2">收发同时干扰机场景<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>在收发同时干扰机场景中，发射端正在发射干扰信号，同时接收端还要侦收外部雷达信号。由于收发隔离不可能无限大，发射信号会通过天线耦合、结构泄漏、电缆串扰等路径进入接收机，形成强自干扰。</p>
+<p>在线性对消模型里，自干扰可以写成：</p>
+<div class="arithmatex">\[d(n) = \sum_{k=0}^{M-1} h(k)\,x(n-k) + v(n)\]</div>
+<p>其中：</p>
+<ul>
+<li><span class="arithmatex">\(x(n)\)</span> —— 发射端参考信号</li>
+<li><span class="arithmatex">\(d(n)\)</span> —— 接收端观测到的自干扰分量</li>
+<li><span class="arithmatex">\(h(k)\)</span> —— 线性自干扰通道系数</li>
+<li><span class="arithmatex">\(M\)</span> —— 通道记忆长度</li>
+<li><span class="arithmatex">\(v(n)\)</span> —— 噪声或建模误差</li>
+</ul>
+<p>对消器的目标是估计出线性通道 <span class="arithmatex">\(h(k)\)</span>，然后重构自干扰：</p>
+<div class="arithmatex">\[\hat{d}(n) = \sum_{k=0}^{M-1} \hat{h}(k)\,x(n-k)\]</div>
+<p>再从接收混合信号中减去：</p>
+<div class="arithmatex">\[y_{\text{cancel}}(n) = y(n) - \hat{d}(n)\]</div>
+<p>其中 <span class="arithmatex">\(y(n)\)</span> 是接收端总信号，通常包含目标雷达信号 <span class="arithmatex">\(s(n)\)</span>、自干扰 <span class="arithmatex">\(d(n)\)</span> 和噪声 <span class="arithmatex">\(w(n)\)</span>：</p>
+<div class="arithmatex">\[y(n) = s(n) + d(n) + w(n)\]</div>
+<p>对消后希望得到：</p>
+<div class="arithmatex">\[y_{\text{cancel}}(n) \approx s(n) + w(n)\]</div>
+<blockquote>
+<p>因此，线性对消可以理解为：<strong>利用发射端参考信号，通过线性滤波器估计接收端自干扰，再从接收信号中相减的对消方法。</strong></p>
+</blockquote>
+<hr />
+<h2 id="_3">线性对消适用的情况<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>线性对消适用于自干扰主要由线性耦合路径造成的场景，例如：</p>
+<ul>
+<li>天线间直接耦合</li>
+<li>结构泄漏</li>
+<li>线缆串扰</li>
+<li>线性多径反射</li>
+<li>接收链路线性范围内工作</li>
+<li>发射功放没有明显压缩或失真</li>
+</ul>
+<p><strong>优点</strong>：结构简单、参数量少、实现方便、适合 FPGA/DSP 实时部署。</p>
+<p><strong>缺点</strong>：当发射功率较大，功放进入非线性区，或者接收链路存在明显非线性失真时，线性模型无法准确重构自干扰，残差会明显增大。</p>
+<hr />
+<h2 id="_4">物理信道模型<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>线性自干扰建模主要考虑多径信道的影响，即自干扰从发射机发出至抵达接收机的所有路径，其中包括主要的<strong>近距离直射路径，以及各反射、散射路径</strong>。</p>
-<h3 id="_3">等效数学模型<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h2 id="_5">等效数学模型<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>与基于时域信号的射频域对消方法类似，这样的多径自干扰信道建模可以等效为一个<strong>多抽头延迟线滤波器</strong>，该滤波器的各抽头延时值对应的权值符合自干扰信道的冲激响应。</p>
-<h3 id="_4">对消原理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h2 id="_6">对消原理<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>发射的基带信号作为该滤波器的输入信号，在应用适当的延迟和加权操作后得到估计信号，即可用于抵消接收信号中的自干扰。</p>
-<h3 id="_5">核心挑战<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h2 id="_7">核心挑战<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>在实际应用中，发射机发出的参考信号是容易获得的，<strong>关键在于如何使滤波器尽量去贴近实际自干扰信道特性</strong>。</p>
 <p>这就需要各种自适应滤波算法来估计线性滤波器的抽头权值，线性自干扰对消的研究大多基于此多径信道的建模形式。</p>
-<h3 id="_6">自适应滤波算法研究现状<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>在数字域自干扰对消技术中，基于自适应滤波算法的自干扰对消技术是目前收发同时系统中的主要研究方向。自适应滤波算法是基于最小二乘、最小均方误差等目标函数准则，利用参考信号与自干扰信号来自适应估计滤波器系数的算法。自适应滤波算法的使用可以增强对消的鲁棒性，根据对消结果实时反馈调整滤波器系数，可以跟踪实时的信道变化，实现对自干扰信道的自适应估计重构[39]，因而成为了自干扰对消的常用方法。</p>
-<p>现有的自适应滤波算法主要包括最小均方算法（Least Mean Square, LMS）、递归最小二乘（Recursive Least Squares, RLS）算法和仿射投影（Affine Projection, AP）算法等，其中又以 LMS 和 RLS 最常用[40]。</p>
-<h4 id="lms">LMS 算法及其改进<a class="headerlink" href="#lms" title="Permanent link">&para;</a></h4>
+<hr />
+<h2 id="_8">自适应滤波算法研究现状<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>在数字域自干扰对消技术中，基于自适应滤波算法的自干扰对消技术是目前收发同时系统中的主要研究方向。自适应滤波算法是基于最小二乘、最小均方误差等目标函数准则，利用参考信号与自干扰信号来自适应估计滤波器系数的算法。自适应滤波算法的使用可以增强对消的鲁棒性，根据对消结果实时反馈调整滤波器系数，可以跟踪实时的信道变化，实现对自干扰信道的自适应估计重构 [39]，因而成为了自干扰对消的常用方法。</p>
+<p>现有的自适应滤波算法主要包括最小均方算法（Least Mean Square, LMS）、递归最小二乘（Recursive Least Squares, RLS）算法和仿射投影（Affine Projection, AP）算法等，其中又以 LMS 和 RLS 最常用 [40]。</p>
+<h3 id="lms">LMS 算法及其改进<a class="headerlink" href="#lms" title="Permanent link">&para;</a></h3>
 <p>LMS 由于其硬件实现的低复杂度和对不同信号条件的鲁棒性得以广泛应用，然而这种固定步长的 LMS 算法的稳态误差和收敛速度却相互制约，由此衍生出了各种变步长 LMS 算法：</p>
 <ul>
-<li>文献[41]通过构造基于先验误差的步长函数，提出了一种基于先验误差的变步长 NLMS 算法，使用先验误差的相关系数实时调整算法步长因子改进了算法性能；</li>
-<li>文献[42]则使用一种基于正态分布曲线的分段式变步长 LMS 算法，相较于固定步长算法可获得更佳的收敛速度与稳态误差；</li>
-<li>文献[43]提出了一种噪声鲁棒变步长 LMS 算法，通过将改进的双 sigmoid 函数和误差信号自相关函数相结合，使算法具有更强的抗噪能力、更快的跟踪速度和更好的稳态性能；</li>
-<li>文献[44]提出了一种用于自适应波束形成的快速且鲁棒的 VSS-LMS 算法，VSS 是基于归一化的 sigmoid 函数得到的，通过瞬时误差和估计信号功率的平方累积和进行归一化。该算法可以在不调整任何参数的情况下自适应地更新步长。</li>
+<li>文献 [41] 通过构造基于先验误差的步长函数，提出了一种基于先验误差的变步长 NLMS 算法，使用先验误差的相关系数实时调整算法步长因子改进了算法性能；</li>
+<li>文献 [42] 则使用一种基于正态分布曲线的分段式变步长 LMS 算法，相较于固定步长算法可获得更佳的收敛速度与稳态误差；</li>
+<li>文献 [43] 提出了一种噪声鲁棒变步长 LMS 算法，通过将改进的双 sigmoid 函数和误差信号自相关函数相结合，使算法具有更强的抗噪能力、更快的跟踪速度和更好的稳态性能；</li>
+<li>文献 [44] 提出了一种用于自适应波束形成的快速且鲁棒的 VSS-LMS 算法，VSS 是基于归一化的 sigmoid 函数得到的，通过瞬时误差和估计信号功率的平方累积和进行归一化。该算法可以在不调整任何参数的情况下自适应地更新步长。</li>
 </ul>
 <p>LMS 算法的改进型很多，总体来说都是对其步长函数的改进使其步长变化更灵活，在增加一定算法复杂度的前提下更有利于快速收敛和保持低稳态误差。</p>
-<h4 id="rls">RLS 算法及其改进<a class="headerlink" href="#rls" title="Permanent link">&para;</a></h4>
+<h3 id="rls">RLS 算法及其改进<a class="headerlink" href="#rls" title="Permanent link">&para;</a></h3>
 <p>递归最小二乘算法是遵循最小二乘准则的自适应算法，在收敛速度和稳态误差上要优于 LMS 算法，但 RLS 实现复杂度远比 LMS 大，且 RLS 的跟踪能力有待提高，所以 RLS 也有很多改进算法：</p>
 <ul>
-<li>文献[45]提出了一种基于数据复用和二分坐标下降迭代的低复杂度 RLS 改进算法，在改善跟踪性能的同时降低了部分复杂度，对 RLS 代替 LMS 进行硬件实现具有一定的积极意义；</li>
-<li>文献[46]在传统算法基础上，增加了对待估计系统参数的稀疏约束，提出了一种稀疏约束的可变遗忘因子 RLS 算法。该方法改善了对稀疏系统的辨识精度，并且结合了可变遗忘因子，在有效提高算法跟踪性能的基础上进一步降低了稳态误差；</li>
-<li>文献[47]在水声全双工通信中使用一种新的多层递归最小二乘（m-RLS）算法[48]实现对自干扰信道和信号传输信道的联合信道估计，通过多层 RLS 的联合使用从而提高了干扰对消性能，但是显然也进一步加大了算法复杂度。</li>
+<li>文献 [45] 提出了一种基于数据复用和二分坐标下降迭代的低复杂度 RLS 改进算法，在改善跟踪性能的同时降低了部分复杂度，对 RLS 代替 LMS 进行硬件实现具有一定的积极意义；</li>
+<li>文献 [46] 在传统算法基础上，增加了对待估计系统参数的稀疏约束，提出了一种稀疏约束的可变遗忘因子 RLS 算法。该方法改善了对稀疏系统的辨识精度，并且结合了可变遗忘因子，在有效提高算法跟踪性能的基础上进一步降低了稳态误差；</li>
+<li>文献 [47] 在水声全双工通信中使用一种新的多层递归最小二乘（m-RLS）算法 [48] 实现对自干扰信道和信号传输信道的联合信道估计，通过多层 RLS 的联合使用从而提高了干扰对消性能，但是显然也进一步加大了算法复杂度。</li>
 </ul>
-<h4 id="_7">小结<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
-<p>目前的 RLS 改进算法尚不能弥补 RLS 相较 LMS 的两大劣势：一是其面对未知干扰环境的鲁棒性相对较差，二是其与滤波器阶数呈平方律关系的复杂度（<span class="arithmatex">\(O(M^2)\)</span>）远大于遵循线性关系复杂度的 LMS（<span class="arithmatex">\(O(M)\)</span>）。因此，LMS 算法及其改进型算法依然是干扰对消中最广泛使用的自适应滤波算法[40]。</p>
-<h1 id="_8">常用的自适应滤波算法<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h1>
+<h3 id="_9">小结<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>目前的 RLS 改进算法尚不能弥补 RLS 相较 LMS 的两大劣势：一是其面对未知干扰环境的鲁棒性相对较差，二是其与滤波器阶数呈平方律关系的复杂度（<span class="arithmatex">\(O(M^2)\)</span>）远大于遵循线性关系复杂度的 LMS（<span class="arithmatex">\(O(M)\)</span>）。因此，LMS 算法及其改进型算法依然是干扰对消中最广泛使用的自适应滤波算法 [40]。</p>
+<hr />
+<h2 id="_10">常用的自适应滤波算法<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>自适应滤波器可以通过自动调节滤波器权系数去适应不同的环境而广泛应用在信号处理场景中，譬如有源噪声对消、语音回声对消、阵列的波束成形、数字预失真（Digital Predistortion, DPD）领域、信道估计（Channel Estimation）以及同频同时全双工领域等等。</p>
 <p>一个 <span class="arithmatex">\(N\)</span> 抽头的自适应滤波器的框图如下：</p>
 <p><img alt="Pasted image 20260527155451.png" src="../img/Pasted%20image%2020260527155451.png" /></p>
@@ -2219,7 +2316,7 @@
 <hr />
 <h2 id="vssap">VSSAP 算法（变步长仿射投影）<a class="headerlink" href="#vssap" title="Permanent link">&para;</a></h2>
 <blockquote>
-<p>文献来源：赵忠凯, 毛蓓, 鲁人杰, "基于 VSSAP 算法的自适应干扰对消技术研究", 《现代雷达》, 2023, Vol.45, No.11, pp.74-79.</p>
+<p>文献来源：赵忠凯, 毛, 鲁人杰, "基于 VSSAP 算法的自适应干扰对消技术研究", 《现代雷达》, 2023, Vol.45, No.11, pp.74-79.</p>
 </blockquote>
 <p>定步长 AP 存在<strong>收敛速度与稳态误差的矛盾</strong>。<strong>VSSAP（Variable Step-Size Affine Projection）</strong> 将定步长因子替换为由高斯分布函数和误差自相关控制的变步长函数：</p>
 <div class="arithmatex">\[\boxed{\mu(n)=\beta\cdot\exp\!\big(-\alpha\cdot\hat{\sigma}_e^{2}(n)\big)}\]</div>
@@ -2232,7 +2329,7 @@
 <p>原文结论：VSSAP 的收敛速度和稳态误差显著优于 LMS 及其改进算法，<strong>对消比提高了约 10 dB</strong>。</p>
 </blockquote>
 <hr />
-<h2 id="_9">噪声训练法<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h2 id="_11">噪声训练法<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p>文献来源：鲁人杰, "干扰机的数字域自干扰对消技术研究", 哈尔滨工程大学硕士学位论文, 2023.（导师：赵忠凯）</p>
 </blockquote>
@@ -2268,7 +2365,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="_10">算法性能综合对比<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h2 id="_12">算法性能综合对比<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2325,7 +2422,50 @@
 </tbody>
 </table>
 <hr />
-<h2 id="_11">参考文献<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h2 id="_13">典型线性对消算法汇总<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">算法</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>LMS</strong></td>
+<td style="text-align: left;">最小均方，最简单的自适应滤波算法</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>NLMS</strong></td>
+<td style="text-align: left;">归一化 LMS，消除输入功率对收敛的影响</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>RLS</strong></td>
+<td style="text-align: left;">递归最小二乘，收敛快但复杂度高</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>AP</strong></td>
+<td style="text-align: left;">仿射投影，NLMS 的多向量推广</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>线性 FIR 滤波器</strong></td>
+<td style="text-align: left;">固定或自适应线性抽头延迟线</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>线性最小二乘 LS</strong></td>
+<td style="text-align: left;">批处理线性拟合</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>频域线性均衡</strong></td>
+<td style="text-align: left;">频域线性补偿</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>如果使用神经网络，但网络只学习类似线性卷积或线性映射关系，本质上也可以归入线性对消思想。例如输入为 <span class="arithmatex">\([x(n), x(n-1), \ldots, x(n-M+1)]\)</span>，输出为 <span class="arithmatex">\(\hat{d}(n)\)</span>，而模型只拟合线性组合，那么它仍然属于线性自干扰建模。</p>
+</blockquote>
+<hr />
+<h2 id="_14">参考文献<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <ol>
 <li>鲁人杰, "干扰机的数字域自干扰对消技术研究", 哈尔滨工程大学硕士学位论文, 2023.</li>
 <li>赵忠凯, 毛蓓, 鲁人杰, "基于 VSSAP 算法的自适应干扰对消技术研究", 《现代雷达》, 2023, 45(11): 74-79.</li>
@@ -2335,7 +2475,7 @@
 <li>Sayed A.H., <em>Adaptive Filters</em>, Wiley-IEEE Press, 2008.</li>
 </ol>
 <hr />
-<h2 id="_12">相关笔记<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h2 id="_15">相关笔记<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../%E5%AF%B9%E6%B6%88%E5%B8%B8%E8%A7%81%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D/">对消常见专业名词</a>：完整术语表与缩写对照</li>
 <li><a href="../%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88/">非线性对消方法</a>：样条哈默斯坦/维纳模型、ARC 代价函数、深度学习对消</li>
@@ -2362,7 +2502,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年6月4日 14:14:32 UTC">2026年6月4日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年6月29日 06:59:28 UTC">2026年6月29日</span>
   </span>
 
     
