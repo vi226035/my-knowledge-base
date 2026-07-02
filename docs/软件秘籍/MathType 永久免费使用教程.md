@@ -1,8 +1,7 @@
 ---
 title: "MathType 永久免费使用教程"
-source: "https://zhuanlan.zhihu.com/p/2036431734904993636"
 author:
-  - "[[空山新雨后]]"
+  - "[[vi226035]]"
 published: 2026-05-09
 created: 2026-07-02
 tags:
