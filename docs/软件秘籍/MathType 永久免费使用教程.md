@@ -12,13 +12,13 @@ tags:
 
 # MathType 永久免费使用教程
 
-> 通过删除注册表配置项，无限次重置 MathType 30 天试用期。适用于 **Windows 系统**，MathType 7.4.8.0 系列版本。
+> 通过删除注册表配置项，无限次重置 MathType 30 天试用期。适用于 **Windows 系统**，MathType 7.11 系列版本。
 
 ## 测试环境
 
 - 操作系统：Windows 11
 - 办公软件：WPS（Microsoft Office 同理）
-- MathType 版本：7.4.8.0
+- MathType 版本：7.11
 
 ![[../kb_material/软件秘籍_image/mathtype_main.jpg]]
 
