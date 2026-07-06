@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="W是单位周期复指数序列，n是序列样值的序号，N是DFT变换的长度（N点DFT）">
+        <meta name="description" content="旋转因子（Twiddle Factor） 是单位周期复指数序列，定义为：">
       
       
         <meta name="author" content="['[[vi226035]]']">
@@ -76,7 +76,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "DFT 中的旋转因子 W 的理解",
-    "description": "W是单位周期复指数序列，n是序列样值的序号，N是DFT变换的长度（N点DFT）",
+    "description": "旋转因子（Twiddle Factor） 是单位周期复指数序列，定义为：",
     "author": {
       "@type": "Person",
       "name": "vi226035"
@@ -91,7 +91,7 @@
   
 <meta property="og:type" content="website" />
 <meta property="og:title" content="DFT中的旋转因子W的理解 - 信号·FPGA·深度学习笔记" />
-<meta property="og:description" content="W是单位周期复指数序列，n是序列样值的序号，N是DFT变换的长度（N点DFT）" />
+<meta property="og:description" content="旋转因子（Twiddle Factor） 是单位周期复指数序列，定义为：" />
 <meta property="og:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/FPGA/DFT%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%9B%A0%E5%AD%90W%E7%9A%84%E7%90%86%E8%A7%A3.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
@@ -99,7 +99,7 @@
 <meta property="og:url" content="https://vi226035.github.io/my-knowledge-base/FPGA/DFT%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%9B%A0%E5%AD%90W%E7%9A%84%E7%90%86%E8%A7%A3/" />
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:title" content="DFT中的旋转因子W的理解 - 信号·FPGA·深度学习笔记" />
-<meta property="twitter:description" content="W是单位周期复指数序列，n是序列样值的序号，N是DFT变换的长度（N点DFT）" />
+<meta property="twitter:description" content="旋转因子（Twiddle Factor） 是单位周期复指数序列，定义为：" />
 <meta property="twitter:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/FPGA/DFT%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%9B%A0%E5%AD%90W%E7%9A%84%E7%90%86%E8%A7%A3.png" />
 </head>
   
@@ -1500,6 +1500,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT 中的旋转因子 W 的理解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1516,6 +1534,258 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何直观：单位圆等分
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="几何直观：单位圆等分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#n4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N=4 举例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        物理意义：频域采样间隔
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        欧拉公式联系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用旋转因子值表
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="常用旋转因子值表">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#n2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N=2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N=4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N=8
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重要性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="重要性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 周期性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 对称性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 可约性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        在DFT公式中的角色
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FPGA实现要点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FPGA实现要点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        存储优化：查找表（LUT）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cordic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CORDIC算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        量化精度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相关笔记
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1638,6 +1908,247 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何直观：单位圆等分
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="几何直观：单位圆等分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#n4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N=4 举例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        物理意义：频域采样间隔
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        欧拉公式联系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用旋转因子值表
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="常用旋转因子值表">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#n2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N=2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N=4
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        N=8
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重要性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="重要性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 周期性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 对称性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 可约性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        在DFT公式中的角色
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fpga" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FPGA实现要点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FPGA实现要点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        存储优化：查找表（LUT）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cordic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CORDIC算法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        量化精度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相关笔记
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1657,18 +2168,167 @@
 
 
 <h1 id="dftw">DFT中的旋转因子W的理解<a class="headerlink" href="#dftw" title="Permanent link">&para;</a></h1>
-<p>W是单位周期复指数序列，n是序列样值的序号，N是DFT变换的长度（N点DFT）</p>
-<p><img alt="dft_w_factor_1.png" src="../../kb_material/FPGA_image/dft_w_factor_1.png" /></p>
-<p>表示在复平面的一个单位圆，它的下标N是2π的分母，表示把圆N等分，每一份的角度是2π/N，</p>
-<p>这个我们叫它<strong>基频</strong>。</p>
+<h2 id="_1">定义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>旋转因子（Twiddle Factor）<span class="arithmatex">\(W_N\)</span> 是单位周期复指数序列，定义为：</p>
+<div class="arithmatex">\[W_N = e^{-j\frac{2\pi}{N}}\]</div>
+<p>N点DFT中，旋转因子的一般形式为：</p>
+<div class="arithmatex">\[W_N^{nk} = e^{-j\frac{2\pi}{N}nk}\]</div>
+<p>其中：
+- <span class="arithmatex">\(N\)</span> — DFT变换长度（N点DFT）
+- <span class="arithmatex">\(n\)</span> — 时域序列样值的序号，<span class="arithmatex">\(0 \leq n \leq N-1\)</span>
+- <span class="arithmatex">\(k\)</span> — 频域序号（第k个频率采样点），<span class="arithmatex">\(0 \leq k \leq N-1\)</span></p>
+<h2 id="_2">几何直观：单位圆等分<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><img alt="dft_w_factor_2.png" src="../../kb_material/FPGA_image/dft_w_factor_2.png" /></p>
-<p><strong>旋转因子</strong> 就是DFT在变换的区间内，<strong>等间隔采样序列的频谱函数</strong>。</p>
-<p>说直白点，时域采样是以时间为基本单位隔1s采样一个点</p>
-<p>而在频域的采样这个旋转因子就是对应这个间隔。</p>
-<p>复指数与三角函数的连接是欧拉公式。</p>
-<p>比如N=4要在频域里采样4个点以什么为采样单位来贯穿这4个点呢？</p>
-<p>刚好傅里叶变换中有能表达为复指数的，而在复平面这个单位圆里就平均分为N等分，那一份就是频率采样的单位。</p>
-<p>那一份就是旋转因子的右上角标，如上图4个点的DFT，在频率采样的第一个点就是 <img alt="dft_w_factor_3.png" src="../../kb_material/FPGA_image/dft_w_factor_3.png" /> ，第二个点就是，等等。而 <strong>旋转因子</strong> 就是表达这个 <strong>等间隔采样序列的一个频谱函数</strong></p>
+<p><span class="arithmatex">\(W_N\)</span> 表示在复平面上单位圆的一个点，下标 <span class="arithmatex">\(N\)</span> 是 <span class="arithmatex">\(2\pi\)</span> 的分母，表示<strong>把单位圆 <span class="arithmatex">\(N\)</span> 等分</strong>，每一份的角度是 <span class="arithmatex">\(\frac{2\pi}{N}\)</span>。</p>
+<p>这个基本角度间隔我们叫它<strong>基频</strong>。</p>
+<h3 id="n4">N=4 举例<a class="headerlink" href="#n4" title="Permanent link">&para;</a></h3>
+<p><img alt="dft_w_factor_1.png" src="../../kb_material/FPGA_image/dft_w_factor_1.png" /></p>
+<p>以 <span class="arithmatex">\(N=4\)</span> 为例：</p>
+<div class="arithmatex">\[W_4^0 = e^{-j\frac{2\pi}{4} \cdot 0} = e^0 = 1\]</div>
+<div class="arithmatex">\[W_4^1 = e^{-j\frac{2\pi}{4} \cdot 1} = e^{-j\frac{\pi}{2}} = \cos(-\frac{\pi}{2}) + j\sin(-\frac{\pi}{2}) = -j\]</div>
+<div class="arithmatex">\[W_4^2 = e^{-j\frac{2\pi}{4} \cdot 2} = e^{-j\pi} = -1\]</div>
+<div class="arithmatex">\[W_4^3 = e^{-j\frac{2\pi}{4} \cdot 3} = e^{-j\frac{3\pi}{2}} = j\]</div>
+<p>在单位圆上对应四个点：<span class="arithmatex">\((1, 0)\)</span>、<span class="arithmatex">\((0, -j)\)</span>、<span class="arithmatex">\((-1, 0)\)</span>、<span class="arithmatex">\((0, j)\)</span>，正好将圆四等分。</p>
+<h2 id="_3">物理意义：频域采样间隔<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><strong>旋转因子就是DFT在变换区间内，等间隔采样序列频谱函数的采样间隔。</strong></p>
+<p>类比理解：
+- <strong>时域采样</strong>：以时间为基本单位，每隔 <span class="arithmatex">\(T_s\)</span> 秒采样一个点
+- <strong>频域采样</strong>：以旋转因子为基本单位，每隔 <span class="arithmatex">\(\frac{2\pi}{N}\)</span> 弧度采样一个频谱点</p>
+<p>比如 <span class="arithmatex">\(N=4\)</span> 要在频域里采样4个点，以什么为采样单位来贯穿这4个点呢？</p>
+<p>刚好傅里叶变换中有能表达为复指数的形式，而在复平面这个单位圆里就平均分为 <span class="arithmatex">\(N\)</span> 等分，那一份就是频率采样的单位。</p>
+<p>4点DFT中，频率采样的第一个点就是 <img alt="dft_w_factor_3.png" src="../../kb_material/FPGA_image/dft_w_factor_3.png" /> ，第二个点就是 <span class="arithmatex">\(W_4^2\)</span>，以此类推。而<strong>旋转因子</strong>就是表达这个<strong>等间隔采样序列的频谱函数</strong>。</p>
+<h2 id="_4">欧拉公式联系<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>复指数与三角函数的连接是<strong>欧拉公式</strong>：</p>
+<div class="arithmatex">\[e^{-j\theta} = \cos\theta - j\sin\theta\]</div>
+<p>因此旋转因子可以展开为：</p>
+<div class="arithmatex">\[W_N^{nk} = \cos\left(\frac{2\pi nk}{N}\right) - j\sin\left(\frac{2\pi nk}{N}\right)\]</div>
+<h2 id="_5">常用旋转因子值表<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="n2">N=2<a class="headerlink" href="#n2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(k\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(W_2^k\)</span></th>
+<th style="text-align: center;">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-j\pi}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-1\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="n4_1">N=4<a class="headerlink" href="#n4_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(k\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(W_4^k\)</span></th>
+<th style="text-align: center;">值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-j\pi/2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-j\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-j\pi}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-j3\pi/2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(j\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="n8">N=8<a class="headerlink" href="#n8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(k\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(W_8^k\)</span></th>
+<th style="text-align: center;">值（近似）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-j\pi/4}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{\sqrt{2}}{2} - j\frac{\sqrt{2}}{2} \approx 0.707 - 0.707j\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-j\pi/2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-j\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-j3\pi/4}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-\frac{\sqrt{2}}{2} - j\frac{\sqrt{2}}{2} \approx -0.707 - 0.707j\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-j\pi}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-1\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_6">重要性质<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. 周期性<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[W_N^{n+N} = W_N^n\]</div>
+<div class="arithmatex">\[W_N^{nk+N} = W_N^{nk}\]</div>
+<p>旋转因子以 <span class="arithmatex">\(N\)</span> 为周期循环，这在FPGA实现中意味着只需存储一个周期的查找表。</p>
+<h3 id="2">2. 对称性<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[W_N^{n+N/2} = -W_N^n\]</div>
+<p>这是<strong>半周期反对称</strong>，FFT蝶形运算的核心优化依据——后半部分的旋转因子只需取负号即可得到。</p>
+<h3 id="3">3. 可约性<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[W_{mN}^{mn} = W_N^n\]</div>
+<h2 id="dft">在DFT公式中的角色<a class="headerlink" href="#dft" title="Permanent link">&para;</a></h2>
+<p>N点DFT定义为：</p>
+<div class="arithmatex">\[X(k) = \sum_{n=0}^{N-1} x(n) \cdot W_N^{nk}\]</div>
+<p>旋转因子 <span class="arithmatex">\(W_N^{nk}\)</span> 作为加权系数，将时域序列 <span class="arithmatex">\(x(n)\)</span> 投影到第 <span class="arithmatex">\(k\)</span> 个频域采样点上。</p>
+<h2 id="fpga">FPGA实现要点<a class="headerlink" href="#fpga" title="Permanent link">&para;</a></h2>
+<h3 id="lut">存储优化：查找表（LUT）<a class="headerlink" href="#lut" title="Permanent link">&para;</a></h3>
+<p>利用旋转因子的<strong>周期性</strong>和<strong>对称性</strong>，只需存储 <span class="arithmatex">\(N/4\)</span> 个值（第一象限），其余通过符号变换和索引映射获得：</p>
+<ul>
+<li>第二象限：<span class="arithmatex">\(W_N^{N/4+k} = -j \cdot W_N^k\)</span>（实部虚部交换并变号）</li>
+<li>第三象限：<span class="arithmatex">\(W_N^{N/2+k} = -W_N^k\)</span>（取负）</li>
+<li>第四象限：<span class="arithmatex">\(W_N^{3N/4+k} = j \cdot W_N^k\)</span></li>
+</ul>
+<h3 id="cordic">CORDIC算法<a class="headerlink" href="#cordic" title="Permanent link">&para;</a></h3>
+<p>对于需要动态计算旋转因子的场景（如变长FFT），可使用<strong>CORDIC算法</strong>直接在硬件中计算 <span class="arithmatex">\(\sin/\cos\)</span>，无需查找表，但速度较慢。</p>
+<h3 id="_7">量化精度<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>旋转因子通常用<strong>定点数</strong>表示：
+- 16-bit Q15 格式：精度 <span class="arithmatex">\(\approx 2^{-15} \approx 3 \times 10^{-5}\)</span>，适用于大多数应用
+- 18-bit/20-bit：高精度需求（如雷达信号处理）
+- 浮点（FPGA软核或DSP48）：最高精度但资源消耗大</p>
+<hr />
+<h2 id="_8">相关笔记<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E6%95%B0%E5%AD%97%E4%B8%8B%E5%8F%98%E9%A2%91%EF%BC%88DDC%EF%BC%89/">数字下变频（DDC）</a> — 正交混频中同样用到复指数旋转</li>
+<li><a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E7%A9%BA%E9%97%B4%E8%B0%B1%E4%BC%B0%E8%AE%A1%E4%B8%8E%20MUSIC%20%E7%AE%97%E6%B3%95/">空间谱估计与 MUSIC 算法</a> — 阵列信号处理中的DFT/FFT应用</li>
+</ul>
 
 
 
@@ -1691,7 +2351,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月6日 07:25:22 UTC">2026年7月6日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月6日 07:36:44 UTC">2026年7月6日</span>
   </span>
 
     
