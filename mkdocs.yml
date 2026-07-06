@@ -128,5 +128,6 @@ nav:
       - 非线性对消方法: 数字对消/非线性对消.md
   - FPGA:
       - FPGA: FPGA/index.md
+      - DFT 中的旋转因子 W 的理解: FPGA/DFT中的旋转因子W的理解.md
   - 软件秘籍:
       - MathType 永久免费使用教程: 软件秘籍/MathType 永久免费使用教程.md
