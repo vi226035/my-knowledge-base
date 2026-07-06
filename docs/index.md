@@ -63,7 +63,7 @@ created: 2026-05-25
 ## FPGA
 
 - [FPGA](FPGA/index.md) — 开发笔记与资源优化
-- [DFT 中的旋转因子 W 的理解](FPGA/DFT中的旋转因子W的理解.md) — 单位圆等分、基频、频域采样间隔的直观理解
+- [DFT 中的旋转因子 W 的理解](FPGA/DFT中的旋转因子W的理解.md) — 定义、几何直观、常用值表、周期性/对称性性质、FPGA LUT 与 CORDIC 实现
 
 ---
 
