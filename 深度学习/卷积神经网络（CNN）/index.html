@@ -1968,6 +1968,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -2035,6 +2041,90 @@
     
   
     DFT 中的旋转因子 W 的理解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FPGA/UART%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UART 串行通信协议
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FPGA/SPI%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPI 串行通信协议
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FPGA/I2C%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I2C 串行通信协议
   
 
     
@@ -2822,7 +2912,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <li><strong>计算快</strong>：只需 <code>max(0, x)</code>，Sigmoid 需要做指数运算</li>
 <li><strong>诱导稀疏性</strong>：负半区直接输出 0，网络中约有一半神经元同时处于非激活状态，更接近生物神经元"多数沉默、少数活跃"的工作方式</li>
 </ol>
-<p><img alt="Pasted image 20260509144748.png" src="../../kb_material/ML_image/Pasted%20image%2020260509144748.png" /></p>
+<p><img alt="Pasted image 20260509144748.png" src="../kb_material/ML_image/Pasted image 20260509144748.png" /></p>
 <hr />
 <h2 id="_12">卷积总结<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <p>用一个表来回顾卷积层的核心概念：</p>
@@ -3087,7 +3177,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 - <strong>ResNet-18/34</strong>：用简单的两层残差块（3×3→3×3）
 - <strong>ResNet-50/101/152</strong>：用 bottleneck 残差块（1×1→3×3→1×1），1×1 负责压缩和恢复通道，大幅减少计算量</p>
 <p>ResNet-152 以 152 层的深度在 2015 年夺得 ImageNet 冠军，top-5 错误率仅 3.57%，首次超过人类水平。</p>
-<p><img alt="Pasted image 20260509171355.png" src="../../kb_material/ML_image/Pasted%20image%2020260509171355.png" />
+<p><img alt="Pasted image 20260509171355.png" src="../kb_material/ML_image/Pasted image 20260509171355.png" />
 <img alt="Pasted image 20260509171732.png" src="../../kb_material/ML_image/Pasted%20image%2020260509171732.png" /></p>
 <h1 id="inceptionnet">InceptionNet<a class="headerlink" href="#inceptionnet" title="Permanent link">&para;</a></h1>
 <p>GoogLeNet（又称 InceptionNet V1）在 2014 年 ImageNet 竞赛中夺冠。它的核心创新是 <strong>Inception 模块</strong>——与其纠结该用多大的卷积核（3×3？5×5？），不如<strong>在同一层里同时用多个不同尺寸的卷积核，让网络自己"选"</strong>。</p>
@@ -3159,7 +3249,7 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
 <li>降维后：<span class="arithmatex">\(\underbrace{256 \times 1 \times 1 \times 64}_{1×1 降维} + \underbrace{64 \times 5 \times 5 \times 64}_{5×5 卷积} = 16{,}384 + 102{,}400 = 118{,}784\)</span></li>
 </ul>
 <p><strong>减少了约 71% 的参数量</strong>，且 1×1 卷积后跟 ReLU 还额外增加了一层非线性。</p>
-<p><img alt="Pasted image 20260510103545.png" src="../../kb_material/ML_image/Pasted%20image%2020260510103545.png" /></p>
+<p><img alt="Pasted image 20260510103545.png" src="../kb_material/ML_image/Pasted image 20260510103545.png" /></p>
 <blockquote>
 <p>Inception 模块同时做 1×1、3×3、5×5 卷积<strong>和</strong>池化，四个分支并行提取不同尺度的特征，最后 concat 拼接所有结果。小卷积核提取细节纹理，大卷积核提取宏观轮廓，池化保留最强信号——三管齐下，让网络自己学哪些尺度更重要。</p>
 </blockquote>
@@ -3488,6 +3578,10 @@ $<span class="arithmatex">\(P = \frac{K-1}{2}\)</span>$</p>
         <script src="../../javascripts/katex.min.js"></script>
       
         <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/mermaid-init.js"></script>
       
     
   </body>

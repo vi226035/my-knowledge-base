@@ -1,0 +1,3151 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SPI 就像餐厅的转盘传送带——老板（Master）控制转盘转速（时钟），从厨房（MOSI）往桌上送菜，同时空盘子（MISO）从桌上回收到厨房。一根管送、一根管收，同时干活，又快又利索。每个桌子（Slave）有独立的呼叫按钮（CS 片选）。">
+      
+      
+        <meta name="author" content="vi226035">
+      
+      
+        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/FPGA/SPI%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">
+      
+      
+        <link rel="prev" href="../UART%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">
+      
+      
+        <link rel="next" href="../I2C%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>SPI 串行通信协议 - 信号·FPGA·深度学习笔记</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-S17BB74PGE"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-S17BB74PGE",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-S17BB74PGE",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "SPI 串行通信协议",
+    "description": "SPI 就像餐厅的转盘传送带——老板（Master）控制转盘转速（时钟），从厨房（MOSI）往桌上送菜，同时空盘子（MISO）从桌上回收到厨房。一根管送、一根管收，同时干活，又快又利索。每个桌子（Slave）有独立的呼叫按钮（CS 片选）。",
+    "author": {
+      "@type": "Person",
+      "name": "vi226035"
+    },
+    "url": "https://vi226035.github.io/my-knowledge-base/FPGA/SPI%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/"
+    ,"datePublished": "2026-07-22"
+    
+  }
+  </script>
+  
+
+  
+<meta property="og:type" content="website" />
+<meta property="og:title" content="SPI 串行通信协议 - 信号·FPGA·深度学习笔记" />
+<meta property="og:description" content="SPI 就像餐厅的转盘传送带——老板（Master）控制转盘转速（时钟），从厨房（MOSI）往桌上送菜，同时空盘子（MISO）从桌上回收到厨房。一根管送、一根管收，同时干活，又快又利索。每个桌子（Slave）有独立的呼叫按钮（CS 片选）。" />
+<meta property="og:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/FPGA/SPI%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://vi226035.github.io/my-knowledge-base/FPGA/SPI%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="SPI 串行通信协议 - 信号·FPGA·深度学习笔记" />
+<meta property="twitter:description" content="SPI 就像餐厅的转盘传送带——老板（Master）控制转盘转速（时钟），从厨房（MOSI）往桌上送菜，同时空盘子（MISO）从桌上回收到厨房。一根管送、一根管收，同时干活，又快又利索。每个桌子（Slave）有独立的呼叫按钮（CS 片选）。" />
+<meta property="twitter:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/FPGA/SPI%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE.png" />
+</head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spi" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="信号·FPGA·深度学习笔记" class="md-header__button md-logo" aria-label="信号·FPGA·深度学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            信号·FPGA·深度学习笔记
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SPI 串行通信协议
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vi226035/my-knowledge-base" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vi226035/my-knowledge-base
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  深度学习
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Pytorch%E5%85%A5%E9%97%A8/Pytorch%E5%85%A5%E9%97%A8/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  PyTorch 入门
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E6%95%B0%E5%AD%97%E4%B8%8B%E5%8F%98%E9%A2%91%EF%BC%88DDC%EF%BC%89/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  信号处理
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E5%AF%B9%E6%B6%88%E5%B8%B8%E8%A7%81%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数字对消
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E8%BD%AF%E4%BB%B6%E7%A7%98%E7%B1%8D/MathType%20%E6%B0%B8%E4%B9%85%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  软件秘籍
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="信号·FPGA·深度学习笔记" class="md-nav__button md-logo" aria-label="信号·FPGA·深度学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    信号·FPGA·深度学习笔记
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vi226035/my-knowledge-base" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vi226035/my-knowledge-base
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    深度学习
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    神经网络
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积神经网络（CNN）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    循环神经网络（RNN）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%BD%91%E7%BB%9C%EF%BC%88LSTM%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    长短期记忆网络（LSTM）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E9%97%A8%E6%8E%A7%E5%BE%AA%E7%8E%AF%E5%8D%95%E5%85%83%EF%BC%88GRU%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    门控循环单元（GRU）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E4%B8%80%E4%BA%9B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常见疑惑解答
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%80%89%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    应用场景与选型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降优化算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时域卷积网络（TCN）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PyTorch 入门
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PyTorch 入门
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pytorch%E5%85%A5%E9%97%A8/Pytorch%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PyTorch 入门
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pytorch%E5%85%A5%E9%97%A8/Python%E8%AF%AD%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python 语法全览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号处理
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号处理
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E6%95%B0%E5%AD%97%E4%B8%8B%E5%8F%98%E9%A2%91%EF%BC%88DDC%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDC（数字下变频）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E6%95%B0%E5%AD%97%E4%B8%8A%E5%8F%98%E9%A2%91%EF%BC%88DUC%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DUC（数字上变频）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E4%B8%AD%E9%A2%91%E6%8E%A5%E6%94%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达数字信号中频接收
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E6%A3%80%E6%B5%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达信号检测
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E8%B0%83%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达信号调制类型识别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%B9%B2%E6%B6%89%E4%BB%AA%E5%8E%9F%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    干涉仪测向原理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E7%A9%BA%E9%97%B4%E8%B0%B1%E4%BC%B0%E8%AE%A1%E4%B8%8E%20MUSIC%20%E7%AE%97%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    空间谱估计与 MUSIC 算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%B9%B6%E8%A1%8C%E5%8F%8C%E8%BE%B9Jacobi%E6%97%8B%E8%BD%AC%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并行双边 Jacobi 旋转特征值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%88%86%E6%95%B0%E9%98%B6%E5%BB%B6%E8%BF%9F%28Farrow%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    分数阶延迟滤波器（Farrow 结构）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字对消
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数字对消
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E5%AF%B9%E6%B6%88%E5%B8%B8%E8%A7%81%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业名词与缩写
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性对消方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    非线性对消方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DFT%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%9B%A0%E5%AD%90W%E7%9A%84%E7%90%86%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT 中的旋转因子 W 的理解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UART%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UART 串行通信协议
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPI 串行通信协议
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPI 串行通信协议
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、大白话一句话理解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、SPI 是什么
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、硬件连接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、硬件连接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 信号线定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 一主多从连接
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spi-cpol-cpha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、SPI 的四种工作模式（CPOL &amp; CPHA）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、SPI 的四种工作模式（CPOL &amp; CPHA）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-cpolclock-polarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 CPOL（Clock Polarity，时钟极性）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-cphaclock-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 CPHA（Clock Phase，时钟相位）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 四种模式组合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-mode-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Mode 0 时序图（最常用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、SPI 传输过程详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、SPI 传输过程详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-8-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 一次完整的 8-bit 传输
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 本质理解：移位寄存器交换
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verilog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、Verilog 代码实现
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、Verilog 代码实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-spi-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 SPI Master 模块
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-spi-slave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 SPI Slave 模块
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、关键设计要点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、关键设计要点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 时序约束
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 时钟分频
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 片选策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、SPI 的优缺点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、SPI 的优缺点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        优点 ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缺点 ❌
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、常见应用场景
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spi-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、SPI vs 其他协议对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、FAQ 常见问题
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../I2C%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I2C 串行通信协议
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    软件秘籍
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    软件秘籍
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E7%A7%98%E7%B1%8D/MathType%20%E6%B0%B8%E4%B9%85%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MathType 永久免费使用教程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、大白话一句话理解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spi_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、SPI 是什么
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、硬件连接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、硬件连接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 信号线定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 一主多从连接
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spi-cpol-cpha" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、SPI 的四种工作模式（CPOL &amp; CPHA）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、SPI 的四种工作模式（CPOL &amp; CPHA）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-cpolclock-polarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 CPOL（Clock Polarity，时钟极性）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-cphaclock-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 CPHA（Clock Phase，时钟相位）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 四种模式组合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-mode-0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Mode 0 时序图（最常用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spi_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、SPI 传输过程详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、SPI 传输过程详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-8-bit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 一次完整的 8-bit 传输
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 本质理解：移位寄存器交换
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verilog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、Verilog 代码实现
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、Verilog 代码实现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-spi-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 SPI Master 模块
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-spi-slave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 SPI Slave 模块
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、关键设计要点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、关键设计要点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 时序约束
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 时钟分频
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 片选策略
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spi_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、SPI 的优缺点
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、SPI 的优缺点">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        优点 ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        缺点 ❌
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、常见应用场景
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spi-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、SPI vs 其他协议对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、FAQ 常见问题
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="spi">SPI 串行通信协议<a class="headerlink" href="#spi" title="Permanent link">&para;</a></h1>
+<h2 id="_1">一、大白话一句话理解<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>SPI 就像<strong>餐厅的转盘传送带</strong>——老板（Master）控制转盘转速（时钟），从厨房（MOSI）往桌上送菜，同时空盘子（MISO）从桌上回收到厨房。一根管送、一根管收，同时干活，又快又利索。每个桌子（Slave）有独立的呼叫按钮（CS 片选）。</p>
+</blockquote>
+<hr />
+<h2 id="spi_1">二、SPI 是什么<a class="headerlink" href="#spi_1" title="Permanent link">&para;</a></h2>
+<p>SPI（Serial Peripheral Interface，串行外设接口）是 Motorola 公司提出的<strong>同步串行通信</strong>接口。</p>
+<p><strong>核心特征：</strong></p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同步/异步</td>
+<td><strong>同步</strong>——需要共享时钟信号（SCLK）</td>
+</tr>
+<tr>
+<td>双工方式</td>
+<td><strong>全双工</strong>——收发同时进行</td>
+</tr>
+<tr>
+<td>物理线条</td>
+<td><strong>4 根</strong>：SCLK、MOSI、MISO、CS/SS</td>
+</tr>
+<tr>
+<td>主从关系</td>
+<td><strong>一主多从</strong>——Master 控制时钟，CS 选择从机</td>
+</tr>
+<tr>
+<td>速率</td>
+<td>可达数十甚至上百 Mbps（远超 UART）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_2">三、硬件连接<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 信号线定义<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+    Master["&lt;b&gt;Master（主机）&lt;/b&gt;"]
+    Slave["&lt;b&gt;Slave（从机）&lt;/b&gt;"]
+
+    Master -- "SCLK（时钟，Master→Slave）" --&gt; Slave
+    Master -- "MOSI（主出从入）" --&gt; Slave
+    Master -- "CS/SS（片选，低有效）" --&gt; Slave
+    Slave -- "MISO（主入从出）" --&gt; Master</code></pre>
+<table>
+<thead>
+<tr>
+<th>信号线</th>
+<th>全称</th>
+<th>方向</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SCLK</strong></td>
+<td>Serial Clock</td>
+<td>Master → Slave</td>
+<td>时钟信号，由主机产生</td>
+</tr>
+<tr>
+<td><strong>MOSI</strong></td>
+<td>Master Out Slave In</td>
+<td>Master → Slave</td>
+<td>主机发送、从机接收</td>
+</tr>
+<tr>
+<td><strong>MISO</strong></td>
+<td>Master In Slave Out</td>
+<td>Master ← Slave</td>
+<td>从机发送、主机接收</td>
+</tr>
+<tr>
+<td><strong>CS/SS</strong></td>
+<td>Chip Select / Slave Select</td>
+<td>Master → Slave</td>
+<td>片选，低有效，选中哪个从机</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32">3.2 一主多从连接<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart TB
+    subgraph Shared["共享总线"]
+        SCLK["SCLK ──┐"]
+        MOSI["MOSI ──┤"]
+        MISO["MISO ─┤"]
+    end
+
+    S0["&lt;b&gt;Slave 0&lt;/b&gt;&lt;br/&gt;CS0"]
+    S1["&lt;b&gt;Slave 1&lt;/b&gt;&lt;br/&gt;CS1"]
+    S2["&lt;b&gt;Slave 2&lt;/b&gt;&lt;br/&gt;CS2"]
+
+    SCLK --- S0 &amp; S1 &amp; S2
+    MOSI --&gt; S0 &amp; S1 &amp; S2
+    S0 &amp; S1 &amp; S2 --&gt; MISO
+
+    Master["&lt;b&gt;Master&lt;/b&gt;"]
+    Master --- Shared
+    Master -.- "CS0" -.- S0
+    Master -.- "CS1" -.- S1
+    Master -.- "CS2" -.- S2
+
+    style S0 fill:#e8f4f8,stroke:#333
+    style S1 fill:#e8f4f8,stroke:#333
+    style S2 fill:#e8f4f8,stroke:#333
+    style Master fill:#fff3cd,stroke:#333</code></pre>
+<blockquote>
+<p>💡 <strong>MOSI 和 MISO 是共享总线</strong>，但 <strong>CS 是每个从机独立的</strong>。这就是为什么设备多了线会很多。</p>
+</blockquote>
+<hr />
+<h2 id="spi-cpol-cpha">四、SPI 的四种工作模式（CPOL &amp; CPHA）<a class="headerlink" href="#spi-cpol-cpha" title="Permanent link">&para;</a></h2>
+<p>这是 SPI 最让人头疼的地方。核心就是两个参数：</p>
+<h3 id="41-cpolclock-polarity">4.1 CPOL（Clock Polarity，时钟极性）<a class="headerlink" href="#41-cpolclock-polarity" title="Permanent link">&para;</a></h3>
+<p>决定<strong>空闲时</strong>时钟是高还是低：</p>
+<table>
+<thead>
+<tr>
+<th>CPOL</th>
+<th>空闲电平</th>
+<th>波形示意</th>
+<th>第一个边沿</th>
+<th>第二个边沿</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0</strong></td>
+<td>低 (0)</td>
+<td>低→高→低→高→低（方波脉冲，空闲低电平）</td>
+<td>上升沿 ↑</td>
+<td>下降沿 ↓</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>高 (1)</td>
+<td><code>‾‾‾└‾‾‾┘‾‾┘└‾</code></td>
+<td>下降沿 ↓</td>
+<td>上升沿 ↑</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>表格中的波形：下划线 <code>_</code> 代表低电平，上划线 <code>‾</code> 代表高电平。CPOL=0 空闲低，CPOL=1 空闲高。</p>
+</blockquote>
+<h3 id="42-cphaclock-phase">4.2 CPHA（Clock Phase，时钟相位）<a class="headerlink" href="#42-cphaclock-phase" title="Permanent link">&para;</a></h3>
+<p>决定<strong>在哪个边沿采样数据</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>CPHA</th>
+<th>采样边沿</th>
+<th>通俗理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0</strong></td>
+<td>第一个边沿</td>
+<td>"前缘采样"——时钟跳变后立即采</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>第二个边沿</td>
+<td>"后沿采样"——时钟回到空闲前采</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43">4.3 四种模式组合<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>CPOL</th>
+<th>CPHA</th>
+<th>空闲电平</th>
+<th>采样边沿</th>
+<th>移位边沿</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mode 0</td>
+<td>0</td>
+<td>0</td>
+<td>低</td>
+<td>上升沿</td>
+<td>下降沿</td>
+</tr>
+<tr>
+<td>Mode 1</td>
+<td>0</td>
+<td>1</td>
+<td>低</td>
+<td>下降沿</td>
+<td>上升沿</td>
+</tr>
+<tr>
+<td>Mode 2</td>
+<td>1</td>
+<td>0</td>
+<td>高</td>
+<td>下降沿</td>
+<td>上升沿</td>
+</tr>
+<tr>
+<td>Mode 3</td>
+<td>1</td>
+<td>1</td>
+<td>高</td>
+<td>上升沿</td>
+<td>下降沿</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚡ <strong>Mode 0 和 Mode 3 最常用！</strong> 大部分 SPI Flash、ADC、DAC 都用这两个模式。</p>
+</blockquote>
+<h3 id="44-mode-0">4.4 Mode 0 时序图（最常用）<a class="headerlink" href="#44-mode-0" title="Permanent link">&para;</a></h3>
+<p>Mode 0 = CPOL(0) + CPHA(0)：空闲低，<strong>上升沿采样</strong>，下降沿移位</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant M as Master
+    participant S as Slave
+
+    Note over M,S: CS 拉低，选中从机
+    M-&gt;&gt;S: CS = 0（拉低片选）
+
+    rect rgb(240,248,255)
+        Note over M,S: 每个 SCLK 周期：Master 发 1 bit (MOSI)，Slave 发 1 bit (MISO)
+        M-&gt;&gt;S: SCLK↑ 采样 D7（MOSI）/ SCLK↑ 采样 U7（MISO）
+        M-&gt;&gt;S: SCLK↑ 采样 D6 / SCLK↑ 采样 U6
+        M-&gt;&gt;S: SCLK↑ 采样 D5 / SCLK↑ 采样 U5
+        M-&gt;&gt;S: SCLK↑ 采样 D4 / SCLK↑ 采样 U4
+        Note over M,S: ... 重复到 D0/U0
+        M-&gt;&gt;S: SCLK↑ 采样 D0 / SCLK↑ 采样 U0
+    end
+
+    Note over M,S: CS 拉高，释放从机
+    M-&gt;&gt;S: CS = 1（拉高片选）
+
+    Note over M: Master 收到 Slave 数据: U7..U0
+    Note over S: Slave 收到 Master 数据: D7..D0</code></pre>
+<blockquote>
+<p>在 Mode 0 中：CS 拉低 → 每个 SCLK 上升沿同时采样 MOSI 和 MISO → 循环 8 次 → CS 拉高。</p>
+</blockquote>
+<hr />
+<h2 id="spi_2">五、SPI 传输过程详解<a class="headerlink" href="#spi_2" title="Permanent link">&para;</a></h2>
+<h3 id="51-8-bit">5.1 一次完整的 8-bit 传输<a class="headerlink" href="#51-8-bit" title="Permanent link">&para;</a></h3>
+<h3 id="52">5.2 本质理解：移位寄存器交换<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<p>SPI 的本质就是<strong>两个移位寄存器互换数据</strong>：</p>
+<pre class="mermaid"><code>flowchart TB
+    subgraph Master_SR["Master 移位寄存器（初始: D7 D6 D5 D4 D3 D2 D1 D0）"]
+        direction LR
+        M0["D7"] --&gt; M1["D6"] --&gt; M2["D5"] --&gt; M3["D4"]
+        M3 --&gt; M4["D3"] --&gt; M5["D2"] --&gt; M6["D1"] --&gt; M7["D0"]
+    end
+
+    subgraph Slave_SR["Slave 移位寄存器（初始: U7 U6 U5 U4 U3 U2 U1 U0）"]
+        direction LR
+        S0["U7"] --&gt; S1["U6"] --&gt; S2["U5"] --&gt; S3["U4"]
+        S3 --&gt; S4["U3"] --&gt; S5["U2"] --&gt; S6["U1"] --&gt; S7["U0"]
+    end
+
+    M7 -. "MISO (U7→Master)" .-&gt; M0
+    S7 -. "MOSI (D7→Slave)" .-&gt; S0
+
+    style Master_SR fill:#fff3cd,stroke:#333
+    style Slave_SR fill:#e8f4f8,stroke:#333</code></pre>
+<blockquote>
+<p>经过 8 个 SCLK 后，Master 寄存器里变成 U7~U0，Slave 寄存器里变成 D7~D0——<strong>数据完全互换</strong>。</p>
+<p>💡 这意味着 <strong>SPI 没有纯粹的"只发"或"只收"</strong>——每次传输必然是发 8 bit 同时收 8 bit。如果你只关心读，那发出去的 8 bit 就是"垃圾数据"（通常是 0x00 或 0xFF）。</p>
+</blockquote>
+<hr />
+<h2 id="verilog">六、Verilog 代码实现<a class="headerlink" href="#verilog" title="Permanent link">&para;</a></h2>
+<h3 id="61-spi-master">6.1 SPI Master 模块<a class="headerlink" href="#61-spi-master" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">module</span><span class="w"> </span><span class="n">spi_master</span><span class="w"> </span><span class="p">#(</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="n">CLK_DIV</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">4</span><span class="p">,</span><span class="w">      </span><span class="c1">// 分频系数：SCLK = CLK / (2*CLK_DIV)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="n">DATA_WIDTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">8</span><span class="w">    </span><span class="c1">// 数据宽度</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">)(</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w">                  </span><span class="n">clk</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w">                  </span><span class="n">rst_n</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="c1">// 用户接口</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">tx_data</span><span class="p">,</span><span class="w">     </span><span class="c1">// 待发送数据</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w">                  </span><span class="n">start</span><span class="p">,</span><span class="w">        </span><span class="c1">// 启动传输</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w">  </span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">rx_data</span><span class="p">,</span><span class="w">     </span><span class="c1">// 接收到的数据</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w">                   </span><span class="n">rx_valid</span><span class="p">,</span><span class="w">    </span><span class="c1">// 接收数据有效</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="c1">// SPI 引脚</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w">                   </span><span class="n">sclk</span><span class="p">,</span><span class="w">        </span><span class="c1">// SPI 时钟</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w">                   </span><span class="n">mosi</span><span class="p">,</span><span class="w">        </span><span class="c1">// 主出从入</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w">                  </span><span class="n">miso</span><span class="p">,</span><span class="w">        </span><span class="c1">// 主入从出</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w">                   </span><span class="n">cs_n</span><span class="w">         </span><span class="c1">// 片选（低有效）</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">);</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="c1">// ======== 状态机 ========</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="k">localparam</span><span class="w"> </span><span class="n">IDLE</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mh">2</span><span class="mi">&#39;d0</span><span class="p">;</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">    </span><span class="k">localparam</span><span class="w"> </span><span class="n">TRANS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">2</span><span class="mi">&#39;d1</span><span class="p">;</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="k">localparam</span><span class="w"> </span><span class="n">DONE</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mh">2</span><span class="mi">&#39;d2</span><span class="p">;</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w">             </span><span class="n">state</span><span class="p">;</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="n">$clog2</span><span class="p">(</span><span class="n">CLK_DIV</span><span class="p">)</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">clk_cnt</span><span class="p">;</span><span class="w">    </span><span class="c1">// 分频计数器</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w">  </span><span class="n">shift_reg</span><span class="p">;</span><span class="w">      </span><span class="c1">// 移位寄存器</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="n">$clog2</span><span class="p">(</span><span class="n">DATA_WIDTH</span><span class="p">)</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">bit_cnt</span><span class="p">;</span><span class="w"> </span><span class="c1">// 位计数</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">    </span><span class="kt">reg</span><span class="w">                   </span><span class="n">sclk_toggle</span><span class="p">;</span><span class="w">    </span><span class="c1">// 时钟翻转标志</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">    </span><span class="c1">// ======== 主状态机 ========</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">            </span><span class="n">state</span><span class="w">      </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">IDLE</span><span class="p">;</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">            </span><span class="n">cs_n</span><span class="w">       </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="w">            </span><span class="n">sclk</span><span class="w">       </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="w">    </span><span class="c1">// Mode 0: CPOL=0</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">            </span><span class="n">clk_cnt</span><span class="w">    </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">            </span><span class="n">bit_cnt</span><span class="w">    </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="w">            </span><span class="n">shift_reg</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">            </span><span class="n">mosi</span><span class="w">       </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="w">            </span><span class="n">rx_data</span><span class="w">    </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="w">            </span><span class="n">rx_valid</span><span class="w">   </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="w">            </span><span class="n">sclk_toggle</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a><span class="w">        </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="w">            </span><span class="n">rx_valid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="w">                </span><span class="nl">IDLE:</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="w">                    </span><span class="n">cs_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="w">    </span><span class="c1">// 空闲时 CS 拉高</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="w">                    </span><span class="n">sclk</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="w">                        </span><span class="n">cs_n</span><span class="w">       </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span><span class="w">   </span><span class="c1">// 拉低 CS 选中从机</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="w">                        </span><span class="n">shift_reg</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">tx_data</span><span class="p">;</span><span class="w"> </span><span class="c1">// 加载发送数据</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="w">                        </span><span class="n">bit_cnt</span><span class="w">    </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="w">                        </span><span class="n">clk_cnt</span><span class="w">    </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a><span class="w">                        </span><span class="n">sclk_toggle</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a><span class="w">                        </span><span class="n">state</span><span class="w">      </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">TRANS</span><span class="p">;</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="w">                        </span><span class="n">mosi</span><span class="w">       </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">tx_data</span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">1</span><span class="p">];</span><span class="w"> </span><span class="c1">// MSB first</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="w">                    </span><span class="k">end</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a><span class="w">                </span><span class="k">end</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="w">                </span><span class="nl">TRANS:</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">clk_cnt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CLK_DIV</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mh">1</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a><span class="w">                        </span><span class="n">clk_cnt</span><span class="w">     </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a><span class="w">                        </span><span class="n">sclk_toggle</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="o">~</span><span class="n">sclk_toggle</span><span class="p">;</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a><span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sclk_toggle</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a><span class="w">                            </span><span class="c1">// SCLK 下降沿 → 更新 MOSI（移位）</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a><span class="w">                            </span><span class="n">sclk</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="o">~</span><span class="n">sclk</span><span class="p">;</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a><span class="w">                            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bit_cnt</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">DATA_WIDTH</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mh">1</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a><span class="w">                                </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{</span><span class="n">shift_reg</span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">],</span><span class="w"> </span><span class="n">miso</span><span class="p">};</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a><span class="w">                                </span><span class="n">mosi</span><span class="w">      </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">2</span><span class="p">];</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a><span class="w">                            </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a><span class="w">                                </span><span class="c1">// 最后一个 bit</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a><span class="w">                                </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{</span><span class="n">shift_reg</span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">],</span><span class="w"> </span><span class="n">miso</span><span class="p">};</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a><span class="w">                            </span><span class="k">end</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a><span class="w">                            </span><span class="n">bit_cnt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">bit_cnt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a><span class="w">                        </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a><span class="w">                            </span><span class="c1">// SCLK 上升沿</span>
+<a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a><span class="w">                            </span><span class="n">sclk</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="o">~</span><span class="n">sclk</span><span class="p">;</span>
+<a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a><span class="w">                            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bit_cnt</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">DATA_WIDTH</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a><span class="w">                                </span><span class="n">state</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">DONE</span><span class="p">;</span>
+<a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a><span class="w">                            </span><span class="k">end</span>
+<a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a><span class="w">                        </span><span class="k">end</span>
+<a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a><span class="w">                    </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a><span class="w">                        </span><span class="n">clk_cnt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">clk_cnt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a><span class="w">                    </span><span class="k">end</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a><span class="w">                </span><span class="k">end</span>
+<a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>
+<a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a><span class="w">                </span><span class="nl">DONE:</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a><span class="w">                    </span><span class="n">rx_valid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a><span class="w">                    </span><span class="n">rx_data</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">;</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a><span class="w">                    </span><span class="n">cs_n</span><span class="w">     </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span><span class="w">    </span><span class="c1">// 释放从机</span>
+<a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a><span class="w">                    </span><span class="n">state</span><span class="w">    </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">IDLE</span><span class="p">;</span>
+<a id="__codelineno-0-96" name="__codelineno-0-96" href="#__codelineno-0-96"></a><span class="w">                </span><span class="k">end</span>
+<a id="__codelineno-0-97" name="__codelineno-0-97" href="#__codelineno-0-97"></a><span class="w">            </span><span class="k">endcase</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-0-99" name="__codelineno-0-99" href="#__codelineno-0-99"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-0-100" name="__codelineno-0-100" href="#__codelineno-0-100"></a>
+<a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a><span class="k">endmodule</span>
+</code></pre></div>
+<h3 id="62-spi-slave">6.2 SPI Slave 模块<a class="headerlink" href="#62-spi-slave" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">module</span><span class="w"> </span><span class="n">spi_slave</span><span class="w"> </span><span class="p">#(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="n">DATA_WIDTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">8</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">)(</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w">                  </span><span class="n">clk</span><span class="p">,</span><span class="w">     </span><span class="c1">// 从机本地时钟（用于同步 CS）</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w">                  </span><span class="n">rst_n</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="c1">// 用户接口</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">tx_data</span><span class="p">,</span><span class="w"> </span><span class="c1">// 待发送数据（提前准备好）</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w">  </span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">rx_data</span><span class="p">,</span><span class="w"> </span><span class="c1">// 接收到的数据</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w">                   </span><span class="n">rx_valid</span><span class="p">,</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="c1">// SPI 引脚</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w">                  </span><span class="n">sclk</span><span class="p">,</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w">                  </span><span class="n">mosi</span><span class="p">,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w">                   </span><span class="n">miso</span><span class="p">,</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="kt">wire</span><span class="w">                  </span><span class="n">cs_n</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="p">);</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="c1">// ======== CS 同步 ========</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">cs_sync1</span><span class="p">,</span><span class="w"> </span><span class="n">cs_sync2</span><span class="p">;</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="n">cs_active</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="n">cs_sync2</span><span class="p">;</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">            </span><span class="n">cs_sync1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">            </span><span class="n">cs_sync2</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">        </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">            </span><span class="n">cs_sync1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cs_n</span><span class="p">;</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">            </span><span class="n">cs_sync2</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cs_sync1</span><span class="p">;</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">    </span><span class="c1">// ======== SCLK 边沿检测 ========</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">sclk_d1</span><span class="p">,</span><span class="w"> </span><span class="n">sclk_d2</span><span class="p">;</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="w">            </span><span class="n">sclk_d1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="w">            </span><span class="n">sclk_d2</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="w">        </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cs_active</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="w">            </span><span class="n">sclk_d1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">sclk</span><span class="p">;</span>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="w">            </span><span class="n">sclk_d2</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">sclk_d1</span><span class="p">;</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="w">        </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="w">            </span><span class="n">sclk_d1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="w">            </span><span class="n">sclk_d2</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="n">sclk_rise</span><span class="w">  </span><span class="o">=</span><span class="w">  </span><span class="n">sclk_d2</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">~</span><span class="n">sclk_d1</span><span class="p">;</span><span class="w">  </span><span class="c1">// 上升沿</span>
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="n">sclk_fall</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">~</span><span class="n">sclk_d2</span><span class="w"> </span><span class="o">&amp;</span><span class="w">  </span><span class="n">sclk_d1</span><span class="p">;</span><span class="w">  </span><span class="c1">// 下降沿</span>
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="w">    </span><span class="c1">// ======== 移位寄存器 ========</span>
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">;</span>
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="n">$clog2</span><span class="p">(</span><span class="n">DATA_WIDTH</span><span class="p">)</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">bit_cnt</span><span class="p">;</span>
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a><span class="w">    </span><span class="c1">// Mode 0 示例：上升沿采样，下降沿移位</span>
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a><span class="w">            </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a><span class="w">            </span><span class="n">bit_cnt</span><span class="w">   </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a><span class="w">            </span><span class="n">miso</span><span class="w">      </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a><span class="w">            </span><span class="n">rx_data</span><span class="w">   </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a><span class="w">            </span><span class="n">rx_valid</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a><span class="w">        </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a><span class="w">            </span><span class="n">rx_valid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>
+<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">cs_active</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a><span class="w">                </span><span class="c1">// CS 无效 → 复位</span>
+<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a><span class="w">                </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">tx_data</span><span class="p">;</span>
+<a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a><span class="w">                </span><span class="n">miso</span><span class="w">      </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">tx_data</span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">1</span><span class="p">];</span><span class="w"> </span><span class="c1">// MSB first</span>
+<a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a><span class="w">                </span><span class="n">bit_cnt</span><span class="w">   </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a><span class="w">            </span><span class="k">end</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sclk_rise</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a><span class="w">                    </span><span class="c1">// 上升沿：采样 MOSI</span>
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a><span class="w">                    </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{</span><span class="n">shift_reg</span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">],</span><span class="w"> </span><span class="n">mosi</span><span class="p">};</span>
+<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a><span class="w">                    </span><span class="n">bit_cnt</span><span class="w">   </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">bit_cnt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>
+<a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bit_cnt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">DATA_WIDTH</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mh">1</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a><span class="w">                        </span><span class="n">rx_valid</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a><span class="w">                        </span><span class="n">rx_data</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{</span><span class="n">shift_reg</span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">],</span><span class="w"> </span><span class="n">mosi</span><span class="p">};</span>
+<a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a><span class="w">                    </span><span class="k">end</span>
+<a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a><span class="w">                </span><span class="k">end</span>
+<a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>
+<a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sclk_fall</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a><span class="w">                    </span><span class="c1">// 下降沿：更新 MISO 输出</span>
+<a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a><span class="w">                    </span><span class="n">miso</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">shift_reg</span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">2</span><span class="p">];</span>
+<a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a><span class="w">                    </span><span class="n">shift_reg</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">{</span><span class="n">shift_reg</span><span class="p">[</span><span class="n">DATA_WIDTH</span><span class="o">-</span><span class="mh">2</span><span class="o">:</span><span class="mh">0</span><span class="p">],</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">};</span>
+<a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a><span class="w">                </span><span class="k">end</span>
+<a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a><span class="w">            </span><span class="k">end</span>
+<a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a>
+<a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a><span class="k">endmodule</span>
+</code></pre></div>
+<hr />
+<h2 id="_3">七、关键设计要点<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 时序约束<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<p>SPI 的速度受限于以下因素：
+- <strong>Setup/Hold 时间</strong>：数据必须在时钟边沿前稳定（setup），且边沿后保持一段时间（hold）
+- <strong>传播延迟</strong>：信号在线上的传输延迟
+- <strong>从机响应速度</strong>：从机必须在下一个时钟边沿前准备好 MISO 数据</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant M as Master
+    participant S as Slave
+
+    M-&gt;&gt;S: 拉低 CS，选中从机
+    M-&gt;&gt;S: MOSI 数据稳定
+    Note over M,S: t&lt;sub&gt;setup&lt;/sub&gt;：数据需提前稳定
+    M-&gt;&gt;S: SCLK 上升沿（采样点）
+    Note over M,S: t&lt;sub&gt;hold&lt;/sub&gt;：数据需继续保持
+    M-&gt;&gt;S: 从机响应，准备 MISO
+    Note over S: 从机必须在下一个沿之前准备好 MISO</code></pre>
+<h3 id="72">7.2 时钟分频<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<p>在 FPGA 中，SCLK 由系统时钟分频得到：</p>
+<div class="arithmatex">\[f_{SCLK} = \frac{f_{CLK}}{2 \times CLK\_DIV}\]</div>
+<p>例如系统时钟 50MHz，CLK_DIV = 5 → SCLK = 5MHz。</p>
+<h3 id="73">7.3 片选策略<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>独立 CS</strong>：每个从机一根 CS 线（最常见，简单直接）</li>
+<li><strong>菊花链（Daisy Chain）</strong>：多个从机串联，只需一根 CS（如某些 LED 驱动芯片）</li>
+<li><strong>3 线模式</strong>：MOSI/MISO 合并为一根双向线（节省引脚）</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    Master["&lt;b&gt;Master&lt;/b&gt;"]
+    S0["&lt;b&gt;Slave 0&lt;/b&gt;"]
+    S1["&lt;b&gt;Slave 1&lt;/b&gt;"]
+    S2["&lt;b&gt;Slave 2&lt;/b&gt;"]
+
+    Master --&gt;|MOSI (串联传递)| S0 --&gt;|MOSI| S1 --&gt;|MOSI| S2
+    Master &lt;--|MISO (串联返回)| S0 &lt;--|MISO| S1 &lt;--|MISO| S2
+
+    Note["只需 1 根 CS，所有从机共用&lt;br/&gt;数据像流水一样逐个传递"]
+
+    style S0 fill:#e8f4f8,stroke:#333
+    style S1 fill:#e8f4f8,stroke:#333
+    style S2 fill:#e8f4f8,stroke:#333
+    style Master fill:#fff3cd,stroke:#333
+    style Note fill:#f0f0f0,stroke:#999,stroke-dasharray: 5 5</code></pre>
+<hr />
+<h2 id="spi_3">八、SPI 的优缺点<a class="headerlink" href="#spi_3" title="Permanent link">&para;</a></h2>
+<h3 id="_4">优点 ✅<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>速度快</strong>：可达数十 Mbps，远超 UART 和 I2C</li>
+<li><strong>全双工</strong>：收发同时进行</li>
+<li><strong>协议简单</strong>：没有复杂的地址机制、仲裁逻辑</li>
+<li><strong>灵活</strong>：数据宽度可自定义（8/16/32 bit 都行）</li>
+<li><strong>无上拉电阻</strong>：推挽输出，信号质量好</li>
+</ul>
+<h3 id="_5">缺点 ❌<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>线多</strong>：N 个从机需要 N 根 CS 线（3+N 根总线）</li>
+<li><strong>没有应答机制</strong>：Master 不知道 Slave 是否正确收到</li>
+<li><strong>无多主支持</strong>：标准 SPI 只支持一个 Master</li>
+<li><strong>距离短</strong>：板级通信，不适合长距离</li>
+</ul>
+<hr />
+<h2 id="_6">九、常见应用场景<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>SPI Flash</strong>：W25Q64 等 NOR Flash，存储程序/数据</li>
+<li><strong>DAC</strong>：AD9xxx 系列高速 DAC 配置</li>
+<li><strong>ADC</strong>：AD7xxx 系列 ADC 数据读取</li>
+<li><strong>LCD/OLED 显示屏</strong>：SPI 接口的小屏</li>
+<li><strong>SD 卡</strong>：SPI 模式读写（虽然 SD 卡有自己的 4-bit 模式）</li>
+<li><strong>传感器</strong>：加速度计、陀螺仪等</li>
+</ul>
+<hr />
+<h2 id="spi-vs">十、SPI vs 其他协议对比<a class="headerlink" href="#spi-vs" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>SPI</th>
+<th>I2C</th>
+<th>UART</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>线数</td>
+<td>4 + N(CS)</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>⭐⭐⭐ 最快</td>
+<td>⭐⭐ 中等</td>
+<td>⭐ 最慢</td>
+</tr>
+<tr>
+<td>双工</td>
+<td>全双工</td>
+<td>半双工</td>
+<td>全双工</td>
+</tr>
+<tr>
+<td>多从机</td>
+<td>CS 扩展（线多）</td>
+<td>地址寻址（省线）</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>硬件复杂度</td>
+<td>低</td>
+<td>中</td>
+<td>最低</td>
+</tr>
+<tr>
+<td>上拉电阻</td>
+<td>不需要</td>
+<td><strong>需要</strong></td>
+<td>不需要</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="faq">十一、FAQ 常见问题<a class="headerlink" href="#faq" title="Permanent link">&para;</a></h2>
+<p><strong>Q：CPOL 和 CPHA 到底怎么选？</strong></p>
+<blockquote>
+<p>看从机芯片的数据手册！每个 SPI 从机芯片都有规定的模式，Master 必须匹配。最常见的 Flash 芯片（如 W25Qxx）用 Mode 0 或 Mode 3。</p>
+</blockquote>
+<p><strong>Q：SPI 的"全双工"有什么实际意义？</strong></p>
+<blockquote>
+<p>比如读 SPI Flash 时，你发 1 字节命令（同时收到 1 字节"垃圾"），然后发 0x00 读数据（同时往 Flash 送"空数据"）。收发是同步进行的。</p>
+</blockquote>
+<p><strong>Q：SPI 最多能接多少个从机？</strong></p>
+<blockquote>
+<p>理论上受 CS 线数量限制。实际上 CS 线太多会有布线问题和负载电容问题。一般不超过 8 个。更多的话考虑用 I2C 或 SPI 多路复用器。</p>
+</blockquote>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月22日 13:25:58 UTC">2026年7月22日</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月22日 13:25:58 UTC">2026年7月22日</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/katex.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>
