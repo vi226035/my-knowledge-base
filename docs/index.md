@@ -64,6 +64,9 @@ created: 2026-05-25
 
 - [FPGA](FPGA/index.md) — 开发笔记与资源优化
 - [DFT 中的旋转因子 W 的理解](FPGA/DFT中的旋转因子W的理解.md) — 定义、几何直观、常用值表、周期性/对称性性质、FPGA LUT 与 CORDIC 实现
+- [UART 串行通信协议](FPGA/UART串行通信协议.md) — 异步串口通信：帧格式、波特率、收发 Verilog 实现
+- [SPI 串行通信协议](FPGA/SPI串行通信协议.md) — 同步高速四线协议：CPOL/CPHA 模式、移位寄存器交换、Master/Slave 代码
+- [I2C 串行通信协议](FPGA/I2C串行通信协议.md) — 两线半双工总线：地址寻址、开漏上拉、仲裁机制、EEPROM 读写示例
 
 ---
 

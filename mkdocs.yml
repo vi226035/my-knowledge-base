@@ -83,7 +83,11 @@ markdown_extensions:
       generic: true
   - pymdownx.highlight:
       anchor_linenums: true
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.inlinehilite
   - pymdownx.details
   - toc:
@@ -92,6 +96,8 @@ markdown_extensions:
 extra_javascript:
   - javascripts/katex.min.js
   - javascripts/katex.js
+  - https://unpkg.com/mermaid@11/dist/mermaid.min.js
+  - javascripts/mermaid-init.js
 
 extra_css:
   - stylesheets/katex.min.css
@@ -129,5 +135,8 @@ nav:
   - FPGA:
       - FPGA: FPGA/index.md
       - DFT 中的旋转因子 W 的理解: FPGA/DFT中的旋转因子W的理解.md
+      - UART 串行通信协议: FPGA/UART串行通信协议.md
+      - SPI 串行通信协议: FPGA/SPI串行通信协议.md
+      - I2C 串行通信协议: FPGA/I2C串行通信协议.md
   - 软件秘籍:
       - MathType 永久免费使用教程: 软件秘籍/MathType 永久免费使用教程.md
