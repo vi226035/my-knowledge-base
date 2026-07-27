@@ -81,7 +81,7 @@ created: 2026-05-25
 - [UART 串行通信协议](FPGA/UART串行通信协议.md) — 异步串口通信：帧格式、波特率、收发 Verilog 实现
 - [SPI 串行通信协议](FPGA/SPI串行通信协议.md) — 同步高速四线协议：CPOL/CPHA 模式、移位寄存器交换、Master/Slave 代码
 - [I2C 串行通信协议](FPGA/I2C串行通信协议.md) — 两线半双工总线：地址寻址、开漏上拉、仲裁机制、EEPROM 读写示例
-- [数字芯片设计与验证全流程](数字芯片设计与验证全流程.md) — Synopsys Golden UPF Flow：五层抽象、验证手段、综合后端、FPGA 视角
+- [数字芯片设计与验证全流程](数字IC/数字芯片设计与验证全流程.md) — Synopsys Golden UPF Flow：五层抽象、验证手段、综合后端、FPGA 视角
 
 ---
 
