@@ -60,6 +60,20 @@ created: 2026-05-25
 
 ---
 
+## 数字IC
+
+数字芯片设计与验证相关知识，从 Verilog 到 UVM 的系统学习。
+
+- [数字IC](数字IC/index.md) — 数字芯片设计与验证索引
+- [数字芯片设计与验证概述](数字IC/数字芯片设计与验证概述.md) — 设计流程、验证三手段、研发流程、语言工具栈
+- [Verilog HDL 核心语法与建模](数字IC/Verilog HDL核心语法与建模.md) — 模块结构、四种建模方式、Task/Function
+- [高性能数字电路设计](数字IC/高性能数字电路设计.md) — PPA、状态机三段式、时钟时序、FIFO、低功耗
+- [SystemVerilog 基础语法](数字IC/SystemVerilog基础语法.md) — always_ff/comb、interface、package、数组方法
+- [SystemVerilog 核心特性](数字IC/SystemVerilog核心特性.md) — 数据类型、OOP、随机约束、SVA、覆盖率
+- [UVM 验证方法学入门](数字IC/UVM验证方法学入门.md) — UVM 架构、六大组件、TLM 通信、Factory 机制
+
+---
+
 ## FPGA
 
 - [FPGA](FPGA/index.md) — 开发笔记与资源优化
@@ -67,6 +81,7 @@ created: 2026-05-25
 - [UART 串行通信协议](FPGA/UART串行通信协议.md) — 异步串口通信：帧格式、波特率、收发 Verilog 实现
 - [SPI 串行通信协议](FPGA/SPI串行通信协议.md) — 同步高速四线协议：CPOL/CPHA 模式、移位寄存器交换、Master/Slave 代码
 - [I2C 串行通信协议](FPGA/I2C串行通信协议.md) — 两线半双工总线：地址寻址、开漏上拉、仲裁机制、EEPROM 读写示例
+- [数字芯片设计与验证全流程](数字芯片设计与验证全流程.md) — Synopsys Golden UPF Flow：五层抽象、验证手段、综合后端、FPGA 视角
 
 ---
 

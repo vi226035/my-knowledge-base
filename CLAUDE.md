@@ -12,13 +12,21 @@
 
 ### 整理 Clippings
 
-当用户说"整理抓取的文章"时：
+当用户表达任何与整理抓取文章相关的意图时（不限于"整理抓取的文章"，详见 `CLAUDE-CLIPPINGS.md` 意图识别章节）：
 
-1. 检查 `docs/Clippings/` 目录下的新文件
-2. 将文章归类到合适的目录（`ML/`、`信号处理/`、`FPGA/` 等）
-3. 在 `docs/index.md` 中添加链接
-4. 在 `mkdocs.yml` 的 `nav` 中添加对应条目
-5. 删除 Clippings 中的原始文件（已完成归类）
+1. **自动识别用户意图** — 完整整理 / 仅翻译 / 仅分类 / 仅格式化 / 部分操作
+2. 检查 `docs/Clippings/` 目录下的新文件
+3. 读取并评估每篇文章的质量（详见 CLAUDE-CLIPPINGS.md 质量标准）
+4. 英文内容翻译为中文（详见翻译规则）
+5. 按标准输出格式重构（详见标准笔记结构 + 通俗解释规则）
+6. 清理内容、添加 frontmatter、确定分类
+7. **自动创建新分类**（如果文章不属于任何现有目录）
+8. 移动到目标目录（`ML/`、`信号处理/`、`FPGA/` 等）
+9. 添加 Wiki 链接关联已有笔记
+10. 在 `docs/index.md` 和 `mkdocs.yml` 的 `nav` 中同步更新
+11. 删除 Clippings 中的原始文件
+12. 运行 `mkdocs build` 验证
+13. 输出整理结果汇总
 
 ### 新笔记创建规范
 
@@ -119,7 +127,8 @@ D:\Obsidian\my-knowledge-base\
 ├── knowledge_base_material/ # 外部参考材料（PDF 提取、图片等）
 ├── mkdocs.yml               # MkDocs 站点配置
 ├── hooks.py                 # MkDocs 自定义钩子
-└── CLAUDE.md                # 本文件
+├── CLAUDE.md                # 主操作指南
+── CLAUDE-CLIPPINGS.md      # Clippings 整理专用手册
 ```
 
 ## 重要约定
