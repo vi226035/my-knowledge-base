@@ -143,13 +143,7 @@ nav:
       - 数字IC: 数字IC/index.md
       - 数字芯片设计与验证概述: 数字IC/数字芯片设计与验证概述.md
       - Verilog HDL 核心语法与建模: 数字IC/Verilog HDL核心语法与建模.md
-      - 高性能数字电路设计: 数字IC/高性能数字电路设计.md
+      - SystemVerilog 基础语法: 数字IC/SystemVerilog基础语法.md
       - SystemVerilog 核心特性: 数字IC/SystemVerilog核心特性.md
-      - UVM 验证方法学入门: 数字IC/UVM验证方法学入门.md
-  - 数字IC:
-      - 数字IC: 数字IC/index.md
-      - 数字芯片设计与验证概述: 数字IC/数字芯片设计与验证概述.md
-      - Verilog HDL 核心语法与建模: 数字IC/Verilog HDL核心语法与建模.md
       - 高性能数字电路设计: 数字IC/高性能数字电路设计.md
-      - SystemVerilog 核心特性: 数字IC/SystemVerilog核心特性.md
       - UVM 验证方法学入门: 数字IC/UVM验证方法学入门.md
