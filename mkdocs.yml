@@ -138,7 +138,6 @@ nav:
       - UART 串行通信协议: FPGA/UART串行通信协议.md
       - SPI 串行通信协议: FPGA/SPI串行通信协议.md
       - I2C 串行通信协议: FPGA/I2C串行通信协议.md
-      - 数字芯片设计与验证全流程: 数字IC/数字芯片设计与验证全流程.md
   - 数字IC:
       - 数字IC: 数字IC/index.md
       - 数字芯片设计与验证概述: 数字IC/数字芯片设计与验证概述.md
@@ -147,3 +146,4 @@ nav:
       - SystemVerilog 核心特性: 数字IC/SystemVerilog核心特性.md
       - 高性能数字电路设计: 数字IC/高性能数字电路设计.md
       - UVM 验证方法学入门: 数字IC/UVM验证方法学入门.md
+      - 数字芯片设计与验证全流程：数字IC/数字芯片设计与验证全流程.md
