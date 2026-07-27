@@ -82,6 +82,12 @@ def on_page_markdown(markdown, page, config, files):
     # 1. Convert image embeds: ![[path.png]] -> ![alt](relative_path)
     def convert_image(m):
         target = m.group(1)
+        # Search in current directory first
+        docs_dir = config["docs_dir"] if isinstance(config, dict) else getattr(config, 'docs_dir', 'docs')
+        current_dir = os.path.join(docs_dir, page_dir) if page_dir else docs_dir
+        local_target = os.path.join(current_dir, target)
+        if os.path.exists(local_target):
+            return f"![{target.rsplit('/', 1)[-1]}]({target})"
         return f"![{target.rsplit('/', 1)[-1]}]({make_relative(target, True)})"
 
     markdown = re.sub(
@@ -99,6 +105,18 @@ def on_page_markdown(markdown, page, config, files):
         # Only add .md if target doesn't already have an extension
         if "." not in target.rsplit("/", 1)[-1]:
             target += ".md"
+        # Search for target: first in current directory, then docs root
+        docs_dir = config["docs_dir"] if isinstance(config, dict) else getattr(config, 'docs_dir', 'docs')
+        current_dir = os.path.join(docs_dir, page_dir) if page_dir else docs_dir
+        # Try current directory first
+        local_target = os.path.join(current_dir, target)
+        if os.path.exists(local_target):
+            return f"[{alias}]({target})"
+        # Try docs root
+        root_target = os.path.join(docs_dir, target)
+        if os.path.exists(root_target):
+            return f"[{alias}]({make_relative(target)})"
+        # Fallback
         return f"[{alias}]({make_relative(target)})"
 
     markdown = re.sub(
