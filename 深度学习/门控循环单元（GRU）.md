@@ -25,7 +25,7 @@ LSTM 的设计非常成功——它用细胞状态 $C_t$ 的加法更新替代 R
 
 LSTM 里有三个门（遗忘门、输入门、输出门），外加一个独立的长时记忆 $c_t$（细胞状态），和一个输出用的隐藏状态 $h_t$：
 
-![[../kb_material/ML_image/Pasted image 20260510110752.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510110752.png]]
 
 这导致 LSTM 的参数很多，训练和推理都比较慢。
 

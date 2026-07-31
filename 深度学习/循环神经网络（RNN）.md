@@ -38,7 +38,7 @@ RNN 处理的序列任务主要分四种模式：
 - **不实时（Seq2Seq）**：读完整个输入序列再生成输出。例如：机器翻译——读完整句英文，再输出整句中文。
 - **实时**：每读一个输入就立刻输出一个结果。例如：视频逐帧标注——每一帧画面都要判断里面有什么。
 
-![[../kb_material/ML_image/Pasted image 20260510152411.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510152411.png]]
 
 ---
 
@@ -64,7 +64,7 @@ y_t &= \text{softmax}(W_{hy} h_t + b_y)
 
 > 关键：$W_{xh}$、$W_{hh}$、$W_{hy}$ 在所有时间步**共享**——同一套参数处理整个序列。
 
-![[../kb_material/ML_image/Pasted image 20260510153233.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510153233.png]]
 
 ---
 
@@ -79,7 +79,7 @@ y_t &= \text{softmax}(W_{hy} h_t + b_y)
                             传递给时刻 t+1
 ```
 
-![[../kb_material/ML_image/Pasted image 20260510153341.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510153341.png]]
 
 ### 字符级语言模型示例
 
@@ -91,7 +91,7 @@ y_t &= \text{softmax}(W_{hy} h_t + b_y)
 - 输入 `l`，期望输出 `l`（第一个 l 后面可能还是 l）
 - 输入 `l`，期望输出 `o`（第二个 l 后可能是 o）
 
-![[../kb_material/ML_image/Pasted image 20260510153704.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510153704.png]]
 
 每个时刻，RNN 输出的是**整个词汇表的概率分布**。以输入 `l` 第二个为例，模型综合了前文 `"hel"` 的信息：
 - 输出层给出每个字母的概率：`h: 0.03, e: 0.05, l: 0.28, o: 0.64`
@@ -99,7 +99,7 @@ y_t &= \text{softmax}(W_{hy} h_t + b_y)
 
 > 注意：$h_t$ 是当前时刻的隐藏状态（综合了从 $t=0$ 到现在的所有信息），$y_t$ 是从 $h_t$ 推出的输出。
 
-![[../kb_material/ML_image/Pasted image 20260510153715.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510153715.png]]
 
 ---
 
@@ -115,7 +115,7 @@ RNN 的正向传播就是在每个时间步重复同样的计算。
 
 然后 $h_t$ 传给 $t+1$ 步，循环往复。
 
-![[../kb_material/ML_image/Pasted image 20260510153836.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510153836.png]]
 
 ### 直观理解
 
@@ -136,16 +136,16 @@ RNN 的反向传播叫 **BPTT（Backpropagation Through Time，通过时间的�
 
 > 了解这大概流程即可：复合函数 + 链式法则沿时间展开。编程时框架会自动处理。
 
-![[../kb_material/ML_image/Pasted image 20260510154036.png]]
-![[../kb_material/ML_image/Pasted image 20260510154500.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510154036.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510154500.png]]
 
 ### 展开的计算图
 
 把 RNN 按时间展开后就像一个很深的网络——长度为 T 的序列，展开后就是 T 层的"伪深度网络"。每一层共享同样的参数，但梯度要穿过的路径很长，这就埋下了梯度消失的隐患。
 
-![[../kb_material/ML_image/Pasted image 20260510154522.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510154522.png]]
 
-![[../kb_material/ML_image/Pasted image 20260510154922.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510154922.png]]
 
 ### 截断 BPTT
 
@@ -153,8 +153,8 @@ RNN 的反向传播叫 **BPTT（Backpropagation Through Time，通过时间的�
 
 这样做既节省计算，也避免了不相关的远距离依赖干扰当前训练。
 
-![[../kb_material/ML_image/Pasted image 20260510155045.png]]
-![[../kb_material/ML_image/Pasted image 20260510155124.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510155045.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510155124.png]]
 
 ---
 
@@ -168,11 +168,11 @@ RNN 的反向传播叫 **BPTT（Backpropagation Through Time，通过时间的�
 
 每一层的每个时间步都有自己独立的隐藏状态。多层 RNN 能学到不同时间尺度的特征——浅层抓短期模式，深层抓长期模式。但通常 2~3 层就足够，再多反而容易过拟合。
 
-![[../kb_material/ML_image/Pasted image 20260510155428.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510155428.png]]
 
-![[../kb_material/ML_image/Pasted image 20260510155435.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510155435.png]]
 
-![[../kb_material/ML_image/Pasted image 20260510155638.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510155638.png]]
 
 ---
 
@@ -192,7 +192,7 @@ RNN 的反向传播叫 **BPTT（Backpropagation Through Time，通过时间的�
 
 这样就可以同时利用前后文信息了。**代价**：无法实时处理——必须读完整个序列才能跑后向 RNN。
 
-![[../kb_material/ML_image/Pasted image 20260510155825.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510155825.png]]
 
 ---
 

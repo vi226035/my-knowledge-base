@@ -78,7 +78,7 @@ $$
 
 当前主流的 BLV 脉动阵列结构包含对角处理器（计算 Jacobi 旋转因子）和非对角处理器（完成 $2\times 2$ 子矩阵的平面旋转），通过矩阵数据交换和多次迭代完成特征值分解。
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/5e58b754c78696d6023b92c103d48570c20e1029b1a42b3adca8b39cbf02b681.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/5e58b754c78696d6023b92c103d48570c20e1029b1a42b3adca8b39cbf02b681.jpg)
 
 **图2.1 改进的BLV脉动阵列结构（$N = 6$）**
 
@@ -274,7 +274,7 @@ $$
 
 图2.2 给出了基于 FPGA 的并行双边 Jacobi 旋转新方法的顶层描述，其中标明了模块之间的关键信号通路。
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c0c11f84c7b6d3f7944e1a2827371cb550c3db6be02dda44c2f7a61fb621eeb1.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c0c11f84c7b6d3f7944e1a2827371cb550c3db6be02dda44c2f7a61fb621eeb1.jpg)
 
 **图2.2 基于FPGA的并行双边Jacobi旋转新方法的顶层描述**
 
@@ -377,11 +377,11 @@ $$
 
 采用奇偶固定调度序列确定每次 Jacobi 旋转影响的行和列。以 $8 \times 8$ 矩阵为例，一次循环需 8 步完成。优化规则：偶数步的行列编号可由奇数步的前 3 个和后 3 个元素推导得到，省去偶数步调度序列的缓存，节省硬件资源。
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/6dbf6aadc63c4a74f40a5c944a6432b1fa8479cacd2abf75ef634274d42681f6.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/6dbf6aadc63c4a74f40a5c944a6432b1fa8479cacd2abf75ef634274d42681f6.jpg)
 
 **图2.3 标准奇偶固定调度序列**
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/889a6347a0bce182f9db3e6defb42ed1ce001ebe540ae4685ee75d4e080b6139.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/889a6347a0bce182f9db3e6defb42ed1ce001ebe540ae4685ee75d4e080b6139.jpg)
 
 **图2.4 缓存的奇偶固定调度序列**
 
@@ -394,7 +394,7 @@ $$
 
 可根据硬件资源、实时性需求灵活选择并行度。
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/58f3802894971bc0423d01f503913c608f081f5f20d020306464c0a36f12f5cf.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/58f3802894971bc0423d01f503913c608f081f5f20d020306464c0a36f12f5cf.jpg)
 
 **图2.6 变形后的 $8 \times 8$ 实对称矩阵的两种读取方式**
 
@@ -402,7 +402,7 @@ $$
 
 矩阵乘法硬件结构主要包括乘法器和加法器，可通过 FPGA 上的 DSP48E1 实现。矩阵左乘处理行向量，矩阵右乘处理列向量。
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c370b447555b14c2f4e71093a5de21f1cb49e81352dacdfafc10f676cdf52b01.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c370b447555b14c2f4e71093a5de21f1cb49e81352dacdfafc10f676cdf52b01.jpg)
 
 **图2.7 矩阵乘法的硬件架构**
 
@@ -458,15 +458,15 @@ $$
 
 其中 $\boldsymbol{\Sigma}_M$ 和 $\boldsymbol{\Sigma}_F$ 分别是 MATLAB EIG 和 FPGA 得到的特征值矩阵。
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/dcefeb6247585ad432fa53add61422573694f6aaf9023430283496638c70dab1.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/dcefeb6247585ad432fa53add61422573694f6aaf9023430283496638c70dab1.jpg)
 
 **(a) QR algorithm 矩阵重建误差**
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/7ca11101e8b95df36d1e9c4ef3927941d0ebfc81fe6047baae34a4f0b7f515c8.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/7ca11101e8b95df36d1e9c4ef3927941d0ebfc81fe6047baae34a4f0b7f515c8.jpg)
 
 **(b) Improved QR algorithm [119] 矩阵重建误差**
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/8099b57ff1306e8086d2508c65ada0fb42421649f87c868e510561fba83a009f.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/8099b57ff1306e8086d2508c65ada0fb42421649f87c868e510561fba83a009f.jpg)
 
 **(c) 本章新方法 矩阵重建误差**
 
@@ -494,15 +494,15 @@ $$
 
 新方法的硬件资源消耗最少，时延最小。数值计算结果显示：新方法得到特征向量正交性最佳，伪倒谱误差幅值最小，谱峰最尖锐（噪声子空间与信号子空间正交性最好）。
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/641bb5ec6af960946ac99f53bfb5698b66d2b70f06e0919525d4dcbc81fbdc50.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/641bb5ec6af960946ac99f53bfb5698b66d2b70f06e0919525d4dcbc81fbdc50.jpg)
 
 **(a) QR algorithm 的伪倒谱**
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c890e0004ac4072082bba580e4060f4644b261c37715def8b5b891be374b9676.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c890e0004ac4072082bba580e4060f4644b261c37715def8b5b891be374b9676.jpg)
 
 **(b) Improved QR algorithm [119] 的伪倒谱**
 
-![](../kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/42e46a2032a205c76aa735a59c0f4598142c3796e33da31cd723a6e7fd6b0e62.jpg)
+![](../_site/kb_material/基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究_闫迪.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/42e46a2032a205c76aa735a59c0f4598142c3796e33da31cd723a6e7fd6b0e62.jpg)
 
 **(c) 本章新方法的伪倒谱**
 

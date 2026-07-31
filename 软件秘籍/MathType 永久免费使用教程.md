@@ -20,7 +20,7 @@ tags:
 - 办公软件：WPS（Microsoft Office 同理）
 - MathType 版本：7.11
 
-![[../kb_material/软件秘籍_image/mathtype_main.jpg]]
+![[../_site/kb_material/软件秘籍_image/mathtype_main.jpg]]
 
 ## 操作步骤
 
@@ -28,11 +28,11 @@ tags:
 
 按 `Win + R` 打开运行窗口：
 
-![[../kb_material/软件秘籍_image/mathtype_run.jpg]]
+![[../_site/kb_material/软件秘籍_image/mathtype_run.jpg]]
 
 输入 `regedit`，回车，打开系统注册表：
 
-![[../kb_material/软件秘籍_image/mathtype_regedit.jpg]]
+![[../_site/kb_material/软件秘籍_image/mathtype_regedit.jpg]]
 
 ### 第二步：删除 MathType 配置项
 
@@ -44,7 +44,7 @@ HKEY_CURRENT_USER\Software\Install Options\Options7.4
 
 该文件夹存储的是 MathType 的安装配置信息，可以安全删除。
 
-![[../kb_material/软件秘籍_image/mathtype_registry1.jpg]]
+![[../_site/kb_material/软件秘籍_image/mathtype_registry1.jpg]]
 
 ### 第三步：删除证书信息
 
@@ -56,13 +56,13 @@ HKEY_CURRENT_USER\Software\JavaSoft\Prefs\com\wiris\editor\license
 
 这些只是许可证验证文件，可以安全删除。
 
-![[../kb_material/软件秘籍_image/mathtype_registry2.jpg]]
+![[../_site/kb_material/软件秘籍_image/mathtype_registry2.jpg]]
 
 ### 第四步：重启 MathType
 
 完成以上操作后，**关闭并重新打开 MathType**，试用期即被重置回 30 天。
 
-![[../kb_material/软件秘籍_image/mathtype_reset.jpg]]
+![[../_site/kb_material/软件秘籍_image/mathtype_reset.jpg]]
 
 ## 温馨提示
 

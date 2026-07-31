@@ -116,7 +116,7 @@ x1, x2, x3, x4, x5, x6
 - 预测 `x4` 时，只看 `x2, x3, x4`
 - 不看 `x5`
 
-![[../kb_material/ML_image/Pasted image 20260520211320.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260520211320.png]]
 
 ### 通俗理解
 
@@ -166,7 +166,7 @@ x1, x2, x3, x4, x5, x6
 
 中间隔开几个点，但感受野瞬间变大。
 
-![[../kb_material/ML_image/Pasted image 20260520211223.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260520211223.png]]
 
 ### 通俗理解
 
@@ -208,7 +208,7 @@ x1, x2, x3, x4, x5, x6
 4. Dropout（防过拟合）
 5. 残差连接（Residual Connection）
 
-![[../kb_material/ML_image/Pasted image 20260520211255.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260520211255.png]]
 
 ### 为什么还要残差连接？
 
@@ -329,7 +329,7 @@ LSTM 的门控机制有点像主动选择记忆。TCN 更像固定结构的扫�
 >
 > 它通过"因果卷积"保证不偷看未来，通过"膨胀卷积"快速看到很长的历史，通过"残差连接"保证深层也能训得动。
 
-![[../kb_material/ML_image/Pasted image 20260520211358.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260520211358.png]]
 
 ### 你可以这样对比它们
 

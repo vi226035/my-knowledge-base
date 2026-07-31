@@ -3,6 +3,11 @@ site_description: 信号处理、FPGA 与机器学习学习笔记
 site_author: vi226035
 site_url: https://vi226035.github.io/my-knowledge-base/
 
+# 配置文件位于 _site/，vault 根目录是 MkDocs 源目录
+docs_dir: ..
+# MkDocs 要求 site_dir 不能位于 docs_dir 内部，
+# 因此构建输出到仓库外的 D:/site_build（部署后可由 gh-deploy 推送）
+site_dir: ../../site_build
 strict: false
 
 repo_name: vi226035/my-knowledge-base
@@ -12,7 +17,7 @@ theme:
   name: material
   language: zh
   font: false
-  custom_dir: docs/overrides
+  custom_dir: overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -42,7 +47,7 @@ theme:
     - content.code.annotate
   icon:
     repo: fontawesome/brands/github
-  favicon: assets/favicon.png
+  favicon: _site/assets/favicon.png
 
 extra:
   generator: false
@@ -51,13 +56,27 @@ extra:
     property: G-S17BB74PGE
 
 exclude_docs: |
-  kb_material/**/*.md
-  kb_material/**/*.json
-  kb_material/**/*_model.json
-  kb_material/**/*_content_list.json
-  kb_material/**/block_list.json
-  kb_material/**/content_list_v2.json
-  kb_material/**/layout.json
+  .git/**
+  .obsidian/**
+  .claude/**
+  .claudian/**
+  __pycache__/**
+  site/**
+  CLAUDE.md
+  CLAUDE-CLIPPINGS.md
+  _site/mkdocs.yml
+  _site/hooks.py
+  _site/requirements.txt
+  _site/robots.txt
+  _site/overrides/**
+  _site/kb_material/**/*.md
+  _site/kb_material/**/*.json
+  _site/kb_material/**/*_model.json
+  _site/kb_material/**/*_content_list.json
+  _site/kb_material/**/block_list.json
+  _site/kb_material/**/content_list_v2.json
+  _site/kb_material/**/layout.json
+  _site/knowledge_base_material/**
   **/*.excalidraw.md
 
 hooks:
@@ -66,13 +85,15 @@ hooks:
 plugins:
   - search:
       lang: zh
-  - social:
-      cards_layout_options:
-        font_family: Noto Sans SC
+  # social 插件需联网下载 Google Fonts 生成卡片，离线构建会超时，暂注释
+  # - social:
+  #     cards_layout_options:
+  #       font_family: Noto Sans SC
   - git-revision-date-localized:
       enable_creation_date: true
       type: date
       locale: zh
+      enable_git_follow: false
 
 markdown_extensions:
   - admonition
@@ -94,14 +115,14 @@ markdown_extensions:
       permalink: true
 
 extra_javascript:
-  - javascripts/katex.min.js
-  - javascripts/katex.js
+  - _site/javascripts/katex.min.js
+  - _site/javascripts/katex.js
   - https://unpkg.com/mermaid@11/dist/mermaid.min.js
-  - javascripts/mermaid-init.js
+  - _site/javascripts/mermaid-init.js
 
 extra_css:
-  - stylesheets/katex.min.css
-  - stylesheets/extra.css
+  - _site/stylesheets/katex.min.css
+  - _site/stylesheets/extra.css
 
 nav:
   - 首页: index.md

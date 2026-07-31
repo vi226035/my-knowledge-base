@@ -55,21 +55,21 @@
 ### 0.4 多文章处理
 
 当用户说"把这些都整理一下"或"全部处理"：
-- 逐一处理 `docs/Clippings/` 中所有文件
+- 逐一处理 `Clippings/` 中所有文件
 - 每篇独立执行完整流程
 - 最后汇总输出整理结果
 
 ### 0.5 上下文感知
 
 - 如果用户正在看某篇具体文章（通过 editor_selection 或 linked_note），直接对该文章操作
-- 如果用户没有指定文章，默认处理 `docs/Clippings/` 中所有未整理的文件
+- 如果用户没有指定文章，默认处理 `Clippings/` 中所有未整理的文件
 - 如果用户提到某个具体主题（如"关于 FPGA 的那篇"），根据文件名或内容匹配
 
 ---
 
 ## 一、Clippings 是什么
 
-**来源**：用户通过 **Obsidian Web Clipper**（浏览器扩展）从网页抓取文章，自动保存到 `docs/Clippings/` 目录。
+**来源**：用户通过 **Obsidian Web Clipper**（浏览器扩展）从网页抓取文章，自动保存到 `Clippings/` 目录。
 
 **典型内容**：技术博客、教程、论文摘要、GitHub README、知乎/掘金文章等。
 
@@ -101,7 +101,7 @@ tags: [...]
 
 ```bash
 # 列出 Clippings 目录下所有文件
-ls -lt docs/Clippings/
+ls -lt Clippings/
 ```
 
 - 如果目录为空或只有旧文件（已在其他目录），告知用户"Clippings 目录没有新文章"
@@ -250,10 +250,10 @@ created: YYYY-MM-DD
 
 ##### 5.4.1 图片存储位置
 
-**所有图片统一存储到 `knowledge_base_material/` 目录下**，按内容主题自动创建子文件夹。
+**所有图片统一存储到 `_site/kb_material/` 目录下**，按内容主题自动创建子文件夹。
 
 ```
-knowledge_base_material/
+_site/kb_material/
 ├── 文章标题/                  ← 以文章标题（中文）创建文件夹
 │   ├── 架构图.png              ← 根据图片内容命名
 │   ├── 时序图.png
@@ -301,21 +301,21 @@ knowledge_base_material/
 处理步骤：
 
 ```bash
-# 1. 在 knowledge_base_material/ 下创建文章对应文件夹
-mkdir -p "knowledge_base_material/文章标题/"
+# 1. 在 _site/kb_material/ 下创建文章对应文件夹
+mkdir -p "_site/kb_material/文章标题/"
 
 # 2. 下载图片到该文件夹（如果图片有 URL）
-curl -sfo "knowledge_base_material/文章标题/图片描述.png" "图片URL"
+curl -sfo "_site/kb_material/文章标题/图片描述.png" "图片URL"
 
 # 3. 如果是 Obsidian 粘贴的图片（已在 vault 中），直接移动
-mv "docs/Pasted image xxx.png" "knowledge_base_material/文章标题/图片描述.png"
+mv "Pasted image xxx.png" "_site/kb_material/文章标题/图片描述.png"
 ```
 
 在笔记中引用图片：
 
 ```markdown
 <!-- 正确：使用 wiki 链接引用 kb_material 中的图片 -->
-![[knowledge_base_material/文章标题/图片描述.png]]
+![[../_site/kb_material/文章标题/图片描述.png]]
 
 <!-- 或者用相对路径（如果图片在同级目录） -->
 ![[图片描述.png]]
@@ -336,20 +336,20 @@ mv "docs/Pasted image xxx.png" "knowledge_base_material/文章标题/图片描�
 
 ```
 原始文件：
-  docs/Clippings/UART串口通信详解 (知乎).md
-  docs/Pasted image 20260723120000.png  （UART 数据帧格式图）
-  docs/Pasted image 20260723120001.png  （UART 收发时序图）
-  docs/Pasted image 20260723120002.png  （作者公众号二维码）
+  Clippings/UART串口通信详解 (知乎).md
+  Pasted image 20260723120000.png  （UART 数据帧格式图）
+  Pasted image 20260723120001.png  （UART 收发时序图）
+  Pasted image 20260723120002.png  （作者公众号二维码）
 
 整理后：
-  knowledge_base_material/UART串口通信详解/
+  _site/kb_material/UART串口通信详解/
     ├── UART数据帧格式.png
     └── UART收发时序图.png
   
-  docs/FPGA/UART串口通信详解.md
+  FPGA/UART串口通信详解.md
     内容中引用：
-    ![[knowledge_base_material/UART串口通信详解/UART数据帧格式.png]]
-    ![[knowledge_base_material/UART串口通信详解/UART收发时序图.png]]
+    ![[../_site/kb_material/UART串口通信详解/UART数据帧格式.png]]
+    ![[../_site/kb_material/UART串口通信详解/UART收发时序图.png]]
   
   （公众号二维码已删除）
 ```
@@ -392,7 +392,7 @@ mv "docs/Pasted image xxx.png" "knowledge_base_material/文章标题/图片描�
 
 创建规则：
 1. 根据文章核心主题确定**简洁的中文目录名**（如 `嵌入式/`、`通信协议/`、`数学基础/`、`论文阅读/`）
-2. 在 `docs/` 下创建该目录
+2. 在 `` 下创建该目录
 3. 在目录中创建 `index.md` 索引文件：
    ```markdown
    ---
@@ -405,7 +405,7 @@ mv "docs/Pasted image xxx.png" "knowledge_base_material/文章标题/图片描�
 
    简要描述这个分类包含的内容。
    ```
-4. 在 `docs/index.md` 中添加新的分类小节
+4. 在 `index.md` 中添加新的分类小节
 5. 在 `mkdocs.yml` 的 `nav` 中添加新的分类条目
 6. 告知用户"已创建新分类：XX/"
 
@@ -465,7 +465,7 @@ created: YYYY-MM-DD
 
 ```bash
 # 搜索知识库中是否有相关笔记
-grep -rl "关键词" docs/ --include="*.md" | grep -v Clippings
+grep -rl "关键词"  --include="*.md" | grep -v Clippings
 ```
 
 - 如果找到相关笔记，在整理后的文章中用 `[[目录/笔记名]]` 添加引用
@@ -473,7 +473,7 @@ grep -rl "关键词" docs/ --include="*.md" | grep -v Clippings
 
 ### Step 9：更新索引与导航
 
-#### 9.1 更新 `docs/index.md`
+#### 9.1 更新 `index.md`
 
 在对应分类下添加一行：
 ```markdown
@@ -495,7 +495,7 @@ grep -rl "关键词" docs/ --include="*.md" | grep -v Clippings
 ### Step 10：移动文件
 
 ```bash
-mv "docs/Clippings/原标题 (来源).md" "docs/目标目录/新标题.md"
+mv "Clippings/原标题 (来源).md" "目标目录/新标题.md"
 ```
 
 ### Step 11：构建验证
@@ -529,9 +529,9 @@ mkdocs build
 ### 3.3 图文混合文章
 
 **严格按 Step 5.4（图片处理）规则执行**：
-- 根据图片内容自动创建 `knowledge_base_material/文章标题/` 文件夹
+- 根据图片内容自动创建 `_site/kb_material/文章标题/` 文件夹
 - 下载图片并按内容重命名（不用原始随机文件名）
-- 在笔记中用 `![[knowledge_base_material/文章标题/xxx.png]]` 引用
+- 在笔记中用 `![[../_site/kb_material/文章标题/xxx.png]]` 引用
 - 删除无关图片（头像、广告、二维码）
 - 无法下载的图片用文字描述替代：`>  原图：XXX的示意图`
 
@@ -608,7 +608,7 @@ mkdocs build
 10. **索引必须同步** — index.md 和 mkdocs.yml 必须同时更新，缺一不可
 11. **构建必须通过** — 每次整理后运行 `mkdocs build` 验证
 12. **新分类自动创建** — 如果文章不属于任何现有分类，自动创建新目录并配置索引
-13. **图片必须归档** — 所有图片统一存到 `knowledge_base_material/文章标题/` 下，按内容命名，笔记中用 `![[...]]` 引用
+13. **图片必须归档** — 所有图片统一存到 `_site/kb_material/文章标题/` 下，按内容命名，笔记中用 `![[...]]` 引用
 
 ---
 
@@ -700,7 +700,7 @@ localparam BIT_PERIOD = CLK_FREQ / BAUD_RATE;
 ## 七、快速参考：目录分类速查
 
 ```
-docs/
+
 ├── 深度学习/      ← 神经网络、CNN、RNN、LSTM、Transformer、PyTorch
 ├── ML/           ← 传统机器学习、SVM、决策树、聚类
 ├── 信号处理/      ← FFT、滤波器、雷达、DOA、MUSIC、采样
@@ -712,7 +712,7 @@ docs/
 ├── Clippings/    ← 抓取文章暂存（整理后清空）
 └── （新分类自动创建）← 不属于以上分类时，按主题自动创建
 
-knowledge_base_material/    ← 图片归档目录（重要！）
+_site/kb_material/    ← 图片归档目录（重要！）
 ├── 文章标题1/
 │   ├── 架构图.png
 │   └── 时序图.png

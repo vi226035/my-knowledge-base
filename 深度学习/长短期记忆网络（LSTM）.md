@@ -23,7 +23,7 @@ $$h_t = \tanh(W_{xh} x_t + W_{hh} h_{t-1} + b_h)$$
 
 没有"选择性保留"的能力——重要的旧信息和不重要的旧信息被一视同仁地洗掉了。
 
-![[../kb_material/ML_image/Pasted image 20260510160246.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510160246.png]]
 
 ---
 
@@ -39,11 +39,11 @@ LSTM 的核心创新是引入了**细胞状态（Cell State）** $C_t$，它是�
 | **输入门** $i_t$ | 决定新信息中哪些值得记住 | "这条新信息很重要，写进记忆" |
 | **输出门** $o_t$ | 决定从记忆中提取什么来输出 | "现在需要记得这些，才能回答" |
 
-![[../kb_material/ML_image/Pasted image 20260510160344.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510160344.png]]
 
 ### 详细结构
 
-![[../kb_material/ML_image/Pasted image 20260510160455.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510160455.png]]
 
 ---
 
@@ -61,7 +61,7 @@ $$f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)$$
 
 **直观理解**：读到一个句号时，遗忘门可能把"主语是单数还是复数"这类信息清零，因为下一句不受此约束。
 
-![[../kb_material/ML_image/Pasted image 20260510160644.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510160644.png]]
 
 ### 第二步：输入门——决定记什么
 
@@ -79,7 +79,7 @@ $$\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)$$
 
 > 输入门 $i_t$ 是"门卫"——它判断哪些新信息值得写进记忆；候选记忆 $\tilde{C}_t$ 是写进去的内容本身。
 
-![[../kb_material/ML_image/Pasted image 20260510160650.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510160650.png]]
 
 ### 第三步：更新细胞状态
 
@@ -93,7 +93,7 @@ $$C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t$$
 
 这就是 LSTM 最精妙的设计：**遗忘和写入都是选择性的**，$C_t$ 的信息可以沿着时间轴几乎无损地流动——这正是解决 RNN 梯度消失的关键。
 
-![[../kb_material/ML_image/Pasted image 20260510160746.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510160746.png]]
 
 ### 第四步：输出门——决定输出什么
 
@@ -108,7 +108,7 @@ $$h_t = o_t \odot \tanh(C_t)$$
 
 > 类比：你在考试时记得整本书的内容（$C_t$），但当前这道题只需要其中的几个知识点——输出门帮你提取需要的那部分。
 
-![[../kb_material/ML_image/Pasted image 20260510160943.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510160943.png]]
 
 ---
 
@@ -125,7 +125,7 @@ h_t &= o_t \odot \tanh(C_t)
 
 每个门都有自己的权重矩阵（$W_f, W_i, W_C, W_o$），这些参数在所有时间步上共享。
 
-![[../kb_material/ML_image/Pasted image 20260510161012.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260510161012.png]]
 
 ---
 
@@ -163,7 +163,7 @@ LSTM 不能直接吃汉字或英文单词，它只认数字（向量）。**Embe
 
 查表！每个整数编号对应一个向量。网络里维护一张"词向量表"——每行是一个词的向量表示，训练时会不断微调这些向量值。
 
-![[../kb_material/ML_image/Pasted image 20260513103006.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260513103006.png]]
 
 ### Embedding 层的本质
 
@@ -179,7 +179,7 @@ nn.Embedding(词表大小, 向量维度)
 
 Embedding 之后，每个词变成了一个固定长度的向量。LSTM 按顺序读这些向量，更新细胞状态和隐藏状态，最终输出预测结果。
 
-![[../kb_material/ML_image/Pasted image 20260513103429.png]]
+![[../_site/kb_material/ML_image/Pasted image 20260513103429.png]]
 
 > 完整流程：原始文本 → 分词 → 编号 → Embedding 查表得向量 → 送入 LSTM 按时间步处理 → 输出预测。
 

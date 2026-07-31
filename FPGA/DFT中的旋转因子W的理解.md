@@ -29,7 +29,7 @@ $$W_N^{nk} = e^{-j\frac{2\pi}{N}nk}$$
 
 ## 几何直观：单位圆等分
 
-![[../kb_material/FPGA_image/dft_w_factor_2.png]]
+![[../_site/kb_material/FPGA_image/dft_w_factor_2.png]]
 
 $W_N$ 表示在复平面上单位圆的一个点，下标 $N$ 是 $2\pi$ 的分母，表示**把单位圆 $N$ 等分**，每一份的角度是 $\frac{2\pi}{N}$。
 
@@ -37,7 +37,7 @@ $W_N$ 表示在复平面上单位圆的一个点，下标 $N$ 是 $2\pi$ 的分�
 
 ### N=4 举例
 
-![[../kb_material/FPGA_image/dft_w_factor_1.png]]
+![[../_site/kb_material/FPGA_image/dft_w_factor_1.png]]
 
 以 $N=4$ 为例：
 
@@ -63,7 +63,7 @@ $$W_4^3 = e^{-j\frac{2\pi}{4} \cdot 3} = e^{-j\frac{3\pi}{2}} = j$$
 
 刚好傅里叶变换中有能表达为复指数的形式，而在复平面这个单位圆里就平均分为 $N$ 等分，那一份就是频率采样的单位。
 
-4点DFT中，频率采样的第一个点就是 ![[../kb_material/FPGA_image/dft_w_factor_3.png]] ，第二个点就是 $W_4^2$，以此类推。而**旋转因子**就是表达这个**等间隔采样序列的频谱函数**。
+4点DFT中，频率采样的第一个点就是 ![[../_site/kb_material/FPGA_image/dft_w_factor_3.png]] ，第二个点就是 $W_4^2$，以此类推。而**旋转因子**就是表达这个**等间隔采样序列的频谱函数**。
 
 ## 欧拉公式联系
 
