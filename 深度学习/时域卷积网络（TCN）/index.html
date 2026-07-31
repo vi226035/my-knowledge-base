@@ -24,7 +24,7 @@
         
       
       
-      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="icon" href="../../_site/assets/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
@@ -49,9 +49,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/katex.min.css">
+      <link rel="stylesheet" href="../../_site/stylesheets/katex.min.css">
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../_site/stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -88,20 +88,7 @@
   </script>
   
 
-  
-<meta property="og:type" content="website" />
-<meta property="og:title" content="时域卷积网络（TCN） - 信号·FPGA·深度学习笔记" />
-<meta property="og:description" content="TCN（Temporal Convolutional Network，时域卷积网络）是一种专门处理序列数据的神经网络。它看起来像 CNN，但不是拿来扫图片，而是拿来扫时间序列——比如语音、传感器数据、股价、文本序列。" />
-<meta property="og:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89.png" />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://vi226035.github.io/my-knowledge-base/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/" />
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="时域卷积网络（TCN） - 信号·FPGA·深度学习笔记" />
-<meta property="twitter:description" content="TCN（Temporal Convolutional Network，时域卷积网络）是一种专门处理序列数据的神经网络。它看起来像 CNN，但不是拿来扫图片，而是拿来扫时间序列——比如语音、传感器数据、股价、文本序列。" />
-<meta property="twitter:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89.png" />
-</head>
+  </head>
   
   
     
@@ -2903,7 +2890,7 @@
 <li>预测 <code>x4</code> 时，只看 <code>x2, x3, x4</code></li>
 <li>不看 <code>x5</code></li>
 </ul>
-<p><img alt="Pasted image 20260520211320.png" src="../../kb_material/ML_image/Pasted%20image%2020260520211320.png" /></p>
+<p><img alt="Pasted image 20260520211320.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260520211320.png" /></p>
 <h3 id="_4">通俗理解<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>普通卷积像考试时偷看后面的答案。</p>
 <p>因果卷积像真正考试：</p>
@@ -2936,7 +2923,7 @@
 <li>膨胀率 = 4：看 <code>x1, x5, x9</code></li>
 </ul>
 <p>中间隔开几个点，但感受野瞬间变大。</p>
-<p><img alt="Pasted image 20260520211223.png" src="../../kb_material/ML_image/Pasted%20image%2020260520211223.png" /></p>
+<p><img alt="Pasted image 20260520211223.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260520211223.png" /></p>
 <h3 id="_5">通俗理解<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>普通卷积像你看书是一页一页翻。</p>
 <p>膨胀卷积像你做速读：</p>
@@ -2967,7 +2954,7 @@
 <li>Dropout（防过拟合）</li>
 <li>残差连接（Residual Connection）</li>
 </ol>
-<p><img alt="Pasted image 20260520211255.png" src="../../kb_material/ML_image/Pasted%20image%2020260520211255.png" /></p>
+<p><img alt="Pasted image 20260520211255.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260520211255.png" /></p>
 <h3 id="_7">为什么还要残差连接？<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>因为网络一深就容易训练困难。</p>
 <p>残差连接的思想和 ResNet 一样：</p>
@@ -3084,7 +3071,7 @@
 <p><strong>TCN = 用卷积来做时间序列。</strong></p>
 <p>它通过"因果卷积"保证不偷看未来，通过"膨胀卷积"快速看到很长的历史，通过"残差连接"保证深层也能训得动。</p>
 </blockquote>
-<p><img alt="Pasted image 20260520211358.png" src="../../kb_material/ML_image/Pasted%20image%2020260520211358.png" /></p>
+<p><img alt="Pasted image 20260520211358.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260520211358.png" /></p>
 <h3 id="_11">你可以这样对比它们<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>RNN</strong>：一步一步往后传，简单但容易忘</li>
@@ -3208,7 +3195,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年5月25日 11:49:20 UTC">2026年5月25日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月31日 16:37:27 UTC">2026年7月31日</span>
   </span>
 
     
@@ -3218,7 +3205,7 @@
     <span class="md-icon" title="创建日期">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年5月20日 13:26:07 UTC">2026年5月20日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月31日 16:37:27 UTC">2026年7月31日</span>
   </span>
 
     
@@ -3277,13 +3264,13 @@
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../javascripts/katex.min.js"></script>
+        <script src="../../_site/javascripts/katex.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../_site/javascripts/katex.js"></script>
       
         <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
-        <script src="../../javascripts/mermaid-init.js"></script>
+        <script src="../../_site/javascripts/mermaid-init.js"></script>
       
     
   </body>

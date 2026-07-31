@@ -24,7 +24,7 @@
         
       
       
-      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="icon" href="../../_site/assets/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
@@ -49,9 +49,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/katex.min.css">
+      <link rel="stylesheet" href="../../_site/stylesheets/katex.min.css">
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../_site/stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -88,20 +88,7 @@
   </script>
   
 
-  
-<meta property="og:type" content="website" />
-<meta property="og:title" content="神经网络 - 信号·FPGA·深度学习笔记" />
-<meta property="og:description" content="神经网络本质上是一个万能函数逼近器：给它大量输入-输出样本，它能自动“学“出一个函数来拟合这种映射关系。" />
-<meta property="og:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.png" />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://vi226035.github.io/my-knowledge-base/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" />
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="神经网络 - 信号·FPGA·深度学习笔记" />
-<meta property="twitter:description" content="神经网络本质上是一个万能函数逼近器：给它大量输入-输出样本，它能自动“学“出一个函数来拟合这种映射关系。" />
-<meta property="twitter:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C.png" />
-</head>
+  </head>
   
   
     
@@ -2577,7 +2564,7 @@
 </ul>
 <p>加权和 = <span class="arithmatex">\(0.6 \times 0.8 + 0.8 \times (-0.6) + 0.3 = 0.48 - 0.48 + 0.3 = 0.3\)</span></p>
 <p>再用 Sigmoid 激活：<span class="arithmatex">\(S(0.3) = \frac{1}{1+e^{-0.3}} \approx 0.574\)</span>，偏向"适合出门"但没那么确定——因为温度适中但降雨概率高，两者互相抵消后偏置起了决定作用。</p>
-<p><img alt="Pasted image 20260509102005.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102005.png" /></p>
+<p><img alt="Pasted image 20260509102005.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509102005.png" /></p>
 <hr />
 <h2 id="_6">神经网络结构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>多个神经元按层组织，前一层的输出作为后一层的输入，形成"多层感知机"。</p>
@@ -2591,7 +2578,7 @@
 <h3 id="_8">为什么需要多层？<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>单层只能表达线性关系。堆叠多层 + 非线性激活函数 = 能表达任意复杂函数。</p>
 <p>类比：一层 = 只能画直线分割数据；两层 = 能画折线；三层以上 ≈ 能画任意形状的边界。</p>
-<p><img alt="Pasted image 20260509102332.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102332.png" /></p>
+<p><img alt="Pasted image 20260509102332.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509102332.png" /></p>
 <hr />
 <h2 id="_9">正向传播<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>从输入 → 隐藏层 → 输出，逐层计算，最终得到预测值的过程。</p>
@@ -2611,8 +2598,8 @@ A^{[l]} &amp;= f^{[l]}(Z^{[l]})
 <li>经 Sigmoid：<span class="arithmatex">\(A^{[1]} = [S(1.7), S(2.7)]^T \approx [0.846, 0.937]^T\)</span></li>
 </ul>
 <p>然后 <span class="arithmatex">\(A^{[1]}\)</span> 继续向后传播，直到输出层。</p>
-<p><img alt="Pasted image 20260509102321.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102321.png" />
-<img alt="Pasted image 20260509151348.png" src="../../kb_material/ML_image/Pasted%20image%2020260509151348.png" /></p>
+<p><img alt="Pasted image 20260509102321.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509102321.png" />
+<img alt="Pasted image 20260509151348.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509151348.png" /></p>
 <hr />
 <h2 id="_12">反向传播<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <p>正向传播给出预测值后，需要衡量"差了多少"，然后把这个误差反向传回去，指导每个参数该调多少。</p>
@@ -2638,8 +2625,8 @@ $<span class="arithmatex">\(L = -\sum_{i} y_i \log(\hat{y}_i)\)</span>$</p>
 3. 判断琴弦该拧紧还是拧松（反向传播算梯度）
 4. 稍微拧一点（参数更新）
 5. 重复 1-4 直到音准</p>
-<p><img alt="Pasted image 20260509103713.png" src="../../kb_material/ML_image/Pasted%20image%2020260509103713.png" /></p>
-<p><img alt="Pasted image 20260509102920.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102920.png" /></p>
+<p><img alt="Pasted image 20260509103713.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509103713.png" /></p>
+<p><img alt="Pasted image 20260509102920.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509102920.png" /></p>
 <h3 id="_17">链式法则<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <p>反向传播的数学基础。对于复合函数 <span class="arithmatex">\(L = f(g(h(x)))\)</span>：</p>
 <div class="arithmatex">\[\frac{dL}{dx} = \frac{dL}{df} \cdot \frac{df}{dg} \cdot \frac{dg}{dh} \cdot \frac{dh}{dx}\]</div>
@@ -2651,15 +2638,15 @@ $<span class="arithmatex">\(L = -\sum_{i} y_i \log(\hat{y}_i)\)</span>$</p>
 - <span class="arithmatex">\(\frac{\partial L}{\partial 中间} = 2 × 5 = 10\)</span>
 - <span class="arithmatex">\(\frac{\partial 中间}{\partial x} = 3\)</span>
 - <span class="arithmatex">\(\frac{\partial L}{\partial x} = 10 × 3 = 30\)</span> ✓（直接求导：<span class="arithmatex">\(2(3x+2)·3\)</span>，<span class="arithmatex">\(x=1\)</span> 代入 = 30）</p>
-<p><img alt="Pasted image 20260509102958.png" src="../../kb_material/ML_image/Pasted%20image%2020260509102958.png" />
-<img alt="Pasted image 20260509103129.png" src="../../kb_material/ML_image/Pasted%20image%2020260509103129.png" /></p>
+<p><img alt="Pasted image 20260509102958.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509102958.png" />
+<img alt="Pasted image 20260509103129.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509103129.png" /></p>
 <hr />
 <h2 id="_18">神经网络训练优化<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
 <h3 id="_19">问题：全量梯度下降太慢<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
 <p>每次更新参数需要遍历全部训练数据（几万甚至几百万样本），计算一次梯度代价极大，而且会卡在局部细节里无法"跳过"。</p>
 <div class="arithmatex">\[w := w - \eta \cdot \frac{1}{N}\sum_{i=1}^{N} \nabla L_i(w)\]</div>
 <p>当 <span class="arithmatex">\(N = 100\)</span> 万时，更新一步就要算 100 万次梯度，不现实。</p>
-<p><img alt="Pasted image 20260509104055.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104055.png" /></p>
+<p><img alt="Pasted image 20260509104055.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509104055.png" /></p>
 <h3 id="mini-batch">Mini-Batch 梯度下降<a class="headerlink" href="#mini-batch" title="Permanent link">&para;</a></h3>
 <p>不每次用全量数据，而是每次随机抽取一小批（如 32、64、128 个样本）来估算梯度。这样更新快，且随机性有助于跳出局部陷阱。</p>
 <div class="arithmatex">\[w := w - \eta \cdot \frac{1}{m}\sum_{i \in batch} \nabla L_i(w)\]</div>
@@ -2690,7 +2677,7 @@ $<span class="arithmatex">\(L = -\sum_{i} y_i \log(\hat{y}_i)\)</span>$</p>
 </tr>
 </tbody>
 </table>
-<p><img alt="Pasted image 20260509104248.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104248.png" /></p>
+<p><img alt="Pasted image 20260509104248.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509104248.png" /></p>
 <h4 id="mini-batch_1">Mini-Batch 的问题与对策<a class="headerlink" href="#mini-batch_1" title="Permanent link">&para;</a></h4>
 <p><strong>震荡问题</strong>：</p>
 <p>Mini-Batch 的梯度只是真实梯度的估计，有噪声。batch 越小，估计越不准，优化路径越"蛇形走位"。</p>
@@ -2698,13 +2685,13 @@ $<span class="arithmatex">\(L = -\sum_{i} y_i \log(\hat{y}_i)\)</span>$</p>
 <li>batch_size = 1：极致震荡，几乎随机游走</li>
 <li>batch_size = 256：比较平稳，方向可靠</li>
 </ul>
-<p><img alt="Pasted image 20260509104447.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104447.png" /></p>
+<p><img alt="Pasted image 20260509104447.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509104447.png" /></p>
 <p><strong>局部极值</strong>：</p>
 <p>梯度下降到山谷（局部最低点）就停下来了，但可能旁边有更深的谷（全局最低点）。不过实践中，高维空间的"真正的局部极值"其实不多——大部分是鞍点。</p>
-<p><img alt="Pasted image 20260509104718.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104718.png" /></p>
+<p><img alt="Pasted image 20260509104718.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509104718.png" /></p>
 <p><strong>鞍点</strong>：</p>
 <p>导数为 0，但不是极值点（像马鞍：一个方向凸，一个方向凹）。在高维空间中鞍点远比局部极值常见，这是困扰梯度下降的主要问题——停在鞍点不动了。</p>
-<p><img alt="Pasted image 20260509104908.png" src="../../kb_material/ML_image/Pasted%20image%2020260509104908.png" /></p>
+<p><img alt="Pasted image 20260509104908.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509104908.png" /></p>
 <h3 id="sgd">SGD 动量梯度下降<a class="headerlink" href="#sgd" title="Permanent link">&para;</a></h3>
 <p>给优化加"惯性"——如果之前一直在往某个方向走，那这次更新时保留一部分这个方向的速度。</p>
 <div class="arithmatex">\[\begin{aligned}
@@ -2713,7 +2700,7 @@ w_{t+1} &amp;= w_t - \eta \cdot v_t
 \end{aligned}\]</div>
 <p>其中 <span class="arithmatex">\(\beta \approx 0.9\)</span>，控制"惯性"大小。</p>
 <p><strong>直观类比</strong>：就像从山上滚下来的球——越滚越快，遇到小坑直接冲过去，不会被卡住。</p>
-<p><img alt="Pasted image 20260509105259.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105259.png" /></p>
+<p><img alt="Pasted image 20260509105259.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509105259.png" /></p>
 <h4 id="_20">动量法的效果<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h4>
 <ul>
 <li>在一致下降的方向上加速（如滚下斜坡）</li>
@@ -2722,8 +2709,8 @@ w_{t+1} &amp;= w_t - \eta \cdot v_t
 </ul>
 <p><strong>没有动量时的下降路径</strong>：之字形前进，在横向震荡中浪费大量步数
 <strong>有动量时的下降路径</strong>：横向震荡被平滑，纵向下降被加速，更快到达谷底</p>
-<p><img alt="Pasted image 20260509105521.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105521.png" />
-<img alt="Pasted image 20260509105538.png" src="../../kb_material/ML_image/Pasted%20image%2020260509105538.png" /></p>
+<p><img alt="Pasted image 20260509105521.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509105521.png" />
+<img alt="Pasted image 20260509105538.png" src="../../_site/kb_material/ML_image/Pasted%20image%2020260509105538.png" /></p>
 
 
 
@@ -2746,7 +2733,7 @@ w_{t+1} &amp;= w_t - \eta \cdot v_t
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年5月25日 11:49:20 UTC">2026年5月25日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月31日 16:37:27 UTC">2026年7月31日</span>
   </span>
 
     
@@ -2756,7 +2743,7 @@ w_{t+1} &amp;= w_t - \eta \cdot v_t
     <span class="md-icon" title="创建日期">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年5月9日 09:57:53 UTC">2026年5月9日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月31日 16:37:27 UTC">2026年7月31日</span>
   </span>
 
     
@@ -2815,13 +2802,13 @@ w_{t+1} &amp;= w_t - \eta \cdot v_t
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../javascripts/katex.min.js"></script>
+        <script src="../../_site/javascripts/katex.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../_site/javascripts/katex.js"></script>
       
         <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
-        <script src="../../javascripts/mermaid-init.js"></script>
+        <script src="../../_site/javascripts/mermaid-init.js"></script>
       
     
   </body>

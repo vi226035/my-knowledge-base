@@ -24,7 +24,7 @@
         
       
       
-      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="icon" href="../../_site/assets/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
@@ -49,9 +49,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/katex.min.css">
+      <link rel="stylesheet" href="../../_site/stylesheets/katex.min.css">
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../_site/stylesheets/extra.css">
     
     <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -88,20 +88,7 @@
   </script>
   
 
-  
-<meta property="og:type" content="website" />
-<meta property="og:title" content="并行双边 Jacobi 旋转特征值分解 - 信号·FPGA·深度学习笔记" />
-<meta property="og:description" content="本章整理自《基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究》（闫迪，长安大学，2024）第二章" />
-<meta property="og:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%B9%B6%E8%A1%8C%E5%8F%8C%E8%BE%B9Jacobi%E6%97%8B%E8%BD%AC%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E8%A7%A3.png" />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://vi226035.github.io/my-knowledge-base/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%B9%B6%E8%A1%8C%E5%8F%8C%E8%BE%B9Jacobi%E6%97%8B%E8%BD%AC%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E8%A7%A3/" />
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="并行双边 Jacobi 旋转特征值分解 - 信号·FPGA·深度学习笔记" />
-<meta property="twitter:description" content="本章整理自《基于FPGA的阵列信号处理算法中关键矩阵算子的高性能实现研究》（闫迪，长安大学，2024）第二章" />
-<meta property="twitter:image" content="https://vi226035.github.io/my-knowledge-base/assets/images/social/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%B9%B6%E8%A1%8C%E5%8F%8C%E8%BE%B9Jacobi%E6%97%8B%E8%BD%AC%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E8%A7%A3.png" />
-</head>
+  </head>
   
   
     
@@ -2584,7 +2571,7 @@ t = \tan\theta = \frac{\operatorname{sign}(\tau)}{|\tau| + \sqrt{1 + \tau^2}}, \
 <li>CORDIC 将三角函数转换为移位运算，通过不断逼近旋转角度实现：<span class="arithmatex">\(x_{i+1} = x_i - y_i d_i 2^{-i}\)</span>，<span class="arithmatex">\(y_{i+1} = y_i - y_i d_i 2^{-i}\)</span>，<span class="arithmatex">\(z_{i+1} = z_i - d_i \arctan 2^{-i}\)</span></li>
 </ul>
 <p>当前主流的 BLV 脉动阵列结构包含对角处理器（计算 Jacobi 旋转因子）和非对角处理器（完成 <span class="arithmatex">\(2\times 2\)</span> 子矩阵的平面旋转），通过矩阵数据交换和多次迭代完成特征值分解。</p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/5e58b754c78696d6023b92c103d48570c20e1029b1a42b3adca8b39cbf02b681.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/5e58b754c78696d6023b92c103d48570c20e1029b1a42b3adca8b39cbf02b681.jpg" /></p>
 <p><strong>图2.1 改进的BLV脉动阵列结构（<span class="arithmatex">\(N = 6\)</span>）</strong></p>
 <h3 id="222">2.2.2 稀疏旋转矩阵的乘法<a class="headerlink" href="#222" title="Permanent link">&para;</a></h3>
 <p>新方法的核心思想是利用旋转矩阵 <span class="arithmatex">\(\mathbf{U}\)</span> 行、列向量仅含两个非零元素的稀疏特性，简化矩阵乘法运算。</p>
@@ -2736,7 +2723,7 @@ e_3 = e_4 \tag{2.20}
 <h2 id="23">2.3 关键硬件体系架构<a class="headerlink" href="#23" title="Permanent link">&para;</a></h2>
 <h3 id="231">2.3.1 顶层描述<a class="headerlink" href="#231" title="Permanent link">&para;</a></h3>
 <p>图2.2 给出了基于 FPGA 的并行双边 Jacobi 旋转新方法的顶层描述，其中标明了模块之间的关键信号通路。</p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c0c11f84c7b6d3f7944e1a2827371cb550c3db6be02dda44c2f7a61fb621eeb1.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c0c11f84c7b6d3f7944e1a2827371cb550c3db6be02dda44c2f7a61fb621eeb1.jpg" /></p>
 <p><strong>图2.2 基于FPGA的并行双边Jacobi旋转新方法的顶层描述</strong></p>
 <h4 id="12">12 个硬件模块及其功能<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
 <p>根据图 2.2，新方法的硬件架构共计 12 个模块，各模块功能如下：</p>
@@ -2792,9 +2779,9 @@ e_3 = e_4 \tag{2.20}
 <h3 id="232">2.3.2 数据缓存<a class="headerlink" href="#232" title="Permanent link">&para;</a></h3>
 <p><strong>（1）调度序列缓存</strong></p>
 <p>采用奇偶固定调度序列确定每次 Jacobi 旋转影响的行和列。以 <span class="arithmatex">\(8 \times 8\)</span> 矩阵为例，一次循环需 8 步完成。优化规则：偶数步的行列编号可由奇数步的前 3 个和后 3 个元素推导得到，省去偶数步调度序列的缓存，节省硬件资源。</p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/6dbf6aadc63c4a74f40a5c944a6432b1fa8479cacd2abf75ef634274d42681f6.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/6dbf6aadc63c4a74f40a5c944a6432b1fa8479cacd2abf75ef634274d42681f6.jpg" /></p>
 <p><strong>图2.3 标准奇偶固定调度序列</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/889a6347a0bce182f9db3e6defb42ed1ce001ebe540ae4685ee75d4e080b6139.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/889a6347a0bce182f9db3e6defb42ed1ce001ebe540ae4685ee75d4e080b6139.jpg" /></p>
 <p><strong>图2.4 缓存的奇偶固定调度序列</strong></p>
 <p><strong>（2）矩阵数据行式读取</strong></p>
 <p>采用逐行方式读取矩阵数据，支持灵活的并行度：
@@ -2802,11 +2789,11 @@ e_3 = e_4 \tag{2.20}
 - <span class="arithmatex">\(P = 4\)</span>：每次读取 4 行（并行度 2）
 - <span class="arithmatex">\(P = 8\)</span>：每次读取 8 行（并行度 4）</p>
 <p>可根据硬件资源、实时性需求灵活选择并行度。</p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/58f3802894971bc0423d01f503913c608f081f5f20d020306464c0a36f12f5cf.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/58f3802894971bc0423d01f503913c608f081f5f20d020306464c0a36f12f5cf.jpg" /></p>
 <p><strong>图2.6 变形后的 <span class="arithmatex">\(8 \times 8\)</span> 实对称矩阵的两种读取方式</strong></p>
 <h3 id="233">2.3.3 矩阵乘法<a class="headerlink" href="#233" title="Permanent link">&para;</a></h3>
 <p>矩阵乘法硬件结构主要包括乘法器和加法器，可通过 FPGA 上的 DSP48E1 实现。矩阵左乘处理行向量，矩阵右乘处理列向量。</p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c370b447555b14c2f4e71093a5de21f1cb49e81352dacdfafc10f676cdf52b01.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c370b447555b14c2f4e71093a5de21f1cb49e81352dacdfafc10f676cdf52b01.jpg" /></p>
 <p><strong>图2.7 矩阵乘法的硬件架构</strong></p>
 <h2 id="24">2.4 实验结果与分析<a class="headerlink" href="#24" title="Permanent link">&para;</a></h2>
 <p>实验平台：Xilinx XC7V690T-FPGA，测试矩阵维数为 <span class="arithmatex">\(8 \times 8\)</span> 复厄米特矩阵，与四种方法对比。</p>
@@ -2908,11 +2895,11 @@ e_3 = e_4 \tag{2.20}
 \mathbf{E}_v = | \mathbf{I} - \mathbf{V}^H \mathbf{V} | \tag{2.23}
 \]</div>
 <p>其中 <span class="arithmatex">\(\boldsymbol{\Sigma}_M\)</span> 和 <span class="arithmatex">\(\boldsymbol{\Sigma}_F\)</span> 分别是 MATLAB EIG 和 FPGA 得到的特征值矩阵。</p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/dcefeb6247585ad432fa53add61422573694f6aaf9023430283496638c70dab1.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/dcefeb6247585ad432fa53add61422573694f6aaf9023430283496638c70dab1.jpg" /></p>
 <p><strong>(a) QR algorithm 矩阵重建误差</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/7ca11101e8b95df36d1e9c4ef3927941d0ebfc81fe6047baae34a4f0b7f515c8.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/7ca11101e8b95df36d1e9c4ef3927941d0ebfc81fe6047baae34a4f0b7f515c8.jpg" /></p>
 <p><strong>(b) Improved QR algorithm [119] 矩阵重建误差</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/8099b57ff1306e8086d2508c65ada0fb42421649f87c868e510561fba83a009f.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/8099b57ff1306e8086d2508c65ada0fb42421649f87c868e510561fba83a009f.jpg" /></p>
 <p><strong>(c) 本章新方法 矩阵重建误差</strong></p>
 <p><strong>图2.8 矩阵重建误差对比</strong></p>
 <p>实验结论：
@@ -2960,11 +2947,11 @@ e_3 = e_4 \tag{2.20}
 </table>
 <p><strong>表2.2 DOA估计实验硬件资源消耗</strong></p>
 <p>新方法的硬件资源消耗最少，时延最小。数值计算结果显示：新方法得到特征向量正交性最佳，伪倒谱误差幅值最小，谱峰最尖锐（噪声子空间与信号子空间正交性最好）。</p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/641bb5ec6af960946ac99f53bfb5698b66d2b70f06e0919525d4dcbc81fbdc50.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/641bb5ec6af960946ac99f53bfb5698b66d2b70f06e0919525d4dcbc81fbdc50.jpg" /></p>
 <p><strong>(a) QR algorithm 的伪倒谱</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c890e0004ac4072082bba580e4060f4644b261c37715def8b5b891be374b9676.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/c890e0004ac4072082bba580e4060f4644b261c37715def8b5b891be374b9676.jpg" /></p>
 <p><strong>(b) Improved QR algorithm [119] 的伪倒谱</strong></p>
-<p><img alt="" src="../../kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/42e46a2032a205c76aa735a59c0f4598142c3796e33da31cd723a6e7fd6b0e62.jpg" /></p>
+<p><img alt="" src="../../_site/kb_material/%E5%9F%BA%E4%BA%8EFPGA%E7%9A%84%E9%98%B5%E5%88%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E4%B8%AD%E5%85%B3%E9%94%AE%E7%9F%A9%E9%98%B5%E7%AE%97%E5%AD%90%E7%9A%84%E9%AB%98%E6%80%A7%E8%83%BD%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6_%E9%97%AB%E8%BF%AA.pdf-0744ff48-8b86-4f31-af9c-38c0ad8d1d4d/images/42e46a2032a205c76aa735a59c0f4598142c3796e33da31cd723a6e7fd6b0e62.jpg" /></p>
 <p><strong>(c) 本章新方法的伪倒谱</strong></p>
 <p><strong>图2.12(a)-(c) 基于三种方法实现MUSIC算法的伪倒谱</strong></p>
 <h2 id="26">2.6 结论<a class="headerlink" href="#26" title="Permanent link">&para;</a></h2>
@@ -2998,7 +2985,7 @@ e_3 = e_4 \tag{2.20}
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年5月25日 11:49:20 UTC">2026年5月25日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月31日 16:37:27 UTC">2026年7月31日</span>
   </span>
 
     
@@ -3008,7 +2995,7 @@ e_3 = e_4 \tag{2.20}
     <span class="md-icon" title="创建日期">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年5月3日 06:41:23 UTC">2026年5月3日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月31日 16:37:27 UTC">2026年7月31日</span>
   </span>
 
     
@@ -3067,13 +3054,13 @@ e_3 = e_4 \tag{2.20}
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../javascripts/katex.min.js"></script>
+        <script src="../../_site/javascripts/katex.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../_site/javascripts/katex.js"></script>
       
         <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
       
-        <script src="../../javascripts/mermaid-init.js"></script>
+        <script src="../../_site/javascripts/mermaid-init.js"></script>
       
     
   </body>
