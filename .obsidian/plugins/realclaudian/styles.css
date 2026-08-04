@@ -1120,6 +1120,70 @@ body.theme-light .claudian-message-content pre {
 
 
 /* ============================================
+   components/citations.css
+   ============================================ */
+.claudian-citations {
+  margin: 8px 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.claudian-citations-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 3px 0;
+  cursor: pointer;
+}
+
+.claudian-citations-chevron {
+  color: var(--text-faint);
+  transition: transform 0.15s ease;
+}
+
+.claudian-citations.expanded .claudian-citations-chevron {
+  transform: rotate(90deg);
+}
+
+.claudian-citations-label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.claudian-citations-count {
+  color: var(--text-faint);
+}
+
+.claudian-citations-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 4px 0 0 7px;
+  padding: 4px 0 4px 17px;
+  border-inline-start: 2px solid var(--background-modifier-border);
+}
+
+.claudian-citation-location {
+  color: var(--text-muted);
+  font-family: var(--font-monospace);
+  overflow-wrap: anywhere;
+}
+
+.claudian-citation-note {
+  margin-top: 2px;
+  color: var(--text-faint);
+  line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .claudian-citations-chevron {
+    transition: none;
+  }
+}
+
+
+/* ============================================
    components/toolcalls.css
    ============================================ */
 .claudian-tool-call {
@@ -6168,6 +6232,12 @@ code .claudian-file-link:hover {
    ============================================ */
 /* Provider model picker */
 
+.claudian-settings .claudian-provider-model-picker-setting {
+  padding: 0 12px;
+  background: transparent;
+  border-radius: 0;
+}
+
 .claudian-provider-model-picker {
   display: flex;
   flex-direction: column;
@@ -6179,6 +6249,7 @@ code .claudian-file-link:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 12px;
+  padding: 0 12px;
   font-size: var(--font-ui-small);
   color: var(--text-muted);
 }
@@ -6317,9 +6388,21 @@ code .claudian-file-link:hover {
 
 .claudian-provider-model-picker-selected-controls {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 6px;
   flex-shrink: 0;
+}
+
+.claudian-provider-model-picker-selected-alias-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.claudian-provider-model-picker-selected-alias-label {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  line-height: 1;
 }
 
 .claudian-provider-model-picker-selected-alias {
@@ -6543,6 +6626,7 @@ code .claudian-file-link:hover {
 /* outline + offset + border-radius */
 .claudian-tool-header:focus-visible,
 .claudian-thinking-header:focus-visible,
+.claudian-citations-header:focus-visible,
 .claudian-subagent-header:focus-visible,
 .claudian-input-nav-btn:focus-visible,
 .claudian-model-btn:focus-visible,
