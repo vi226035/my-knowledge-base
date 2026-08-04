@@ -1,7 +1,7 @@
 ---
 title: "MathType 永久免费使用教程"
 author:
-  - "[[vi226035]]"
+  - "vi226035"
 published: 2026-05-09
 created: 2026-07-02
 tags:

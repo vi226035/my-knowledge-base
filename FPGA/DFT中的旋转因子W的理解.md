@@ -1,7 +1,7 @@
 ---
 title: "DFT中的旋转因子W的理解"
 author:
-  - "[[vi226035]]"
+  - "vi226035"
 created: 2026-07-06
 tags:
   - "FPGA"
