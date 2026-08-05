@@ -1,0 +1,3593 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="组合逻辑 = 输出只由当前输入决定的电路，不含记忆元件。本篇讲透它的分析方法（四步）与设计方法（五步）、五大常用 MSI 器件，以及绕不开的竞争冒险。前置知识见 数字电路基础。">
+      
+      
+        <meta name="author" content="vi226035">
+      
+      
+        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/FPGA/%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">
+      
+      
+        <link rel="prev" href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">
+      
+      
+        <link rel="next" href="../%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../_site/assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>组合逻辑电路 - 信号·FPGA·深度学习笔记</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../_site/stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../_site/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-S17BB74PGE"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-S17BB74PGE",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-S17BB74PGE",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+  
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "组合逻辑电路",
+    "description": "组合逻辑 = 输出只由当前输入决定的电路，不含记忆元件。本篇讲透它的分析方法（四步）与设计方法（五步）、五大常用 MSI 器件，以及绕不开的竞争冒险。前置知识见 数字电路基础。",
+    "author": {
+      "@type": "Person",
+      "name": "vi226035"
+    },
+    "url": "https://vi226035.github.io/my-knowledge-base/FPGA/%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/"
+    ,"datePublished": "2026-08-05"
+    
+  }
+  </script>
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="信号·FPGA·深度学习笔记" class="md-header__button md-logo" aria-label="信号·FPGA·深度学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            信号·FPGA·深度学习笔记
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              组合逻辑电路
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vi226035/my-knowledge-base" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vi226035/my-knowledge-base
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  深度学习
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Pytorch%E5%85%A5%E9%97%A8/Pytorch%E5%85%A5%E9%97%A8/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  PyTorch 入门
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E6%95%B0%E5%AD%97%E4%B8%8B%E5%8F%98%E9%A2%91%EF%BC%88DDC%EF%BC%89/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  信号处理
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E5%AF%B9%E6%B6%88%E5%B8%B8%E8%A7%81%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数字对消
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  FPGA
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E6%95%B0%E5%AD%97IC/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数字IC
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../%E8%BD%AF%E4%BB%B6%E7%A7%98%E7%B1%8D/MathType%20%E6%B0%B8%E4%B9%85%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  软件秘籍
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="信号·FPGA·深度学习笔记" class="md-nav__button md-logo" aria-label="信号·FPGA·深度学习笔记" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    信号·FPGA·深度学习笔记
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vi226035/my-knowledge-base" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vi226035/my-knowledge-base
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    深度学习
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    深度学习
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    神经网络
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积神经网络（CNN）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    循环神经网络（RNN）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%BD%91%E7%BB%9C%EF%BC%88LSTM%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    长短期记忆网络（LSTM）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E9%97%A8%E6%8E%A7%E5%BE%AA%E7%8E%AF%E5%8D%95%E5%85%83%EF%BC%88GRU%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    门控循环单元（GRU）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E4%B8%80%E4%BA%9B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常见疑惑解答
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%80%89%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    应用场景与选型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降优化算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时域卷积网络（TCN）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PyTorch 入门
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PyTorch 入门
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pytorch%E5%85%A5%E9%97%A8/Pytorch%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PyTorch 入门
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Pytorch%E5%85%A5%E9%97%A8/Python%E8%AF%AD%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python 语法全览
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号处理
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号处理
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E6%95%B0%E5%AD%97%E4%B8%8B%E5%8F%98%E9%A2%91%EF%BC%88DDC%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDC（数字下变频）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E6%95%B0%E5%AD%97%E4%B8%8A%E5%8F%98%E9%A2%91%EF%BC%88DUC%EF%BC%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DUC（数字上变频）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E4%B8%AD%E9%A2%91%E6%8E%A5%E6%94%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达数字信号中频接收
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E6%A3%80%E6%B5%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达信号检测
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E8%B0%83%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%AF%86%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雷达信号调制类型识别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%B9%B2%E6%B6%89%E4%BB%AA%E5%8E%9F%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    干涉仪测向原理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E7%A9%BA%E9%97%B4%E8%B0%B1%E4%BC%B0%E8%AE%A1%E4%B8%8E%20MUSIC%20%E7%AE%97%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    空间谱估计与 MUSIC 算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%B9%B6%E8%A1%8C%E5%8F%8C%E8%BE%B9Jacobi%E6%97%8B%E8%BD%AC%E7%89%B9%E5%BE%81%E5%80%BC%E5%88%86%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    并行双边 Jacobi 旋转特征值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/%E5%88%86%E6%95%B0%E9%98%B6%E5%BB%B6%E8%BF%9F%28Farrow%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    分数阶延迟滤波器（Farrow 结构）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字对消
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数字对消
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E5%AF%B9%E6%B6%88%E5%B8%B8%E8%A7%81%E4%B8%93%E4%B8%9A%E5%90%8D%E8%AF%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业名词与缩写
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性对消方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97%E5%AF%B9%E6%B6%88/%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%AF%B9%E6%B6%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    非线性对消方法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    FPGA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字电路基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    组合逻辑电路
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    组合逻辑电路
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、特点
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、组合电路的分析方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、组合电路的分析方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最简与或式与最简或与式——两种标准最简形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、组合电路的设计步骤
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、常用中规模组合器件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、常用中规模组合器件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （1）编码器（Encoder）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （2）译码器（Decoder）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3muxmultiplexer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （3）数据选择器（MUX，Multiplexer）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4adder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （4）加法器（Adder）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5magnitude-comparator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （5）数值比较器（Magnitude Comparator）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、竞争冒险
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、竞争冒险">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （1）竞争与冒险的概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （2）产生原因
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （3）冒险现象的识别（三种方法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （4）冒险的类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （5）消除冒险的五种方法及原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （6）五种方法对比小结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相关笔记
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序逻辑电路
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DFT%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%9B%A0%E5%AD%90W%E7%9A%84%E7%90%86%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DFT 中的旋转因子 W 的理解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UART%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UART 串行通信协议
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPI%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SPI 串行通信协议
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../I2C%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    I2C 串行通信协议
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../%E6%95%B0%E5%AD%97IC/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字IC
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数字IC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97IC/%E6%95%B0%E5%AD%97%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%AA%8C%E8%AF%81%E6%A6%82%E8%BF%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字芯片设计与验证概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97IC/Verilog%20HDL%E6%A0%B8%E5%BF%83%E8%AF%AD%E6%B3%95%E4%B8%8E%E5%BB%BA%E6%A8%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Verilog HDL 核心语法与建模
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97IC/SystemVerilog%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog 基础语法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97IC/SystemVerilog%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SystemVerilog 核心特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97IC/%E9%AB%98%E6%80%A7%E8%83%BD%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高性能数字电路设计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97IC/UVM%E9%AA%8C%E8%AF%81%E6%96%B9%E6%B3%95%E5%AD%A6%E5%85%A5%E9%97%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UVM 验证方法学入门
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E5%AD%97IC/%E6%95%B0%E5%AD%97%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%AA%8C%E8%AF%81%E5%85%A8%E6%B5%81%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字芯片设计与验证全流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    软件秘籍
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    软件秘籍
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%BD%AF%E4%BB%B6%E7%A7%98%E7%B1%8D/MathType%20%E6%B0%B8%E4%B9%85%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MathType 永久免费使用教程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、特点
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、组合电路的分析方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、组合电路的分析方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最简与或式与最简或与式——两种标准最简形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、组合电路的设计步骤
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、常用中规模组合器件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、常用中规模组合器件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （1）编码器（Encoder）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （2）译码器（Decoder）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3muxmultiplexer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （3）数据选择器（MUX，Multiplexer）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4adder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （4）加法器（Adder）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5magnitude-comparator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （5）数值比较器（Magnitude Comparator）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、竞争冒险
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、竞争冒险">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （1）竞争与冒险的概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （2）产生原因
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （3）冒险现象的识别（三种方法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （4）冒险的类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （5）消除冒险的五种方法及原理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        （6）五种方法对比小结
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相关笔记
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">组合逻辑电路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>组合逻辑 = <strong>输出只由当前输入决定</strong>的电路，不含记忆元件。本篇讲透它的<strong>分析方法（四步）与设计方法（五步）</strong>、五大常用 MSI 器件，以及绕不开的<strong>竞争冒险</strong>。前置知识见 <a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a>。</p>
+</blockquote>
+<h2 id="_2">一、特点<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>任意时刻输出<strong>只取决于当前输入</strong>，与电路原来的状态无关</li>
+<li>结构上：<strong>只有门电路，没有反馈、没有存储元件</strong></li>
+<li>典型器件：加法器、编码器、译码器、数据选择器、数值比较器</li>
+</ul>
+<h2 id="_3">二、组合电路的分析方法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><strong>分析的任务</strong>：给定逻辑图（或实际电路），搞清它实现的是什么逻辑功能——与"设计"方向相反。</p>
+<p><strong>四步分析法</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>① 看逻辑图，逐级写表达式 → ② 化简/变换为最简式 → ③ 列真值表 → ④ 归纳逻辑功能
+</code></pre></div>
+<ol>
+<li><strong>看逻辑图，逐级写表达式</strong>：从输入端开始，朝输出端把每个门的输出表达式逐一写出。多级电路先给中间信号命名（如 P、M、N），最后逐步代入得到输出的总表达式。</li>
+<li><strong>化简或变换</strong>：用布尔代数（<a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a> 2.5 节四大招）或卡诺图（同基础笔记第三节）化简。目标不是盲目求短，而是化成<strong>易于辨认的最简式</strong>——最常用<strong>最简与或式</strong>，有时化成异或等特殊形式反而更容易看出功能。</li>
+<li><strong>列真值表</strong>：把输入变量的全部组合逐一代入化简后的表达式，算出对应输出。</li>
+<li><strong>归纳逻辑功能</strong>：观察真值表规律，用一句话概括电路的实际功能（加法、比较、表决、奇偶校验等），必要时评价电路是否合理、能否改进。</li>
+</ol>
+<h3 id="_4">最简与或式与最简或与式——两种标准最简形式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>这就是第②步所说的"最简函数表达式"。逻辑表达式有两种互为对偶的标准形式：</p>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>结构</th>
+<th>示例</th>
+<th>对应硬件结构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>与或式（SOP）</strong></td>
+<td>积之和：积项用或连接</td>
+<td><span class="arithmatex">\(Y = AB + \overline{A}C\)</span></td>
+<td>与-或两级电路</td>
+</tr>
+<tr>
+<td><strong>或与式（POS）</strong></td>
+<td>和之积：和项用与连接</td>
+<td><span class="arithmatex">\(Y = (A+B)(\overline{A}+C)\)</span></td>
+<td>或-与两级电路</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>最简与或式</strong>：积项个数最少，且每个积项的变量数最少。</li>
+<li><strong>最简或与式</strong>：和项个数最少，且每个和项的变量数最少。</li>
+<li>两种形式可用分配律、摩根定律互相转换，描述的是同一个函数。</li>
+</ul>
+<p><strong>同一张卡诺图的两种读法</strong>：</p>
+<ul>
+<li><strong>圈 1 → 最简与或式</strong>：每个圈读出一个积项，各积项相加。</li>
+<li><strong>圈 0 → 最简或与式</strong>：先对 Y 的 0 格画圈，得到 <span class="arithmatex">\(\overline{Y}\)</span> 的最简与或式，再整体取反（摩根定律）即得 Y 的最简或与式。</li>
+</ul>
+<blockquote>
+<p><strong>例题 1（同一卡诺图两种读法）</strong>：已知 <span class="arithmatex">\(Y(A,B,C) = \sum m(0,2,5,7)\)</span>，分别求最简与或式和最简或与式。</p>
+<p>卡诺图：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>A\BC</th>
+<th>00</th>
+<th>01</th>
+<th>11</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><strong>1</strong>(<span class="arithmatex">\(m_0\)</span>)</td>
+<td>0</td>
+<td>0</td>
+<td><strong>1</strong>(<span class="arithmatex">\(m_2\)</span>)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td><strong>1</strong>(<span class="arithmatex">\(m_5\)</span>)</td>
+<td><strong>1</strong>(<span class="arithmatex">\(m_7\)</span>)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>圈 1（最简与或式）</strong>：<span class="arithmatex">\(m_0, m_2\)</span>（左右卷绕相邻）→ <span class="arithmatex">\(\overline{A}\overline{C}\)</span>；<span class="arithmatex">\(m_5, m_7\)</span> → <span class="arithmatex">\(AC\)</span>：</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; $<span class="arithmatex">\(Y = \overline{A}\overline{C} + AC\)</span>$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>圈 0（最简或与式）</strong>：0 格为 <span class="arithmatex">\(m_1, m_3, m_4, m_6\)</span>，即 <span class="arithmatex">\(\overline{Y} = \sum m(1,3,4,6)\)</span>。圈图得 <span class="arithmatex">\(m_1, m_3\)</span> → <span class="arithmatex">\(\overline{A}C\)</span>；<span class="arithmatex">\(m_4, m_6\)</span> → <span class="arithmatex">\(A\overline{C}\)</span>，故 <span class="arithmatex">\(\overline{Y} = \overline{A}C + A\overline{C}\)</span>；整体取反：</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; $<span class="arithmatex">\(Y = \overline{\overline{A}C + A\overline{C}} = (A + \overline{C})(\overline{A} + C)\)</span>$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>验证</strong>：展开 <span class="arithmatex">\((A + \overline{C})(\overline{A} + C) = \underbrace{A\overline{A}}_{0} + AC + \overline{A}\overline{C} + \underbrace{\overline{C}C}_{0} = AC + \overline{A}\overline{C}\)</span>，与与或式完全一致 ✓。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; （本例函数与 B 无关——B 是冗余变量，电路本质是 A、C 的<strong>同或</strong>。）</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>下面用四步分析法完整分析一个电路：</p>
+<blockquote>
+<p><strong>例题 2（四步分析法示范）</strong>：分析由四个与非门构成的电路 <span class="arithmatex">\(Y = \overline{\left(\overline{A \cdot P}\right) \cdot \left(\overline{B \cdot P}\right)}\)</span>，其中 <span class="arithmatex">\(P = \overline{AB}\)</span>。</p>
+<p><strong>① 看逻辑图，逐级写表达式</strong>：
+$<span class="arithmatex">\(M = \overline{A \cdot P} = \overline{A} + \overline{P} = \overline{A} + AB\)</span>$
+$<span class="arithmatex">\(N = \overline{B \cdot P} = \overline{B} + \overline{P} = \overline{B} + AB\)</span>$</p>
+<p><strong>② 化简/变换</strong>：
+$<span class="arithmatex">\(Y = \overline{M \cdot N} = \overline{(\overline{A} + AB)(\overline{B} + AB)}\)</span>$</p>
+<p>展开括号内：<span class="arithmatex">\((\overline{A} + AB)(\overline{B} + AB) = \overline{A}\overline{B} + \underbrace{\overline{A}AB}_{0} + \underbrace{AB\overline{B}}_{0} + AB = \overline{A}\overline{B} + AB\)</span></p>
+<p>故 <span class="arithmatex">\(Y = \overline{\overline{A}\overline{B} + AB} = A \oplus B\)</span>。</p>
+<p><strong>③ 列真值表</strong>：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th><span class="arithmatex">\(P=\overline{AB}\)</span></th>
+<th>Y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>④ 归纳逻辑功能</strong>：A、B 相异时 Y=1，相同则 Y=0——电路实现<strong>异或</strong>功能。这是仅用与非门实现任意逻辑的经典例子（与非门是"万能门"）。</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">三、组合电路的设计步骤<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p><strong>设计的任务与分析相反</strong>：给定逻辑功能要求，设计出能实现它的电路（逻辑图）。</p>
+<p><strong>标准设计流程</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>① 逻辑抽象（定义变量、赋值）→ ② 列真值表 → ③ 写表达式并化简为最简式 → ④ 画逻辑图 → ⑤ 验证
+</code></pre></div>
+<p><strong>核心主链</strong>正是：<strong>逻辑功能 → 真值表 → 最简函数表达式 → 逻辑图</strong>。</p>
+<ol>
+<li><strong>逻辑抽象</strong>：明确问题有几个输入变量、几个输出变量，并为每个变量规定 0/1 的含义（如"同意=1、不同意=0"）。这一步把文字要求翻译成逻辑问题。</li>
+<li><strong>列真值表</strong>：把输入的全部组合逐一列出，按功能要求写出对应输出值。真值表是后续所有步骤的唯一依据。</li>
+<li><strong>写表达式并化简</strong>：先由真值表写出标准与或式（取输出为 1 的最小项之和），再用卡诺图化简为<strong>最简与或式</strong>（若要或与实现则圈 0 得最简或与式，见本文"分析方法"一节）。</li>
+<li><strong>画逻辑图</strong>：按最简式画门电路。若限定只用某一种门（如与非门），先用双重取反、摩根定律把表达式变换成对应形式再画。</li>
+<li><strong>验证</strong>：回代真值表核对电路确实实现了要求的功能。</li>
+</ol>
+<blockquote>
+<p><strong>例题 3（三人表决器，完整设计流程）</strong>：设计一个多数表决电路——三个评委 A、B、C 每人一票，两票及以上同意则提案通过（Y=1）。</p>
+<p><strong>① 逻辑抽象</strong>：三个输入 A、B、C（同意=1，不同意=0）；一个输出 Y（通过=1，否决=0）。</p>
+<p><strong>② 列真值表</strong>：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>Y</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>全反对</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1 票</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1 票</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>2 票 ✓</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1 票</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2 票 ✓</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>2 票 ✓</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>3 票 ✓</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>③ 写表达式并化简</strong>：<span class="arithmatex">\(Y = \sum m(3,5,6,7)\)</span>，卡诺图化简：</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>A\BC</th>
+<th>00</th>
+<th>01</th>
+<th>11</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td><strong>1</strong>(<span class="arithmatex">\(m_3\)</span>)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td><strong>1</strong>(<span class="arithmatex">\(m_5\)</span>)</td>
+<td><strong>1</strong>(<span class="arithmatex">\(m_7\)</span>)</td>
+<td><strong>1</strong>(<span class="arithmatex">\(m_6\)</span>)</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; 画圈：<span class="arithmatex">\(m_3, m_7\)</span> → <span class="arithmatex">\(BC\)</span>；<span class="arithmatex">\(m_5, m_7\)</span> → <span class="arithmatex">\(AC\)</span>；<span class="arithmatex">\(m_6, m_7\)</span> → <span class="arithmatex">\(AB\)</span>。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; $<span class="arithmatex">\(Y = AB + AC + BC\)</span>$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>④ 画逻辑图</strong>：三个两输入与门 + 一个三输入或门即可实现。若<strong>限定只用与非门</strong>，先变换：<span class="arithmatex">\(Y = \overline{\overline{AB} \cdot \overline{AC} \cdot \overline{BC}}\)</span>，用 4 个与非门实现。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>⑤ 验证</strong>：回代真值表，凡两票及以上同意 Y=1，符合要求 ✓。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_6">四、常用中规模组合器件<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>中规模集成电路（MSI）把常用的组合功能做成标准芯片。掌握它们的<strong>功能、表达式和典型应用</strong>，既能直接搭电路，也能当"积木"实现任意逻辑。下面逐个详解五大器件。</p>
+<h3 id="1encoder">（1）编码器（Encoder）<a class="headerlink" href="#1encoder" title="Permanent link">&para;</a></h3>
+<p><strong>功能</strong>：把"哪个输入有效"编成二进制代码输出——用代码表示输入信号。</p>
+<p><strong>普通编码器</strong>（8 线—3 线）：8 个输入 <span class="arithmatex">\(I_0\)</span>–<span class="arithmatex">\(I_7\)</span>（每次只允许一个为 1），输出 3 位二进制码 <span class="arithmatex">\(Y_2Y_1Y_0\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th>有效输入</th>
+<th>输出 <span class="arithmatex">\(Y_2Y_1Y_0\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(I_0=1\)</span></td>
+<td>000</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I_1=1\)</span></td>
+<td>001</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I_2=1\)</span></td>
+<td>010</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I_3=1\)</span></td>
+<td>011</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I_4=1\)</span></td>
+<td>100</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I_5=1\)</span></td>
+<td>101</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I_6=1\)</span></td>
+<td>110</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I_7=1\)</span></td>
+<td>111</td>
+</tr>
+</tbody>
+</table>
+<p>输出表达式：
+$<span class="arithmatex">\(Y_2 = I_4 + I_5 + I_6 + I_7,\quad Y_1 = I_2 + I_3 + I_6 + I_7,\quad Y_0 = I_1 + I_3 + I_5 + I_7\)</span>$</p>
+<p><strong>局限</strong>：普通编码器<strong>同一时刻只允许一个输入有效</strong>，若多个同时有效，输出会混乱。</p>
+<p><strong>优先编码器（74HC148）</strong>：给每个输入规定优先级，多个输入同时有效时，<strong>只编优先级最高</strong>的那个。
+- 输入 <span class="arithmatex">\(\overline{I_0}\)</span>–<span class="arithmatex">\(\overline{I_7}\)</span> <strong>低电平有效</strong>，<span class="arithmatex">\(\overline{I_7}\)</span> 优先级最高；
+- 输出 <span class="arithmatex">\(\overline{A_2}\overline{A_1}\overline{A_0}\)</span> 也是<strong>低有效</strong>（代码取反输出）；
+- 附加引脚：使能输入 <span class="arithmatex">\(\overline{E_I}\)</span>、群选择输出 <span class="arithmatex">\(\overline{G_S}\)</span>（指示"有输入有效"）、扩展输出 <span class="arithmatex">\(\overline{E_O}\)</span>（用于级联扩展更多输入）。</p>
+<h3 id="2decoder">（2）译码器（Decoder）<a class="headerlink" href="#2decoder" title="Permanent link">&para;</a></h3>
+<p><strong>功能</strong>：编码的逆过程——把二进制代码"翻译"成对应的输出信号。</p>
+<p><strong>3 线—8 线译码器（74HC138）</strong>：3 个地址输入 <span class="arithmatex">\(A_2A_1A_0\)</span>，8 个<strong>低有效</strong>输出 <span class="arithmatex">\(\overline{Y_0}\)</span>–<span class="arithmatex">\(\overline{Y_7}\)</span>；带使能端 <span class="arithmatex">\(G_1\)</span>（高有效）、<span class="arithmatex">\(\overline{G_{2A}}\)</span>、<span class="arithmatex">\(\overline{G_{2B}}\)</span>（低有效），仅当 <span class="arithmatex">\(G_1=1\)</span> 且 <span class="arithmatex">\(\overline{G_{2A}}=\overline{G_{2B}}=0\)</span> 时才工作。</p>
+<p>使能后的译码关系：</p>
+<table>
+<thead>
+<tr>
+<th>输入 <span class="arithmatex">\(A_2A_1A_0\)</span></th>
+<th>有效输出（低电平）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>000</td>
+<td><span class="arithmatex">\(\overline{Y_0}=0\)</span></td>
+</tr>
+<tr>
+<td>001</td>
+<td><span class="arithmatex">\(\overline{Y_1}=0\)</span></td>
+</tr>
+<tr>
+<td>010</td>
+<td><span class="arithmatex">\(\overline{Y_2}=0\)</span></td>
+</tr>
+<tr>
+<td>011</td>
+<td><span class="arithmatex">\(\overline{Y_3}=0\)</span></td>
+</tr>
+<tr>
+<td>100</td>
+<td><span class="arithmatex">\(\overline{Y_4}=0\)</span></td>
+</tr>
+<tr>
+<td>101</td>
+<td><span class="arithmatex">\(\overline{Y_5}=0\)</span></td>
+</tr>
+<tr>
+<td>110</td>
+<td><span class="arithmatex">\(\overline{Y_6}=0\)</span></td>
+</tr>
+<tr>
+<td>111</td>
+<td><span class="arithmatex">\(\overline{Y_7}=0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>输出表达式：<span class="arithmatex">\(\overline{Y_i} = \overline{m_i}\)</span>，即<strong>每个输出就是对应最小项的取反</strong>。</p>
+<p><strong>应用</strong>：
+1. <strong>地址译码</strong>：选中某个存储单元或外设；
+2. <strong>实现任意组合逻辑</strong>：74HC138 相当于"最小项发生器"，配一个与非门即可实现任意三变量函数（见例题 20）；
+3. <strong>级联扩展</strong>：多片 138 可扩展成更多地址线的译码器。</p>
+<blockquote>
+<p><strong>延伸</strong>：<strong>显示译码器</strong>（如 74HC47/48）把 BCD 码译成七段数码管的段选信号，驱动显示数字 0–9。</p>
+<p><strong>例题 4（用 74HC138 实现逻辑函数）</strong>：用一片 74HC138 和一个与非门实现 <span class="arithmatex">\(Y = \sum m(1,2,4,7)\)</span>。</p>
+<p><strong>思路</strong>：74HC138 输出的是 <span class="arithmatex">\(\overline{m_0}\)</span>–<span class="arithmatex">\(\overline{m_7}\)</span>。对 <span class="arithmatex">\(Y = m_1 + m_2 + m_4 + m_7\)</span> 两次取反、用摩根定律：
+$<span class="arithmatex">\(Y = m_1 + m_2 + m_4 + m_7 = \overline{\overline{m_1}\cdot\overline{m_2}\cdot\overline{m_4}\cdot\overline{m_7}}\)</span>$</p>
+<p><strong>接法</strong>：把地址 <span class="arithmatex">\(A_2A_1A_0\)</span> 接三个输入变量，将输出端 <span class="arithmatex">\(\overline{Y_1}, \overline{Y_2}, \overline{Y_4}, \overline{Y_7}\)</span> 接到一个 4 输入与非门，与非门的输出即为 <span class="arithmatex">\(Y\)</span>。</p>
+</blockquote>
+<h3 id="3muxmultiplexer">（3）数据选择器（MUX，Multiplexer）<a class="headerlink" href="#3muxmultiplexer" title="Permanent link">&para;</a></h3>
+<p><strong>功能</strong>：在地址（选择）输入控制下，从多路数据中<strong>选一路</strong>送到输出——相当于一个"多档位旋转开关"。</p>
+<p><strong>4 选 1 数据选择器</strong>：地址 <span class="arithmatex">\(A_1A_0\)</span>，数据输入 <span class="arithmatex">\(D_0\)</span>–<span class="arithmatex">\(D_3\)</span>，输出 <span class="arithmatex">\(Y\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(A_1\)</span></th>
+<th><span class="arithmatex">\(A_0\)</span></th>
+<th>输出 <span class="arithmatex">\(Y\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td><span class="arithmatex">\(D_0\)</span></td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td><span class="arithmatex">\(D_1\)</span></td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td><span class="arithmatex">\(D_2\)</span></td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td><span class="arithmatex">\(D_3\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>输出表达式：
+$<span class="arithmatex">\(Y = \overline{A_1}\overline{A_0}D_0 + \overline{A_1}A_0D_1 + A_1\overline{A_0}D_2 + A_1A_0D_3\)</span>$</p>
+<p>典型芯片：<strong>74HC153</strong>（双 4 选 1，带使能端）。</p>
+<p><strong>重要应用——实现逻辑函数</strong>：4 选 1 MUX 的表达式结构与<strong>二变量最小项展开</strong>完全一致，故能直接实现二变量函数；把第三个变量接到数据输入端（余变量法），还能实现三变量函数。一般规律：<strong><span class="arithmatex">\(2^n\)</span> 选 1 的 MUX 可实现任意 <span class="arithmatex">\(n\)</span> 变量及以下的逻辑函数</strong>。</p>
+<blockquote>
+<p><strong>例题 5（用 4 选 1 MUX 实现三变量函数）</strong>：用一片 4 选 1 数据选择器实现 <span class="arithmatex">\(F(A,B,C) = \sum m(0,3,5,6)\)</span>。</p>
+<p><strong>思路（余变量法）</strong>：选 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 作地址（<span class="arithmatex">\(A_1=A, A_0=B\)</span>），把第三个变量 <span class="arithmatex">\(C\)</span> 分配给数据输入端。对每一组 <span class="arithmatex">\((A,B)\)</span>，写出 <span class="arithmatex">\(F\)</span> 关于 <span class="arithmatex">\(C\)</span> 的值：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(AB\)</span></th>
+<th>对应最小项</th>
+<th><span class="arithmatex">\(F\)</span> 与 <span class="arithmatex">\(C\)</span> 的关系</th>
+<th>数据端取值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00</td>
+<td><span class="arithmatex">\(m_0=000\)</span></td>
+<td><span class="arithmatex">\(C=0\)</span> 时 <span class="arithmatex">\(F=1\)</span></td>
+<td><span class="arithmatex">\(D_0=\overline{C}\)</span></td>
+</tr>
+<tr>
+<td>01</td>
+<td><span class="arithmatex">\(m_3=011\)</span></td>
+<td><span class="arithmatex">\(C=1\)</span> 时 <span class="arithmatex">\(F=1\)</span></td>
+<td><span class="arithmatex">\(D_1=C\)</span></td>
+</tr>
+<tr>
+<td>10</td>
+<td><span class="arithmatex">\(m_5=101\)</span></td>
+<td><span class="arithmatex">\(C=1\)</span> 时 <span class="arithmatex">\(F=1\)</span></td>
+<td><span class="arithmatex">\(D_2=C\)</span></td>
+</tr>
+<tr>
+<td>11</td>
+<td><span class="arithmatex">\(m_6=110\)</span></td>
+<td><span class="arithmatex">\(C=0\)</span> 时 <span class="arithmatex">\(F=1\)</span></td>
+<td><span class="arithmatex">\(D_3=\overline{C}\)</span></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>接法</strong>：<span class="arithmatex">\(A_1=A\)</span>、<span class="arithmatex">\(A_0=B\)</span>，数据端接 <span class="arithmatex">\(D_0=\overline{C}\)</span>、<span class="arithmatex">\(D_1=C\)</span>、<span class="arithmatex">\(D_2=C\)</span>、<span class="arithmatex">\(D_3=\overline{C}\)</span>，输出即 <span class="arithmatex">\(F\)</span>。</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; 验证：<span class="arithmatex">\(Y = \overline{A}\overline{B}\overline{C} + \overline{A}BC + A\overline{B}C + AB\overline{C} = \sum m(0,3,5,6)\)</span> ✓。</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="4adder">（4）加法器（Adder）<a class="headerlink" href="#4adder" title="Permanent link">&para;</a></h3>
+<p><strong>半加器（Half Adder）</strong>：对两个一位二进制数相加，<strong>不考虑低位进位</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>和 S</th>
+<th>进位 C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>表达式：<span class="arithmatex">\(S = A \oplus B\)</span>，<span class="arithmatex">\(C = AB\)</span>。</p>
+<p><strong>全加器（Full Adder）</strong>：把加数 A、被加数 B 与<strong>低位进位 <span class="arithmatex">\(C_{in}\)</span></strong> 三者相加，输出本位和 S 与向高位的进位 <span class="arithmatex">\(C_{out}\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th><span class="arithmatex">\(C_{in}\)</span></th>
+<th>S</th>
+<th><span class="arithmatex">\(C_{out}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>表达式：
+$<span class="arithmatex">\(S = A \oplus B \oplus C_{in},\qquad C_{out} = AB + C_{in}(A \oplus B) = AB + AC_{in} + BC_{in}\)</span>$</p>
+<p><strong>多位加法器</strong>：把全加器级联，低位 <span class="arithmatex">\(C_{out}\)</span> 接高位 <span class="arithmatex">\(C_{in}\)</span>，即得 n 位<strong>行波进位加法器</strong>。缺点：进位逐级传递，位数多时速度慢。</p>
+<p><strong>超前进位加法器（CLA）</strong>：各级进位由专门电路<strong>同时产生</strong>，不等逐级传递，速度快。典型芯片 <strong>74HC283</strong>（4 位全加器，可级联成更多位）。</p>
+<h3 id="5magnitude-comparator">（5）数值比较器（Magnitude Comparator）<a class="headerlink" href="#5magnitude-comparator" title="Permanent link">&para;</a></h3>
+<p><strong>功能</strong>：比较两个二进制数 A、B 的大小，输出三个结果：<span class="arithmatex">\(A&gt;B\)</span>、<span class="arithmatex">\(A=B\)</span>、<span class="arithmatex">\(A&lt;B\)</span>。</p>
+<p><strong>一位比较器</strong>的表达式：</p>
+<table>
+<thead>
+<tr>
+<th>结果</th>
+<th>表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A = B\)</span></td>
+<td><span class="arithmatex">\(\overline{A \oplus B}\)</span>（同或）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A &gt; B\)</span></td>
+<td><span class="arithmatex">\(A\overline{B}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A &lt; B\)</span></td>
+<td><span class="arithmatex">\(\overline{A}B\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>多位比较原理</strong>：<strong>从最高位向低位逐位比较</strong>——最高位能分出大小就直接定结果；最高位相等，再比次高位，依此类推。例如比较 4 位 <span class="arithmatex">\(A=A_3A_2A_1A_0\)</span> 与 <span class="arithmatex">\(B=B_3B_2B_1B_0\)</span>：先比 <span class="arithmatex">\(A_3\)</span>、<span class="arithmatex">\(B_3\)</span>，相等才继续比 <span class="arithmatex">\(A_2\)</span>、<span class="arithmatex">\(B_2\)</span>……</p>
+<p><strong>4 位数值比较器（74HC85）</strong>：比较两个 4 位数，另设三个<strong>级联输入</strong>（<span class="arithmatex">\(I_{A&gt;B}\)</span>、<span class="arithmatex">\(I_{A=B}\)</span>、<span class="arithmatex">\(I_{A&lt;B}\)</span>）。把低位芯片的三个输出接到高位芯片的级联输入，即可扩展成 8 位、12 位……比较器。</p>
+<blockquote>
+<p><strong>小结</strong>：编码器/译码器做"代码 ↔ 信号"转换，数据选择器做"多路选一路"，加法器做算术，比较器比大小——它们是构成运算器、控制器等更复杂数字系统的标准积木。</p>
+</blockquote>
+<h2 id="_7">五、竞争冒险<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="1">（1）竞争与冒险的概念<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>竞争（Race）</strong>：同一个信号经<strong>两条或多条路径</strong>传到某个汇合点，由于各路径<strong>门延迟不同</strong>，到达时刻有先有后，这种"抢先后"的现象。</li>
+<li><strong>冒险（Hazard）</strong>：竞争导致输出产生了<strong>本不该有的瞬时尖峰脉冲（毛刺）</strong>，即输出短暂地违背了应有的逻辑功能。</li>
+</ul>
+<p><strong>关系</strong>：竞争<strong>一定</strong>源于路径延迟差异，但<strong>不一定</strong>产生毛刺；只有当延迟差异恰好让输出瞬间出错时才构成冒险。冒险必然由竞争引起。</p>
+<h3 id="2">（2）产生原因<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>根源是<strong>门电路的传输延迟</strong>——信号每经过一级门都要花时间（传输延迟时间 <span class="arithmatex">\(t_{pd}\)</span>），不是瞬时完成的。具体分两种情形：</p>
+<ol>
+<li><strong>同一信号走不同路径</strong>：信号 A 一路<strong>直达</strong>某门，另一路<strong>经非门</strong>变成 <span class="arithmatex">\(\overline{A}\)</span> 再到该门。直达路径级数少、延迟短，反相路径多一级非门、延迟长，于是 A 与 <span class="arithmatex">\(\overline{A}\)</span> 到达汇合点<strong>不同步</strong>——本应严格互补的两个信号，瞬间可能同时为 0 或同时为 1。</li>
+<li><strong>多输入同时跳变</strong>：多个输入同时变化（如计数器从 <span class="arithmatex">\(0111 \to 1000\)</span>，四位一起翻转）时，各位延迟不一致，中间会短暂出现错误的过渡组合。</li>
+</ol>
+<h3 id="3">（3）冒险现象的识别（三种方法）<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p><strong>方法一：代数法（最常用）</strong>
+把其余变量代入固定值，让表达式只剩一个变量 X：</p>
+<ul>
+<li>若能化成 <span class="arithmatex">\(Y = X + \overline{X}\)</span> → X 变化时可能出现<strong>静态 1 冒险</strong>（输出本应恒 1，却冒出一个瞬时 0 负脉冲）。</li>
+<li>若能化成 <span class="arithmatex">\(Y = X \cdot \overline{X}\)</span> → X 变化时可能出现<strong>静态 0 冒险</strong>（输出本应恒 0，却冒出一个瞬时 1 正脉冲）。</li>
+</ul>
+<p><strong>方法二：卡诺图法（相切判断）</strong>
+在卡诺图中，若代表两个积项的<strong>圈相切（相邻但不相交、不被更大的圈覆盖）</strong>，则相切处对应的变量切换就会发生冒险。相切点正是信号从一个积项"换轨"到另一个积项的临界位置。</p>
+<p><strong>方法三：波形观测法（实验法）</strong>
+用示波器观察输出，看信号跳变期间是否叠加了窄毛刺。最直接，但需要实际电路或仿真。</p>
+<h3 id="4">（4）冒险的类型<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>稳态应输出</th>
+<th>毛刺</th>
+<th>出现的表达式结构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>静态 1 冒险</strong></td>
+<td>恒为 1</td>
+<td>瞬时 0（负脉冲）</td>
+<td>与或式中能化为 <span class="arithmatex">\(X + \overline{X}\)</span></td>
+</tr>
+<tr>
+<td><strong>静态 0 冒险</strong></td>
+<td>恒为 0</td>
+<td>瞬时 1（正脉冲）</td>
+<td>或与式中能化为 <span class="arithmatex">\(X \cdot \overline{X}\)</span></td>
+</tr>
+<tr>
+<td><strong>动态冒险</strong></td>
+<td>0→1 或 1→0</td>
+<td>跳变中多次起伏</td>
+<td>多路径延迟差异大，较少见</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>"静态"指稳态下输出<strong>本不该变</strong>，却因竞争瞬间变了一下；"动态"指输出本就要变，却在变化途中多抖了几次。</p>
+<p><strong>例题 6（判断与消除）</strong>：分析 <span class="arithmatex">\(Y = \overline{A}C + AB\)</span> 的冒险。</p>
+<p><strong>① 判断（代数法）</strong>：令 <span class="arithmatex">\(B = C = 1\)</span>，则 <span class="arithmatex">\(Y = \overline{A} + A\)</span>，属 <span class="arithmatex">\(X + \overline{X}\)</span> 形式 → <strong>存在静态 1 冒险</strong>。
+（卡诺图上看，<span class="arithmatex">\(\overline{A}C\)</span> 与 <span class="arithmatex">\(AB\)</span> 两个圈在 <span class="arithmatex">\(m_3\)</span>、<span class="arithmatex">\(m_7\)</span> 处相切，同样可判。）
+<strong>② 毛刺成因</strong>：A 由 1→0 时，A 先变 0，而 <span class="arithmatex">\(\overline{A}\)</span> 因非门延迟仍短暂为 0，两者同时为 0，或门输出瞬间掉到 0，产生负毛刺。
+<strong>③ 消除（加冗余项）</strong>：补上桥接两个相切圈的冗余项 <span class="arithmatex">\(BC\)</span>：
+$<span class="arithmatex">\(Y = \overline{A}C + AB + BC\)</span>$
+当 <span class="arithmatex">\(B = C = 1\)</span> 时，<span class="arithmatex">\(BC = 1\)</span> 恒成立，<span class="arithmatex">\(Y = \overline{A} + A + 1 = 1\)</span>。</p>
+</blockquote>
+<h3 id="5">（5）消除冒险的五种方法及原理<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<p><strong>方法一：加冗余乘积项（逻辑设计层面，最治本）</strong></p>
+<ul>
+<li><strong>做法</strong>：在表达式中加入一个不改变稳态功能的冗余乘积项，把卡诺图上相切的两个圈"桥接"起来。</li>
+<li><strong>为什么能避免</strong>：信号切换的瞬态期间，原来两个乘积项出现"青黄不接"（都短暂为 0），而冗余项 <span class="arithmatex">\(BC\)</span> 恰好在这段过渡期<strong>始终为 1</strong>，把输出稳稳"托"在 1，毛刺无从产生。稳态时冗余项不改变函数值，只在瞬态起作用。</li>
+</ul>
+<p><strong>方法二：输出并联滤波电容（硬件层面）</strong></p>
+<ul>
+<li><strong>做法</strong>：在输出端对地并联一个几十～几百 pF 的小电容。</li>
+<li><strong>为什么能避免</strong>：毛刺是<strong>极窄</strong>的脉冲（ns 级），电容的充放电相当于低通滤波，把窄脉冲"抹平"吸收掉。</li>
+<li><strong>代价</strong>：同时把正常信号的边沿也变缓，降低工作速度，只适合低速电路。</li>
+</ul>
+<p><strong>方法三：加选通（使能）脉冲 ST（时间上避开）</strong></p>
+<ul>
+<li><strong>做法</strong>：给输出门加使能端，让 ST 只在输入<strong>完全稳定后</strong>的有效窗口内打开。</li>
+<li><strong>为什么能避免</strong>：毛刺只出现在跳变的瞬态期，选通脉冲在时间上<strong>避开</strong>这段瞬态，只放行稳态值——相当于"等风停了再出门"。</li>
+<li><strong>要求</strong>：需要一个与输入变化同步的时序控制信号。</li>
+</ul>
+<p><strong>方法四：输出加同步寄存器（D 触发器）——FPGA 首选</strong></p>
+<ul>
+<li><strong>做法</strong>：在组合逻辑输出后接一个时钟沿触发的 D 触发器。</li>
+<li><strong>为什么能避免</strong>：触发器<strong>只在时钟沿那一瞬间</strong>采样输入；组合逻辑的毛刺产生于两个时钟沿之间，且到下一个时钟沿到来前信号早已稳定（满足建立时间即可），因此触发器采到的是稳态值，毛刺被时钟沿"屏蔽"掉。这是同步时序电路天然抗毛刺的根本原因。</li>
+</ul>
+<p><strong>方法五：改用格雷码编码（从源头消除）</strong></p>
+<ul>
+<li><strong>做法</strong>：计数器、状态机用格雷码代替自然二进制码。</li>
+<li><strong>为什么能避免</strong>：冒险的根源之一是<strong>多位同时跳变</strong>导致各路径到达错位；格雷码相邻状态<strong>只变一位</strong>，根本不存在多位齐变，从源头消除了这类竞争（呼应 <a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a> 中的格雷码）。</li>
+</ul>
+<h3 id="6">（6）五种方法对比小结<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>消除层面</th>
+<th>一句话原理</th>
+<th>适用 / 代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冗余乘积项</td>
+<td>逻辑设计</td>
+<td>桥接相切圈，过渡期托住输出</td>
+<td>最治本，略增门数</td>
+</tr>
+<tr>
+<td>滤波电容</td>
+<td>硬件</td>
+<td>低通滤波吸收窄脉冲</td>
+<td>低速电路，边沿变缓</td>
+</tr>
+<tr>
+<td>选通脉冲</td>
+<td>时间域</td>
+<td>避开瞬态，只采稳态</td>
+<td>需时序控制信号</td>
+</tr>
+<tr>
+<td>同步寄存器</td>
+<td>时钟域</td>
+<td>时钟沿屏蔽沿间毛刺</td>
+<td><strong>FPGA 主流</strong>，需时钟</td>
+</tr>
+<tr>
+<td>格雷码</td>
+<td>编码源头</td>
+<td>每次只变一位，无多比特齐变</td>
+<td>计数器、状态机、跨时钟域</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>FPGA 视角</strong>：现代 FPGA 以同步时序为主，组合逻辑输出通常先经触发器寄存再送出，毛刺被时钟沿"屏蔽"。竞争冒险主要威胁<strong>纯组合输出、异步路径、跨时钟域信号</strong>，这些正是时序约束要重点管控的对象（见 <a href="../../%E6%95%B0%E5%AD%97IC/%E9%AB%98%E6%80%A7%E8%83%BD%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/">高性能数字电路设计</a>）。</p>
+</blockquote>
+<hr />
+<h2 id="_8">相关笔记<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a> —— 数制码制、逻辑代数、卡诺图（本篇的前置）</li>
+<li><a href="../%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">时序逻辑电路</a> —— 有记忆的电路：触发器、计数器、状态机</li>
+<li><a href="../../%E6%95%B0%E5%AD%97IC/Verilog%20HDL%E6%A0%B8%E5%BF%83%E8%AF%AD%E6%B3%95%E4%B8%8E%E5%BB%BA%E6%A8%A1/">Verilog HDL 核心语法与建模</a> —— 组合逻辑的 HDL 描述（always @*）</li>
+</ul>
+
+
+
+
+
+
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="最后更新">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月5日 15:26:32 UTC">2026年8月5日</span>
+  </span>
+
+    
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="创建日期">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月5日 15:26:32 UTC">2026年8月5日</span>
+  </span>
+
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.top", "navigation.indexes", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../_site/javascripts/katex.min.js"></script>
+      
+        <script src="../../_site/javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"></script>
+      
+        <script src="../../_site/javascripts/mermaid-init.js"></script>
+      
+    
+  </body>
+</html>

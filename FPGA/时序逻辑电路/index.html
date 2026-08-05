@@ -6,19 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="不同网络结构不是“谁比谁强“的关系，而是不同工具解决不同问题。这篇笔记帮你快速判断：什么场景用什么模型。">
+        <meta name="description" content="时序逻辑 = 输出由当前输入 + 历史状态共同决定的电路，核心是触发器（记忆单元）。本篇覆盖触发器特性方程、时序电路分析与设计、计数器与寄存器。前置知识见 数字电路基础 与 组合逻辑电路。">
       
       
         <meta name="author" content="vi226035">
       
       
-        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%80%89%E5%9E%8B/">
+        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/FPGA/%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">
       
       
-        <link rel="prev" href="../%E4%B8%80%E4%BA%9B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/">
+        <link rel="prev" href="../%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">
       
       
-        <link rel="next" href="../%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/">
+        <link rel="next" href="../DFT%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%9B%A0%E5%AD%90W%E7%9A%84%E7%90%86%E8%A7%A3/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>应用场景与选型 - 信号·FPGA·深度学习笔记</title>
+        <title>时序逻辑电路 - 信号·FPGA·深度学习笔记</title>
       
     
     
@@ -75,14 +75,14 @@
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "headline": "应用场景与选型",
-    "description": "不同网络结构不是“谁比谁强“的关系，而是不同工具解决不同问题。这篇笔记帮你快速判断：什么场景用什么模型。",
+    "headline": "时序逻辑电路",
+    "description": "时序逻辑 = 输出由当前输入 + 历史状态共同决定的电路，核心是触发器（记忆单元）。本篇覆盖触发器特性方程、时序电路分析与设计、计数器与寄存器。前置知识见 数字电路基础 与 组合逻辑电路。",
     "author": {
       "@type": "Person",
       "name": "vi226035"
     },
-    "url": "https://vi226035.github.io/my-knowledge-base/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%80%89%E5%9E%8B/"
-    ,"datePublished": "2026-05-25"
+    "url": "https://vi226035.github.io/my-knowledge-base/FPGA/%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/"
+    ,"datePublished": "2026-08-05"
     
   }
   </script>
@@ -141,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              应用场景与选型
+              时序逻辑电路
             
           </span>
         </div>
@@ -271,13 +271,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-tabs__link">
           
   
   
@@ -361,11 +359,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../FPGA/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
           
   
   
@@ -499,10 +499,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -528,20 +526,17 @@
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -559,7 +554,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -577,7 +572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-nav__link">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="md-nav__link">
         
   
   
@@ -605,7 +600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89/" class="md-nav__link">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -633,7 +628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89/" class="md-nav__link">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -661,7 +656,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%BD%91%E7%BB%9C%EF%BC%88LSTM%EF%BC%89/" class="md-nav__link">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E7%BD%91%E7%BB%9C%EF%BC%88LSTM%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -689,7 +684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E9%97%A8%E6%8E%A7%E5%BE%AA%E7%8E%AF%E5%8D%95%E5%85%83%EF%BC%88GRU%EF%BC%89/" class="md-nav__link">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E9%97%A8%E6%8E%A7%E5%BE%AA%E7%8E%AF%E5%8D%95%E5%85%83%EF%BC%88GRU%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -717,7 +712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E4%B8%80%E4%BA%9B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" class="md-nav__link">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E4%B8%80%E4%BA%9B%E7%96%91%E6%83%91%E8%A7%A3%E7%AD%94/" class="md-nav__link">
         
   
   
@@ -742,37 +737,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    应用场景与选型
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E9%80%89%E5%9E%8B/" class="md-nav__link">
         
   
   
@@ -788,192 +756,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        快速选型速查
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        各网络详解
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="各网络详解">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-mlp" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 全连接网络（MLP）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-cnn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 卷积神经网络（CNN）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-rnn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 循环神经网络（RNN）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-lstm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 长短期记忆网络（LSTM）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-gru" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. 门控循环单元（GRU）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-transformer-attention" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Transformer / Attention
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#7-tcn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. 时序卷积网络（TCN）
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        实时序列预测：推荐方案
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="实时序列预测：推荐方案">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        什么是"实时"？
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        推荐排序
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        实际建议
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        总结对比
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -986,7 +768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" class="md-nav__link">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/" class="md-nav__link">
         
   
   
@@ -1014,7 +796,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/" class="md-nav__link">
+      <a href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%97%B6%E5%9F%9F%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%EF%BC%88TCN%EF%BC%89/" class="md-nav__link">
         
   
   
@@ -1643,6 +1425,8 @@
       
   
   
+    
+  
   
   
     
@@ -1670,18 +1454,21 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../FPGA/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -1699,13 +1486,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1725,7 +1512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../FPGA/%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/" class="md-nav__link">
+      <a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/" class="md-nav__link">
         
   
   
@@ -1753,7 +1540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../FPGA/%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/" class="md-nav__link">
+      <a href="../%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/" class="md-nav__link">
         
   
   
@@ -1778,10 +1565,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../FPGA/%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序逻辑电路
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1797,6 +1611,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、特点
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、触发器——时序电路的记忆单元
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、时序电路的分析步骤
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、时序电路的设计步骤
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、常用时序器件
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相关笔记
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1809,7 +1709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../FPGA/DFT%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%9B%A0%E5%AD%90W%E7%9A%84%E7%90%86%E8%A7%A3/" class="md-nav__link">
+      <a href="../DFT%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%9B%A0%E5%AD%90W%E7%9A%84%E7%90%86%E8%A7%A3/" class="md-nav__link">
         
   
   
@@ -1837,7 +1737,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../FPGA/UART%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+      <a href="../UART%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
         
   
   
@@ -1865,7 +1765,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../FPGA/SPI%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+      <a href="../SPI%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
         
   
   
@@ -1893,7 +1793,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../FPGA/I2C%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+      <a href="../I2C%E4%B8%B2%E8%A1%8C%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
         
   
   
@@ -2322,7 +2222,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        快速选型速查
+        一、特点
       
     </span>
   </a>
@@ -2333,93 +2233,10 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        各网络详解
+        二、触发器——时序电路的记忆单元
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="各网络详解">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-mlp" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. 全连接网络（MLP）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-cnn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. 卷积神经网络（CNN）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-rnn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. 循环神经网络（RNN）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-lstm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. 长短期记忆网络（LSTM）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-gru" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. 门控循环单元（GRU）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-transformer-attention" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Transformer / Attention
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#7-tcn" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. 时序卷积网络（TCN）
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2427,57 +2244,40 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        实时序列预测：推荐方案
+        三、时序电路的分析步骤
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="实时序列预测：推荐方案">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        什么是"实时"？
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        推荐排序
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        实际建议
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        总结对比
+        四、时序电路的设计步骤
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、常用时序器件
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相关笔记
       
     </span>
   </a>
@@ -2504,277 +2304,406 @@
   
 
 
-<h1 id="_1">常见神经网络应用场景与选型指南<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>不同网络结构不是"谁比谁强"的关系，而是<strong>不同工具解决不同问题</strong>。这篇笔记帮你快速判断：什么场景用什么模型。</p>
-<hr />
-<h2 id="_2">快速选型速查<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h1 id="_1">时序逻辑电路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>时序逻辑 = <strong>输出由当前输入 + 历史状态共同决定</strong>的电路，核心是触发器（记忆单元）。本篇覆盖触发器特性方程、时序电路分析与设计、计数器与寄存器。前置知识见 <a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a> 与 <a href="../%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">组合逻辑电路</a>。</p>
+</blockquote>
+<h2 id="_2">一、特点<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>任意时刻输出 = <strong>当前输入 + 电路原状态（历史）</strong> 的函数</li>
+<li>结构上 = <strong>组合电路 + 存储元件（触发器）+ 反馈</strong></li>
+<li>按触发方式分：<strong>同步</strong>（统一时钟 CLK 控制）/ <strong>异步</strong></li>
+<li>按输出结构分：<strong>Moore 型</strong>（输出只与状态有关）/ <strong>Mealy 型</strong>（输出与状态和输入都有关）</li>
+</ul>
+<h2 id="_3">二、触发器——时序电路的记忆单元<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>四种触发器的<strong>特性方程</strong>（最重要）：</p>
 <table>
 <thead>
 <tr>
-<th>你的数据长这样</th>
-<th>你想做什么</th>
-<th>首选模型</th>
+<th>触发器</th>
+<th>特性方程</th>
+<th>约束/说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>图片（猫、狗、X 光片）</td>
-<td>分类 / 检测</td>
-<td>CNN</td>
+<td>RS</td>
+<td><span class="arithmatex">\(Q^* = S + \overline{R}Q\)</span></td>
+<td><span class="arithmatex">\(SR = 0\)</span>（不允许 S=R=1）</td>
 </tr>
 <tr>
-<td>一段文字</td>
-<td>情感分析、文本分类</td>
-<td>LSTM / GRU + Embedding</td>
+<td>JK</td>
+<td><span class="arithmatex">\(Q^* = J\overline{Q} + \overline{K}Q\)</span></td>
+<td>无约束，J=K=1 时翻转，<strong>最通用</strong></td>
 </tr>
 <tr>
-<td>时间序列（股价、温度）</td>
-<td>预测未来值</td>
-<td>LSTM / GRU / 1D-CNN</td>
+<td>D</td>
+<td><span class="arithmatex">\(Q^* = D\)</span></td>
+<td>输出直接跟随 D，<strong>FPGA 中最常用</strong></td>
 </tr>
 <tr>
-<td>一句话 → 另一句话</td>
-<td>翻译、摘要</td>
-<td>Seq2Seq（LSTM+Attention）</td>
-</tr>
-<tr>
-<td>实时传感器流</td>
-<td>毫秒级异常检测</td>
-<td>GRU / 1D-CNN / 简单 RNN</td>
-</tr>
-<tr>
-<td>图片→文字</td>
-<td>看图说话</td>
-<td>CNN（编码）+ LSTM（解码）</td>
-</tr>
-<tr>
-<td>表格数据（年龄、收入）</td>
-<td>分类 / 回归</td>
-<td>普通全连接网络（MLP）</td>
+<td>T</td>
+<td><span class="arithmatex">\(Q^* = T \oplus Q\)</span></td>
+<td>T=1 翻转，用于计数器</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="_3">各网络详解<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<h3 id="1-mlp">1. 全连接网络（MLP）<a class="headerlink" href="#1-mlp" title="Permanent link">&para;</a></h3>
-<p><strong>结构</strong>：输入 → 若干全连接层 → 输出</p>
-<p><strong>一句话描述</strong>：最基础的结构，每层所有神经元和下层所有神经元相连。</p>
-<p><strong>擅长</strong>：表格型数据（CSV、Excel 那种行列数据）。信用评分、房价预测。</p>
-<p><strong>不擅长</strong>：图像（参数爆炸）、序列（没有记忆机制）。</p>
-<p><strong>特点</strong>：
-- 优点：简单，训练快，可解释性高
-- 缺点：参数量随输入维度指数增长；无法利用空间/时间结构</p>
-<hr />
-<h3 id="2-cnn">2. 卷积神经网络（CNN）<a class="headerlink" href="#2-cnn" title="Permanent link">&para;</a></h3>
-<p><strong>结构</strong>：卷积 → 池化 → 卷积 → 池化 → ... → 全连接 → 输出</p>
-<p><strong>一句话描述</strong>：用可滑动的小窗口扫过输入，每个位置共享权重。</p>
-<p><strong>擅长</strong>：图像分类/检测/分割、视频帧分析、音频频谱图。</p>
-<p><strong>也可以做序列</strong>：1D-CNN 在时间序列上表现不差，速度快，适合实时场景。</p>
-<p><strong>特点</strong>：
-- 优点：参数少、平移等变性、训练成熟
-- 缺点：感受野固定，长距离依赖需要很深或膨胀卷积</p>
-<hr />
-<h3 id="3-rnn">3. 循环神经网络（RNN）<a class="headerlink" href="#3-rnn" title="Permanent link">&para;</a></h3>
-<p><strong>结构</strong>：输入 → RNN 单元 → 隐藏状态传给自己下一时刻</p>
-<p><strong>一句话描述</strong>：网络有"时间"维度，当前输出依赖之前的输入。</p>
-<p><strong>擅长</strong>：短序列处理（几十步以内）。</p>
-<p><strong>不擅长</strong>：长序列（梯度消失，根本记不住）。</p>
-<p><strong>特点</strong>：
-- 优点：天然适合序列，结构简单
-- 缺点：梯度消失严重，实际只能记 10~20 步</p>
-<hr />
-<h3 id="4-lstm">4. 长短期记忆网络（LSTM）<a class="headerlink" href="#4-lstm" title="Permanent link">&para;</a></h3>
-<p><strong>结构</strong>：RNN + 细胞状态 + 遗忘门/输入门/输出门</p>
-<p><strong>一句话描述</strong>：用三个门精确控制记忆的读、写、删，能记住上百步。</p>
-<p><strong>擅长</strong>：长序列处理——机器翻译、语音识别、时序预测、文本生成。</p>
-<p><strong>特点</strong>：
-- 优点：解决梯度消失，能学远距离依赖
-- 缺点：参数是 RNN 的 4 倍，训练慢</p>
-<hr />
-<h3 id="5-gru">5. 门控循环单元（GRU）<a class="headerlink" href="#5-gru" title="Permanent link">&para;</a></h3>
-<p><strong>结构</strong>：LSTM 的精简版——只有两个门（重置门 + 更新门），无独立细胞状态。</p>
-<p><strong>一句话描述</strong>：LSTM 的轻量替代，效果差不多，参数少 25%。</p>
-<p><strong>擅长</strong>：中等长度序列、实时性要求较高的场景、小数据集。</p>
-<p><strong>特点</strong>：
-- 优点：比 LSTM 快，参数少，小数据上可能更好
-- 缺点：极长序列上不如 LSTM 灵活</p>
-<hr />
-<h3 id="6-transformer-attention">6. Transformer / Attention<a class="headerlink" href="#6-transformer-attention" title="Permanent link">&para;</a></h3>
-<p><strong>结构</strong>：自注意力机制——让序列中每个位置直接看到其他所有位置。</p>
-<p><strong>一句话描述</strong>：不再按顺序一步步读，而是"一眼看全文"，然后决定哪些部分重要。</p>
-<p><strong>擅长</strong>：NLP 一切任务（BERT、GPT）、长序列、并行训练。</p>
-<p><strong>特点</strong>：
-- 优点：并行训练极快（没有 RNN 的串行瓶颈），长距离依赖效果最佳
-- 缺点：推理计算量大，参数量大，不适合资源受限的实时嵌入式场景</p>
-<hr />
-<h3 id="7-tcn">7. 时序卷积网络（TCN）<a class="headerlink" href="#7-tcn" title="Permanent link">&para;</a></h3>
-<p><strong>结构</strong>：1D 卷积 + 膨胀卷积 + 残差连接</p>
-<p><strong>一句话描述</strong>：用卷积来做序列——卷积核看的时间范围通过膨胀（dilation）指数增长。</p>
-<p><strong>擅长</strong>：时序预测、序列分类。比 LSTM 训练快（可并行），比 CNN 感受野大。</p>
-<p><strong>特点</strong>：
-- 优点：并行训练、稳定训练、感受野可控
-- 缺点：推理时需缓存历史数据，内存占用较大</p>
-<hr />
-<h2 id="_4">实时序列预测：推荐方案<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="_5">什么是"实时"？<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>各触发器动作特点：</p>
+<ul>
+<li><strong>电平触发（锁存器）</strong>：CLK 有效电平期间输入变化直接影响输出</li>
+<li><strong>边沿触发</strong>：只在 CLK 上升沿/下降沿瞬间采样输入——现代数字系统主流</li>
+<li><strong>脉冲触发（主从）</strong>：CLK 一个周期内分主、从两步完成</li>
+</ul>
+<blockquote>
+<p><strong>时序约束概念</strong>：数据必须在时钟沿到来前<strong>建立时间</strong>（<span class="arithmatex">\(t_{su}\)</span>）内稳定、之后保持<strong>保持时间</strong>（<span class="arithmatex">\(t_h\)</span>）不变，否则触发器进入亚稳态。这是 FPGA 时序分析的物理基础（详见 <a href="../../%E6%95%B0%E5%AD%97IC/%E9%AB%98%E6%80%A7%E8%83%BD%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/">高性能数字电路设计</a>）。</p>
+</blockquote>
+<h2 id="_4">三、时序电路的分析步骤<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>电路图 → 写驱动方程（各触发器输入）→ 代入特性方程得状态方程 → 列状态表 → 画状态图 → 归纳功能
+</code></pre></div>
+<h2 id="_5">四、时序电路的设计步骤<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>设计要求 → 画状态图 → 状态化简/状态编码 → 选触发器 → 求驱动方程（卡诺图）→ 画逻辑图 → 检查能否自启动
+</code></pre></div>
+<blockquote>
+<p><strong>例题 1（同步六进制计数器设计，全流程）</strong>：用 D 触发器设计一个同步六进制加法计数器，状态 0→1→2→3→4→5→0 循环。</p>
+<p><strong>① 状态编码</strong>：六进制需 3 个触发器，取自然编码：000→001→010→011→100→101→000。</p>
+<p><strong>② 状态转换表</strong>（<span class="arithmatex">\(Q^*\)</span> 为次态）：</p>
+</blockquote>
 <table>
 <thead>
 <tr>
-<th>场景</th>
-<th>延迟要求</th>
-<th>举例</th>
+<th>现态 <span class="arithmatex">\(Q_2 Q_1 Q_0\)</span></th>
+<th>次态 <span class="arithmatex">\(Q_2^* Q_1^* Q_0^*\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>准实时</td>
-<td>秒级</td>
-<td>天气预报、股票趋势</td>
+<td>0 0 0</td>
+<td>0 0 1</td>
 </tr>
 <tr>
-<td>强实时</td>
-<td>毫秒级</td>
-<td>传感器异常检测、高频交易、电机控制</td>
+<td>0 0 1</td>
+<td>0 1 0</td>
+</tr>
+<tr>
+<td>0 1 0</td>
+<td>0 1 1</td>
+</tr>
+<tr>
+<td>0 1 1</td>
+<td>1 0 0</td>
+</tr>
+<tr>
+<td>1 0 0</td>
+<td>1 0 1</td>
+</tr>
+<tr>
+<td>1 0 1</td>
+<td>0 0 0</td>
+</tr>
+<tr>
+<td>1 1 0</td>
+<td>×（未用状态）</td>
+</tr>
+<tr>
+<td>1 1 1</td>
+<td>×（未用状态）</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>③ 选 D 触发器</strong>：因 <span class="arithmatex">\(Q^* = D\)</span>，故驱动方程直接就是次态方程 <span class="arithmatex">\(D_i = Q_i^*\)</span>。</td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>④ 卡诺图求次态方程</strong>（未用状态 110、111 作无关项）。</td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <span class="arithmatex">\(Q_0^*\)</span> 卡诺图（行 <span class="arithmatex">\(Q_2\)</span>，列 <span class="arithmatex">\(Q_1Q_0\)</span>）：</td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h3 id="_6">推荐排序<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p><strong>首选：GRU（门控循环单元）</strong></p>
-<p>在实时场景下几乎是最好的平衡点：</p>
-<ul>
-<li>效果接近 LSTM，参数少 25%，推理更快</li>
-<li>门控机制能处理大多数序列依赖问题</li>
-<li>FPGA/嵌入式移植友好</li>
-</ul>
-<p><strong>次选：1D-CNN</strong></p>
-<p>如果序列规律主要靠局部模式（比如振动信号、心电波形）：</p>
-<ul>
-<li>比 GRU 更快——卷积天生可并行</li>
-<li>感受野通过膨胀卷积可扩展</li>
-<li>推理时延迟极低</li>
-</ul>
-<p><strong>备选：轻量 LSTM</strong></p>
-<p>如果序列中有 &gt;50 步的关键依赖关系：</p>
-<ul>
-<li>比 GRU 多一个门控维度，长程关系稍好</li>
-<li>代价是参数多一点、推理慢一点</li>
-</ul>
-<p><strong>不推荐实时的</strong>：</p>
-<ul>
-<li><strong>Transformer</strong>：推理需要计算整个序列的注意力矩阵，计算量随长度平方增长，不适合毫秒级实时。</li>
-<li><strong>大型 RNN</strong>：多层 + 双向 + 大隐藏维度，串行推理慢，不如用 GRU。</li>
-</ul>
-<h3 id="_7">实际建议<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>你的约束</th>
-<th>推荐</th>
+<th><span class="arithmatex">\(Q_2 \backslash Q_1Q_0\)</span></th>
+<th>00</th>
+<th>01</th>
+<th>11</th>
+<th>10</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>序列 &lt; 20 步，越快越好</td>
-<td>简单 RNN 或 1D-CNN</td>
+<td>0</td>
+<td>1(<span class="arithmatex">\(m_0\)</span>)</td>
+<td>0(<span class="arithmatex">\(m_1\)</span>)</td>
+<td>0(<span class="arithmatex">\(m_3\)</span>)</td>
+<td>1(<span class="arithmatex">\(m_2\)</span>)</td>
 </tr>
 <tr>
-<td>序列 20~100 步，平衡效果和速度</td>
-<td><strong>GRU</strong></td>
+<td>1</td>
+<td>1(<span class="arithmatex">\(m_4\)</span>)</td>
+<td>0(<span class="arithmatex">\(m_5\)</span>)</td>
+<td><span class="arithmatex">\(\times\)</span>(<span class="arithmatex">\(m_7\)</span>)</td>
+<td><span class="arithmatex">\(\times\)</span>(<span class="arithmatex">\(m_6\)</span>)</td>
 </tr>
 <tr>
-<td>序列 &gt; 100 步，追求效果</td>
-<td>轻量 LSTM</td>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>可离线训练、推理可接受 &gt; 100ms</td>
-<td>Transformer</td>
+<td>&gt; 圈四角 <span class="arithmatex">\(m_0, m_2, m_4, m_6(\times)\)</span>（上下、左右均卷绕相邻）→ 公共部分 <span class="arithmatex">\(Q_0 = 0\)</span> → <span class="arithmatex">\(Q_0^* = \overline{Q_0}\)</span>，故 <span class="arithmatex">\(D_0 = \overline{Q_0}\)</span>（最低位每个时钟都翻转 ✓）。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td>嵌入式 / FPGA 部署</td>
-<td>GRU 或 1D-CNN</td>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <span class="arithmatex">\(Q_1^*\)</span> 卡诺图：</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(Q_2 \backslash Q_1Q_0\)</span></th>
+<th>00</th>
+<th>01</th>
+<th>11</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0(<span class="arithmatex">\(m_0\)</span>)</td>
+<td>1(<span class="arithmatex">\(m_1\)</span>)</td>
+<td>0(<span class="arithmatex">\(m_3\)</span>)</td>
+<td>1(<span class="arithmatex">\(m_2\)</span>)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0(<span class="arithmatex">\(m_4\)</span>)</td>
+<td>0(<span class="arithmatex">\(m_5\)</span>)</td>
+<td><span class="arithmatex">\(\times\)</span>(<span class="arithmatex">\(m_7\)</span>)</td>
+<td><span class="arithmatex">\(\times\)</span>(<span class="arithmatex">\(m_6\)</span>)</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <span class="arithmatex">\(m_1\)</span> 的相邻格 <span class="arithmatex">\(m_0, m_3, m_5\)</span> 均为 0（<strong>注意 <span class="arithmatex">\(m_3\)</span> 是有效状态不是无关项</strong>），只能单独成圈 → <span class="arithmatex">\(\overline{Q_2}\,\overline{Q_1}Q_0\)</span>；<span class="arithmatex">\(m_2\)</span> 与无关项 <span class="arithmatex">\(m_6\)</span> 成圈 → <span class="arithmatex">\(Q_1\overline{Q_0}\)</span>。得：</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; $<span class="arithmatex">\(D_1 = Q_1^* = \overline{Q_2}\,\overline{Q_1}Q_0 + Q_1\overline{Q_0}\)</span>$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <span class="arithmatex">\(Q_2^*\)</span> 卡诺图：</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(Q_2 \backslash Q_1Q_0\)</span></th>
+<th>00</th>
+<th>01</th>
+<th>11</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; 圈 <span class="arithmatex">\(m_3, m_7(\times)\)</span> → <span class="arithmatex">\(Q_1Q_0\)</span>；圈 <span class="arithmatex">\(m_4, m_6(\times)\)</span> → <span class="arithmatex">\(Q_2\overline{Q_0}\)</span>。得：</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; $<span class="arithmatex">\(D_2 = Q_2^* = Q_1Q_0 + Q_2\overline{Q_0}\)</span>$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>⑤ 汇总驱动方程</strong>：</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; $<span class="arithmatex">\(\begin{cases} D_0 = \overline{Q_0} \\ D_1 = \overline{Q_2}\,\overline{Q_1}Q_0 + Q_1\overline{Q_0} \\ D_2 = Q_1Q_0 + Q_2\overline{Q_0} \end{cases}\)</span>$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; <strong>⑥ 自启动检查</strong>：代入未用状态验证能否回到有效循环——</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; - 状态 110：<span class="arithmatex">\(D_2D_1D_0 = 111\)</span> → 次态 111</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; - 状态 111：<span class="arithmatex">\(D_2D_1D_0 = 100\)</span> → 次态 100（回到有效循环 ✓）</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>&gt; 电路<strong>可以自启动</strong>。逻辑图：三个 D 触发器共接 CLK，驱动端按上述方程接与或门即可。</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>例题 2（D 触发器工作波形判断）</strong>：边沿 D 触发器，CLK 上升沿采样。若 CLK 第 1、2、3 个上升沿前 D 分别为 1、0、1，初态 <span class="arithmatex">\(Q=0\)</span>，则 <span class="arithmatex">\(Q\)</span> 依次变为 1、0、1。<strong>注意</strong>：上升沿之间 D 的变化对 Q 无影响——这就是"边沿触发"的含义。</p>
+</blockquote>
+<h2 id="_6">五、常用时序器件<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>器件</th>
+<th>功能</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>寄存器</strong></td>
+<td>存放 n 位二进制数据</td>
+<td>n 个 D 触发器并联，共享 CLK</td>
+</tr>
+<tr>
+<td><strong>移位寄存器</strong></td>
+<td>数据逐位移动</td>
+<td>可串入并出/并入串出，实现串并转换、流水延时</td>
+</tr>
+<tr>
+<td><strong>同步计数器</strong></td>
+<td>计数</td>
+<td>所有触发器共用一个 CLK；如 74HC161（4 位同步二进制计数器，带异步清零、同步置数）</td>
+</tr>
+<tr>
+<td><strong>异步计数器</strong></td>
+<td>计数</td>
+<td>前级输出做后级时钟，纹波进位、速度慢</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_8">总结对比<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>模型</th>
-<th>适合数据</th>
-<th>长程依赖</th>
-<th>训练速度</th>
-<th>推理速度</th>
-<th>参数量</th>
-<th>实时推荐度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MLP</td>
-<td>表格</td>
-<td>✗</td>
-<td>极快</td>
-<td>极快</td>
-<td>中</td>
-<td>★★☆</td>
-</tr>
-<tr>
-<td>CNN</td>
-<td>图像、局部序列</td>
-<td>✗</td>
-<td>快</td>
-<td>快</td>
-<td>少</td>
-<td>★★★</td>
-</tr>
-<tr>
-<td>RNN</td>
-<td>短序列</td>
-<td>✗</td>
-<td>慢</td>
-<td>快</td>
-<td>少</td>
-<td>★★★</td>
-</tr>
-<tr>
-<td><strong>GRU</strong></td>
-<td><strong>序列</strong></td>
-<td><strong>较好</strong></td>
-<td><strong>中</strong></td>
-<td><strong>快</strong></td>
-<td><strong>较少</strong></td>
-<td><strong>★★★★★</strong></td>
-</tr>
-<tr>
-<td>LSTM</td>
-<td>长序列</td>
-<td>好</td>
-<td>慢</td>
-<td>中</td>
-<td>较多</td>
-<td>★★★★</td>
-</tr>
-<tr>
-<td>TCN</td>
-<td>时序</td>
-<td>好</td>
-<td>快</td>
-<td>中</td>
-<td>中</td>
-<td>★★★☆</td>
-</tr>
-<tr>
-<td>Transformer</td>
-<td>长文本</td>
-<td>极好</td>
-<td>极快</td>
-<td>慢</td>
-<td>极大</td>
-<td>★★</td>
-</tr>
-</tbody>
-</table>
+<h2 id="_7">相关笔记<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a> —— 数制码制、逻辑代数、卡诺图</li>
+<li><a href="../%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">组合逻辑电路</a> —— 无记忆电路：分析/设计方法、MSI 器件</li>
+<li><a href="../../%E6%95%B0%E5%AD%97IC/Verilog%20HDL%E6%A0%B8%E5%BF%83%E8%AF%AD%E6%B3%95%E4%B8%8E%E5%BB%BA%E6%A8%A1/">Verilog HDL 核心语法与建模</a> —— 时序逻辑的 HDL 描述（always @(posedge clk)）</li>
+</ul>
 
 
 
@@ -2797,7 +2726,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月31日 16:37:27 UTC">2026年7月31日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月5日 15:26:32 UTC">2026年8月5日</span>
   </span>
 
     
@@ -2807,7 +2736,7 @@
     <span class="md-icon" title="创建日期">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月31日 16:37:27 UTC">2026年7月31日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月5日 15:26:32 UTC">2026年8月5日</span>
   </span>
 
     
