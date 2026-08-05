@@ -1,5 +1,5 @@
-site_name: 信号·FPGA·深度学习笔记
-site_description: 信号处理、FPGA 与机器学习学习笔记
+site_name: vi226035 的知识库
+site_description: vi226035 的个人知识库——信号处理、数字硬件（FPGA/数字IC/数字电路）与机器学习学习笔记
 site_author: vi226035
 site_url: https://vi226035.github.io/my-knowledge-base/
 
@@ -47,7 +47,8 @@ theme:
     - content.code.annotate
   icon:
     repo: fontawesome/brands/github
-  favicon: _site/assets/favicon.png
+  logo: _site/assets/logo.svg
+  favicon: _site/assets/favicon.svg
 
 extra:
   generator: false
