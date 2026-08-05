@@ -155,6 +155,9 @@ nav:
       - 非线性对消方法: 数字对消/非线性对消.md
   - FPGA:
       - FPGA: FPGA/index.md
+      - 数字电路基础: FPGA/数字电路基础.md
+      - 组合逻辑电路: FPGA/组合逻辑电路.md
+      - 时序逻辑电路: FPGA/时序逻辑电路.md
       - DFT 中的旋转因子 W 的理解: FPGA/DFT中的旋转因子W的理解.md
       - UART 串行通信协议: FPGA/UART串行通信协议.md
       - SPI 串行通信协议: FPGA/SPI串行通信协议.md
