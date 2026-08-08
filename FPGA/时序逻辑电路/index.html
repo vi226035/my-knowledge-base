@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="时序逻辑 = 输出由当前输入 + 历史状态共同决定的电路，核心是触发器（记忆单元）。本篇覆盖触发器特性方程、时序电路分析与设计、计数器与寄存器。前置知识见 数字电路基础 与 组合逻辑电路。">
+        <meta name="description" content="时序逻辑 = 输出由当前输入 + 历史状态共同决定的电路。它和组合逻辑的根本区别是有记忆——靠存储元件（锁存器/触发器）记住“过去的状态“。本篇按知识链条展开：存储元件 → 触发方式 → 描述方法 → 分析 → 设计 → 寄存器/计数器。前置见 数字电路基础 与 组合逻辑电路。">
       
       
         <meta name="author" content="vi226035">
@@ -18,7 +18,7 @@
         <link rel="prev" href="../%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">
       
       
-        <link rel="next" href="../DFT%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%9B%A0%E5%AD%90W%E7%9A%84%E7%90%86%E8%A7%A3/">
+        <link rel="next" href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">
       
       
         
@@ -76,7 +76,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "时序逻辑电路",
-    "description": "时序逻辑 = 输出由当前输入 + 历史状态共同决定的电路，核心是触发器（记忆单元）。本篇覆盖触发器特性方程、时序电路分析与设计、计数器与寄存器。前置知识见 数字电路基础 与 组合逻辑电路。",
+    "description": "时序逻辑 = 输出由当前输入 + 历史状态共同决定的电路。它和组合逻辑的根本区别是有记忆——靠存储元件（锁存器/触发器）记住“过去的状态“。本篇按知识链条展开：存储元件 → 触发方式 → 描述方法 → 分析 → 设计 → 寄存器/计数器。前置见 数字电路基础 与 组合逻辑电路。",
     "author": {
       "@type": "Person",
       "name": "vi226035"
@@ -1448,6 +1448,8 @@
       
         
       
+        
+      
     
     
     
@@ -1629,10 +1631,38 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一、特点
+        一、时序电路概述
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="一、时序电路概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 特点与结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1640,10 +1670,60 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、触发器——时序电路的记忆单元
+        二、存储元件：锁存器与触发器
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="二、存储元件：锁存器与触发器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 为什么需要存储
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-rs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 基本 RS 锁存器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 钟控锁存器与电平触发方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 边沿触发方式：解决空翻
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1651,10 +1731,49 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、时序电路的分析步骤
+        三、四种常用边沿触发器
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="三、四种常用边沿触发器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 特性表与特性方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 触发器之间的转换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 边沿触发的波形理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1662,7 +1781,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、时序电路的设计步骤
+        四、描述时序逻辑的方法
       
     </span>
   </a>
@@ -1673,7 +1792,68 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五、常用时序器件
+        五、同步时序电路的分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、同步时序电路的分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 第①步：由电路图写三个方程式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 第②步：列特性表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 第③步：画状态图
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 第④步：据状态图分析逻辑规律
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、同步时序电路的设计
       
     </span>
   </a>
@@ -1681,7 +1861,129 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、寄存器与移位寄存器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、寄存器与移位寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 寄存器（并行存储）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 移位寄存器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、计数器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、计数器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-74hc161" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 同步计数器 74HC161
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-161" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 用 161 构成任意模计数器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 级联
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、核心概念速查表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         相关笔记
@@ -1695,6 +1997,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FPGA 校招面试八股
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2220,10 +2550,38 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一、特点
+        一、时序电路概述
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="一、时序电路概述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 特点与结构
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2231,10 +2589,60 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、触发器——时序电路的记忆单元
+        二、存储元件：锁存器与触发器
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="二、存储元件：锁存器与触发器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 为什么需要存储
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-rs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 基本 RS 锁存器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 钟控锁存器与电平触发方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 边沿触发方式：解决空翻
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2242,10 +2650,49 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、时序电路的分析步骤
+        三、四种常用边沿触发器
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="三、四种常用边沿触发器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 特性表与特性方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 触发器之间的转换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 边沿触发的波形理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2253,7 +2700,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、时序电路的设计步骤
+        四、描述时序逻辑的方法
       
     </span>
   </a>
@@ -2264,7 +2711,68 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五、常用时序器件
+        五、同步时序电路的分析
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、同步时序电路的分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 第①步：由电路图写三个方程式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 第②步：列特性表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 第③步：画状态图
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 第④步：据状态图分析逻辑规律
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、同步时序电路的设计
       
     </span>
   </a>
@@ -2272,7 +2780,129 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、寄存器与移位寄存器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、寄存器与移位寄存器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 寄存器（并行存储）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 移位寄存器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、计数器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、计数器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-74hc161" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 同步计数器 74HC161
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-161" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 用 161 构成任意模计数器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 级联
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、核心概念速查表
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         相关笔记
@@ -2304,68 +2934,523 @@
 
 <h1 id="_1">时序逻辑电路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>时序逻辑 = <strong>输出由当前输入 + 历史状态共同决定</strong>的电路，核心是触发器（记忆单元）。本篇覆盖触发器特性方程、时序电路分析与设计、计数器与寄存器。前置知识见 <a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a> 与 <a href="../%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">组合逻辑电路</a>。</p>
+<p>时序逻辑 = <strong>输出由当前输入 + 历史状态共同决定</strong>的电路。它和组合逻辑的根本区别是<strong>有记忆</strong>——靠存储元件（锁存器/触发器）记住"过去的状态"。本篇按知识链条展开：<strong>存储元件 → 触发方式 → 描述方法 → 分析 → 设计 → 寄存器/计数器</strong>。前置见 <a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a> 与 <a href="../%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">组合逻辑电路</a>。</p>
 </blockquote>
-<h2 id="_2">一、特点<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="_2">一、时序电路概述<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 特点与结构<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <ul>
 <li>任意时刻输出 = <strong>当前输入 + 电路原状态（历史）</strong> 的函数</li>
-<li>结构上 = <strong>组合电路 + 存储元件（触发器）+ 反馈</strong></li>
-<li>按触发方式分：<strong>同步</strong>（统一时钟 CLK 控制）/ <strong>异步</strong></li>
-<li>按输出结构分：<strong>Moore 型</strong>（输出只与状态有关）/ <strong>Mealy 型</strong>（输出与状态和输入都有关）</li>
+<li>结构上 = <strong>组合电路 + 存储元件 + 反馈</strong>（存储元件把输出"喂回"输入，形成记忆）</li>
 </ul>
-<h2 id="_3">二、触发器——时序电路的记忆单元<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>四种触发器的<strong>特性方程</strong>（最重要）：</p>
+<p><strong>结构框图</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输入 X ──►┌────────────┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>          │ 组合电路    ├──► 输出 Y
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>状态 Q ──►│            │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>          └─────┬──────┘
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        ▲       │(驱动 W)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        │       ▼
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   ┌────────────────┐
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>   │  存储元件(触发器)│◄── CLK
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>   └────────────────┘
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        状态 Q（记忆）
+</code></pre></div>
+<p>三组方程（时序电路的"数学模型"）：</p>
 <table>
 <thead>
 <tr>
-<th>触发器</th>
-<th>特性方程</th>
-<th>约束/说明</th>
+<th>方程</th>
+<th>形式</th>
+<th>含义</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>RS</td>
-<td><span class="arithmatex">\(Q^* = S + \overline{R}Q\)</span></td>
-<td><span class="arithmatex">\(SR = 0\)</span>（不允许 S=R=1）</td>
+<td>输出方程</td>
+<td><span class="arithmatex">\(Y = F(X, Q)\)</span></td>
+<td>输出由输入和现态决定</td>
 </tr>
 <tr>
-<td>JK</td>
-<td><span class="arithmatex">\(Q^* = J\overline{Q} + \overline{K}Q\)</span></td>
-<td>无约束，J=K=1 时翻转，<strong>最通用</strong></td>
+<td>驱动（激励）方程</td>
+<td><span class="arithmatex">\(W = G(X, Q)\)</span></td>
+<td>组合电路送给触发器输入端的信号</td>
 </tr>
 <tr>
-<td>D</td>
-<td><span class="arithmatex">\(Q^* = D\)</span></td>
-<td>输出直接跟随 D，<strong>FPGA 中最常用</strong></td>
-</tr>
-<tr>
-<td>T</td>
-<td><span class="arithmatex">\(Q^* = T \oplus Q\)</span></td>
-<td>T=1 翻转，用于计数器</td>
+<td>状态方程</td>
+<td><span class="arithmatex">\(Q^* = H(W, Q)\)</span></td>
+<td>把驱动代入触发器特性方程，得次态</td>
 </tr>
 </tbody>
 </table>
-<p>各触发器动作特点：</p>
+<h3 id="12">1.2 分类<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>电平触发（锁存器）</strong>：CLK 有效电平期间输入变化直接影响输出</li>
-<li><strong>边沿触发</strong>：只在 CLK 上升沿/下降沿瞬间采样输入——现代数字系统主流</li>
-<li><strong>脉冲触发（主从）</strong>：CLK 一个周期内分主、从两步完成</li>
+<li>按有无统一时钟：<strong>同步</strong>（所有触发器共用一个 CLK，同时翻转）/ <strong>异步</strong>（触发器时钟不同，逐级 ripple）</li>
+<li>按输出依赖：<strong>Moore 型</strong>（输出只与状态有关，<span class="arithmatex">\(Y=F(Q)\)</span>）/ <strong>Mealy 型</strong>（输出与状态和输入都有关，<span class="arithmatex">\(Y=F(X,Q)\)</span>）</li>
 </ul>
+<hr />
+<h2 id="_3">二、存储元件：锁存器与触发器<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 为什么需要存储<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>组合电路"给什么出什么"，没有记忆。要记住 1 位信息，需要<strong>双稳态电路</strong>——两个交叉耦合的反相/与非门，能稳定停在 0 或 1 两个状态之一，这就是最基本的存储单元。</p>
+<h3 id="22-rs">2.2 基本 RS 锁存器<a class="headerlink" href="#22-rs" title="Permanent link">&para;</a></h3>
+<p>用两个与非门交叉耦合构成，输入 <span class="arithmatex">\(\overline{S}\)</span>（置位）、<span class="arithmatex">\(\overline{R}\)</span>（复位）<strong>低电平有效</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\overline{S}\)</span></th>
+<th><span class="arithmatex">\(\overline{R}\)</span></th>
+<th><span class="arithmatex">\(Q^*\)</span></th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td><span class="arithmatex">\(Q\)</span></td>
+<td>保持</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>置 1（Set）</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>置 0（Reset）</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1*</td>
+<td><strong>禁用</strong>（两输出同为 1，且撤除后状态不定）</td>
+</tr>
+</tbody>
+</table>
+<p>特点：<strong>没有时钟</strong>，输入一变输出立刻变（异步）。它是所有时序元件的"细胞"，但不便于同步系统使用。</p>
+<h3 id="23">2.3 钟控锁存器与电平触发方式<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p>给基本锁存器加上时钟控制门，得到<strong>钟控（电平触发）锁存器</strong>：只在 <span class="arithmatex">\(CLK=1\)</span> 期间输入才起作用。</p>
+<p><strong>电平触发方式</strong>：在 <span class="arithmatex">\(CLK\)</span> 有效电平（高电平）的<strong>整个期间</strong>，输出都随输入变化——像"门开着，随时能进"。</p>
+<p><strong>D 锁存器</strong>（透明锁存器）：把钟控 RS 的 <span class="arithmatex">\(S=D\)</span>、<span class="arithmatex">\(R=\overline{D}\)</span> 即得，消除了禁用状态。</p>
+<table>
+<thead>
+<tr>
+<th>D</th>
+<th><span class="arithmatex">\(Q^*\)</span>（CLK=1 期间）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>特性方程：<span class="arithmatex">\(Q^* = D\)</span>（CLK 有效时）。</p>
+<p><strong>空翻（race-around）现象</strong>：电平触发期间，若输入多次变化，输出就跟着<strong>多次翻转</strong>；在计数器这类带反馈的电路里，一个时钟脉冲内可能连翻好几次，造成计数错误。这是电平触发的固有缺陷。</p>
+<h3 id="24">2.4 边沿触发方式：解决空翻<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<p><strong>边沿触发方式</strong>：触发器<strong>只在 CLK 的上升沿（或下降沿）那一瞬间</strong>采样输入并翻转，其余时刻输入变化一律不理。由于采样窗口极窄，一个时钟周期只翻转一次，<strong>从根本上消除空翻</strong>。</p>
 <blockquote>
-<p><strong>时序约束概念</strong>：数据必须在时钟沿到来前<strong>建立时间</strong>（<span class="arithmatex">\(t_{su}\)</span>）内稳定、之后保持<strong>保持时间</strong>（<span class="arithmatex">\(t_h\)</span>）不变，否则触发器进入亚稳态。这是 FPGA 时序分析的物理基础（详见 <a href="../../%E6%95%B0%E5%AD%97IC/%E9%AB%98%E6%80%A7%E8%83%BD%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/">高性能数字电路设计</a>）。</p>
+<p><strong>过渡方案——主从（脉冲）触发</strong>：CLK 高电平期间主触发器接收输入、从触发器保持；CLK 下降沿主→从一次传递。也避免了空翻，但高电平期间输入仍可能影响主级（"一次变化"问题），故现代设计普遍采用真正的边沿触发。</p>
 </blockquote>
-<h2 id="_4">三、时序电路的分析步骤<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>电路图 → 写驱动方程（各触发器输入）→ 代入特性方程得状态方程 → 列状态表 → 画状态图 → 归纳功能
-</code></pre></div>
-<h2 id="_5">四、时序电路的设计步骤<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>设计要求 → 画状态图 → 状态化简/状态编码 → 选触发器 → 求驱动方程（卡诺图）→ 画逻辑图 → 检查能否自启动
-</code></pre></div>
+<p><strong>三种触发方式对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>触发方式</th>
+<th>采样窗口</th>
+<th>空翻</th>
+<th>典型器件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电平触发</td>
+<td>CLK 有效电平整个期间</td>
+<td>有</td>
+<td>锁存器</td>
+</tr>
+<tr>
+<td>脉冲触发（主从）</td>
+<td>一个脉冲分两步</td>
+<td>无（但有一次变化问题）</td>
+<td>主从 JK</td>
+</tr>
+<tr>
+<td>边沿触发</td>
+<td>仅时钟沿瞬间</td>
+<td>无</td>
+<td>现代触发器、FPGA</td>
+</tr>
+</tbody>
+</table>
+<p><strong>时序约束</strong>：数据必须在时钟沿到来前<strong>建立时间</strong> <span class="arithmatex">\(t_{su}\)</span> 内稳定、之后保持<strong>保持时间</strong> <span class="arithmatex">\(t_h\)</span> 不变，否则进入亚稳态。这是 FPGA 时序分析的物理基础（见 <a href="../../%E6%95%B0%E5%AD%97IC/%E9%AB%98%E6%80%A7%E8%83%BD%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/">高性能数字电路设计</a>）。</p>
+<hr />
+<h2 id="_4">三、四种常用边沿触发器<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 特性表与特性方程<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p><strong>RS 触发器</strong>（钟控 RS 的边沿版，高有效）：</p>
+<table>
+<thead>
+<tr>
+<th>S</th>
+<th>R</th>
+<th><span class="arithmatex">\(Q^*\)</span></th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td><span class="arithmatex">\(Q\)</span></td>
+<td>保持</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>置 0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>置 1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>×</td>
+<td>禁用</td>
+</tr>
+</tbody>
+</table>
+<p>特性方程：<span class="arithmatex">\(Q^* = S + \overline{R}Q\)</span>，约束 <span class="arithmatex">\(SR=0\)</span>。</p>
+<p><strong>D 触发器</strong>：<span class="arithmatex">\(Q^* = D\)</span>，输出直接跟随 D，<strong>FPGA 中最常用</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>D</th>
+<th><span class="arithmatex">\(Q^*\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>JK 触发器</strong>（功能最全，无禁用）：</p>
+<table>
+<thead>
+<tr>
+<th>J</th>
+<th>K</th>
+<th><span class="arithmatex">\(Q^*\)</span></th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td><span class="arithmatex">\(Q\)</span></td>
+<td>保持</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>置 0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>置 1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td><span class="arithmatex">\(\overline{Q}\)</span></td>
+<td>翻转</td>
+</tr>
+</tbody>
+</table>
+<p>特性方程：<span class="arithmatex">\(Q^* = J\overline{Q} + \overline{K}Q\)</span>。</p>
+<p><strong>T 触发器</strong>（计数用）：</p>
+<table>
+<thead>
+<tr>
+<th>T</th>
+<th><span class="arithmatex">\(Q^*\)</span></th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><span class="arithmatex">\(Q\)</span></td>
+<td>保持</td>
+</tr>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(\overline{Q}\)</span></td>
+<td>翻转</td>
+</tr>
+</tbody>
+</table>
+<p>特性方程：<span class="arithmatex">\(Q^* = T \oplus Q\)</span>。</p>
+<h3 id="32">3.2 触发器之间的转换<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>已有某种触发器、需要另一种功能时，用组合电路改造：<strong>令目标特性方程 = 现有特性方程</strong>，解出现有触发器输入端的驱动方程。</p>
+<p><strong>例题 1（JK → D）</strong>：用 JK 触发器实现 D 触发器。令 <span class="arithmatex">\(Q^* = D\)</span> 与 <span class="arithmatex">\(Q^* = J\overline{Q} + \overline{K}Q\)</span> 相等，取 <span class="arithmatex">\(J = D\)</span>、<span class="arithmatex">\(K = \overline{D}\)</span>，代入验证：<span class="arithmatex">\(Q^* = D\overline{Q} + \overline{\overline{D}}Q = D\overline{Q} + DQ = D\)</span> ✓。即 JK 的 J 接 D、K 接 <span class="arithmatex">\(\overline{D}\)</span> 就是 D 触发器。</p>
+<h3 id="33">3.3 边沿触发的波形理解<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p><strong>例题 2（D 触发器工作波形）</strong>：边沿 D 触发器，CLK 上升沿采样。若第 1、2、3 个上升沿前 D 分别为 1、0、1，初态 <span class="arithmatex">\(Q=0\)</span>，则 <span class="arithmatex">\(Q\)</span> 依次变为 1、0、1。<strong>注意</strong>：上升沿<strong>之间</strong> D 的任何变化对 Q 无影响——这正是"边沿触发"的含义，也是它能抗毛刺、消空翻的原因。</p>
+<hr />
+<h2 id="_5">四、描述时序逻辑的方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>同一个时序电路有五种等价描述，可互相转换：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>形式</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>逻辑图</strong></td>
+<td>触发器 + 门的连接图</td>
+<td>对应硬件实现</td>
+</tr>
+<tr>
+<td><strong>方程组</strong></td>
+<td>输出/驱动/状态三组方程</td>
+<td>便于代数推导</td>
+</tr>
+<tr>
+<td><strong>特性表（状态转换表）</strong></td>
+<td>现态 + 输入 → 次态 + 输出</td>
+<td>唯一、无歧义</td>
+</tr>
+<tr>
+<td><strong>状态图</strong></td>
+<td>圆圈=状态，箭头=转移（标 输入/输出）</td>
+<td>直观展示状态迁移</td>
+</tr>
+<tr>
+<td><strong>波形图（时序图）</strong></td>
+<td>各信号随时间变化</td>
+<td>便于观察时序关系</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
-<p><strong>例题 1（同步六进制计数器设计，全流程）</strong>：用 D 触发器设计一个同步六进制加法计数器，状态 0→1→2→3→4→5→0 循环。</p>
-<p><strong>① 状态编码</strong>：六进制需 3 个触发器，取自然编码：000→001→010→011→100→101→000。</p>
+<p><strong>转换链条</strong>：逻辑图 →（写）方程组 →（代入）特性表 →（画）状态图 / 波形图。分析就是沿这条链从左往右走，设计则从右往左走。</p>
+</blockquote>
+<hr />
+<h2 id="_6">五、同步时序电路的分析<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>分析的本质是"读图翻译出行为规律"，按链条推进：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>电路图 → ① 写三个方程式 → ② 列特性表（状态转换表）→ ③ 画状态图/波形图 → ④ 据状态图分析逻辑规律
+</code></pre></div>
+<h3 id="51-1">5.1 第①步：由电路图写三个方程式<a class="headerlink" href="#51-1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>输出方程</strong> <span class="arithmatex">\(Y = F(X, Q)\)</span>：看接在输出端的组合电路。若没有专门输出门，则触发器状态本身就是输出（Moore 型）。</li>
+<li><strong>驱动（输入）方程</strong> <span class="arithmatex">\(W = G(X, Q)\)</span>：看接在每个触发器输入端的组合电路，逐个写出，如 <span class="arithmatex">\(J_0=\cdots\)</span>、<span class="arithmatex">\(D_1=\cdots\)</span>。</li>
+<li><strong>状态（特性）方程</strong> <span class="arithmatex">\(Q^* = H(W, Q)\)</span>：把各驱动方程代入对应触发器的特性方程。例如 <span class="arithmatex">\(J_0=K_0=X\)</span> 代入 JK 特性方程得 <span class="arithmatex">\(Q_0^* = X \oplus Q_0\)</span>。</li>
+</ul>
+<p>注意：同步电路所有触发器共用一个 CLK，状态方程在同一时钟沿同时成立，全部状态在同一条沿上一起跳变。</p>
+<h3 id="52-2">5.2 第②步：列特性表<a class="headerlink" href="#52-2" title="Permanent link">&para;</a></h3>
+<p>把"现态 + 输入"的所有组合枚举出来，代入<strong>状态方程</strong>求次态、代入<strong>输出方程</strong>求输出，得到状态转换表。它就是时序电路的"真值表"。</p>
+<h3 id="53-3">5.3 第③步：画状态图<a class="headerlink" href="#53-3" title="Permanent link">&para;</a></h3>
+<p>状态图是特性表的图形版，规律一目了然。它的<strong>基本结构</strong>由五类元素构成：</p>
+<table>
+<thead>
+<tr>
+<th>元素</th>
+<th>画法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>状态圈</strong></td>
+<td>圆圈（或圆角框），内写状态名/编码</td>
+<td>一个圆圈 = 一个状态，如 <span class="arithmatex">\(S_0\)</span> 或 <span class="arithmatex">\(Q_1Q_0=00\)</span></td>
+</tr>
+<tr>
+<td><strong>圈内的输出</strong>（Moore）</td>
+<td>状态圈内写"状态/输出"，如 <span class="arithmatex">\(00/Y{=}0\)</span></td>
+<td>Moore 型输出只取决于状态，故标在圈内</td>
+</tr>
+<tr>
+<td><strong>有向箭头</strong></td>
+<td>从现态指向次态</td>
+<td>一次时钟沿引起的状态转移</td>
+</tr>
+<tr>
+<td><strong>箭头上的标注</strong></td>
+<td>Mealy 标"输入/输出"（如 <span class="arithmatex">\(X{=}1/Y{=}0\)</span>）；Moore 只标输入</td>
+<td>转移发生的条件（及 Mealy 输出）</td>
+</tr>
+<tr>
+<td><strong>自环</strong></td>
+<td>指向自己的箭头</td>
+<td>状态保持（现态=次态）</td>
+</tr>
+<tr>
+<td><strong>初态标记</strong></td>
+<td>无来处的箭头 <span class="arithmatex">\([*]\to S_0\)</span></td>
+<td>复位/起始状态</td>
+</tr>
+</tbody>
+</table>
+<p>以例题 4 的受控计数器为例，状态图长这样（圆圈里是"状态/输出"，箭头上是输入）：</p>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; S0
+    S0: 00 / Y=0
+    S1: 01 / Y=0
+    S2: 10 / Y=0
+    S3: 11 / Y=1
+    S0 --&gt; S1: X=1
+    S1 --&gt; S2: X=1
+    S2 --&gt; S3: X=1
+    S3 --&gt; S0: X=1
+    S0 --&gt; S0: X=0
+    S1 --&gt; S1: X=0
+    S2 --&gt; S2: X=0
+    S3 --&gt; S3: X=0</code></pre>
+<p>读图口诀：<strong>看圈知状态与输出，看箭头知转移，看标注知条件，看自环知保持，看循环知功能</strong>。</p>
+<h3 id="54-4">5.4 第④步：据状态图分析逻辑规律<a class="headerlink" href="#54-4" title="Permanent link">&para;</a></h3>
+<p>看三点：① 状态如何循环（计数？序列？分频？）；② 输入起什么控制作用（何时走、何时停）；③ 输出的物理含义（进位？标志？）。最后用一句话概括"这是什么电路"。</p>
+<p><strong>例题 3（两位同步计数器分析）</strong>：两个 JK 触发器，<span class="arithmatex">\(J_0=K_0=1\)</span>，<span class="arithmatex">\(J_1=K_1=Q_0\)</span>，共用 CLK，无专门输出门（Moore 型，状态即输出）。</p>
+<p><strong>① 三个方程式</strong>：驱动 <span class="arithmatex">\(J_0=K_0=1\)</span>，<span class="arithmatex">\(J_1=K_1=Q_0\)</span>；代入 JK 特性方程得状态方程
+$<span class="arithmatex">\(Q_0^* = \overline{Q_0},\qquad Q_1^* = Q_0 \oplus Q_1\)</span>$</p>
+<p><strong>② 特性表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>现态 <span class="arithmatex">\(Q_1Q_0\)</span></th>
+<th>次态 <span class="arithmatex">\(Q_1^*Q_0^*\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00</td>
+<td>01</td>
+</tr>
+<tr>
+<td>01</td>
+<td>10</td>
+</tr>
+<tr>
+<td>10</td>
+<td>11</td>
+</tr>
+<tr>
+<td>11</td>
+<td>00</td>
+</tr>
+</tbody>
+</table>
+<p><strong>③ 状态图</strong>：<span class="arithmatex">\(00 \to 01 \to 10 \to 11 \to 00\)</span>，四个状态循环。</p>
+<p><strong>④ 逻辑规律</strong>：<span class="arithmatex">\(Q_0\)</span> 每拍必翻，<span class="arithmatex">\(Q_1\)</span> 在 <span class="arithmatex">\(Q_0=1\)</span> 时翻——<strong>两位同步二进制加法计数器（模 4）</strong>。</p>
+<p><strong>例题 4（完整分析：带输入 X 与输出 Y）</strong>：两个 JK 触发器，输入 X：<span class="arithmatex">\(J_0=K_0=X\)</span>，<span class="arithmatex">\(J_1=K_1=XQ_0\)</span>；输出门 <span class="arithmatex">\(Y = Q_1Q_0\)</span>。</p>
+<p><strong>① 三个方程式</strong>：
+- 输出方程：<span class="arithmatex">\(Y = Q_1Q_0\)</span>
+- 驱动方程：<span class="arithmatex">\(J_0=K_0=X\)</span>；<span class="arithmatex">\(J_1=K_1=XQ_0\)</span>
+- 状态方程（JK 接成 <span class="arithmatex">\(J=K=T\)</span>，即 <span class="arithmatex">\(Q^*=T\oplus Q\)</span>）：
+$<span class="arithmatex">\(Q_0^* = X \oplus Q_0,\qquad Q_1^* = (XQ_0) \oplus Q_1\)</span>$</p>
+<p><strong>② 特性表</strong>（次态 / 输出 Y）：</p>
+<table>
+<thead>
+<tr>
+<th>现态 <span class="arithmatex">\(Q_1Q_0\)</span></th>
+<th><span class="arithmatex">\(X=0\)</span> 时次态/Y</th>
+<th><span class="arithmatex">\(X=1\)</span> 时次态/Y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00</td>
+<td>00 / 0</td>
+<td>01 / 0</td>
+</tr>
+<tr>
+<td>01</td>
+<td>01 / 0</td>
+<td>10 / 0</td>
+</tr>
+<tr>
+<td>10</td>
+<td>10 / 0</td>
+<td>11 / 0</td>
+</tr>
+<tr>
+<td>11</td>
+<td>11 / 0</td>
+<td>00 / 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>③ 状态图</strong>：<span class="arithmatex">\(X=1\)</span> 时沿 <span class="arithmatex">\(00 \to 01 \to 10 \to 11 \to 00\)</span> 循环；<span class="arithmatex">\(X=0\)</span> 时各状态自环保持；状态 11 时 <span class="arithmatex">\(Y=1\)</span>。</p>
+<p><strong>④ 逻辑规律</strong>：X=1 计数、X=0 保持——<strong>带计数使能的两位同步加法计数器</strong>，计满 11 时进位输出 Y=1。</p>
+<hr />
+<h2 id="_7">六、同步时序电路的设计<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p><strong>设计是分析的逆过程</strong>：分析是"给电路图 → 求功能"，设计是"给功能 → 造电路图"，正好把分析的链条倒过来走，中间插入几个设计特有的环节（状态化简/编码、选触发器、查自启动）：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>分析（正：电路→功能）</th>
+<th>设计（逆：功能→电路）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>读逻辑图</td>
+<td>明确功能要求，<strong>画状态图</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td>写三个方程式</td>
+<td>状态化简/编码，<strong>列状态表</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>列特性表</td>
+<td>选触发器，<strong>求驱动/输出方程</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>画状态图/波形图</td>
+<td><strong>画逻辑图</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>归纳逻辑功能</td>
+<td>检查能否<strong>自启动</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>设计步骤</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>设计要求 → 画状态图 → 状态化简/编码 → 选触发器 → 求驱动方程（卡诺图）→ 画逻辑图 → 检查自启动
+</code></pre></div>
+<p><strong>例题 5（同步六进制计数器设计，全流程）</strong>：用 D 触发器设计 0→1→2→3→4→5→0 循环。</p>
+<p><strong>① 状态编码</strong>：需 3 个触发器，取自然编码：000→001→010→011→100→101→000。</p>
 <p><strong>② 状态转换表</strong>（<span class="arithmatex">\(Q^*\)</span> 为次态）：</p>
-</blockquote>
 <table>
 <thead>
 <tr>
@@ -2406,32 +3491,11 @@
 <td>1 1 1</td>
 <td>×（未用状态）</td>
 </tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>③ 选 D 触发器</strong>：因 <span class="arithmatex">\(Q^* = D\)</span>，故驱动方程直接就是次态方程 <span class="arithmatex">\(D_i = Q_i^*\)</span>。</td>
-<td></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>④ 卡诺图求次态方程</strong>（未用状态 110、111 作无关项）。</td>
-<td></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <span class="arithmatex">\(Q_0^*\)</span> 卡诺图（行 <span class="arithmatex">\(Q_2\)</span>，列 <span class="arithmatex">\(Q_1Q_0\)</span>）：</td>
-<td></td>
-</tr>
 </tbody>
 </table>
+<p><strong>③ 选 D 触发器</strong>：因 <span class="arithmatex">\(Q^* = D\)</span>，驱动方程即次态方程 <span class="arithmatex">\(D_i = Q_i^*\)</span>。</p>
+<p><strong>④ 卡诺图求次态方程</strong>（未用状态 110、111 作无关项）：</p>
+<p><span class="arithmatex">\(Q_0^*\)</span> 卡诺图：</p>
 <table>
 <thead>
 <tr>
@@ -2454,39 +3518,13 @@
 <td>1</td>
 <td>1(<span class="arithmatex">\(m_4\)</span>)</td>
 <td>0(<span class="arithmatex">\(m_5\)</span>)</td>
-<td><span class="arithmatex">\(\times\)</span>(<span class="arithmatex">\(m_7\)</span>)</td>
-<td><span class="arithmatex">\(\times\)</span>(<span class="arithmatex">\(m_6\)</span>)</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; 圈四角 <span class="arithmatex">\(m_0, m_2, m_4, m_6(\times)\)</span>（上下、左右均卷绕相邻）→ 公共部分 <span class="arithmatex">\(Q_0 = 0\)</span> → <span class="arithmatex">\(Q_0^* = \overline{Q_0}\)</span>，故 <span class="arithmatex">\(D_0 = \overline{Q_0}\)</span>（最低位每个时钟都翻转 ✓）。</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <span class="arithmatex">\(Q_1^*\)</span> 卡诺图：</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>×(<span class="arithmatex">\(m_7\)</span>)</td>
+<td>×(<span class="arithmatex">\(m_6\)</span>)</td>
 </tr>
 </tbody>
 </table>
+<p>圈四角 <span class="arithmatex">\(m_0, m_2, m_4, m_6(\times)\)</span> → <span class="arithmatex">\(Q_0=0\)</span> → <span class="arithmatex">\(D_0 = \overline{Q_0}\)</span>。</p>
+<p><span class="arithmatex">\(Q_1^*\)</span> 卡诺图：</p>
 <table>
 <thead>
 <tr>
@@ -2509,46 +3547,13 @@
 <td>1</td>
 <td>0(<span class="arithmatex">\(m_4\)</span>)</td>
 <td>0(<span class="arithmatex">\(m_5\)</span>)</td>
-<td><span class="arithmatex">\(\times\)</span>(<span class="arithmatex">\(m_7\)</span>)</td>
-<td><span class="arithmatex">\(\times\)</span>(<span class="arithmatex">\(m_6\)</span>)</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <span class="arithmatex">\(m_1\)</span> 的相邻格 <span class="arithmatex">\(m_0, m_3, m_5\)</span> 均为 0（<strong>注意 <span class="arithmatex">\(m_3\)</span> 是有效状态不是无关项</strong>），只能单独成圈 → <span class="arithmatex">\(\overline{Q_2}\,\overline{Q_1}Q_0\)</span>；<span class="arithmatex">\(m_2\)</span> 与无关项 <span class="arithmatex">\(m_6\)</span> 成圈 → <span class="arithmatex">\(Q_1\overline{Q_0}\)</span>。得：</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; $<span class="arithmatex">\(D_1 = Q_1^* = \overline{Q_2}\,\overline{Q_1}Q_0 + Q_1\overline{Q_0}\)</span>$</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <span class="arithmatex">\(Q_2^*\)</span> 卡诺图：</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>×(<span class="arithmatex">\(m_7\)</span>)</td>
+<td>×(<span class="arithmatex">\(m_6\)</span>)</td>
 </tr>
 </tbody>
 </table>
+<p><span class="arithmatex">\(m_1\)</span> 单独成圈 → <span class="arithmatex">\(\overline{Q_2}\,\overline{Q_1}Q_0\)</span>；<span class="arithmatex">\(m_2\)</span> 与 <span class="arithmatex">\(m_6(\times)\)</span> 成圈 → <span class="arithmatex">\(Q_1\overline{Q_0}\)</span>。得 <span class="arithmatex">\(D_1 = \overline{Q_2}\,\overline{Q_1}Q_0 + Q_1\overline{Q_0}\)</span>。</p>
+<p><span class="arithmatex">\(Q_2^*\)</span> 卡诺图：</p>
 <table>
 <thead>
 <tr>
@@ -2574,129 +3579,177 @@
 <td>×</td>
 <td>×</td>
 </tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; 圈 <span class="arithmatex">\(m_3, m_7(\times)\)</span> → <span class="arithmatex">\(Q_1Q_0\)</span>；圈 <span class="arithmatex">\(m_4, m_6(\times)\)</span> → <span class="arithmatex">\(Q_2\overline{Q_0}\)</span>。得：</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; $<span class="arithmatex">\(D_2 = Q_2^* = Q_1Q_0 + Q_2\overline{Q_0}\)</span>$</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>⑤ 汇总驱动方程</strong>：</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; $<span class="arithmatex">\(\begin{cases} D_0 = \overline{Q_0} \\ D_1 = \overline{Q_2}\,\overline{Q_1}Q_0 + Q_1\overline{Q_0} \\ D_2 = Q_1Q_0 + Q_2\overline{Q_0} \end{cases}\)</span>$</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>⑥ 自启动检查</strong>：代入未用状态验证能否回到有效循环——</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; - 状态 110：<span class="arithmatex">\(D_2D_1D_0 = 111\)</span> → 次态 111</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; - 状态 111：<span class="arithmatex">\(D_2D_1D_0 = 100\)</span> → 次态 100（回到有效循环 ✓）</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; 电路<strong>可以自启动</strong>。逻辑图：三个 D 触发器共接 CLK，驱动端按上述方程接与或门即可。</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
-<blockquote>
-<p><strong>例题 2（D 触发器工作波形判断）</strong>：边沿 D 触发器，CLK 上升沿采样。若 CLK 第 1、2、3 个上升沿前 D 分别为 1、0、1，初态 <span class="arithmatex">\(Q=0\)</span>，则 <span class="arithmatex">\(Q\)</span> 依次变为 1、0、1。<strong>注意</strong>：上升沿之间 D 的变化对 Q 无影响——这就是"边沿触发"的含义。</p>
-</blockquote>
-<h2 id="_6">五、常用时序器件<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>圈 <span class="arithmatex">\(m_3, m_7(\times)\)</span> → <span class="arithmatex">\(Q_1Q_0\)</span>；圈 <span class="arithmatex">\(m_4, m_6(\times)\)</span> → <span class="arithmatex">\(Q_2\overline{Q_0}\)</span>。得 <span class="arithmatex">\(D_2 = Q_1Q_0 + Q_2\overline{Q_0}\)</span>。</p>
+<p><strong>⑤ 汇总驱动方程</strong>：
+$<span class="arithmatex">\(\begin{cases} D_0 = \overline{Q_0} \\ D_1 = \overline{Q_2}\,\overline{Q_1}Q_0 + Q_1\overline{Q_0} \\ D_2 = Q_1Q_0 + Q_2\overline{Q_0} \end{cases}\)</span>$</p>
+<p><strong>⑥ 自启动检查</strong>：状态 110 → 次态 111；111 → 次态 100（回到有效循环 ✓）。电路<strong>可以自启动</strong>。</p>
+<hr />
+<h2 id="_8">七、寄存器与移位寄存器<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 寄存器（并行存储）<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<p><strong>n 位寄存器</strong> = n 个 D 触发器并联，共享 CLK。一个时钟沿把 n 位数据同时存入，用于<strong>暂存数据</strong>。FPGA 里 <code>always @(posedge clk) reg &lt;= data;</code> 就是寄存器。</p>
+<h3 id="72">7.2 移位寄存器<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<p>每个触发器的 D 接前一级的 Q，数据在时钟驱动下<strong>逐位移动</strong>。按输入/输出方式分四种：串入串出、串入并出、并入串出、并入并出。</p>
+<p><strong>4 位右移寄存器</strong>（串入 SI）行为：每拍 <span class="arithmatex">\(Q_0 \to Q_1 \to Q_2 \to Q_3\)</span>，SI 进入 <span class="arithmatex">\(Q_0\)</span>。</p>
+<p><strong>通用移位寄存器 74HC194</strong>：由模式端 <span class="arithmatex">\(S_1S_0\)</span> 选择功能：</p>
 <table>
 <thead>
 <tr>
-<th>器件</th>
+<th><span class="arithmatex">\(S_1\)</span></th>
+<th><span class="arithmatex">\(S_0\)</span></th>
 <th>功能</th>
-<th>要点</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>寄存器</strong></td>
-<td>存放 n 位二进制数据</td>
-<td>n 个 D 触发器并联，共享 CLK</td>
+<td>0</td>
+<td>0</td>
+<td>保持</td>
 </tr>
 <tr>
-<td><strong>移位寄存器</strong></td>
-<td>数据逐位移动</td>
-<td>可串入并出/并入串出，实现串并转换、流水延时</td>
+<td>0</td>
+<td>1</td>
+<td>右移</td>
 </tr>
 <tr>
-<td><strong>同步计数器</strong></td>
+<td>1</td>
+<td>0</td>
+<td>左移</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>并行置数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="73">7.3 应用<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>串并转换</strong>：串行数据移入后并行读出（或反向）</li>
+<li><strong>延时</strong>：数据每拍移一位，移 n 位即延时 n 个时钟</li>
+<li><strong>序列发生器</strong>：配合反馈产生特定序列（如伪随机码）</li>
+</ul>
+<hr />
+<h2 id="_9">八、计数器<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="81">8.1 分类<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>同步计数器</strong>：所有触发器共用 CLK，速度快（如 74HC161）</li>
+<li><strong>异步（纹波）计数器</strong>：前级输出作后级时钟，逐级 ripple，速度慢</li>
+</ul>
+<h3 id="82-74hc161">8.2 同步计数器 74HC161<a class="headerlink" href="#82-74hc161" title="Permanent link">&para;</a></h3>
+<p>4 位同步二进制计数器，功能表：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\overline{CLR}\)</span></th>
+<th><span class="arithmatex">\(\overline{LOAD}\)</span></th>
+<th>ENP</th>
+<th>ENT</th>
+<th>CLK</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+<td>异步清零 0000</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>×</td>
+<td>×</td>
+<td>↑</td>
+<td>同步置数</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>↑</td>
 <td>计数</td>
-<td>所有触发器共用一个 CLK；如 74HC161（4 位同步二进制计数器，带异步清零、同步置数）</td>
 </tr>
 <tr>
-<td><strong>异步计数器</strong></td>
-<td>计数</td>
-<td>前级输出做后级时钟，纹波进位、速度慢</td>
+<td>1</td>
+<td>1</td>
+<td>非全1</td>
+<td></td>
+<td>×</td>
+<td>保持</td>
+</tr>
+</tbody>
+</table>
+<h3 id="83-161">8.3 用 161 构成任意模计数器<a class="headerlink" href="#83-161" title="Permanent link">&para;</a></h3>
+<p><strong>反馈置数法（同步，推荐）</strong>：当计到 <span class="arithmatex">\(M-1\)</span> 时译码产生 <span class="arithmatex">\(\overline{LOAD}=0\)</span>，下一个时钟沿置回初值，得模 M 计数。</p>
+<p><strong>例题 6（161 接模 6）</strong>：要 0→1→…→5→0。当计到 5（0101）时令 <span class="arithmatex">\(\overline{LOAD}=\overline{Q_2 Q_0}\)</span>（即 <span class="arithmatex">\(Q_2\)</span>、<span class="arithmatex">\(Q_0\)</span> 接与非门），数据端接 0000。则 0–5 正常计数，到 5 时下一沿置 0，循环六个状态，实现模 6。
+（在 0–5 中只有 5 满足 <span class="arithmatex">\(Q_2Q_0=11\)</span>，译码唯一 ✓。）</p>
+<p><strong>反馈清零法（异步）</strong>：计到 M 时译码产生 <span class="arithmatex">\(\overline{CLR}=0\)</span> 立即清零。因 M 状态只瞬间出现，输出有毛刺，不如置数法干净。</p>
+<h3 id="84">8.4 级联<a class="headerlink" href="#84" title="Permanent link">&para;</a></h3>
+<p>把低位片的进位输出（RCO）接高位片的 ENT/ENP，可级联成更高模数（如两片 161 级联成模 256）。</p>
+<hr />
+<h2 id="_10">九、核心概念速查表<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>一句话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>锁存器</td>
+<td>电平触发，CLK 有效期间输出随输入变（有空翻）</td>
+</tr>
+<tr>
+<td>触发器</td>
+<td>边沿触发，仅在时钟沿采样（无空翻）</td>
+</tr>
+<tr>
+<td>空翻</td>
+<td>电平触发期间一个脉冲内多次翻转</td>
+</tr>
+<tr>
+<td>RS</td>
+<td>置位/复位，有禁用约束 <span class="arithmatex">\(SR=0\)</span></td>
+</tr>
+<tr>
+<td>D</td>
+<td><span class="arithmatex">\(Q^*=D\)</span>，FPGA 主力</td>
+</tr>
+<tr>
+<td>JK</td>
+<td>功能全，J=K=1 翻转</td>
+</tr>
+<tr>
+<td>T</td>
+<td><span class="arithmatex">\(Q^*=T\oplus Q\)</span>，计数</td>
+</tr>
+<tr>
+<td>特性表/方程/状态图/波形图</td>
+<td>时序逻辑的四种等价描述</td>
+</tr>
+<tr>
+<td>寄存器</td>
+<td>n 个 D 触发器并联，存数据</td>
+</tr>
+<tr>
+<td>移位寄存器</td>
+<td>数据逐位移动，串并转换/延时</td>
+</tr>
+<tr>
+<td>计数器</td>
+<td>状态循环，计数/分频</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="_7">相关笔记<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h2 id="_11">相关笔记<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a> —— 数制码制、逻辑代数、卡诺图</li>
 <li><a href="../%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">组合逻辑电路</a> —— 无记忆电路：分析/设计方法、MSI 器件</li>
@@ -2724,7 +3777,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月5日 15:26:32 UTC">2026年8月5日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月8日 08:31:08 UTC">2026年8月8日</span>
   </span>
 
     
