@@ -6,19 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="组合逻辑 = 输出只由当前输入决定的电路，不含记忆元件。本篇讲透它的分析方法（四步）与设计方法（五步）、五大常用 MSI 器件，以及绕不开的竞争冒险。前置知识见 数字电路基础。">
+        <meta name="description" content="记录各公司校招笔试题目与解析。通用高频题见「一」，按公司记录的真题见「二」。建议刷题配合 FPGA 校招面试八股 一起看。">
       
       
         <meta name="author" content="vi226035">
       
       
-        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/FPGA/%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">
+        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/FPGA/%E6%A0%A1%E6%8B%9B%E7%AC%94%E8%AF%95%E7%9C%9F%E9%A2%98%E9%9B%86/">
       
       
-        <link rel="prev" href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">
+        <link rel="prev" href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">
       
       
-        <link rel="next" href="../%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">
+        <link rel="next" href="../DFT%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%9B%A0%E5%AD%90W%E7%9A%84%E7%90%86%E8%A7%A3/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>组合逻辑电路 - vi226035 的知识库</title>
+        <title>校招笔试真题集 - vi226035 的知识库</title>
       
     
     
@@ -75,14 +75,14 @@
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "headline": "组合逻辑电路",
-    "description": "组合逻辑 = 输出只由当前输入决定的电路，不含记忆元件。本篇讲透它的分析方法（四步）与设计方法（五步）、五大常用 MSI 器件，以及绕不开的竞争冒险。前置知识见 数字电路基础。",
+    "headline": "校招笔试真题集",
+    "description": "记录各公司校招笔试题目与解析。通用高频题见「一」，按公司记录的真题见「二」。建议刷题配合 FPGA 校招面试八股 一起看。",
     "author": {
       "@type": "Person",
       "name": "vi226035"
     },
-    "url": "https://vi226035.github.io/my-knowledge-base/FPGA/%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/"
-    ,"datePublished": "2026-08-05"
+    "url": "https://vi226035.github.io/my-knowledge-base/FPGA/%E6%A0%A1%E6%8B%9B%E7%AC%94%E8%AF%95%E7%9C%9F%E9%A2%98%E9%9B%86/"
+    ,"datePublished": "2026-08-06"
     
   }
   </script>
@@ -107,7 +107,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#fpga-ic" class="md-skip">
           跳转至
         </a>
       
@@ -140,7 +140,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              组合逻辑电路
+              校招笔试真题集
             
           </span>
         </div>
@@ -1539,37 +1539,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    组合逻辑电路
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/" class="md-nav__link">
         
   
   
@@ -1585,242 +1558,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        一、特点
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        二、组合电路的分析方法
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="二、组合电路的分析方法">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        最简与或式与最简或与式——两种标准最简形式
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        三、组合电路的设计步骤
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        四、常用中规模组合器件
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="四、常用中规模组合器件">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1encoder" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （1）编码器（Encoder）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2decoder" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （2）译码器（Decoder）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3muxmultiplexer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （3）数据选择器（MUX，Multiplexer）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4adder" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （4）加法器（Adder）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5magnitude-comparator" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （5）数值比较器（Magnitude Comparator）
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        五、竞争冒险
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="五、竞争冒险">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （1）竞争与冒险的概念
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （2）产生原因
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （3）冒险现象的识别（三种方法）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （4）冒险的类型
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （5）消除冒险的五种方法及原理
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （6）五种方法对比小结
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        相关笔记
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1886,10 +1623,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../%E6%A0%A1%E6%8B%9B%E7%AC%94%E8%AF%95%E7%9C%9F%E9%A2%98%E9%9B%86/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    校招笔试真题集
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1905,6 +1669,258 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用说明
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、经典高频笔试题（各公司反复考，含解析）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、经典高频笔试题（各公司反复考，含解析）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 建立时间计算与最高频率（⭐⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 阻塞/非阻塞赋值结果（⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-fifo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 FIFO 深度计算（⭐⭐⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 占空比 50% 的三分频（⭐⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-latch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 推断出 latch 的代码（⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 跨时钟域单比特处理（⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-1011" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 序列检测 1011（⭐⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、按公司记录的真题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、按公司记录的真题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 华为海思
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 大疆
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 中兴
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 联发科 / 紫光展锐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 汇顶 / 兆易创新
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 寒武纪 / 地平线 / 商汤
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 天锐星通
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 其他公司（可自行新增小节）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、刷题建议
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        相关笔记
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2427,13 +2443,107 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一、特点
+        使用说明
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、经典高频笔试题（各公司反复考，含解析）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、经典高频笔试题（各公司反复考，含解析）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 建立时间计算与最高频率（⭐⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 阻塞/非阻塞赋值结果（⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-fifo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 FIFO 深度计算（⭐⭐⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 占空比 50% 的三分频（⭐⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-latch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 推断出 latch 的代码（⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 跨时钟域单比特处理（⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#17-1011" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7 序列检测 1011（⭐⭐⭐⭐）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2441,19 +2551,96 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、组合电路的分析方法
+        二、按公司记录的真题
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="二、组合电路的分析方法">
+    <nav class="md-nav" aria-label="二、按公司记录的真题">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        最简与或式与最简或与式——两种标准最简形式
+        2.1 华为海思
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 大疆
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 中兴
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 联发科 / 紫光展锐
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 汇顶 / 兆易创新
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 寒武纪 / 地平线 / 商汤
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 天锐星通
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 其他公司（可自行新增小节）
       
     </span>
   </a>
@@ -2462,177 +2649,22 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、刷题建议
+      
+    </span>
+  </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        三、组合电路的设计步骤
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        四、常用中规模组合器件
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="四、常用中规模组合器件">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1encoder" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （1）编码器（Encoder）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2decoder" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （2）译码器（Decoder）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3muxmultiplexer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （3）数据选择器（MUX，Multiplexer）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4adder" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （4）加法器（Adder）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5magnitude-comparator" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （5）数值比较器（Magnitude Comparator）
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        五、竞争冒险
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="五、竞争冒险">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （1）竞争与冒险的概念
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （2）产生原因
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （3）冒险现象的识别（三种方法）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （4）冒险的类型
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （5）消除冒险的五种方法及原理
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        （6）五种方法对比小结
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         相关笔记
@@ -2662,890 +2694,420 @@
   
 
 
-<h1 id="_1">组合逻辑电路<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="fpga-ic">校招笔试真题集（FPGA / 数字IC）<a class="headerlink" href="#fpga-ic" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>组合逻辑 = <strong>输出只由当前输入决定</strong>的电路，不含记忆元件。本篇讲透它的<strong>分析方法（四步）与设计方法（五步）</strong>、五大常用 MSI 器件，以及绕不开的<strong>竞争冒险</strong>。前置知识见 <a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a>。</p>
-</blockquote>
-<h2 id="_2">一、特点<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<ul>
-<li>任意时刻输出<strong>只取决于当前输入</strong>，与电路原来的状态无关</li>
-<li>结构上：<strong>只有门电路，没有反馈、没有存储元件</strong></li>
-<li>典型器件：加法器、编码器、译码器、数据选择器、数值比较器</li>
-</ul>
-<h2 id="_3">二、组合电路的分析方法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><strong>分析的任务</strong>：给定逻辑图（或实际电路），搞清它实现的是什么逻辑功能——与"设计"方向相反。</p>
-<p><strong>四步分析法</strong>：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>① 看逻辑图，逐级写表达式 → ② 化简/变换为最简式 → ③ 列真值表 → ④ 归纳逻辑功能
-</code></pre></div>
-<ol>
-<li><strong>看逻辑图，逐级写表达式</strong>：从输入端开始，朝输出端把每个门的输出表达式逐一写出。多级电路先给中间信号命名（如 P、M、N），最后逐步代入得到输出的总表达式。</li>
-<li><strong>化简或变换</strong>：用布尔代数（<a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a> 2.5 节四大招）或卡诺图（同基础笔记第三节）化简。目标不是盲目求短，而是化成<strong>易于辨认的最简式</strong>——最常用<strong>最简与或式</strong>，有时化成异或等特殊形式反而更容易看出功能。</li>
-<li><strong>列真值表</strong>：把输入变量的全部组合逐一代入化简后的表达式，算出对应输出。</li>
-<li><strong>归纳逻辑功能</strong>：观察真值表规律，用一句话概括电路的实际功能（加法、比较、表决、奇偶校验等），必要时评价电路是否合理、能否改进。</li>
-</ol>
-<h3 id="_4">最简与或式与最简或与式——两种标准最简形式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>这就是第②步所说的"最简函数表达式"。逻辑表达式有两种互为对偶的标准形式：</p>
-<table>
-<thead>
-<tr>
-<th>形式</th>
-<th>结构</th>
-<th>示例</th>
-<th>对应硬件结构</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>与或式（SOP）</strong></td>
-<td>积之和：积项用或连接</td>
-<td><span class="arithmatex">\(Y = AB + \overline{A}C\)</span></td>
-<td>与-或两级电路</td>
-</tr>
-<tr>
-<td><strong>或与式（POS）</strong></td>
-<td>和之积：和项用与连接</td>
-<td><span class="arithmatex">\(Y = (A+B)(\overline{A}+C)\)</span></td>
-<td>或-与两级电路</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><strong>最简与或式</strong>：积项个数最少，且每个积项的变量数最少。</li>
-<li><strong>最简或与式</strong>：和项个数最少，且每个和项的变量数最少。</li>
-<li>两种形式可用分配律、摩根定律互相转换，描述的是同一个函数。</li>
-</ul>
-<p><strong>同一张卡诺图的两种读法</strong>：</p>
-<ul>
-<li><strong>圈 1 → 最简与或式</strong>：每个圈读出一个积项，各积项相加。</li>
-<li><strong>圈 0 → 最简或与式</strong>：先对 Y 的 0 格画圈，得到 <span class="arithmatex">\(\overline{Y}\)</span> 的最简与或式，再整体取反（摩根定律）即得 Y 的最简或与式。</li>
-</ul>
-<blockquote>
-<p><strong>例题 1（同一卡诺图两种读法）</strong>：已知 <span class="arithmatex">\(Y(A,B,C) = \sum m(0,2,5,7)\)</span>，分别求最简与或式和最简或与式。</p>
-<p>卡诺图：</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>A\BC</th>
-<th>00</th>
-<th>01</th>
-<th>11</th>
-<th>10</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td><strong>1</strong>(<span class="arithmatex">\(m_0\)</span>)</td>
-<td>0</td>
-<td>0</td>
-<td><strong>1</strong>(<span class="arithmatex">\(m_2\)</span>)</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td><strong>1</strong>(<span class="arithmatex">\(m_5\)</span>)</td>
-<td><strong>1</strong>(<span class="arithmatex">\(m_7\)</span>)</td>
-<td>0</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>圈 1（最简与或式）</strong>：<span class="arithmatex">\(m_0, m_2\)</span>（左右卷绕相邻）→ <span class="arithmatex">\(\overline{A}\overline{C}\)</span>；<span class="arithmatex">\(m_5, m_7\)</span> → <span class="arithmatex">\(AC\)</span>：</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; $<span class="arithmatex">\(Y = \overline{A}\overline{C} + AC\)</span>$</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>圈 0（最简或与式）</strong>：0 格为 <span class="arithmatex">\(m_1, m_3, m_4, m_6\)</span>，即 <span class="arithmatex">\(\overline{Y} = \sum m(1,3,4,6)\)</span>。圈图得 <span class="arithmatex">\(m_1, m_3\)</span> → <span class="arithmatex">\(\overline{A}C\)</span>；<span class="arithmatex">\(m_4, m_6\)</span> → <span class="arithmatex">\(A\overline{C}\)</span>，故 <span class="arithmatex">\(\overline{Y} = \overline{A}C + A\overline{C}\)</span>；整体取反：</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; $<span class="arithmatex">\(Y = \overline{\overline{A}C + A\overline{C}} = (A + \overline{C})(\overline{A} + C)\)</span>$</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>验证</strong>：展开 <span class="arithmatex">\((A + \overline{C})(\overline{A} + C) = \underbrace{A\overline{A}}_{0} + AC + \overline{A}\overline{C} + \underbrace{\overline{C}C}_{0} = AC + \overline{A}\overline{C}\)</span>，与与或式完全一致 ✓。</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; （本例函数与 B 无关——B 是冗余变量，电路本质是 A、C 的<strong>同或</strong>。）</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>下面用四步分析法完整分析一个电路：</p>
-<blockquote>
-<p><strong>例题 2（四步分析法示范）</strong>：分析由四个与非门构成的电路 <span class="arithmatex">\(Y = \overline{\left(\overline{A \cdot P}\right) \cdot \left(\overline{B \cdot P}\right)}\)</span>，其中 <span class="arithmatex">\(P = \overline{AB}\)</span>。</p>
-<p><strong>① 看逻辑图，逐级写表达式</strong>：
-$<span class="arithmatex">\(M = \overline{A \cdot P} = \overline{A} + \overline{P} = \overline{A} + AB\)</span>$
-$<span class="arithmatex">\(N = \overline{B \cdot P} = \overline{B} + \overline{P} = \overline{B} + AB\)</span>$</p>
-<p><strong>② 化简/变换</strong>：
-$<span class="arithmatex">\(Y = \overline{M \cdot N} = \overline{(\overline{A} + AB)(\overline{B} + AB)}\)</span>$</p>
-<p>展开括号内：<span class="arithmatex">\((\overline{A} + AB)(\overline{B} + AB) = \overline{A}\overline{B} + \underbrace{\overline{A}AB}_{0} + \underbrace{AB\overline{B}}_{0} + AB = \overline{A}\overline{B} + AB\)</span></p>
-<p>故 <span class="arithmatex">\(Y = \overline{\overline{A}\overline{B} + AB} = A \oplus B\)</span>。</p>
-<p><strong>③ 列真值表</strong>：</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>A</th>
-<th>B</th>
-<th><span class="arithmatex">\(P=\overline{AB}\)</span></th>
-<th>Y</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>④ 归纳逻辑功能</strong>：A、B 相异时 Y=1，相同则 Y=0——电路实现<strong>异或</strong>功能。这是仅用与非门实现任意逻辑的经典例子（与非门是"万能门"）。</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="_5">三、组合电路的设计步骤<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p><strong>设计的任务与分析相反</strong>：给定逻辑功能要求，设计出能实现它的电路（逻辑图）。</p>
-<p><strong>标准设计流程</strong>：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>① 逻辑抽象（定义变量、赋值）→ ② 列真值表 → ③ 写表达式并化简为最简式 → ④ 画逻辑图 → ⑤ 验证
-</code></pre></div>
-<p><strong>核心主链</strong>正是：<strong>逻辑功能 → 真值表 → 最简函数表达式 → 逻辑图</strong>。</p>
-<ol>
-<li><strong>逻辑抽象</strong>：明确问题有几个输入变量、几个输出变量，并为每个变量规定 0/1 的含义（如"同意=1、不同意=0"）。这一步把文字要求翻译成逻辑问题。</li>
-<li><strong>列真值表</strong>：把输入的全部组合逐一列出，按功能要求写出对应输出值。真值表是后续所有步骤的唯一依据。</li>
-<li><strong>写表达式并化简</strong>：先由真值表写出标准与或式（取输出为 1 的最小项之和），再用卡诺图化简为<strong>最简与或式</strong>（若要或与实现则圈 0 得最简或与式，见本文"分析方法"一节）。</li>
-<li><strong>画逻辑图</strong>：按最简式画门电路。若限定只用某一种门（如与非门），先用双重取反、摩根定律把表达式变换成对应形式再画。</li>
-<li><strong>验证</strong>：回代真值表核对电路确实实现了要求的功能。</li>
-</ol>
-<blockquote>
-<p><strong>例题 3（三人表决器，完整设计流程）</strong>：设计一个多数表决电路——三个评委 A、B、C 每人一票，两票及以上同意则提案通过（Y=1）。</p>
-<p><strong>① 逻辑抽象</strong>：三个输入 A、B、C（同意=1，不同意=0）；一个输出 Y（通过=1，否决=0）。</p>
-<p><strong>② 列真值表</strong>：</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>A</th>
-<th>B</th>
-<th>C</th>
-<th>Y</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>全反对</td>
-</tr>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1 票</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1 票</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>2 票 ✓</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>1 票</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>2 票 ✓</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>2 票 ✓</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>3 票 ✓</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>③ 写表达式并化简</strong>：<span class="arithmatex">\(Y = \sum m(3,5,6,7)\)</span>，卡诺图化简：</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>A\BC</th>
-<th>00</th>
-<th>01</th>
-<th>11</th>
-<th>10</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td><strong>1</strong>(<span class="arithmatex">\(m_3\)</span>)</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td><strong>1</strong>(<span class="arithmatex">\(m_5\)</span>)</td>
-<td><strong>1</strong>(<span class="arithmatex">\(m_7\)</span>)</td>
-<td><strong>1</strong>(<span class="arithmatex">\(m_6\)</span>)</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; 画圈：<span class="arithmatex">\(m_3, m_7\)</span> → <span class="arithmatex">\(BC\)</span>；<span class="arithmatex">\(m_5, m_7\)</span> → <span class="arithmatex">\(AC\)</span>；<span class="arithmatex">\(m_6, m_7\)</span> → <span class="arithmatex">\(AB\)</span>。</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; $<span class="arithmatex">\(Y = AB + AC + BC\)</span>$</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>④ 画逻辑图</strong>：三个两输入与门 + 一个三输入或门即可实现。若<strong>限定只用与非门</strong>，先变换：<span class="arithmatex">\(Y = \overline{\overline{AB} \cdot \overline{AC} \cdot \overline{BC}}\)</span>，用 4 个与非门实现。</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>⑤ 验证</strong>：回代真值表，凡两票及以上同意 Y=1，符合要求 ✓。</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="_6">四、常用中规模组合器件<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>中规模集成电路（MSI）把常用的组合功能做成标准芯片。掌握它们的<strong>功能、表达式和典型应用</strong>，既能直接搭电路，也能当"积木"实现任意逻辑。下面逐个详解五大器件。</p>
-<h3 id="1encoder">（1）编码器（Encoder）<a class="headerlink" href="#1encoder" title="Permanent link">&para;</a></h3>
-<p><strong>功能</strong>：把"哪个输入有效"编成二进制代码输出——用代码表示输入信号。</p>
-<p><strong>普通编码器</strong>（8 线—3 线）：8 个输入 <span class="arithmatex">\(I_0\)</span>–<span class="arithmatex">\(I_7\)</span>（每次只允许一个为 1），输出 3 位二进制码 <span class="arithmatex">\(Y_2Y_1Y_0\)</span>。</p>
-<table>
-<thead>
-<tr>
-<th>有效输入</th>
-<th>输出 <span class="arithmatex">\(Y_2Y_1Y_0\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(I_0=1\)</span></td>
-<td>000</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(I_1=1\)</span></td>
-<td>001</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(I_2=1\)</span></td>
-<td>010</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(I_3=1\)</span></td>
-<td>011</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(I_4=1\)</span></td>
-<td>100</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(I_5=1\)</span></td>
-<td>101</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(I_6=1\)</span></td>
-<td>110</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(I_7=1\)</span></td>
-<td>111</td>
-</tr>
-</tbody>
-</table>
-<p>输出表达式：
-$<span class="arithmatex">\(Y_2 = I_4 + I_5 + I_6 + I_7,\quad Y_1 = I_2 + I_3 + I_6 + I_7,\quad Y_0 = I_1 + I_3 + I_5 + I_7\)</span>$</p>
-<p><strong>局限</strong>：普通编码器<strong>同一时刻只允许一个输入有效</strong>，若多个同时有效，输出会混乱。</p>
-<p><strong>优先编码器（74HC148）</strong>：给每个输入规定优先级，多个输入同时有效时，<strong>只编优先级最高</strong>的那个。
-- 输入 <span class="arithmatex">\(\overline{I_0}\)</span>–<span class="arithmatex">\(\overline{I_7}\)</span> <strong>低电平有效</strong>，<span class="arithmatex">\(\overline{I_7}\)</span> 优先级最高；
-- 输出 <span class="arithmatex">\(\overline{A_2}\overline{A_1}\overline{A_0}\)</span> 也是<strong>低有效</strong>（代码取反输出）；
-- 附加引脚：使能输入 <span class="arithmatex">\(\overline{E_I}\)</span>、群选择输出 <span class="arithmatex">\(\overline{G_S}\)</span>（指示"有输入有效"）、扩展输出 <span class="arithmatex">\(\overline{E_O}\)</span>（用于级联扩展更多输入）。</p>
-<h3 id="2decoder">（2）译码器（Decoder）<a class="headerlink" href="#2decoder" title="Permanent link">&para;</a></h3>
-<p><strong>功能</strong>：编码的逆过程——把二进制代码"翻译"成对应的输出信号。</p>
-<p><strong>3 线—8 线译码器（74HC138）</strong>：3 个地址输入 <span class="arithmatex">\(A_2A_1A_0\)</span>，8 个<strong>低有效</strong>输出 <span class="arithmatex">\(\overline{Y_0}\)</span>–<span class="arithmatex">\(\overline{Y_7}\)</span>；带使能端 <span class="arithmatex">\(G_1\)</span>（高有效）、<span class="arithmatex">\(\overline{G_{2A}}\)</span>、<span class="arithmatex">\(\overline{G_{2B}}\)</span>（低有效），仅当 <span class="arithmatex">\(G_1=1\)</span> 且 <span class="arithmatex">\(\overline{G_{2A}}=\overline{G_{2B}}=0\)</span> 时才工作。</p>
-<p>使能后的译码关系：</p>
-<table>
-<thead>
-<tr>
-<th>输入 <span class="arithmatex">\(A_2A_1A_0\)</span></th>
-<th>有效输出（低电平）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>000</td>
-<td><span class="arithmatex">\(\overline{Y_0}=0\)</span></td>
-</tr>
-<tr>
-<td>001</td>
-<td><span class="arithmatex">\(\overline{Y_1}=0\)</span></td>
-</tr>
-<tr>
-<td>010</td>
-<td><span class="arithmatex">\(\overline{Y_2}=0\)</span></td>
-</tr>
-<tr>
-<td>011</td>
-<td><span class="arithmatex">\(\overline{Y_3}=0\)</span></td>
-</tr>
-<tr>
-<td>100</td>
-<td><span class="arithmatex">\(\overline{Y_4}=0\)</span></td>
-</tr>
-<tr>
-<td>101</td>
-<td><span class="arithmatex">\(\overline{Y_5}=0\)</span></td>
-</tr>
-<tr>
-<td>110</td>
-<td><span class="arithmatex">\(\overline{Y_6}=0\)</span></td>
-</tr>
-<tr>
-<td>111</td>
-<td><span class="arithmatex">\(\overline{Y_7}=0\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>输出表达式：<span class="arithmatex">\(\overline{Y_i} = \overline{m_i}\)</span>，即<strong>每个输出就是对应最小项的取反</strong>。</p>
-<p><strong>应用</strong>：
-1. <strong>地址译码</strong>：选中某个存储单元或外设；
-2. <strong>实现任意组合逻辑</strong>：74HC138 相当于"最小项发生器"，配一个与非门即可实现任意三变量函数（见例题 20）；
-3. <strong>级联扩展</strong>：多片 138 可扩展成更多地址线的译码器。</p>
-<blockquote>
-<p><strong>延伸</strong>：<strong>显示译码器</strong>（如 74HC47/48）把 BCD 码译成七段数码管的段选信号，驱动显示数字 0–9。</p>
-<p><strong>例题 4（用 74HC138 实现逻辑函数）</strong>：用一片 74HC138 和一个与非门实现 <span class="arithmatex">\(Y = \sum m(1,2,4,7)\)</span>。</p>
-<p><strong>思路</strong>：74HC138 输出的是 <span class="arithmatex">\(\overline{m_0}\)</span>–<span class="arithmatex">\(\overline{m_7}\)</span>。对 <span class="arithmatex">\(Y = m_1 + m_2 + m_4 + m_7\)</span> 两次取反、用摩根定律：
-$<span class="arithmatex">\(Y = m_1 + m_2 + m_4 + m_7 = \overline{\overline{m_1}\cdot\overline{m_2}\cdot\overline{m_4}\cdot\overline{m_7}}\)</span>$</p>
-<p><strong>接法</strong>：把地址 <span class="arithmatex">\(A_2A_1A_0\)</span> 接三个输入变量，将输出端 <span class="arithmatex">\(\overline{Y_1}, \overline{Y_2}, \overline{Y_4}, \overline{Y_7}\)</span> 接到一个 4 输入与非门，与非门的输出即为 <span class="arithmatex">\(Y\)</span>。</p>
-</blockquote>
-<h3 id="3muxmultiplexer">（3）数据选择器（MUX，Multiplexer）<a class="headerlink" href="#3muxmultiplexer" title="Permanent link">&para;</a></h3>
-<p><strong>功能</strong>：在地址（选择）输入控制下，从多路数据中<strong>选一路</strong>送到输出——相当于一个"多档位旋转开关"。</p>
-<p><strong>4 选 1 数据选择器</strong>：地址 <span class="arithmatex">\(A_1A_0\)</span>，数据输入 <span class="arithmatex">\(D_0\)</span>–<span class="arithmatex">\(D_3\)</span>，输出 <span class="arithmatex">\(Y\)</span>。</p>
-<table>
-<thead>
-<tr>
-<th><span class="arithmatex">\(A_1\)</span></th>
-<th><span class="arithmatex">\(A_0\)</span></th>
-<th>输出 <span class="arithmatex">\(Y\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td><span class="arithmatex">\(D_0\)</span></td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td><span class="arithmatex">\(D_1\)</span></td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td><span class="arithmatex">\(D_2\)</span></td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td><span class="arithmatex">\(D_3\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>输出表达式：
-$<span class="arithmatex">\(Y = \overline{A_1}\overline{A_0}D_0 + \overline{A_1}A_0D_1 + A_1\overline{A_0}D_2 + A_1A_0D_3\)</span>$</p>
-<p>典型芯片：<strong>74HC153</strong>（双 4 选 1，带使能端）。</p>
-<p><strong>重要应用——实现逻辑函数</strong>：4 选 1 MUX 的表达式结构与<strong>二变量最小项展开</strong>完全一致，故能直接实现二变量函数；把第三个变量接到数据输入端（余变量法），还能实现三变量函数。一般规律：<strong><span class="arithmatex">\(2^n\)</span> 选 1 的 MUX 可实现任意 <span class="arithmatex">\(n\)</span> 变量及以下的逻辑函数</strong>。</p>
-<blockquote>
-<p><strong>例题 5（用 4 选 1 MUX 实现三变量函数）</strong>：用一片 4 选 1 数据选择器实现 <span class="arithmatex">\(F(A,B,C) = \sum m(0,3,5,6)\)</span>。</p>
-<p><strong>思路（余变量法）</strong>：选 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 作地址（<span class="arithmatex">\(A_1=A, A_0=B\)</span>），把第三个变量 <span class="arithmatex">\(C\)</span> 分配给数据输入端。对每一组 <span class="arithmatex">\((A,B)\)</span>，写出 <span class="arithmatex">\(F\)</span> 关于 <span class="arithmatex">\(C\)</span> 的值：</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th><span class="arithmatex">\(AB\)</span></th>
-<th>对应最小项</th>
-<th><span class="arithmatex">\(F\)</span> 与 <span class="arithmatex">\(C\)</span> 的关系</th>
-<th>数据端取值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>00</td>
-<td><span class="arithmatex">\(m_0=000\)</span></td>
-<td><span class="arithmatex">\(C=0\)</span> 时 <span class="arithmatex">\(F=1\)</span></td>
-<td><span class="arithmatex">\(D_0=\overline{C}\)</span></td>
-</tr>
-<tr>
-<td>01</td>
-<td><span class="arithmatex">\(m_3=011\)</span></td>
-<td><span class="arithmatex">\(C=1\)</span> 时 <span class="arithmatex">\(F=1\)</span></td>
-<td><span class="arithmatex">\(D_1=C\)</span></td>
-</tr>
-<tr>
-<td>10</td>
-<td><span class="arithmatex">\(m_5=101\)</span></td>
-<td><span class="arithmatex">\(C=1\)</span> 时 <span class="arithmatex">\(F=1\)</span></td>
-<td><span class="arithmatex">\(D_2=C\)</span></td>
-</tr>
-<tr>
-<td>11</td>
-<td><span class="arithmatex">\(m_6=110\)</span></td>
-<td><span class="arithmatex">\(C=0\)</span> 时 <span class="arithmatex">\(F=1\)</span></td>
-<td><span class="arithmatex">\(D_3=\overline{C}\)</span></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; <strong>接法</strong>：<span class="arithmatex">\(A_1=A\)</span>、<span class="arithmatex">\(A_0=B\)</span>，数据端接 <span class="arithmatex">\(D_0=\overline{C}\)</span>、<span class="arithmatex">\(D_1=C\)</span>、<span class="arithmatex">\(D_2=C\)</span>、<span class="arithmatex">\(D_3=\overline{C}\)</span>，输出即 <span class="arithmatex">\(F\)</span>。</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>&gt; 验证：<span class="arithmatex">\(Y = \overline{A}\overline{B}\overline{C} + \overline{A}BC + A\overline{B}C + AB\overline{C} = \sum m(0,3,5,6)\)</span> ✓。</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="4adder">（4）加法器（Adder）<a class="headerlink" href="#4adder" title="Permanent link">&para;</a></h3>
-<p><strong>半加器（Half Adder）</strong>：对两个一位二进制数相加，<strong>不考虑低位进位</strong>。</p>
-<table>
-<thead>
-<tr>
-<th>A</th>
-<th>B</th>
-<th>和 S</th>
-<th>进位 C</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>表达式：<span class="arithmatex">\(S = A \oplus B\)</span>，<span class="arithmatex">\(C = AB\)</span>。</p>
-<p><strong>全加器（Full Adder）</strong>：把加数 A、被加数 B 与<strong>低位进位 <span class="arithmatex">\(C_{in}\)</span></strong> 三者相加，输出本位和 S 与向高位的进位 <span class="arithmatex">\(C_{out}\)</span>。</p>
-<table>
-<thead>
-<tr>
-<th>A</th>
-<th>B</th>
-<th><span class="arithmatex">\(C_{in}\)</span></th>
-<th>S</th>
-<th><span class="arithmatex">\(C_{out}\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>表达式：
-$<span class="arithmatex">\(S = A \oplus B \oplus C_{in},\qquad C_{out} = AB + C_{in}(A \oplus B) = AB + AC_{in} + BC_{in}\)</span>$</p>
-<p><strong>多位加法器</strong>：把全加器级联，低位 <span class="arithmatex">\(C_{out}\)</span> 接高位 <span class="arithmatex">\(C_{in}\)</span>，即得 n 位<strong>行波进位加法器</strong>。缺点：进位逐级传递，位数多时速度慢。</p>
-<p><strong>超前进位加法器（CLA）</strong>：各级进位由专门电路<strong>同时产生</strong>，不等逐级传递，速度快。典型芯片 <strong>74HC283</strong>（4 位全加器，可级联成更多位）。</p>
-<h3 id="5magnitude-comparator">（5）数值比较器（Magnitude Comparator）<a class="headerlink" href="#5magnitude-comparator" title="Permanent link">&para;</a></h3>
-<p><strong>功能</strong>：比较两个二进制数 A、B 的大小，输出三个结果：<span class="arithmatex">\(A&gt;B\)</span>、<span class="arithmatex">\(A=B\)</span>、<span class="arithmatex">\(A&lt;B\)</span>。</p>
-<p><strong>一位比较器</strong>的表达式：</p>
-<table>
-<thead>
-<tr>
-<th>结果</th>
-<th>表达式</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(A = B\)</span></td>
-<td><span class="arithmatex">\(\overline{A \oplus B}\)</span>（同或）</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(A &gt; B\)</span></td>
-<td><span class="arithmatex">\(A\overline{B}\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(A &lt; B\)</span></td>
-<td><span class="arithmatex">\(\overline{A}B\)</span></td>
-</tr>
-</tbody>
-</table>
-<p><strong>多位比较原理</strong>：<strong>从最高位向低位逐位比较</strong>——最高位能分出大小就直接定结果；最高位相等，再比次高位，依此类推。例如比较 4 位 <span class="arithmatex">\(A=A_3A_2A_1A_0\)</span> 与 <span class="arithmatex">\(B=B_3B_2B_1B_0\)</span>：先比 <span class="arithmatex">\(A_3\)</span>、<span class="arithmatex">\(B_3\)</span>，相等才继续比 <span class="arithmatex">\(A_2\)</span>、<span class="arithmatex">\(B_2\)</span>……</p>
-<p><strong>4 位数值比较器（74HC85）</strong>：比较两个 4 位数，另设三个<strong>级联输入</strong>（<span class="arithmatex">\(I_{A&gt;B}\)</span>、<span class="arithmatex">\(I_{A=B}\)</span>、<span class="arithmatex">\(I_{A&lt;B}\)</span>）。把低位芯片的三个输出接到高位芯片的级联输入，即可扩展成 8 位、12 位……比较器。</p>
-<blockquote>
-<p><strong>小结</strong>：编码器/译码器做"代码 ↔ 信号"转换，数据选择器做"多路选一路"，加法器做算术，比较器比大小——它们是构成运算器、控制器等更复杂数字系统的标准积木。</p>
-</blockquote>
-<h2 id="_7">五、竞争冒险<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<h3 id="1">（1）竞争与冒险的概念<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>竞争（Race）</strong>：同一个信号经<strong>两条或多条路径</strong>传到某个汇合点，由于各路径<strong>门延迟不同</strong>，到达时刻有先有后，这种"抢先后"的现象。</li>
-<li><strong>冒险（Hazard）</strong>：竞争导致输出产生了<strong>本不该有的瞬时尖峰脉冲（毛刺）</strong>，即输出短暂地违背了应有的逻辑功能。</li>
-</ul>
-<p><strong>关系</strong>：竞争<strong>一定</strong>源于路径延迟差异，但<strong>不一定</strong>产生毛刺；只有当延迟差异恰好让输出瞬间出错时才构成冒险。冒险必然由竞争引起。</p>
-<h3 id="2">（2）产生原因<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<p>根源是<strong>门电路的传输延迟</strong>——信号每经过一级门都要花时间（传输延迟时间 <span class="arithmatex">\(t_{pd}\)</span>），不是瞬时完成的。具体分两种情形：</p>
-<ol>
-<li><strong>同一信号走不同路径</strong>：信号 A 一路<strong>直达</strong>某门，另一路<strong>经非门</strong>变成 <span class="arithmatex">\(\overline{A}\)</span> 再到该门。直达路径级数少、延迟短，反相路径多一级非门、延迟长，于是 A 与 <span class="arithmatex">\(\overline{A}\)</span> 到达汇合点<strong>不同步</strong>——本应严格互补的两个信号，瞬间可能同时为 0 或同时为 1。</li>
-<li><strong>多输入同时跳变</strong>：多个输入同时变化（如计数器从 <span class="arithmatex">\(0111 \to 1000\)</span>，四位一起翻转）时，各位延迟不一致，中间会短暂出现错误的过渡组合。</li>
-</ol>
-<h3 id="3">（3）冒险现象的识别（三种方法）<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<p><strong>方法一：代数法（最常用）</strong>
-把其余变量代入固定值，让表达式只剩一个变量 X：</p>
-<ul>
-<li>若能化成 <span class="arithmatex">\(Y = X + \overline{X}\)</span> → X 变化时可能出现<strong>静态 1 冒险</strong>（输出本应恒 1，却冒出一个瞬时 0 负脉冲）。</li>
-<li>若能化成 <span class="arithmatex">\(Y = X \cdot \overline{X}\)</span> → X 变化时可能出现<strong>静态 0 冒险</strong>（输出本应恒 0，却冒出一个瞬时 1 正脉冲）。</li>
-</ul>
-<p><strong>方法二：卡诺图法（相切判断）</strong>
-在卡诺图中，若代表两个积项的<strong>圈相切（相邻但不相交、不被更大的圈覆盖）</strong>，则相切处对应的变量切换就会发生冒险。相切点正是信号从一个积项"换轨"到另一个积项的临界位置。</p>
-<p><strong>方法三：波形观测法（实验法）</strong>
-用示波器观察输出，看信号跳变期间是否叠加了窄毛刺。最直接，但需要实际电路或仿真。</p>
-<h3 id="4">（4）冒险的类型<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>稳态应输出</th>
-<th>毛刺</th>
-<th>出现的表达式结构</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>静态 1 冒险</strong></td>
-<td>恒为 1</td>
-<td>瞬时 0（负脉冲）</td>
-<td>与或式中能化为 <span class="arithmatex">\(X + \overline{X}\)</span></td>
-</tr>
-<tr>
-<td><strong>静态 0 冒险</strong></td>
-<td>恒为 0</td>
-<td>瞬时 1（正脉冲）</td>
-<td>或与式中能化为 <span class="arithmatex">\(X \cdot \overline{X}\)</span></td>
-</tr>
-<tr>
-<td><strong>动态冒险</strong></td>
-<td>0→1 或 1→0</td>
-<td>跳变中多次起伏</td>
-<td>多路径延迟差异大，较少见</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>"静态"指稳态下输出<strong>本不该变</strong>，却因竞争瞬间变了一下；"动态"指输出本就要变，却在变化途中多抖了几次。</p>
-<p><strong>例题 6（判断与消除）</strong>：分析 <span class="arithmatex">\(Y = \overline{A}C + AB\)</span> 的冒险。</p>
-<p><strong>① 判断（代数法）</strong>：令 <span class="arithmatex">\(B = C = 1\)</span>，则 <span class="arithmatex">\(Y = \overline{A} + A\)</span>，属 <span class="arithmatex">\(X + \overline{X}\)</span> 形式 → <strong>存在静态 1 冒险</strong>。
-（卡诺图上看，<span class="arithmatex">\(\overline{A}C\)</span> 与 <span class="arithmatex">\(AB\)</span> 两个圈在 <span class="arithmatex">\(m_3\)</span>、<span class="arithmatex">\(m_7\)</span> 处相切，同样可判。）
-<strong>② 毛刺成因</strong>：A 由 1→0 时，A 先变 0，而 <span class="arithmatex">\(\overline{A}\)</span> 因非门延迟仍短暂为 0，两者同时为 0，或门输出瞬间掉到 0，产生负毛刺。
-<strong>③ 消除（加冗余项）</strong>：补上桥接两个相切圈的冗余项 <span class="arithmatex">\(BC\)</span>：
-$<span class="arithmatex">\(Y = \overline{A}C + AB + BC\)</span>$
-当 <span class="arithmatex">\(B = C = 1\)</span> 时，<span class="arithmatex">\(BC = 1\)</span> 恒成立，<span class="arithmatex">\(Y = \overline{A} + A + 1 = 1\)</span>。</p>
-</blockquote>
-<h3 id="5">（5）消除冒险的五种方法及原理<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
-<p><strong>方法一：加冗余乘积项（逻辑设计层面，最治本）</strong></p>
-<ul>
-<li><strong>做法</strong>：在表达式中加入一个不改变稳态功能的冗余乘积项，把卡诺图上相切的两个圈"桥接"起来。</li>
-<li><strong>为什么能避免</strong>：信号切换的瞬态期间，原来两个乘积项出现"青黄不接"（都短暂为 0），而冗余项 <span class="arithmatex">\(BC\)</span> 恰好在这段过渡期<strong>始终为 1</strong>，把输出稳稳"托"在 1，毛刺无从产生。稳态时冗余项不改变函数值，只在瞬态起作用。</li>
-</ul>
-<p><strong>方法二：输出并联滤波电容（硬件层面）</strong></p>
-<ul>
-<li><strong>做法</strong>：在输出端对地并联一个几十～几百 pF 的小电容。</li>
-<li><strong>为什么能避免</strong>：毛刺是<strong>极窄</strong>的脉冲（ns 级），电容的充放电相当于低通滤波，把窄脉冲"抹平"吸收掉。</li>
-<li><strong>代价</strong>：同时把正常信号的边沿也变缓，降低工作速度，只适合低速电路。</li>
-</ul>
-<p><strong>方法三：加选通（使能）脉冲 ST（时间上避开）</strong></p>
-<ul>
-<li><strong>做法</strong>：给输出门加使能端，让 ST 只在输入<strong>完全稳定后</strong>的有效窗口内打开。</li>
-<li><strong>为什么能避免</strong>：毛刺只出现在跳变的瞬态期，选通脉冲在时间上<strong>避开</strong>这段瞬态，只放行稳态值——相当于"等风停了再出门"。</li>
-<li><strong>要求</strong>：需要一个与输入变化同步的时序控制信号。</li>
-</ul>
-<p><strong>方法四：输出加同步寄存器（D 触发器）——FPGA 首选</strong></p>
-<ul>
-<li><strong>做法</strong>：在组合逻辑输出后接一个时钟沿触发的 D 触发器。</li>
-<li><strong>为什么能避免</strong>：触发器<strong>只在时钟沿那一瞬间</strong>采样输入；组合逻辑的毛刺产生于两个时钟沿之间，且到下一个时钟沿到来前信号早已稳定（满足建立时间即可），因此触发器采到的是稳态值，毛刺被时钟沿"屏蔽"掉。这是同步时序电路天然抗毛刺的根本原因。</li>
-</ul>
-<p><strong>方法五：改用格雷码编码（从源头消除）</strong></p>
-<ul>
-<li><strong>做法</strong>：计数器、状态机用格雷码代替自然二进制码。</li>
-<li><strong>为什么能避免</strong>：冒险的根源之一是<strong>多位同时跳变</strong>导致各路径到达错位；格雷码相邻状态<strong>只变一位</strong>，根本不存在多位齐变，从源头消除了这类竞争（呼应 <a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a> 中的格雷码）。</li>
-</ul>
-<h3 id="6">（6）五种方法对比小结<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>消除层面</th>
-<th>一句话原理</th>
-<th>适用 / 代价</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>冗余乘积项</td>
-<td>逻辑设计</td>
-<td>桥接相切圈，过渡期托住输出</td>
-<td>最治本，略增门数</td>
-</tr>
-<tr>
-<td>滤波电容</td>
-<td>硬件</td>
-<td>低通滤波吸收窄脉冲</td>
-<td>低速电路，边沿变缓</td>
-</tr>
-<tr>
-<td>选通脉冲</td>
-<td>时间域</td>
-<td>避开瞬态，只采稳态</td>
-<td>需时序控制信号</td>
-</tr>
-<tr>
-<td>同步寄存器</td>
-<td>时钟域</td>
-<td>时钟沿屏蔽沿间毛刺</td>
-<td><strong>FPGA 主流</strong>，需时钟</td>
-</tr>
-<tr>
-<td>格雷码</td>
-<td>编码源头</td>
-<td>每次只变一位，无多比特齐变</td>
-<td>计数器、状态机、跨时钟域</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>FPGA 视角</strong>：现代 FPGA 以同步时序为主，组合逻辑输出通常先经触发器寄存再送出，毛刺被时钟沿"屏蔽"。竞争冒险主要威胁<strong>纯组合输出、异步路径、跨时钟域信号</strong>，这些正是时序约束要重点管控的对象（见 <a href="../../%E6%95%B0%E5%AD%97IC/%E9%AB%98%E6%80%A7%E8%83%BD%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/">高性能数字电路设计</a>）。</p>
+<p>记录各公司校招笔试题目与解析。通用高频题见「一」，按公司记录的真题见「二」。建议刷题配合 <a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">FPGA 校招面试八股</a> 一起看。</p>
 </blockquote>
 <hr />
-<h2 id="_8">相关笔记<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h2 id="_1">使用说明<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><strong>难度标记</strong>：⭐ 一星（送分）～ ⭐⭐⭐⭐⭐ 五星（压轴）。</p>
+<p><strong>录入模板</strong>（复制到对应公司分节下填写）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gu">### 【年份·题号】题干一句话（难度：⭐⭐）</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="gs">**知识点**</span>：<span class="sb">`setup/hold`</span>、<span class="sb">`FIFO 深度`</span>、<span class="sb">`CDC`</span>、<span class="sb">`Verilog`</span>、<span class="sb">`状态机`</span>、<span class="sb">`分频`</span> ...
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="gs">**题干**</span>：完整题目描述
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="gs">**选项**</span>：A. ... B. ... C. ... D. ...（选填）
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="gs">**答案**</span>：...
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="gs">**解析**</span>：为什么是它，错项为什么错
+</code></pre></div>
+<p><strong>知识点标签速查</strong>：可与八股笔记各章对应（<code>时序</code>→<a href="../%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">时序逻辑电路</a>，<code>组合</code>→<a href="../%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">组合逻辑电路</a>，<code>数电</code>→<a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a>）。</p>
+<hr />
+<h2 id="_2">一、经典高频笔试题（各公司反复考，含解析）<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 建立时间计算与最高频率（⭐⭐⭐⭐）<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p><strong>知识点</strong>：<code>setup/hold</code>、<code>时序</code></p>
+<p><strong>题干</strong>：两级触发器之间组合逻辑最大延迟 4ns，触发器 <span class="arithmatex">\(t_{co}=1\text{ns}\)</span>、<span class="arithmatex">\(t_{su}=1\text{ns}\)</span>、<span class="arithmatex">\(t_h=0.5\text{ns}\)</span>，时钟周期 10ns，忽略 skew。问：是否违例？最高工作频率？</p>
+<p><strong>答案</strong>：不违例；<span class="arithmatex">\(f_{max} \approx 166.7\text{MHz}\)</span>。</p>
+<p><strong>解析</strong>：
+$<span class="arithmatex">\(T_{min} = t_{co} + t_{comb} + t_{su} = 1+4+1 = 6\text{ns} \le 10\text{ns} \text{ ✓}\)</span>$
+$<span class="arithmatex">\(f_{max} = 1/T_{min} = 1/6\text{ns} \approx 166.7\text{MHz}\)</span>$
+hold 检查：<span class="arithmatex">\(t_{co(min)} + t_{comb(min)} \ge t_h\)</span>，与频率无关，只要路径最小延迟够即可（一般组合路径最小延迟 ≥ 0）。</p>
+<h3 id="12">1.2 阻塞/非阻塞赋值结果（⭐⭐⭐）<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p><strong>知识点</strong>：<code>Verilog</code>、<code>阻塞/非阻塞</code></p>
+<p><strong>题干</strong>：初始 <span class="arithmatex">\(a=1,b=0\)</span>，上升沿后下面两段代码 <span class="arithmatex">\(a,b\)</span> 分别是什么？</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// 代码1</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">end</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1">// 代码2</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="k">end</span>
+</code></pre></div>
+<p><strong>答案</strong>：代码1 → <span class="arithmatex">\(a=0,b=1\)</span>（交换）；代码2 → <span class="arithmatex">\(a=0,b=0\)</span>。</p>
+<p><strong>解析</strong>：非阻塞 <code>&lt;=</code> 并行取旧值，所以 a 拿 b 旧值 0、b 拿 a 旧值 1，交换；阻塞 <code>=</code> 顺序执行，a 先变 0，b 再取"已经变过的 a"=0。<strong>时序逻辑里用阻塞赋值会仿真/综合不一致</strong>，这是经典反例。</p>
+<h3 id="13-fifo">1.3 FIFO 深度计算（⭐⭐⭐⭐⭐）<a class="headerlink" href="#13-fifo" title="Permanent link">&para;</a></h3>
+<p><strong>知识点</strong>：<code>FIFO 深度</code>、<code>CDC</code></p>
+<p><strong>题干</strong>：写时钟 100MHz 背靠背突发写 200 个数据，读时钟 80MHz 连续读，问 FIFO 最小深度。</p>
+<p><strong>答案</strong>：40。</p>
+<p><strong>解析</strong>：突发时长 <span class="arithmatex">\(T = 200/100\text{M} = 2\mu\text{s}\)</span>，期间读走 <span class="arithmatex">\(80\text{M}\times2\mu\text{s}=160\)</span> 个，深度 <span class="arithmatex">\(=200-160=40\)</span>。公式见 <a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">八股</a> 7.2 节。</p>
+<h3 id="14-50">1.4 占空比 50% 的三分频（⭐⭐⭐⭐）<a class="headerlink" href="#14-50" title="Permanent link">&para;</a></h3>
+<p><strong>知识点</strong>：<code>分频</code>、<code>Verilog</code></p>
+<p><strong>题干</strong>：写出占空比 50% 的三分频器代码。</p>
+<p><strong>答案</strong>：模 3 计数器，上升沿/下降沿各产生 <code>(cnt==0)</code> 脉冲，相或：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">cnt_p</span><span class="p">,</span><span class="w"> </span><span class="n">cnt_n</span><span class="p">;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="n">cnt_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">cnt_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_p</span><span class="o">==</span><span class="mh">2</span><span class="p">)</span><span class="o">?</span><span class="mh">0</span><span class="o">:</span><span class="n">cnt_p</span><span class="o">+</span><span class="mh">1</span><span class="p">;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">negedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="n">cnt_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">cnt_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_n</span><span class="o">==</span><span class="mh">2</span><span class="p">)</span><span class="o">?</span><span class="mh">0</span><span class="o">:</span><span class="n">cnt_n</span><span class="o">+</span><span class="mh">1</span><span class="p">;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">assign</span><span class="w"> </span><span class="n">clk_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_p</span><span class="o">==</span><span class="mh">0</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_n</span><span class="o">==</span><span class="mh">0</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="15-latch">1.5 推断出 latch 的代码（⭐⭐⭐）<a class="headerlink" href="#15-latch" title="Permanent link">&para;</a></h3>
+<p><strong>知识点</strong>：<code>Verilog</code>、<code>latch</code></p>
+<p><strong>题干</strong>：下面代码综合出什么电路？</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">en</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">end</span>
+</code></pre></div>
+<p><strong>答案</strong>：推断出 <strong>latch</strong>（en=0 时 y 保持）。</p>
+<p><strong>解析</strong>：组合 always 中 <code>if</code> 无 <code>else</code> → 未写分支保持旧值 → 综合器用锁存器实现。应补 <code>else y = 1'b0;</code>。</p>
+<h3 id="16">1.6 跨时钟域单比特处理（⭐⭐⭐）<a class="headerlink" href="#16" title="Permanent link">&para;</a></h3>
+<p><strong>知识点</strong>：<code>CDC</code></p>
+<p><strong>题干</strong>：慢时钟域的单比特电平信号传到快时钟域怎么处理？快→慢的窄脉冲呢？</p>
+<p><strong>答案</strong>：慢→快：打两拍即可；快→慢：窄脉冲可能短于慢周期而漏采，需<strong>脉冲同步器（toggle 法）</strong>或<strong>展宽+握手</strong>。详解见 <a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">八股</a> 4.2 节。</p>
+<h3 id="17-1011">1.7 序列检测 1011（⭐⭐⭐⭐）<a class="headerlink" href="#17-1011" title="Permanent link">&para;</a></h3>
+<p><strong>知识点</strong>：<code>状态机</code>、<code>FSM</code></p>
+<p><strong>题干</strong>：设计可重叠的 1011 序列检测器（Moore），画出状态转移关系。</p>
+<p><strong>答案</strong>：<span class="arithmatex">\(S_0 \xrightarrow{1} S_1 \xrightarrow{0} S_2 \xrightarrow{1} S_3 \xrightarrow{1} S_4\)</span>（<span class="arithmatex">\(S_4\)</span> 输出 1）；重叠：<span class="arithmatex">\(S_4 \xrightarrow{1} S_1\)</span>、<span class="arithmatex">\(S_4 \xrightarrow{0} S_2\)</span>。完整代码见 <a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">八股</a> 6.4 节。</p>
+<hr />
+<h2 id="_3">二、按公司记录的真题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>每家公司占一个小节，边考边录。<strong>年份</strong>标明校招批次（如 2026 届）。</p>
+</blockquote>
+<h3 id="21">2.1 华为海思<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p><strong>考查方向</strong>：setup/hold 计算、异步 FIFO 深度、跨时钟域、Verilog 波形预测、状态机。</p>
 <ul>
-<li><a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a> —— 数制码制、逻辑代数、卡诺图（本篇的前置）</li>
-<li><a href="../%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">时序逻辑电路</a> —— 有记忆的电路：触发器、计数器、状态机</li>
-<li><a href="../../%E6%95%B0%E5%AD%97IC/Verilog%20HDL%E6%A0%B8%E5%BF%83%E8%AF%AD%E6%B3%95%E4%B8%8E%E5%BB%BA%E6%A8%A1/">Verilog HDL 核心语法与建模</a> —— 组合逻辑的 HDL 描述（always @*）</li>
+<li>（等待录入，模板见「使用说明」）</li>
+</ul>
+<h3 id="22">2.2 大疆<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p><strong>考查方向</strong>：时序约束、DDR/接口协议、数字信号处理、Verilog 手撕。</p>
+<ul>
+<li>（等待录入）</li>
+</ul>
+<h3 id="23">2.3 中兴<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p><strong>考查方向</strong>：数电基础、组合逻辑、计数器、Verilog 改错。</p>
+<ul>
+<li>（等待录入）</li>
+</ul>
+<h3 id="24">2.4 联发科 / 紫光展锐<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
+<p><strong>考查方向</strong>：亚稳态/CDC、FIFO、功耗、AXI 总线基础。</p>
+<ul>
+<li>（等待录入）</li>
+</ul>
+<h3 id="25">2.5 汇顶 / 兆易创新<a class="headerlink" href="#25" title="Permanent link">&para;</a></h3>
+<p><strong>考查方向</strong>：模拟混合信号基础、低功耗、I2C/SPI 协议、状态机。</p>
+<ul>
+<li>（等待录入）</li>
+</ul>
+<h3 id="26">2.6 寒武纪 / 地平线 / 商汤<a class="headerlink" href="#26" title="Permanent link">&para;</a></h3>
+<p><strong>考查方向</strong>：AI 加速器、卷积/流水线、并行计算、DDR。</p>
+<ul>
+<li>（等待录入）</li>
+</ul>
+<h3 id="27">2.7 天锐星通<a class="headerlink" href="#27" title="Permanent link">&para;</a></h3>
+<p><strong>考查方向</strong>：时序（skew/jitter、setup/hold）、存储（BRAM/分布式RAM）、IO 原语、竞争冒险、Verilog 基础、Debug 方法论、计数器编程。</p>
+<blockquote>
+<p>以下 9 题为 2026 届笔试原题，解析已逐题展开，可直接当复习讲义。</p>
+</blockquote>
+<p><strong>1. 时钟 jitter 和时钟偏斜的概念，以及它们影响 FPGA 的最高工作频率吗？（⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>skew</code>、<code>jitter</code>、<code>时序</code></p>
+<p><strong>答案</strong>：
+- <strong>时钟偏斜 skew</strong>：同一时钟源到达<strong>不同触发器</strong>的时间差。根源是时钟布线长度不同（走线有延迟），所以"同一个沿"到 A 触发器和 B 触发器时刻不一致。它是<strong>空间（芯片位置）维度的偏差</strong>。
+- <strong>时钟抖动 jitter</strong>：时钟边沿相对理想时刻的<strong>随机偏差</strong>。根源是 PLL/MMCM 的相位噪声、电源纹波、温度漂移。它是<strong>时间（同一位置不同时刻）维度的不确定</strong>，同一时刻看单个 FF 的沿也在抖。</p>
+<p><strong>它们影响最高频率吗？—— 都影响</strong>，机理不同：</p>
+<table>
+<thead>
+<tr>
+<th>因素</th>
+<th>对 setup 的影响</th>
+<th>对 hold 的影响</th>
+<th>净效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>skew（负偏斜，接收端时钟<strong>早到</strong>）</td>
+<td>吃掉建立余量</td>
+<td>有利于保持</td>
+<td><strong>降低</strong>最高频率</td>
+</tr>
+<tr>
+<td>skew（正偏斜，接收端时钟<strong>晚到</strong>）</td>
+<td>增加建立余量</td>
+<td>威胁保持</td>
+<td>可能提高 setup 上限，但 hold 变紧</td>
+</tr>
+<tr>
+<td>jitter</td>
+<td>压缩有效周期</td>
+<td>—</td>
+<td>一定<strong>降低</strong>最高频率</td>
+</tr>
+</tbody>
+</table>
+<p>setup 分析公式（保守把 skew/jitter 都加进去）：
+$<span class="arithmatex">\(T_{clk} \ge t_{co} + t_{comb} + t_{su} + t_{skew} + t_{jitter}\)</span>$</p>
+<p><strong>符号含义</strong>（记忆：沿 1 出发 → 传数据 → 赶在沿 2 前稳定，一共只有 <span class="arithmatex">\(T_{clk}\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>全称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(T_{clk}\)</span></td>
+<td>时钟周期</td>
+<td>倒数即最高频率 <span class="arithmatex">\(f_{max}=1/T_{clk}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(t_{co}\)</span></td>
+<td>clock-to-output</td>
+<td>发送触发器的输出延迟：时钟沿到后 Q 端出数据的时间</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(t_{comb}\)</span></td>
+<td>组合逻辑延迟</td>
+<td>数据穿过中间所有 LUT/布线的总延迟</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(t_{su}\)</span></td>
+<td>建立时间</td>
+<td>接收触发器要求数据提前于时钟沿稳定</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(t_{skew}\)</span></td>
+<td>时钟偏斜</td>
+<td>时钟到收发两个触发器的时间差（空间偏差）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(t_{jitter}\)</span></td>
+<td>时钟抖动</td>
+<td>时钟沿随机偏差，等效压缩周期（时间偏差）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>时间线</strong>：时钟沿 1 →（<span class="arithmatex">\(t_{co}\)</span>）发送 FF 输出 →（<span class="arithmatex">\(t_{comb}\)</span>）组合逻辑 → 接收 FF 的 D 端 → 须在时钟沿 2 前 <span class="arithmatex">\(t_{su}\)</span> 稳定；沿 1→沿 2 总长 <span class="arithmatex">\(T_{clk}\)</span>，再留 skew/jitter 余量。</p>
+<p>所以<strong>结论：都会影响最高工作频率</strong>。jitter 只有坏影响；skew 方向不定，设计按最坏情况处理。<strong>回答要点</strong>：先把两者概念讲清（空间 vs 时间），再分别说它们怎么进时序公式。</p>
+<p><strong>2. 建立时间和保持时间的概念，以及出现违例怎么修复？（⭐⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>setup/hold</code></p>
+<p><strong>答案</strong>：
+- <strong>建立时间 <span class="arithmatex">\(t_{su}\)</span></strong>：时钟沿<strong>到来前</strong>，数据必须提前稳定下来的最小时间。它限制了数据能"走多慢"。
+- <strong>保持时间 <span class="arithmatex">\(t_h\)</span></strong>：时钟沿<strong>到来后</strong>，数据必须继续保持不变的最小时间。它限制了数据能"变多快"。</p>
+<p><strong>setup 违例</strong>（数据到得太晚）——<strong>影响：限制最高工作频率</strong>（路径太长，数据来不及在下一个沿前稳定，频率一高就出错，所以"最高频率上不去"）。修复：
+1. <strong>降频</strong>（增大 <span class="arithmatex">\(T_{clk}\)</span>），最直接；
+2. <strong>插流水线</strong>：在组合路径中间切一级 FF，把 <span class="arithmatex">\(t_{comb}\)</span> 切成两半（面积换速度）；
+3. <strong>逻辑优化</strong>：减少组合级数、把大表达式拆小、用查找表替换；
+4. <strong>综合/布局优化</strong>：提高综合 effort、约束布局、寄存器重定时 retiming；
+5. 减小 skew。</p>
+<p><strong>hold 违例</strong>（数据变得太快）——<strong>影响：功能性错误，与频率无关</strong>（数据在同一个时钟沿后没保持住 <span class="arithmatex">\(t_h\)</span>，接收端采到的是"变掉的值"，即使降频也照样错）。修复：
+1. <strong>数据路径加 buffer 延迟</strong>（在布线工具里加 delay cell / buffer）；
+2. 工具里开 hold 修复选项；
+3. 注意：<strong>hold 与频率无关</strong>，降频救不了 hold 违例——因为 hold 检查的是"同一个沿后数据不能马上变"，时钟周期再大也没用。</p>
+<blockquote>
+<p><strong>插 buffer 是什么？和"打拍"有什么区别？（面试高频追问）</strong></p>
+<p><strong>打拍</strong> = 在路径上插入<strong>触发器 FF</strong>（有时钟）：把组合路径切短，数据<strong>晚一个时钟周期</strong>到 → 修 <strong>setup 违例</strong>。
+<strong>插 buffer</strong> = 在路径上插入<strong>延迟单元</strong>（如两个反相器串联的 buffer，无时钟）：加一点<strong>纯传播延迟</strong> <span class="arithmatex">\(\Delta t\)</span>，数据<strong>慢几纳秒</strong>到、不多占周期 → 修 <strong>hold 违例</strong>。</p>
+<p>一句话：<strong>打拍=加停顿站（修 setup，但加 1 拍延迟）；插 buffer=加绕路（修 hold，只吃面积/时序余量）</strong>。二者不能互换——打拍对 hold 无效，插 buffer 反而恶化 setup。FPGA 中 hold 一般由布线工具自动修复，不必手插。</p>
+</blockquote>
+<p>判断违例看 <strong>timing report 的 WNS/TNS</strong>（负值即违例）。</p>
+<p><strong>3. BRAM 和分布式 RAM 的区别？什么情况优先选哪个？（⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>BRAM</code>、<code>分布式 RAM</code></p>
+<p><strong>答案</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>BRAM</th>
+<th>分布式 RAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>物理实现</td>
+<td>专用硬核存储块（7 系每块 36Kb）</td>
+<td>用 <strong>LUT</strong> 拼出来的存储</td>
+</tr>
+<tr>
+<td>容量</td>
+<td>大（几 Kb～几十 Mb）</td>
+<td>小（几十 bit～几 Kb）</td>
+</tr>
+<tr>
+<td>读写</td>
+<td>同步写、同步读（有寄存器输出，读延迟固定 1~2 拍）</td>
+<td>同步写、<strong>可异步读</strong>（也可同步）</td>
+</tr>
+<tr>
+<td>资源成本</td>
+<td>占专用 BRAM 块</td>
+<td>占 LUT/FF（与逻辑争资源）</td>
+</tr>
+<tr>
+<td>端口</td>
+<td>每块有限（一般 2 端口）</td>
+<td>灵活，可拆成多个小端口</td>
+</tr>
+<tr>
+<td>时序</td>
+<td>时序友好，不占逻辑资源</td>
+<td>容量大时占用 LUT 多、时序变差</td>
+</tr>
+</tbody>
+</table>
+<p><strong>选择原则</strong>：
+- <strong>大容量、规整、需要同步读的存储</strong>（数据缓冲、图像行缓存、跨时钟 FIFO 体）→ <strong>BRAM</strong>；
+- <strong>小容量（≤ 几 Kb）、需要异步读、或 BRAM 已用尽</strong> → 分布式 RAM；
+- <strong>小移位寄存器 / 小 FIFO / 延迟线</strong> → 分布式（SRL16 就是 LUT 改的移位寄存器）；
+- <strong>海量小存储分散在逻辑中</strong> → 分布式更省 BRAM。</p>
+<p>一句话：<strong>大而规整用 BRAM，小而灵活用分布式</strong>。</p>
+<p><strong>4. IOBUF、IDELAY、IDDR、ODDR 是什么？应用场景？（⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>IO 原语</code></p>
+<p><strong>答案</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>原语</th>
+<th>全称/作用</th>
+<th>关键点</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IOBUF</strong></td>
+<td>双向 IO 缓冲器</td>
+<td>三态控制（高阻 Z / 输出 / 输入），一个 pin 双向</td>
+<td>I2C 的 SDA、存储器数据线等 <strong>inout 总线</strong></td>
+</tr>
+<tr>
+<td><strong>IDELAY</strong></td>
+<td>输入可编程延时单元</td>
+<td>对输入信号做精细延时（步进几十 ps，由 tap 控制）</td>
+<td>对齐源同步接口的 <strong>per-bit skew</strong>（DDR 数据线、LVDS 串行数据）</td>
+</tr>
+<tr>
+<td><strong>IDDR</strong></td>
+<td>输入 DDR 寄存器</td>
+<td>时钟<strong>上、下沿各采 1 bit</strong>，把 1 路 DDR 转成 2 路并行（半速）</td>
+<td>DDR 接口<strong>接收</strong>，如 DDR3/4 数据读</td>
+</tr>
+<tr>
+<td><strong>ODDR</strong></td>
+<td>输出 DDR 寄存器</td>
+<td>把 2 路并行数据在<strong>上、下沿分别输出</strong>，合成 1 路 DDR</td>
+<td>DDR 接口<strong>发送</strong>、DDR 时钟输出（如 DQS 发射）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>串联一句话</strong>：<strong>IDDR/ODDR 负责串并/并串转换（DDR 收发）</strong>，IDELAY 负责输入对齐（解决源同步接口的 bit-skew），IOBUF 负责双向总线。写 DDR 接口或高速源同步接口时这四样是标配。</p>
+<p><strong>5. 竞争和冒险的概念、怎么判断、怎么消除？（⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>竞争冒险</code></p>
+<p><strong>答案</strong>：
+- <strong>竞争（race）</strong>：同一信号经<strong>不同路径</strong>（不同门延迟）到达汇合门，各路径延迟不同，到达时刻不一致。
+- <strong>冒险（hazard）</strong>：竞争导致输出出现<strong>违背稳态逻辑的瞬时毛刺</strong>。分两类：
+  - <strong>静态 1 冒险</strong>：输出本应恒 1，却瞬时掉到 0（负脉冲），对应 <span class="arithmatex">\(Y=X+\overline{X}\)</span> 形式；
+  - <strong>静态 0 冒险</strong>：输出本应恒 0，却瞬时跳到 1（正脉冲），对应 <span class="arithmatex">\(Y=X\cdot\overline{X}\)</span> 形式。</p>
+<p><strong>判断（三种方法）</strong>：
+1. <strong>代数法</strong>：把其余变量代入固定值，若表达式能化成 <span class="arithmatex">\(X+\overline{X}\)</span> → 1 型冒险；化成 <span class="arithmatex">\(X\overline{X}\)</span> → 0 型冒险。
+2. <strong>卡诺图法</strong>：两个积项圈<strong>相切不相交</strong>处，就是冒险点。
+3. <strong>波形观测</strong>：示波器/仿真看跳变瞬间是否出现毛刺。</p>
+<p><strong>消除（四种手段 + 原理）</strong>：
+| 手段 | 原理 |
+|------|------|
+| 加<strong>冗余乘积项</strong> | 桥接相切圈，过渡期托住输出（最治本） |
+| 输出<strong>并联电容</strong> | 低通滤掉窄毛刺（低速可用） |
+| <strong>选通脉冲</strong> | 避开瞬态，只采稳态 |
+| <strong>输出加同步寄存器</strong> | 时钟沿屏蔽沿间毛刺——<strong>FPGA 最常用</strong> |</p>
+<p><strong>6. reg 和 wire 区别？reg 不赋初值综合后电路什么样？（⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>Verilog</code></p>
+<p><strong>答案</strong>：
+- <strong>wire</strong>：线网类型，由 <code>assign</code> 或模块端口连续驱动，表示物理连线。
+- <strong>reg</strong>：变量类型，由 <code>always</code> 块过程赋值。<strong>关键：reg 不一定是寄存器</strong>——
+  - <code>always @(posedge clk)</code> 里的 reg → 综合成<strong>寄存器（FF）</strong>；
+  - <code>always @(*)</code> 里的 reg → 综合成<strong>组合逻辑</strong>；
+  - 组合 always 里 if/case 分支不全 → 综合成 <strong>latch</strong>。</p>
+<p><strong>不赋初值综合后</strong>：
+- 仿真中：reg 默认是 <strong>X</strong>，参与运算会把 X 传染。
+- 综合后上电：寄存器的初始状态是<strong>随机的/不定</strong>（取决于 FPGA 配置后 FF 的实际状态）。
+- <strong>后果</strong>：计数器/状态机可能从任意状态起跑 → 表现为"随机复位/数据错误"。
+- <strong>对策</strong>：<strong>必须复位初始化</strong>——异步复位、同步释放，或复位时赋初值。这是"随机复位/数据错误"类问题的第一大嫌疑。</p>
+<p><strong>7. case 有 default 的好处？没有 default 综合会怎样？（⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>Verilog</code></p>
+<p><strong>答案</strong>：
+- <strong>default 的好处</strong>：
+  1. 覆盖未列举的编码，<strong>避免推断出 latch</strong>（组合 case 未穷举时保持旧值）；
+  2. 状态机的<strong>非法状态有去处</strong>（归到 IDLE），防止跑飞；
+  3. <strong>仿真与综合一致</strong>（未加 default 时两者行为可能不同）。
+- <strong>没有 default</strong>：
+  - 组合 case 未穷举（如 2bit 只写 00/01/10 三支）→ 综合推断出 <strong>latch</strong>（那支保持旧值）；
+  - 用于 FSM → 未定义编码没有转移，可能<strong>进入非法状态</strong>无法跳出。
+- <strong>建议</strong>：每个 case 都写 default，即使已穷举（1bit 的 0/1）也写上，更安全、语义更清楚。</p>
+<p><strong>8. 复杂 FPGA 项目随机复位/数据错误、无法复现，用什么方法/工具定位？（⭐⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>Debug</code>、<code>CDC</code></p>
+<p><strong>答案</strong>：随机、无法复现的错误，99% 与<strong>异步/跨时钟/复位</strong>有关，按"在线抓 → 工具扫 → 根源查 → 仿真复现"四步排查：</p>
+<ol>
+<li><strong>在线抓信号（不打断运行）</strong>：加 <strong>ILA</strong>（Vivado 逻辑分析仪核）抓关键信号——复位、PLL lock、FIFO 空满、状态机当前态、数据使能、错误标志；<strong>VIO</strong> 在线读写内部寄存器，现场注入/查询。</li>
+<li><strong>扫跨时钟域（CDC）</strong>：随机错误最典型来源。用 <strong>Spyglass CDC / Vivado CDC 分析</strong>扫未同步的跨域信号、亚稳态；重点查：单比特快慢域是否打拍、多比特是否握手/格雷码、异步 FIFO 空满是否保守。</li>
+<li><strong>查复位与时钟</strong>：</li>
+<li>复位：确认<strong>异步复位、同步释放</strong>；查复位树偏斜、漏复位模块、复位时序（是否在时钟建立后释放）；</li>
+<li>时钟：PLL/MMCM lock 是否稳定、有无时钟毛刺/切换、门控时钟。</li>
+<li><strong>仿真复现</strong>：抓取实际激励写 testbench；加 <strong>SVA 断言</strong>监控协议/时序违例；跑随机 seed 回归。</li>
+<li><strong>现场留痕</strong>：出错瞬间把关键状态/计数值/时间戳锁进<strong>错误快照寄存器</strong>，事后经接口读出，定位是哪一拍出问题。</li>
+<li><strong>二分隔离</strong>：把数据通路/控制通路、可疑模块逐个屏蔽，缩小范围。</li>
+</ol>
+<p><strong>工具清单</strong>：Vivado <strong>ILA / VIO / IBERT</strong>、VCS/XSim + SVA、<strong>Spyglass CDC</strong>、逻辑分析仪、Xilinx Debug Hub。</p>
+<p><strong>9. 编程题：0~255 计数器，有效时计数、无效保持，255→0 时输出一个时钟周期的溢出脉冲（⭐⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>计数器</code>、<code>Verilog</code></p>
+<p><strong>答案</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">module</span><span class="w"> </span><span class="n">cnt_ovf</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">clk</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">rst_n</span><span class="p">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">en</span><span class="p">,</span><span class="w">            </span><span class="c1">// 有效计数，无效保持</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">cnt</span><span class="p">,</span><span class="w"> </span><span class="c1">// 0~255</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="n">ovf</span><span class="w">        </span><span class="c1">// 255→0 那一拍，输出一个周期高电平</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">);</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">            </span><span class="n">cnt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">8</span><span class="mi">&#39;d0</span><span class="p">;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">            </span><span class="n">ovf</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">en</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">            </span><span class="n">cnt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">            </span><span class="n">ovf</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">8</span><span class="mi">&#39;d255</span><span class="p">);</span><span class="w">   </span><span class="c1">// 本拍 cnt 由 255 变 0，输出溢出脉冲</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">            </span><span class="n">cnt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span><span class="w">               </span><span class="c1">// en 无效：保持</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">            </span><span class="n">ovf</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="k">endmodule</span>
+</code></pre></div>
+<p><strong>解析</strong>：
+- <strong>计数</strong>：<code>en</code> 为 1 时 <code>cnt &lt;= cnt+1</code>，0~255 循环；<code>en</code> 为 0 时 <code>cnt &lt;= cnt</code> 保持。
+- <strong>溢出脉冲</strong>：<code>ovf &lt;= (cnt==255)</code>——当本拍旧值 cnt=255 且 en=1 时，这一拍 cnt 变为 0、ovf 变为 1；下一拍 cnt=0 时 <code>ovf&lt;=0</code>。所以 <code>ovf</code> 恰好高一个时钟周期，且正是在 255→0 跳变后的那一拍。
+- <strong>边界</strong>：复位后 cnt=0 不立即输出脉冲；en 保持有效时每 256 拍出一次溢出。
+- 已用仿真验证：<code>ovf</code> 只在 255→0 那一拍为高，宽恰为 1 个时钟周期。</p>
+<h3 id="28">2.8 其他公司（可自行新增小节）<a class="headerlink" href="#28" title="Permanent link">&para;</a></h3>
+<ul>
+<li>（等待录入）</li>
+</ul>
+<hr />
+<h2 id="_4">三、刷题建议<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>先过通用高频题</strong>（第一节）：覆盖大多数公司 60% 的送分题。</li>
+<li><strong>笔试前</strong>：把目标公司「考查方向」过一遍，重点突击。</li>
+<li><strong>每场笔试后当天录入</strong>：题目+答案+解析趁热写，考完就忘。</li>
+<li><strong>代码题一定要手写跑通</strong>：分频/序列检测/FIFO 这类，面试官常现场改题。</li>
+</ol>
+<hr />
+<h2 id="_5">相关笔记<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">FPGA 校招面试八股</a></li>
+<li><a href="../%E6%95%B0%E5%AD%97%E7%94%B5%E8%B7%AF%E5%9F%BA%E7%A1%80/">数字电路基础</a></li>
+<li><a href="../%E7%BB%84%E5%90%88%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">组合逻辑电路</a></li>
+<li><a href="../%E6%97%B6%E5%BA%8F%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/">时序逻辑电路</a></li>
 </ul>
 
 
@@ -3569,7 +3131,7 @@ $<span class="arithmatex">\(Y = \overline{A}C + AB + BC\)</span>$
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月5日 15:26:32 UTC">2026年8月5日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月11日 15:36:37 UTC">2026年8月11日</span>
   </span>
 
     
@@ -3579,7 +3141,7 @@ $<span class="arithmatex">\(Y = \overline{A}C + AB + BC\)</span>$
     <span class="md-icon" title="创建日期">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月5日 15:26:32 UTC">2026年8月5日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月11日 15:36:37 UTC">2026年8月11日</span>
   </span>
 
     
