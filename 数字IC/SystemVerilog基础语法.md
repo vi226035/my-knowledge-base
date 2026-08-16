@@ -229,7 +229,7 @@ endmodule
 | **调试友好** | ✅ 可跟踪定义位置 | ❌ 难以追踪 |
 | **推荐程度** | ✅ 推荐 | ❌ 不推荐（除条件编译） |
 
->  ⚠️ **重要**：实际项目中**不要用 `define 定义常量**，用 `package` 或 `parameter`。``define 只用于条件编译（如 `` `ifdef SIMULATION`）。
+>  ⚠️ **重要**：实际项目中**不要用 \`define\` 定义常量**，用 \`package\` 或 \`parameter\`。\`define 只用于条件编译（如 \`ifdef SIMULATION）。
 
 ---
 
