@@ -152,7 +152,7 @@ module reset_sync (
     assign rst_sync_n = sync[1];
 endmodule
 ```
-
+     
 ### 3.2 时钟网络
 
 - 时钟必须走**专用全局网络（BUFG）**，不能用普通布线（skew 大、占 LUT）。
@@ -465,11 +465,54 @@ set_multicycle_path 2 -setup -from [get_pins ...] -to [get_pins ...]  # 慢速�
 
 ### 6.1 三段式状态机（推荐写法）
 
-- 第一段：时序，状态寄存器更新。
-- 第二段：组合，次态逻辑。
-- 第三段：时序（或组合），输出。
+- 第一段：时序，状态寄存器更新（`state <= next_state`）。
+- 第二段：组合，次态逻辑（`always @*`，用 `=`）。
+- 第三段：时序，输出寄存化（推荐，消毛刺）；也可用组合输出。
 
-优点：结构清晰、无 latch、输出可寄存消毛刺。
+优点：结构清晰、无 latch、输出可寄存消毛刺；综合器好优化。
+
+**完整模板（可直接背）**：
+
+```verilog
+module fsm_3stage (
+    input  clk,
+    input  rst_n,
+    input  start,
+    input  done,
+    output reg busy          // 输出（寄存器化）
+);
+    // 状态编码：独热码 或 二进制
+    localparam IDLE = 2'b00, RUN = 2'b01, DONE = 2'b10;
+    reg [1:0] state, next_state;
+
+    // ── 第一段：状态寄存器（时序，非阻塞）──
+    always @(posedge clk or negedge rst_n)
+        if (!rst_n) state <= IDLE;
+        else        state <= next_state;
+
+    // ── 第二段：次态逻辑（组合，阻塞赋值）──
+    always @(*) begin
+        next_state = state;          // 默认保持，防 latch
+        case (state)
+            IDLE: if (start) next_state = RUN;
+            RUN:  if (done)  next_state = DONE;
+            DONE: next_state = IDLE;
+            default: next_state = IDLE;
+        endcase
+    end
+
+    // ── 第三段：输出（时序寄存，消毛刺）──
+    always @(posedge clk or negedge rst_n)
+        if (!rst_n) busy <= 1'b0;
+        else        busy <= (state == RUN);   // RUN 状态 busy=1
+endmodule
+```
+
+**要点**：
+1. **第一段必须用 `<=`**，第二段必须用 `=`，**不混用**。
+2. 第二段开头给 `next_state` 赋默认值（=state），防止 case 未覆盖分支推断 latch。
+3. 第三段用寄存输出，毛刺被时钟沿"屏蔽"——FPGA 推荐；若用 `assign busy = (state==RUN)` 是组合输出，状态跳变瞬间可能毛刺。
+4. 独热码：一状态一 FF，译码简单、速度快（FPGA 常用）；二进制省 FF。
 
 ### 6.2 Moore vs Mealy
 
