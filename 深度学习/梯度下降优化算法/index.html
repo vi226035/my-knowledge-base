@@ -3753,9 +3753,24 @@
 <p><strong>为什么叫随机</strong>？因为每次只随机取一小部分数据（比如 64 张图）算梯度，而不是在所有数据上算精确梯度。</p>
 <h3 id="eta">参数 <span class="arithmatex">\(\eta\)</span>（学习率）是怎么影响训练的？<a class="headerlink" href="#eta" title="Permanent link">&para;</a></h3>
 <p><span class="arithmatex">\(\eta\)</span> 是 SGD 唯一的超参数，但它极其敏感：</p>
-<p>| <span class="arithmatex">\(\eta\)</span> 太大 | 一步跨过谷底，出现震荡甚至发散，Loss 忽大忽小 |
-| <span class="arithmatex">\(\eta\)</span> 太小 | 乌龟爬，收敛极慢，可能训到世界末日 Loss 还没到底 |
-| <span class="arithmatex">\(\eta\)</span> 刚好 | 平滑下降，Loss 曲线稳定往下走 |</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\eta\)</span> 太大</th>
+<th>一步跨过谷底，出现震荡甚至发散，Loss 忽大忽小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\eta\)</span> 太小</td>
+<td>乌龟爬，收敛极慢，可能训到世界末日 Loss 还没到底</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\eta\)</span> 刚好</td>
+<td>平滑下降，Loss 曲线稳定往下走</td>
+</tr>
+</tbody>
+</table>
 <h3 id="_6">适用场景<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <ul>
 <li>教学演示（代码最少，最容易理解什么叫"梯度下降"）</li>
@@ -3798,12 +3813,40 @@ w_{t+1} &amp;= w_t - v_t
 <p>SGD 是每步停住重新摸地再走。Momentum 是你推着一个有惯性的大铁球下山——它自己越滚越快，小的坑洼石子直接碾过去，不会被小障碍拦住。</p>
 <h3 id="beta"><span class="arithmatex">\(\beta\)</span> 是怎么影响训练的？<a class="headerlink" href="#beta" title="Permanent link">&para;</a></h3>
 <p><span class="arithmatex">\(\beta\)</span> 决定了"惯性记忆"有多长。以 <span class="arithmatex">\(\beta=0.9\)</span> 为例，过去 10 步的梯度各有权重（最近的占 0.1，上一步 0.09，再上步 0.081...），而 30 步以前的梯度贡献已趋近于 0。</p>
-<p>| <span class="arithmatex">\(\beta=0\)</span> | 退化为 SGD，没有惯性 |
-| <span class="arithmatex">\(\beta=0.5\)</span> | 只记近 2~3 步，惯性很弱 |
-| <span class="arithmatex">\(\beta=0.9\)</span> | 经典值，记近 10 步，工业界标准 |
-| <span class="arithmatex">\(\beta=0.99\)</span> | 惯性接近 100 步，下坡极快但谷底可能刹不住 |
-| <span class="arithmatex">\(\beta\)</span> 太大 | 冲向谷底时速度太快刹不住车，反复冲过头（overshooting） |
-| <span class="arithmatex">\(\beta\)</span> 太小 | 接近 SGD，震荡去不掉 |</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\beta\)</span> 取值</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\beta=0\)</span></td>
+<td>退化为 SGD，没有惯性</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\beta=0.5\)</span></td>
+<td>只记近 2~3 步，惯性很弱</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\beta=0.9\)</span></td>
+<td>经典值，记近 10 步，工业界标准</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\beta=0.99\)</span></td>
+<td>惯性接近 100 步，下坡极快但谷底可能刹不住</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\beta\)</span> 太大</td>
+<td>冲向谷底时速度太快刹不住车，反复冲过头（overshooting）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\beta\)</span> 太小</td>
+<td>接近 SGD，震荡去不掉</td>
+</tr>
+</tbody>
+</table>
 <h3 id="_13">为什么能抑制震荡？<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>震荡方向上的符号不断反转（两次正两次负），累加速度时会互相抵消。而真正下山的方向符号一致，会持续叠加加速。这就是为什么 Momentum 在峡谷地形能比 SGD 快好几倍——它把震荡方向的步给抵消了，有效步只朝下山方向走。</p>
 <h3 id="_14">适用场景<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
@@ -3922,9 +3965,28 @@ w_{t+1} &amp;= w_t - \frac{\eta}{\sqrt{G_t + \epsilon}} \cdot \nabla L(w_t)
 <h3 id="_36">打个比方<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
 <p>AdaGrad 是把从小到大的每一笔收支都记录在案，200 年前的旧账也要拿出来当证据限制今天的花销。RMSprop 只保留最近一段时间的账单——旧的过期作废，始终保持对"当前状态"的合理评估。</p>
 <h3 id="beta_1"><span class="arithmatex">\(\beta\)</span> 的影响<a class="headerlink" href="#beta_1" title="Permanent link">&para;</a></h3>
-<p>| <span class="arithmatex">\(\beta=0.9\)</span>（默认） | 窗口约 10 步，平滑适中 |
-| <span class="arithmatex">\(\beta=0.99\)</span> | 窗口约 100 步，极度平滑但响应慢——梯度突然变化时步长调整迟钝 |
-| <span class="arithmatex">\(\beta=0.5\)</span> | 窗口约 2 步，跟随快但毛刺多——步长忽大忽小 |</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\beta\)</span> 取值</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\beta=0.9\)</span>（默认）</td>
+<td>窗口约 10 步，平滑适中</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\beta=0.99\)</span></td>
+<td>窗口约 100 步，极度平滑但响应慢——梯度突然变化时步长调整迟钝</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\beta=0.5\)</span></td>
+<td>窗口约 2 步，跟随快但毛刺多——步长忽大忽小</td>
+</tr>
+</tbody>
+</table>
 <h3 id="rnnlstm">为什么是 RNN/LSTM 训练的经典选择？<a class="headerlink" href="#rnnlstm" title="Permanent link">&para;</a></h3>
 <p>RNN 的梯度在不同时间步差异极大——刚开头几步梯度很小，越往后梯度越大。如果用固定学习率，后期参数会被巨大梯度假摔死，前期又走不动。RMSprop 自动给大梯度时刻用小步长、给小梯度时刻用大步长，完美适配"梯度幅度变化剧烈"的场景。</p>
 <h3 id="_37">适用场景<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
@@ -3962,10 +4024,32 @@ w_{t+1} &amp;= w_t - \frac{\eta \cdot \hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
 <p><strong>默认值</strong>：<span class="arithmatex">\(\eta=0.001\)</span>，<span class="arithmatex">\(\beta_1=0.9\)</span>，<span class="arithmatex">\(\beta_2=0.999\)</span>，<span class="arithmatex">\(\epsilon=10^{-8}\)</span></p>
 <h3 id="_42">大白话<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h3>
 <p>把 <strong>Momentum 的惯性</strong>（<span class="arithmatex">\(m_t\)</span>）和 <strong>RMSprop 的自适应步长</strong>（<span class="arithmatex">\(v_t\)</span>）焊在一起。再加一个<strong>偏差校正</strong>——因为 <span class="arithmatex">\(m_t\)</span> 和 <span class="arithmatex">\(v_t\)</span> 初始都是 0，训练前几步会被"偏压"得比真实值小，除以 <span class="arithmatex">\(1-\beta_1^t\)</span> 就是放大补偿。训了几步之后 <span class="arithmatex">\(1-\beta_1^t\)</span> 趋近 1，校正自然消失。四个模块各司其职：</p>
-<p>| 一阶矩 <span class="arithmatex">\(m_t\)</span> | 记住方向惯性，平滑震荡（Momentum 贡献） |
-| 二阶矩 <span class="arithmatex">\(v_t\)</span> | 给每个参数调独立步长（RMSprop 贡献） |
-| <span class="arithmatex">\(\hat{m}_t,\,\hat{v}_t\)</span> | 偏差校正，防训练初期 <span class="arithmatex">\(m_t/v_t\)</span> 被初始 0 压扁 |
-| 最终分子分母 | 方向用 <span class="arithmatex">\(m_t\)</span>，步长用 <span class="arithmatex">\(1/\sqrt{v_t}\)</span>，两全其美 |</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一阶矩 <span class="arithmatex">\(m_t\)</span></td>
+<td>记住方向惯性，平滑震荡（Momentum 贡献）</td>
+</tr>
+<tr>
+<td>二阶矩 <span class="arithmatex">\(v_t\)</span></td>
+<td>给每个参数调独立步长（RMSprop 贡献）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\hat{m}_t,\,\hat{v}_t\)</span></td>
+<td>偏差校正，防训练初期 <span class="arithmatex">\(m_t/v_t\)</span> 被初始 0 压扁</td>
+</tr>
+<tr>
+<td>最终分子分母</td>
+<td>方向用 <span class="arithmatex">\(m_t\)</span>，步长用 <span class="arithmatex">\(1/\sqrt{v_t}\)</span>，两全其美</td>
+</tr>
+</tbody>
+</table>
 <h3 id="_43">打个比方<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h3>
 <p>Adam 是一个全能司机：有预判力（Momentum——知道该往哪冲），会看路踩油门（RMSprop——平坦路猛踩、颠簸路轻踩），而且刚启动时不会因为不知道车况就猛打方向盘（偏差校正——温柔起步）。</p>
 <h3 id="_44">四个超参数怎么调？<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h3>
@@ -4239,7 +4323,7 @@ w_{t+1} &amp;= w_t - \frac{\eta \cdot \hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月31日 16:37:27 UTC">2026年7月31日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月16日 03:19:13 UTC">2026年8月16日</span>
   </span>
 
     
