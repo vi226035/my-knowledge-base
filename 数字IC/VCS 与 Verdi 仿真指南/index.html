@@ -6,19 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="本文基于 Synopsys Golden UPF Low Power Flow 流程图，逐层拆解数字芯片从概念到流片的完整生命周期。">
+        <meta name="description" content="VCS 编译仿真 + Verdi 看波形调试，是数字 IC 验证的标配工具链（工业界事实标准）。本篇讲清基本原理 → filelist → testbench 波形代码 → Makefile（含 clean）→ 完整小例子 → 常用选项 → Verdi 操作 → 踩坑。前置见 数字芯片设计与验证概述、SystemVe…">
       
       
         <meta name="author" content="vi226035">
       
       
-        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/%E6%95%B0%E5%AD%97IC/%E6%95%B0%E5%AD%97%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%AA%8C%E8%AF%81%E5%85%A8%E6%B5%81%E7%A8%8B/">
+        <link rel="canonical" href="https://vi226035.github.io/my-knowledge-base/%E6%95%B0%E5%AD%97IC/VCS%20%E4%B8%8E%20Verdi%20%E4%BB%BF%E7%9C%9F%E6%8C%87%E5%8D%97/">
       
       
-        <link rel="prev" href="../VCS%20%E4%B8%8E%20Verdi%20%E4%BB%BF%E7%9C%9F%E6%8C%87%E5%8D%97/">
+        <link rel="prev" href="../UVM%E9%AA%8C%E8%AF%81%E6%96%B9%E6%B3%95%E5%AD%A6%E5%85%A5%E9%97%A8/">
       
       
-        <link rel="next" href="../../%E8%BD%AF%E4%BB%B6%E7%A7%98%E7%B1%8D/MathType%20%E6%B0%B8%E4%B9%85%E5%85%8D%E8%B4%B9%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">
+        <link rel="next" href="../%E6%95%B0%E5%AD%97%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%AA%8C%E8%AF%81%E5%85%A8%E6%B5%81%E7%A8%8B/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>数字芯片设计与验证全流程 - vi226035 的知识库</title>
+        <title>VCS 与 Verdi 仿真指南 - vi226035 的知识库</title>
       
     
     
@@ -75,14 +75,14 @@
   {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "headline": "数字芯片设计与验证全流程",
-    "description": "本文基于 Synopsys Golden UPF Low Power Flow 流程图，逐层拆解数字芯片从概念到流片的完整生命周期。",
+    "headline": "VCS 与 Verdi 仿真指南",
+    "description": "VCS 编译仿真 + Verdi 看波形调试，是数字 IC 验证的标配工具链（工业界事实标准）。本篇讲清基本原理 → filelist → testbench 波形代码 → Makefile（含 clean）→ 完整小例子 → 常用选项 → Verdi 操作 → 踩坑。前置见 数字芯片设计与验证概述、SystemVe…",
     "author": {
       "@type": "Person",
       "name": "vi226035"
     },
-    "url": "https://vi226035.github.io/my-knowledge-base/%E6%95%B0%E5%AD%97IC/%E6%95%B0%E5%AD%97%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%AA%8C%E8%AF%81%E5%85%A8%E6%B5%81%E7%A8%8B/"
-    ,"datePublished": "2026-07-23"
+    "url": "https://vi226035.github.io/my-knowledge-base/%E6%95%B0%E5%AD%97IC/VCS%20%E4%B8%8E%20Verdi%20%E4%BB%BF%E7%9C%9F%E6%8C%87%E5%8D%97/"
+    ,"datePublished": "2026-08-07"
     
   }
   </script>
@@ -107,7 +107,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#vcs-verdi" class="md-skip">
           跳转至
         </a>
       
@@ -140,7 +140,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              数字芯片设计与验证全流程
+              VCS 与 Verdi 仿真指南
             
           </span>
         </div>
@@ -2019,34 +2019,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../VCS%20%E4%B8%8E%20Verdi%20%E4%BB%BF%E7%9C%9F%E6%8C%87%E5%8D%97/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    VCS 与 Verdi 仿真指南
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -2066,7 +2038,7 @@
   <span class="md-ellipsis">
     
   
-    数字芯片设计与验证全流程
+    VCS 与 Verdi 仿真指南
   
 
     
@@ -2084,7 +2056,7 @@
   <span class="md-ellipsis">
     
   
-    数字芯片设计与验证全流程
+    VCS 与 Verdi 仿真指南
   
 
     
@@ -2110,13 +2082,152 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一、大白话一句话理解
+        一、是什么 &amp; 为什么用
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、仿真基本原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、仿真基本原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 编译 + 运行两步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-timescale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 时间单位：timescale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 波形格式对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filelist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、filelist（文件列表）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、filelist（文件列表）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filelistf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filelist.f 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、testbench 文件中需要添加（波形相关）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、Makefile 基础（初学者必读）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、Makefile 基础（初学者必读）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 基本语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-vcs-makefile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 VCS 仿真 Makefile 实例（逐行讲解）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-clean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 为什么 clean 很重要
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2124,91 +2235,52 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、全图总览
+        六、完整工作流小例子
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="二、全图总览">
+    <nav class="md-nav" aria-label="六、完整工作流小例子">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五个抽象层级
+        目录结构
       
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#rtladderv8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rtl/adder.v（8 位加法器）
+      
+    </span>
+  </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#tbtb_adderv" class="md-nav__link">
+    <span class="md-ellipsis">
       
-        <li class="md-nav__item">
+        tb/tb_adder.v
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、逐层详解
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="三、逐层详解">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#systemalgorithm-level" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        第一层：System/Algorithm Level（系统/算法级）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#register-transfer-level-rtl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        第二层：Register-Transfer Level（寄存器传输级 / RTL）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gate-level-middle-end" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        第三层：Gate Level（门级 / 中间段 Middle End）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#schematic-level-back-end" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        第四层：Schematic Level（版图级 / 后端 Back End）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#silicon" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        第五层：Silicon（硅片级）
+        命令步骤
       
     </span>
   </a>
@@ -2221,22 +2293,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、VCS 常用选项速查
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verdi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、Verdi 常用操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、Verdi 常用操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、左侧的验证与原型手段
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="四、左侧的验证与原型手段">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1 静态/形式/动态验证
+        打开
       
     </span>
   </a>
@@ -2244,10 +2327,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42" class="md-nav__link">
+  <a href="#nwave" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 架构探索与虚拟原型
+        nWave 波形窗口常用
       
     </span>
   </a>
@@ -2255,21 +2338,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-emulation" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3 Emulation（硬件仿真）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#44-fpga-prototypingfpga" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.4 FPGA Prototyping（FPGA 原型验证）
+        源码窗口
       
     </span>
   </a>
@@ -2278,28 +2350,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#golden-upf-low-power-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        五、右侧的 Golden UPF Low Power Flow
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        六、底部的基础设施
-      
-    </span>
-  </a>
   
 </li>
       
@@ -2307,7 +2357,7 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        七、数据流（中间的蓝色箭头）
+        九、常见问题排查
       
     </span>
   </a>
@@ -2318,51 +2368,7 @@
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        八、完整的验证闭环
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        九、每个阶段的核心工具（业界主流）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        十、关键术语速查表
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fpga" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        十一、从 FPGA 工程师角度看这个流程
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        十二、总结：一张图记住全流程
+        相关笔记
       
     </span>
   </a>
@@ -2373,6 +2379,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%95%B0%E5%AD%97%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%AA%8C%E8%AF%81%E5%85%A8%E6%B5%81%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数字芯片设计与验证全流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2501,13 +2535,152 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一、大白话一句话理解
+        一、是什么 &amp; 为什么用
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、仿真基本原理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、仿真基本原理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 编译 + 运行两步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-timescale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 时间单位：timescale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 波形格式对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filelist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、filelist（文件列表）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、filelist（文件列表）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filelistf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filelist.f 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testbench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、testbench 文件中需要添加（波形相关）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、Makefile 基础（初学者必读）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、Makefile 基础（初学者必读）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 基本语法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-vcs-makefile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 VCS 仿真 Makefile 实例（逐行讲解）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-clean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 为什么 clean 很重要
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2515,91 +2688,52 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、全图总览
+        六、完整工作流小例子
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="二、全图总览">
+    <nav class="md-nav" aria-label="六、完整工作流小例子">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五个抽象层级
+        目录结构
       
     </span>
   </a>
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#rtladderv8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rtl/adder.v（8 位加法器）
+      
+    </span>
+  </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#tbtb_adderv" class="md-nav__link">
+    <span class="md-ellipsis">
       
-        <li class="md-nav__item">
+        tb/tb_adder.v
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、逐层详解
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="三、逐层详解">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#systemalgorithm-level" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        第一层：System/Algorithm Level（系统/算法级）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#register-transfer-level-rtl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        第二层：Register-Transfer Level（寄存器传输级 / RTL）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#gate-level-middle-end" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        第三层：Gate Level（门级 / 中间段 Middle End）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#schematic-level-back-end" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        第四层：Schematic Level（版图级 / 后端 Back End）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#silicon" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        第五层：Silicon（硅片级）
+        命令步骤
       
     </span>
   </a>
@@ -2612,22 +2746,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、VCS 常用选项速查
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verdi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、Verdi 常用操作
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、Verdi 常用操作">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、左侧的验证与原型手段
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="四、左侧的验证与原型手段">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1 静态/形式/动态验证
+        打开
       
     </span>
   </a>
@@ -2635,10 +2780,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42" class="md-nav__link">
+  <a href="#nwave" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2 架构探索与虚拟原型
+        nWave 波形窗口常用
       
     </span>
   </a>
@@ -2646,21 +2791,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-emulation" class="md-nav__link">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3 Emulation（硬件仿真）
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#44-fpga-prototypingfpga" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.4 FPGA Prototyping（FPGA 原型验证）
+        源码窗口
       
     </span>
   </a>
@@ -2669,28 +2803,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#golden-upf-low-power-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        五、右侧的 Golden UPF Low Power Flow
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        六、底部的基础设施
-      
-    </span>
-  </a>
   
 </li>
       
@@ -2698,7 +2810,7 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        七、数据流（中间的蓝色箭头）
+        九、常见问题排查
       
     </span>
   </a>
@@ -2709,51 +2821,7 @@
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        八、完整的验证闭环
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        九、每个阶段的核心工具（业界主流）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        十、关键术语速查表
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fpga" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        十一、从 FPGA 工程师角度看这个流程
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        十二、总结：一张图记住全流程
+        相关笔记
       
     </span>
   </a>
@@ -2780,532 +2848,529 @@
   
 
 
-<h1 id="_1">数字芯片设计与验证全流程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h1 id="vcs-verdi">VCS 与 Verdi 仿真指南<a class="headerlink" href="#vcs-verdi" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>本文基于 Synopsys Golden UPF Low Power Flow 流程图，逐层拆解数字芯片从概念到流片的完整生命周期。</p>
-</blockquote>
-<p><img alt="Pasted image 20260723220455.png" src="../Pasted%20image%2020260723220455.png" /></p>
-<hr />
-<h2 id="_2">一、大白话一句话理解<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>设计一颗数字芯片，就像<strong>建一栋大楼</strong>：先画概念草图（架构），再出施工图纸（RTL），然后交给施工队变成钢筋骨架（综合→门级网表），接着安排每个房间的具体位置（布局布线），最后浇筑混凝土（流片）。每一步都要请监理检查（验证），确保没偷工减料。</p>
+<p>VCS 编译仿真 + Verdi 看波形调试，是数字 IC 验证的<strong>标配工具链</strong>（工业界事实标准）。本篇讲清<strong>基本原理 → filelist → testbench 波形代码 → Makefile（含 clean）→ 完整小例子 → 常用选项 → Verdi 操作 → 踩坑</strong>。前置见 <a href="../%E6%95%B0%E5%AD%97%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%AA%8C%E8%AF%81%E6%A6%82%E8%BF%B0/">数字芯片设计与验证概述</a>、<a href="../SystemVerilog%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7/">SystemVerilog 核心特性</a>。</p>
 </blockquote>
 <hr />
-<h2 id="_3">二、全图总览<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>这张图是一张<strong>二维矩阵</strong>，有两个维度：</p>
+<h2 id="_1">一、是什么 &amp; 为什么用<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>维度</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>纵向（从上到下）</strong></td>
-<td>设计的<strong>抽象层级</strong>，从最抽象的系统级 → 最具体的硅片级</td>
-</tr>
-<tr>
-<td><strong>横向（从左到右）</strong></td>
-<td>每个层级对应的<strong>活动</strong>（做什么）、<strong>产出物</strong>（得到什么）、<strong>抽象等级</strong>（什么级别）</td>
-</tr>
-</tbody>
-</table>
-<h3 id="_4">五个抽象层级<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>层级从抽象到具体 ↓
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>┌─────────────────────────────────────────────────────┐
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│  System/Algorithm Level  ← 系统/算法级（最抽象）     │
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>─────────────────────────────────────────────────────┤
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│  Register-Transfer Level ← 寄存器传输级（RTL）       │
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>├─────────────────────────────────────────────────────┤
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│  Gate Level              ← 门级（逻辑门网络）        │
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>├─────────────────────────────────────────────────────┤
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│  Schematic Level         ← 版图级（物理几何图形）    │
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>├─────────────────────────────────────────────────────┤
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│  Silicon                 ← 硅片级（最具体，实物）    │
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>└─────────────────────────────────────────────────────┘
-</code></pre></div>
-<hr />
-<h2 id="_5">三、逐层详解<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<h3 id="systemalgorithm-level">第一层：System/Algorithm Level（系统/算法级）<a class="headerlink" href="#systemalgorithm-level" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>flowchart LR
-    A["Specification&lt;br/&gt;芯片规格说明书"] --&gt; B["Architecture&lt;br/&gt;架构设计"]
-    style A fill:#e8f4f8,stroke:#333
-    style B fill:#fff3cd,stroke:#333</code></pre>
-<p><strong>做什么：</strong>
-- 确定芯片要<strong>实现什么功能</strong>、<strong>性能指标</strong>是多少（主频、功耗、面积）
-- 制定 <strong>Specification（规格说明书）</strong>——这是整个项目的"合同"
-- 进行<strong>架构设计</strong>：划分模块、确定总线、选择工艺节点</p>
-<p><strong>产出物：</strong> Specification 文档</p>
-<p><strong>大白话理解：</strong> 就像建房前的<strong>需求沟通</strong>——"我要建一栋3层别墅，5个卧室，带车库，预算200万"。芯片设计也一样，先搞清楚"我要做什么芯片、多少核心、跑多快、耗多少电"。</p>
-<p><strong>关键决策：</strong>
-- 选什么工艺节点？（7nm / 5nm / 28nm...）
-- 用几个 CPU 核心？GPU 要不要？
-- 内存带宽多少？接口用什么（PCIe / DDR / USB）？
-- 功耗预算多少？（手机芯片 vs 服务器芯片差别巨大）</p>
-<hr />
-<h3 id="register-transfer-level-rtl">第二层：Register-Transfer Level（寄存器传输级 / RTL）<a class="headerlink" href="#register-transfer-level-rtl" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>flowchart LR
-    A["HDL Coding&lt;br/&gt;RTL + DFT&lt;br/&gt;硬件描述语言编码"] --&gt; B[("HDL Code&lt;br/&gt;RTL 代码")]
-    style A fill:#e8f4f8,stroke:#333
-    style B fill:#fff3cd,stroke:#333</code></pre>
-<p><strong>做什么：</strong>
-- 工程师用 <strong>Verilog / VHDL / SystemVerilog</strong> 写硬件描述代码
-- 描述每个模块的<strong>寄存器</strong>（存储单元）和它们之间的<strong>数据传输</strong>（Transfer）
-- 同时插入 <strong>DFT（Design for Testability，可测试性设计）</strong> 代码——为后续芯片测试预留结构</p>
-<p><strong>产出物：</strong> HDL Code（RTL 代码文件）</p>
-<p><strong>大白话理解：</strong> 需求确定后，工程师开始<strong>画施工图纸</strong>。用 Verilog 写的代码就像是建筑的"蓝图"——不是真正的钢筋水泥，而是用文字描述"这里有一根柱子，那里有一面墙"。</p>
-<p><strong>DFT 是什么？</strong></p>
-<blockquote>
-<p>芯片造出来后要测试好坏。DFT 就是在设计时<strong>提前埋好"检测点"</strong>——比如扫描链（Scan Chain），让测试设备能"看到"芯片内部的每一个寄存器。没有 DFT，芯片造出来就是个黑盒，没法高效测试。</p>
-</blockquote>
-<hr />
-<h3 id="gate-level-middle-end">第三层：Gate Level（门级 / 中间段 Middle End）<a class="headerlink" href="#gate-level-middle-end" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>flowchart LR
-    A["Synthesis&lt;br/&gt;逻辑综合"] --&gt; B[("Netlist&lt;br/&gt;门级网表")]
-    style A fill:#e8f4f8,stroke:#333
-    style B fill:#fff3cd,stroke:#333</code></pre>
-<p><strong>做什么：</strong>
-- <strong>逻辑综合（Synthesis）</strong>：把 RTL 代码（行为描述）翻译成<strong>具体的逻辑门</strong>（与门、或门、非门、触发器...）
-- 综合工具（如 Design Compiler）会同时做<strong>优化</strong>：面积最小？速度最快？功耗最低？
-- 需要指定<strong>工艺库</strong>（Standard Cell Library）——告诉工具"你用台积电 7nm 的哪些标准单元来搭"</p>
-<p><strong>产出物：</strong> Netlist（门级网表）——一个巨大的"连线清单"，列出所有逻辑门和它们之间的连接关系</p>
-<p><strong>大白话理解：</strong> 施工图纸（RTL）交给<strong>结构工程师</strong>，他把"这里有一面承重墙"翻译成"需要 200 根钢筋、50 立方米混凝土、具体用什么标号的水泥"。网表就是这份详细的"材料清单"。</p>
-<p><strong>关键概念：</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>RTL 代码（行为级）          综合后的门级网表
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>─────────────            ──────────────────
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>always @(posedge clk)      U1: AND2(A, B, Y)
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  if (en)                  U2: DFF(CLK, D, Q)
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    out &lt;= in + 1;         U3: OR2(C, D, Z)
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>                           ...（可能成千上万个门）
-</code></pre></div></p>
-<hr />
-<h3 id="schematic-level-back-end">第四层：Schematic Level（版图级 / 后端 Back End）<a class="headerlink" href="#schematic-level-back-end" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>flowchart LR
-    A["Place &amp; Route&lt;br/&gt;布局布线"] --&gt; B[("Layout&lt;br/&gt;物理版图")]
-    style A fill:#e8f4f8,stroke:#333
-    style B fill:#fff3cd,stroke:#333</code></pre>
-<p><strong>做什么：</strong>
-- <strong>布局（Placement）</strong>：把网表中的每个逻辑门<strong>放到芯片的具体坐标位置</strong>上
-- <strong>布线（Routing）</strong>：用金属线把这些门<strong>连起来</strong>（就是网表中定义的连接关系）
-- 要考虑：信号延迟、功耗、面积、电磁干扰、热分布...</p>
-<p><strong>产出物：</strong> Layout（物理版图）——芯片每一层金属、每一个晶体管的<strong>精确几何形状</strong></p>
-<p><strong>大白话理解：</strong> 材料清单（网表）确定后，<strong>施工队进场</strong>了。布局 = 决定每个房间在楼里的具体位置；布线 = 铺设水管电线。最后得到的版图就是芯片的"CAD 施工图"——精确到纳米级别的几何图形。</p>
-<hr />
-<h3 id="silicon">第五层：Silicon（硅片级）<a class="headerlink" href="#silicon" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>flowchart LR
-    A["Fabrication&lt;br/&gt;晶圆制造/流片"] --&gt; B["Silicon&lt;br/&gt;芯片实物"]
-    style A fill:#e8f4f8,stroke:#333
-    style B fill:#d4edda,stroke:#333</code></pre>
-<p><strong>做什么：</strong>
-- 版图数据（GDSII 格式）送到<strong>晶圆厂</strong>（TSMC / Samsung / Intel）
-- 经过光刻、刻蚀、离子注入、金属沉积等数百道工序
-- 一块晶圆上同时制造数百颗芯片，然后切割、封装、测试</p>
-<p><strong>产出物：</strong> Silicon——真正的芯片实物！</p>
-<p><strong>大白话理解：</strong> 施工图最终交给<strong>建筑公司</strong>，他们浇筑混凝土、砌砖、装修，最终交房。芯片的"交房"就是<strong>流片（Tape-out）</strong>——把版图数据发送给晶圆厂开始生产。</p>
-<blockquote>
-<p>⚠️ 流片成本极高：7nm 工艺一次流片约 <strong>3000 万美元</strong>，5nm 约 <strong>5000 万美元</strong>。所以前面的验证环节至关重要——一旦流片后发现 bug，损失巨大。</p>
-</blockquote>
-<hr />
-<h2 id="_6">四、左侧的验证与原型手段<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>图左侧有一列贯穿所有层级的<strong>验证手段</strong>，这是保证芯片正确性的关键：</p>
-<pre class="mermaid"><code>flowchart TB
-    V1["Static/Formal/Dynamic&lt;br/&gt;Verification&lt;br/&gt;静态/形式/动态验证"]
-    V2["Architecture Exploration&lt;br/&gt;and Virtual Prototyping&lt;br/&gt;架构探索与虚拟原型"]
-    V3["Emulation&lt;br/&gt;硬件仿真"]
-    V4["FPGA Prototyping&lt;br/&gt;FPGA 原型验证"]
-
-    V1 --- V2 --- V3 --- V4
-
-    style V1 fill:#ffe0e0,stroke:#333
-    style V2 fill:#fff3cd,stroke:#333
-    style V3 fill:#e8f4f8,stroke:#333
-    style V4 fill:#d4edda,stroke:#333</code></pre>
-<h3 id="41">4.1 静态/形式/动态验证<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>验证类型</th>
-<th>做什么</th>
-<th>对应阶段</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>动态验证（仿真）</strong></td>
-<td>给 RTL 加测试激励，看输出对不对</td>
-<td>RTL 阶段</td>
-</tr>
-<tr>
-<td><strong>形式验证（Formal）</strong></td>
-<td>用数学方法证明设计满足属性，不依赖仿真向量</td>
-<td>RTL ↔ 门级</td>
-</tr>
-<tr>
-<td><strong>静态验证（Lint/CDC）</strong></td>
-<td>检查代码风格、跨时钟域问题，不运行仿真</td>
-<td>RTL 阶段</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>💡 动态验证像<strong>考试</strong>——出几道题看你能不能做对；形式验证像<strong>数学证明</strong>——直接证明你"永远不可能做错"。</p>
-</blockquote>
-<h3 id="42">4.2 架构探索与虚拟原型<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
-<ul>
-<li>在写 RTL 之前，用 <strong>C/C++/SystemC</strong> 建立系统级模型</li>
-<li>快速评估不同架构方案的性能、功耗</li>
-<li>软件团队可以<strong>提前开发驱动和 OS</strong>，不用等 RTL 完成</li>
-</ul>
-<h3 id="43-emulation">4.3 Emulation（硬件仿真）<a class="headerlink" href="#43-emulation" title="Permanent link">&para;</a></h3>
-<ul>
-<li>用专用硬件仿真器（如 Palladium、Zebu）运行 RTL</li>
-<li>速度比软件仿真快 <strong>100~1000 倍</strong></li>
-<li>适合跑<strong>完整的操作系统和应用程序</strong>来验证芯片</li>
-</ul>
-<h3 id="44-fpga-prototypingfpga">4.4 FPGA Prototyping（FPGA 原型验证）<a class="headerlink" href="#44-fpga-prototypingfpga" title="Permanent link">&para;</a></h3>
-<ul>
-<li>把 RTL 综合到 <strong>FPGA</strong> 上运行</li>
-<li>速度接近真实芯片（几十 MHz）</li>
-<li>可以在<strong>真实系统环境</strong>中验证——插上真实的外设、跑真实的软件</li>
-</ul>
-<hr />
-<h2 id="golden-upf-low-power-flow">五、右侧的 Golden UPF Low Power Flow<a class="headerlink" href="#golden-upf-low-power-flow" title="Permanent link">&para;</a></h2>
-<p>图右侧有一条贯穿全流程的竖条——<strong>Golden UPF Low Power Flow</strong>。</p>
-<p><strong>UPF = Unified Power Format（统一功耗格式）</strong></p>
-<p>这是 IEEE 1801 标准，用来描述芯片的<strong>功耗管理策略</strong>：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>UPF 描述的内容：
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── 电源域（Power Domain）：哪些模块共用一个电源
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>├── 电压域（Voltage Domain）：哪些模块可以独立调压
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├── 电源开关（Power Switch）：哪些模块可以断电
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>├── 电平转换（Level Shifter）：不同电压域之间的信号转换
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>├── 隔离单元（Isolation Cell）：模块断电时输出固定值
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>└── 保留寄存器（Retention Register）：断电时保存状态
-</code></pre></div>
-<p><strong>为什么需要 UPF？</strong></p>
-<blockquote>
-<p>现代芯片（尤其是手机 SoC）有大量<strong>低功耗技术</strong>：DVFS（动态调压调频）、Power Gating（电源关断）、Clock Gating（时钟门控）... UPF 让功耗策略在<strong>每个设计层级</strong>都保持一致——从 RTL 到综合到后端，功耗意图不会丢失。</p>
-</blockquote>
-<hr />
-<h2 id="_7">六、底部的基础设施<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>图底部有一行文字：<strong>Unified Compilation, Unified Debug, Unified Coverage Database</strong></p>
-<pre class="mermaid"><code>flowchart LR
-    A["Unified&lt;br/&gt;Compilation&lt;br/&gt;统一编译"] --- B["Unified&lt;br/&gt;Debug&lt;br/&gt;统一调试"] --- C["Unified&lt;br/&gt;Coverage&lt;br/&gt;Database&lt;br/&gt;统一覆盖率数据库"]
-
-    style A fill:#e8f4f8,stroke:#333
-    style B fill:#fff3cd,stroke:#333
-    style C fill:#d4edda,stroke:#333</code></pre>
-<p>这是 Synopsys 工具的<strong>底层支撑平台</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>组件</th>
+<th>工具</th>
+<th>全称</th>
 <th>作用</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>统一编译</strong></td>
-<td>RTL、门级、版图用同一套编译引擎，结果一致</td>
+<td><strong>VCS</strong></td>
+<td>Synopsys VCS</td>
+<td>商业 <strong>Verilog/SystemVerilog 仿真器</strong>，把 RTL + TB 编译成可执行文件再运行，工业界事实标准</td>
 </tr>
 <tr>
-<td><strong>统一调试</strong></td>
-<td>在任何层级发现 bug，都能追溯到 RTL 源码</td>
+<td><strong>Verdi</strong></td>
+<td>Synopsys Verdi</td>
+<td><strong>调试工具</strong>：看波形（nWave）、源码、状态机、反推信号来源；配合 VCS 使用</td>
 </tr>
 <tr>
-<td><strong>统一覆盖率数据库</strong></td>
-<td>仿真覆盖率、形式验证覆盖率、FPGA 覆盖率汇总到一起，知道"测了多少、还差多少"</td>
+<td><strong>fsdb</strong></td>
+<td>Fast Signal Database</td>
+<td>Verdi 的波形格式，<strong>压缩小、只记录信号变化</strong>，比标准 VCD 高效得多</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="_8">七、数据流（中间的蓝色箭头）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>图中中间的<strong>弯曲蓝色箭头</strong>展示了数据从上层流向下层的过程：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Specification
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>     ↓  （架构设计确定后开始编码）
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  HDL Code
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>     ↓  （RTL 写完后综合）
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  Netlist
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>     ↓  （网表完成后布局布线）
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  Layout
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>     ↓  （版图完成后送晶圆厂）
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  Silicon
+<p><strong>一句话流程</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>写 RTL + testbench → VCS 编译（生成 simv）→ 跑仿真（生成 .fsdb 波形）
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>→ Verdi 打开波形/源码 → 定位 bug → 改代码 → 重编重跑
 </code></pre></div>
-<p>每个箭头都代表一个<strong>关键转折点</strong>——数据格式变了，抽象层级降了，但<strong>设计意图</strong>必须保持不变。这就是为什么每一步之间都需要验证。</p>
 <hr />
-<h2 id="_9">八、完整的验证闭环<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>flowchart TB
-    subgraph 前端
-        A["Specification&lt;br/&gt;规格定义"] --&gt; B["RTL 设计&lt;br/&gt;Verilog/SystemVerilog"]
-    end
-
-    subgraph 验证
-        B --&gt; C["功能仿真&lt;br/&gt;动态验证"]
-        B --&gt; D["形式验证&lt;br/&gt;等价性检查"]
-        B --&gt; E["FPGA 原型&lt;br/&gt;硬件验证"]
-        C --&gt;|"覆盖率不够"| B
-        D --&gt;|"不等价"| B
-    end
-
-    subgraph 中端
-        B --&gt; F["逻辑综合&lt;br/&gt;RTL→门级网表"]
-        F --&gt; G["DFT 插入&lt;br/&gt;扫描链/BIST"]
-    end
-
-    subgraph 后端
-        F --&gt; H["布局布线&lt;br/&gt;Place &amp; Route"]
-        H --&gt; I["物理验证&lt;br/&gt;DRC/LVS"]
-        H --&gt; J["静态时序分析&lt;br/&gt;STA"]
-        J --&gt;|"时序不满足"| H
-    end
-
-    subgraph 签核
-        I --&gt; K["Sign-off&lt;br/&gt;签核检查"]
-        J --&gt; K
-        K --&gt;|"通过"| L["Tape-out&lt;br/&gt;流片"]
-        K --&gt;|"不通过"| H
-    end
-
-    L --&gt; M["Fabrication&lt;br/&gt;晶圆制造"]
-    M --&gt; N["Silicon&lt;br/&gt;芯片实物"]
-
-    style A fill:#fff3cd,stroke:#333
-    style B fill:#e8f4f8,stroke:#333
-    style L fill:#d4edda,stroke:#333
-    style N fill:#ffe0e0,stroke:#333</code></pre>
-<hr />
-<h2 id="_10">九、每个阶段的核心工具（业界主流）<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>阶段</th>
-<th>代表工具</th>
-<th>厂商</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>架构探索</td>
-<td>Platform Architect, CoCentric</td>
-<td>Synopsys / MathWorks</td>
-</tr>
-<tr>
-<td>RTL 编码</td>
-<td>VCS, Verdi</td>
-<td>Synopsys</td>
-</tr>
-<tr>
-<td>功能仿真</td>
-<td>VCS, Xcelium, Questa</td>
-<td>Synopsys / Cadence / Siemens</td>
-</tr>
-<tr>
-<td>形式验证</td>
-<td>VC Formal, JasperGold</td>
-<td>Synopsys / Cadence</td>
-</tr>
-<tr>
-<td>逻辑综合</td>
-<td>Design Compiler, Genus</td>
-<td>Synopsys / Cadence</td>
-</tr>
-<tr>
-<td>DFT</td>
-<td>DFT Compiler, Modus</td>
-<td>Synopsys / Cadence</td>
-</tr>
-<tr>
-<td>布局布线</td>
-<td>ICC2, Innovus</td>
-<td>Synopsys / Cadence</td>
-</tr>
-<tr>
-<td>静态时序</td>
-<td>PrimeTime, Tempus</td>
-<td>Synopsys / Cadence</td>
-</tr>
-<tr>
-<td>物理验证</td>
-<td>IC Validator, Pegasus</td>
-<td>Synopsys / Siemens</td>
-</tr>
-<tr>
-<td>功耗分析</td>
-<td>PrimePower, Voltus</td>
-<td>Synopsys / Cadence</td>
-</tr>
-<tr>
-<td>硬件仿真</td>
-<td>Palladium, Zebu</td>
-<td>Cadence / Synopsys</td>
-</tr>
-<tr>
-<td>FPGA 原型</td>
-<td>HAPS, Protium</td>
-<td>Synopsys</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="_11">十、关键术语速查表<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>术语</th>
-<th>全称</th>
-<th>中文</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RTL</td>
-<td>Register Transfer Level</td>
-<td>寄存器传输级</td>
-<td>用 HDL 描述寄存器和数据传输</td>
-</tr>
-<tr>
-<td>HDL</td>
-<td>Hardware Description Language</td>
-<td>硬件描述语言</td>
-<td>Verilog / VHDL / SystemVerilog</td>
-</tr>
-<tr>
-<td>DFT</td>
-<td>Design for Testability</td>
-<td>可测试性设计</td>
-<td>为芯片测试预留结构</td>
-</tr>
-<tr>
-<td>UPF</td>
-<td>Unified Power Format</td>
-<td>统一功耗格式</td>
-<td>描述低功耗策略的标准</td>
-</tr>
-<tr>
-<td>STA</td>
-<td>Static Timing Analysis</td>
-<td>静态时序分析</td>
-<td>不跑仿真，直接计算所有路径延迟</td>
-</tr>
-<tr>
-<td>DRC</td>
-<td>Design Rule Check</td>
-<td>设计规则检查</td>
-<td>版图是否符合工艺厂的要求</td>
-</tr>
-<tr>
-<td>LVS</td>
-<td>Layout vs Schematic</td>
-<td>版图与原理图对比</td>
-<td>版图和网表是否一致</td>
-</tr>
-<tr>
-<td>Tape-out</td>
-<td>—</td>
-<td>流片</td>
-<td>将版图数据送晶圆厂生产</td>
-</tr>
-<tr>
-<td>Sign-off</td>
-<td>—</td>
-<td>签核</td>
-<td>所有检查通过后批准流片</td>
-</tr>
-<tr>
-<td>Netlist</td>
-<td>—</td>
-<td>网表</td>
-<td>逻辑门和连接关系的列表</td>
-</tr>
-<tr>
-<td>GDSII</td>
-<td>—</td>
-<td>版图数据格式</td>
-<td>送晶圆厂的标准版图文件格式</td>
-</tr>
-<tr>
-<td>CDC</td>
-<td>Clock Domain Crossing</td>
-<td>跨时钟域</td>
-<td>信号在不同时钟域之间传递</td>
-</tr>
-<tr>
-<td>ATPG</td>
-<td>Automatic Test Pattern Generation</td>
-<td>自动测试向量生成</td>
-<td>为 DFT 生成测试激励</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="fpga">十一、从 FPGA 工程师角度看这个流程<a class="headerlink" href="#fpga" title="Permanent link">&para;</a></h2>
-<p>如果你是 FPGA 工程师，你主要参与的是<strong>前三个阶段</strong>：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>你的工作范围 ←←←←←←←←←←←←←←←←←←
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>┌─────────────────────────────────┐
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>│  Architecture  ← 系统架构理解    │
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│  RTL Design    ← 你写 Verilog    │
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│  功能验证       ← 你跑仿真        │
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>│  FPGA Prototyping ← 你就在这里！  │
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>└─────────────────────────────────┘
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                                        综合 → 后端 → 流片
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                                        （ASIC 工程师的事）
+<h2 id="_2">二、仿真基本原理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 编译 + 运行两步<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>VCS 不是"解释执行"，而是：</p>
+<ol>
+<li><strong>编译</strong>：<code>vcs ...</code> 把 Verilog/SV 代码 + 时间模型翻译成 C++，再编成<strong>可执行文件 simv</strong>。</li>
+<li><strong>运行</strong>：<code>./simv</code> 执行仿真，<strong>事件驱动</strong>——仿真器维护一个事件队列，按"当前时刻"取出事件处理，产生新事件排到未来时刻，直到没有事件或遇到 <code>$finish</code>。</li>
+</ol>
+<h3 id="22-timescale">2.2 时间单位：timescale<a class="headerlink" href="#22-timescale" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="no">`timescale</span><span class="w"> </span><span class="mh">1</span><span class="n">ns</span><span class="o">/</span><span class="mh">1</span><span class="n">ps</span><span class="w">   </span><span class="c1">// 时间单位/精度</span>
 </code></pre></div>
-<p><strong>FPGA 工程师 vs ASIC 工程师的区别：</strong></p>
+- 前一个数 = 时间单位（<code>#10</code> 表示 10 个时间单位），后一个 = 仿真精度（最小时间粒度）。
+- <strong>单位不匹配</strong>是仿真和实际时序对不上的常见原因，建议全工程统一。</p>
+<h3 id="23">2.3 波形格式对比<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th></th>
-<th>FPGA 工程师</th>
-<th>ASIC 工程师</th>
+<th>fsdb</th>
+<th>vcd</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>产出</td>
-<td>FPGA 比特流</td>
-<td>GDSII 版图</td>
-</tr>
-<tr>
 <td>工具</td>
-<td>Vivado / Quartus</td>
-<td>DC / ICC2 / Innovus</td>
+<td>Verdi 原生</td>
+<td>通用标准</td>
 </tr>
 <tr>
-<td>周期</td>
-<td>几天~几周</td>
-<td>数月到数年</td>
+<td>体积</td>
+<td>小（仅记录变化，压缩）</td>
+<td>巨大（记录全部）</td>
 </tr>
 <tr>
-<td>成本</td>
-<td>几千~几万元</td>
-<td>数千万美元</td>
+<td>生成</td>
+<td><code>$fsdbDump*</code></td>
+<td><code>$dumpvars</code></td>
 </tr>
 <tr>
-<td>可修改</td>
-<td>随时重新烧录</td>
-<td>流片后无法修改</td>
+<td>用途</td>
+<td>调试首选</td>
+<td>通用交换</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="filelist">三、filelist（文件列表）<a class="headerlink" href="#filelist" title="Permanent link">&para;</a></h2>
+<p><strong>为什么用</strong>：仿真文件一多，手敲命令太长。把<strong>按编译顺序</strong>列好的文件写进一个 <code>.f</code> 文件，用 <code>-f filelist.f</code> 引用。</p>
+<h3 id="filelistf">filelist.f 示例<a class="headerlink" href="#filelistf" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>+incdir+./rtl            # include 目录（可多个 +incdir+）
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>+incdir+./tb
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>+define+WIDTH=8          # 定义宏
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>./rtl/adder.v            # RTL 文件，先放被例化的底层
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>./rtl/sub.v
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>./tb/tb_adder.v          # testbench 最后放
+</code></pre></div>
+<p><strong>要点</strong>：
+- 文件<strong>顺序</strong>重要：被 <code>include</code>/例化的模块一般先列出（VCS 大多能自动解析，但规范上按层次顺序更稳）。
+- 用 <code>+incdir+</code> 而不是在代码里写绝对路径；用 <code>+define+</code> 传宏，不要在 RTL 里改。
+- <code>-f</code> 里还可以再 <code>-f</code> 嵌套子文件列表。</p>
+<hr />
+<h2 id="testbench">四、testbench 文件中需要添加（波形相关）<a class="headerlink" href="#testbench" title="Permanent link">&para;</a></h2>
+<p><strong>这是 Verdi 能出波形的关键</strong>——TB 里必须有这几行：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="no">`timescale</span><span class="w"> </span><span class="mh">1</span><span class="n">ns</span><span class="o">/</span><span class="mh">1</span><span class="n">ps</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">module</span><span class="w"> </span><span class="n">tb_adder</span><span class="p">;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="c1">// ... 信号定义、例化 DUT ...</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="c1">// ★★★ 生成 fsdb 波形（Verdi 专用）★★★</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="n">$fsdbDumpfile</span><span class="p">(</span><span class="s">&quot;wave.fsdb&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// ① 指定波形文件名</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="n">$fsdbDumpvars</span><span class="p">(</span><span class="mh">0</span><span class="p">,</span><span class="w"> </span><span class="n">tb_adder</span><span class="p">);</span><span class="w">    </span><span class="c1">// ② 记录波形：参数1=深度0(全层次)，参数2=起点模块tb_adder</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="c1">// 激励</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="c1">// ... 施加激励 ...</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="c1">// 结束仿真</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="p">#</span><span class="mh">1000</span><span class="p">;</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">        </span><span class="nb">$finish</span><span class="p">;</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="k">endmodule</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>语句</th>
+<th>含义</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$fsdbDumpfile("wave.fsdb")</code></td>
+<td>指定波形文件名</td>
+<td>不写默认 <code>novas.fsdb</code></td>
 </tr>
 <tr>
-<td>验证压力</td>
-<td>相对较低</td>
-<td>极高（流片后改不了）</td>
+<td><code>$fsdbDumpvars(0, tb_adder)</code></td>
+<td>从 tb_adder 开始，dump 全部层次</td>
+<td>最常用</td>
+</tr>
+<tr>
+<td><code>$fsdbDumpvars(0)</code></td>
+<td>从当前模块开始 dump 全部层次</td>
+<td>简单粗暴</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>$fsdbDumpvars(level, instance)</code> 两个参数逐个解释</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$fsdbDumpvars(  深度  ,  起点模块  )
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>               ↑          ↑
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>             参数1       参数2
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>参数1：深度 level</strong></td>
+<td>从起点往下记录<strong>多少层</strong></td>
+<td><code>0</code> = 一路到底（所有子模块全记录）；<code>2</code> = 只记录往下 2 层</td>
+</tr>
+<tr>
+<td><strong>参数2：起点 instance</strong>（可省略）</td>
+<td>从<strong>哪个模块</strong>开始记录</td>
+<td><code>tb_adder</code> = 整个测试平台；<code>u_dut</code> = 只记录被测模块内部</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么写 <code>tb_adder</code></strong>：tb 是顶层，里面例化了被测模块 DUT（这里是 <code>u_dut</code>）。"从 tb_adder 开始全层次记录" = testbench + DUT 内部<strong>所有信号</strong>都进波形。</p>
+<p><strong>常见变体</strong>：
+- <code>$fsdbDumpvars(0)</code> —— 不写起点，默认从<strong>当前所在模块</strong>开始（若在 tb 里写，效果同 <code>tb_adder</code>）。
+- <code>$fsdbDumpvars(0, u_dut)</code> —— <strong>只记录 DUT 内部</strong>，不要 TB 的辅助信号（波形更小、更聚焦）。
+- <code>$fsdbDumpvars(2, tb_adder)</code> —— 只记录往下 2 层（省空间，但内部深层次信号没有）。
+| <code>$finish</code> | 结束仿真 | 不结束则仿真"跑不完"、波形写不完整 |</p>
+<blockquote>
+<p>若用标准 VCD：<code>$dumpfile("wave.vcd"); $dumpvars;</code>——但 VCD 巨大，Verdi 调试优先 fsdb。</p>
+</blockquote>
+<hr />
+<h2 id="makefile">五、Makefile 基础（初学者必读）<a class="headerlink" href="#makefile" title="Permanent link">&para;</a></h2>
+<h3 id="51">5.1 基本语法<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p>Makefile 就是"<strong>告诉 make 怎么一步步干活</strong>"的脚本。核心只有一条规则：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nf">目标</span><span class="o">:</span><span class="w"> </span>依赖
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span>命令<span class="w">        </span><span class="c1"># ← 命令前面必须是一个 Tab（制表符），不是空格！</span>
+</code></pre></div>
+<p><strong>三要素</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>作用</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>目标 target</strong></td>
+<td>要生成的东西 / 动作名</td>
+<td><code>simv</code>、<code>clean</code>、<code>sim</code></td>
+</tr>
+<tr>
+<td><strong>依赖 prerequisites</strong></td>
+<td>做这件事前必须已存在的东西（文件或其他目标）</td>
+<td><code>sim: compile</code> 表示先做 compile</td>
+</tr>
+<tr>
+<td><strong>命令 recipe</strong></td>
+<td>真正执行的 shell 命令</td>
+<td><code>./simv</code>、<code>rm -rf ...</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>四个必懂知识点</strong>：</p>
+<p><strong>① Tab 缩进（最易踩的坑）</strong>：命令必须以 <strong>Tab</strong> 开头，用空格会报错：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Makefile:3: *** missing separator. Stop.
+</code></pre></div></p>
+<p><strong>② 执行规则</strong>：
+- <code>make</code> 默认执行<strong>第一个目标</strong>。
+- 目标比依赖<strong>旧</strong>（依赖更新了）→ 重新执行命令。
+- 若目标对应一个<strong>文件</strong>且已存在、依赖没变 → <strong>什么都不做</strong>（这就是增量编译的原理）。</p>
+<p><strong>③ 变量</strong>：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">VCS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>vcs<span class="w">          </span><span class="c1"># 定义，用 $(VCS) 引用</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">CMP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>-sverilog<span class="w">    </span><span class="c1"># 字符串可以很长，多行用 \ 续行</span>
+</code></pre></div>
+- <code>=</code> 递归展开（用到时才展开）；<code>:=</code> 立即展开；<code>+=</code> 追加；<code>?=</code> 未定义才赋值。
+- 自动变量（最常用）：<code>$@</code> = 当前目标名，<code>$&lt;</code> = 第一个依赖，<code>$^</code> = 所有依赖。</p>
+<p><strong>④ .PHONY 伪目标</strong>：声明某目标<strong>不是文件</strong>（如 <code>clean</code>），否则若目录里碰巧有个叫 <code>clean</code> 的文件，<code>make clean</code> 就会误以为"已经最新"而不执行：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">clean</span>
+</code></pre></div></p>
+<h3 id="52-vcs-makefile">5.2 VCS 仿真 Makefile 实例（逐行讲解）<a class="headerlink" href="#52-vcs-makefile" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c"># ========== 1. 变量定义区（方便统一改） ==========</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">VCS</span><span class="w">      </span><span class="o">=</span><span class="w"> </span>vcs<span class="w">              </span><span class="c1"># 仿真器命令</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nv">VERDI</span><span class="w">    </span><span class="o">=</span><span class="w"> </span>verdi<span class="w">            </span><span class="c1"># 调试工具命令</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nv">FILELIST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>filelist.f<span class="w">       </span><span class="c1"># 源文件列表</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nv">TOP</span><span class="w">      </span><span class="o">=</span><span class="w"> </span>tb_adder<span class="w">         </span><span class="c1"># 顶层模块名（Verdi 打开用）</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nv">SIMV</span><span class="w">     </span><span class="o">=</span><span class="w"> </span>simv<span class="w">             </span><span class="c1"># 编译输出的可执行文件名</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="nv">DUMP</span><span class="w">     </span><span class="o">=</span><span class="w"> </span>wave.fsdb<span class="w">        </span><span class="c1"># 波形文件名</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="c"># 编译选项：-f 读文件列表，-o 指定输出名</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="nv">CMP_OPT</span><span class="w">  </span><span class="o">=</span><span class="w"> </span>-sverilog<span class="w"> </span>-debug_access+all<span class="w"> </span>-timescale<span class="o">=</span>1ns/1ps<span class="w"> </span>-f<span class="w"> </span><span class="k">$(</span>FILELIST<span class="k">)</span><span class="w"> </span>-o<span class="w"> </span><span class="k">$(</span>SIMV<span class="k">)</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="c"># ========== 2. 伪目标声明 ==========</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="nf">.PHONY</span><span class="o">:</span><span class="w"> </span><span class="n">all</span> <span class="n">compile</span> <span class="n">sim</span> <span class="n">wave</span> <span class="n">clean</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="c"># ========== 3. 规则 ==========</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="c"># make（或 make all）：先编译，再仿真</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="nf">all</span><span class="o">:</span><span class="w"> </span><span class="n">compile</span> <span class="n">sim</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="c"># 目标 compile：没有依赖，执行编译命令</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="nf">compile</span><span class="o">:</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="k">$(</span>VCS<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CMP_OPT<span class="k">)</span><span class="w"> </span>-l<span class="w"> </span>compile.log<span class="w">    </span><span class="c1"># vcs ... -o simv</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="c"># 目标 sim：依赖 compile（先编译），再跑仿真生成波形</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="nf">sim</span><span class="o">:</span><span class="w"> </span><span class="n">compile</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">    </span>./<span class="k">$(</span>SIMV<span class="k">)</span><span class="w"> </span>-l<span class="w"> </span>sim.log
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>
+<a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="c"># 目标 wave：依赖 sim（先跑出 fsdb），再开 Verdi 看波形</span>
+<a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a><span class="nf">wave</span><span class="o">:</span><span class="w"> </span><span class="n">sim</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="w">    </span><span class="k">$(</span>VERDI<span class="k">)</span><span class="w"> </span>-sv<span class="w"> </span>-f<span class="w"> </span><span class="k">$(</span>FILELIST<span class="k">)</span><span class="w"> </span>-top<span class="w"> </span><span class="k">$(</span>TOP<span class="k">)</span><span class="w"> </span>-ssf<span class="w"> </span><span class="k">$(</span>DUMP<span class="k">)</span><span class="w"> </span><span class="p">&amp;</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="c"># ★★★ 清理指令：删除编译/仿真所有产物 ★★★</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a><span class="nf">clean</span><span class="o">:</span>
+<a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="k">$(</span>SIMV<span class="k">)</span><span class="w"> </span>simv.daidir<span class="w"> </span>simv.db<span class="w"> </span>csrc<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="w">           </span>*.log<span class="w"> </span>*.fsdb<span class="w"> </span>*.vpd<span class="w"> </span>*.vcd<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a><span class="w">           </span>verdiLog<span class="w"> </span>novas.rc<span class="w"> </span>.vcsmx_rebuild
+</code></pre></div>
+<p><strong>日常用法</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>执行内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>make</code> 或 <code>make all</code></td>
+<td>编译 → 仿真（最常用）</td>
+</tr>
+<tr>
+<td><code>make compile</code></td>
+<td>只编译，不跑仿真</td>
+</tr>
+<tr>
+<td><code>make sim</code></td>
+<td>先编译（若需要）再仿真</td>
+</tr>
+<tr>
+<td><code>make wave</code></td>
+<td>编译 → 仿真 → 打开 Verdi</td>
+</tr>
+<tr>
+<td><code>make clean</code></td>
+<td><strong>清掉所有产物</strong>（重编/提交前必用）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="53-clean">5.3 为什么 clean 很重要<a class="headerlink" href="#53-clean" title="Permanent link">&para;</a></h3>
+<ul>
+<li>VCS 编译会生成 <code>simv.daidir</code>、<code>csrc</code> 等中间目录，<strong>不清干净就重编</strong>会报"仿真器/文件冲突"或结果不更新。</li>
+<li>波形、日志是垃圾大户，提交代码前必须清。</li>
+<li>养成习惯：<strong>改代码前 <code>make clean</code></strong>，避免旧产物干扰。</li>
+<li>面试小问："Makefile 里 clean 的作用？" → 删掉编译/仿真中间产物，保证 <code>make</code> 从干净状态重新编译，避免增量编译用了过期文件。</li>
+</ul>
+<hr />
+<h2 id="_3">六、完整工作流小例子<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_4">目录结构<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>proj/
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>├── rtl/
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>│   └── adder.v
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>├── tb/
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>│   └── tb_adder.v
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>├── filelist.f
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>└── Makefile
+</code></pre></div>
+<h3 id="rtladderv8">rtl/adder.v（8 位加法器）<a class="headerlink" href="#rtladderv8" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">module</span><span class="w"> </span><span class="n">adder</span><span class="w"> </span><span class="p">#(</span><span class="k">parameter</span><span class="w"> </span><span class="n">W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">8</span><span class="p">)(</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="p">[</span><span class="n">W</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="p">[</span><span class="n">W</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">sum</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">);</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="k">endmodule</span>
+</code></pre></div>
+<h3 id="tbtb_adderv">tb/tb_adder.v<a class="headerlink" href="#tbtb_adderv" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="no">`timescale</span><span class="w"> </span><span class="mh">1</span><span class="n">ns</span><span class="o">/</span><span class="mh">1</span><span class="n">ps</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">module</span><span class="w"> </span><span class="n">tb_adder</span><span class="p">;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="kt">reg</span><span class="w">  </span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="k">integer</span><span class="w"> </span><span class="n">errors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="n">adder</span><span class="w"> </span><span class="n">u_dut</span><span class="p">(.</span><span class="n">a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="p">.</span><span class="n">b</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="w"> </span><span class="p">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sum</span><span class="p">));</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">        </span><span class="n">$fsdbDumpfile</span><span class="p">(</span><span class="s">&quot;wave.fsdb&quot;</span><span class="p">);</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">        </span><span class="n">$fsdbDumpvars</span><span class="p">(</span><span class="mh">0</span><span class="p">,</span><span class="w"> </span><span class="n">tb_adder</span><span class="p">);</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">    </span><span class="k">initial</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">        </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">8</span><span class="mi">&#39;d0</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">8</span><span class="mi">&#39;d0</span><span class="p">;</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">        </span><span class="k">repeat</span><span class="w"> </span><span class="p">(</span><span class="mh">10</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="p">;</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">            </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">$random</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">$random</span><span class="p">;</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">            </span><span class="p">#</span><span class="mh">10</span><span class="p">;</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sum</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">                </span><span class="nb">$display</span><span class="p">(</span><span class="s">&quot;FAIL: %0d+%0d=%0d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="p">);</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">                </span><span class="n">errors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">errors</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">            </span><span class="k">end</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="w">        </span><span class="nb">$display</span><span class="p">(</span><span class="s">&quot;Test %0s, errors=%0d&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">errors</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;FAIL&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;PASS&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">errors</span><span class="p">);</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="w">        </span><span class="p">#</span><span class="mh">10</span><span class="p">;</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="w">        </span><span class="nb">$finish</span><span class="p">;</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="k">endmodule</span>
+</code></pre></div>
+<h3 id="_5">命令步骤<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>make<span class="w"> </span>compile<span class="w">          </span><span class="c1"># vcs -sverilog -debug_access+all ... -o simv</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>make<span class="w"> </span>sim<span class="w">              </span><span class="c1"># ./simv -&gt; 生成 wave.fsdb + sim.log</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>make<span class="w"> </span>wave<span class="w">             </span><span class="c1"># verdi 打开波形（后台）</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>make<span class="w"> </span>clean<span class="w">            </span><span class="c1"># 清掉 simv/波形/日志，准备重编或提交</span>
+</code></pre></div>
+<hr />
+<h2 id="vcs">七、VCS 常用选项速查<a class="headerlink" href="#vcs" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-sverilog</code></td>
+<td>支持 SystemVerilog</td>
+</tr>
+<tr>
+<td><code>+v2k</code></td>
+<td>支持 Verilog-2001</td>
+</tr>
+<tr>
+<td><code>-f filelist.f</code></td>
+<td>读文件列表</td>
+</tr>
+<tr>
+<td><code>+incdir+./dir</code></td>
+<td>加 include 目录</td>
+</tr>
+<tr>
+<td><code>+define+NAME</code></td>
+<td>定义宏</td>
+</tr>
+<tr>
+<td><code>-timescale=1ns/1ps</code></td>
+<td>全局时间单位/精度</td>
+</tr>
+<tr>
+<td><code>-o simv</code></td>
+<td>指定输出可执行文件名</td>
+</tr>
+<tr>
+<td><code>-l compile.log</code></td>
+<td>编译日志</td>
+</tr>
+<tr>
+<td><code>-debug_access+all</code></td>
+<td><strong>开调试信息（Verdi 必需）</strong></td>
+</tr>
+<tr>
+<td><code>-kdb</code></td>
+<td>生成高级调试数据库（配 Verdi 查状态机/信号），常与上面同用</td>
+</tr>
+<tr>
+<td><code>-f</code> 嵌套</td>
+<td>文件列表套文件列表</td>
+</tr>
+<tr>
+<td>仿真 <code>./simv</code></td>
+<td>加 <code>-l sim.log</code> 记日志</td>
 </tr>
 </tbody>
 </table>
 <blockquote>
-<p>💡 这也是为什么 FPGA 原型验证（FPGA Prototyping）如此重要——它让 ASIC 团队在<strong>花几千万流片之前</strong>，先用 FPGA 跑一遍真实系统，提前发现 bug。</p>
+<p><strong>Verdi 配合重点</strong>：编译必须带 <code>-debug_access+all</code>（老版本写 <code>-debug_pp</code>），否则 Verdi 打开<strong>看不到内部信号</strong>。要查 RTL 状态机/寄存器需再加 <code>-kdb</code>。</p>
 </blockquote>
 <hr />
-<h2 id="_12">十二、总结：一张图记住全流程<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>需求 → 架构 → RTL → 综合 → 布局布线 → 流片 → 芯片
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>       ↑      ↑       ↑        ↑         ↑
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>      规格   代码    网表     版图      实物
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>       │      │       │        │         │
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>       └── 验证贯穿每一层 ──────────────────┘
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>            （仿真/形式/FPGA/Emulation）
+<h2 id="verdi">八、Verdi 常用操作<a class="headerlink" href="#verdi" title="Permanent link">&para;</a></h2>
+<h3 id="_6">打开<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 编译后开源码 + 波形</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>verdi<span class="w"> </span>-sv<span class="w"> </span>-f<span class="w"> </span>filelist.f<span class="w"> </span>-top<span class="w"> </span>tb_adder<span class="w"> </span>-ssf<span class="w"> </span>wave.fsdb<span class="w"> </span><span class="p">&amp;</span>
 </code></pre></div>
+<h3 id="nwave">nWave 波形窗口常用<a class="headerlink" href="#nwave" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>拖信号进来</td>
+<td>添加信号波形</td>
+</tr>
+<tr>
+<td><code>z</code> / <code>shift+z</code></td>
+<td>缩小 / 放大</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>全屏显示所有波形</td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td>居中到光标</td>
+</tr>
+<tr>
+<td>左键</td>
+<td>加标尺/测量两点间隔</td>
+</tr>
+<tr>
+<td><code>h</code></td>
+<td>信号高亮</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">源码窗口<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>点信号 → 右键 → <strong>Trace</strong>，可反推这个信号由谁驱动（<strong>反推 debug</strong> 是 Verdi 最大价值）。</li>
+<li>波形上双击信号 → 跳到源码赋值处。</li>
+</ul>
+<hr />
+<h2 id="_8">九、常见问题排查<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因 / 解决</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>没生成 .fsdb</strong></td>
+<td>TB 里忘写 <code>$fsdbDumpfile/$fsdbDumpvars</code>，或 <code>$finish</code> 前仿真被打断</td>
+</tr>
+<tr>
+<td><strong>Verdi 打开看不到内部信号</strong></td>
+<td>编译缺 <code>-debug_access+all</code>（或 <code>-kdb</code>）</td>
+</tr>
+<tr>
+<td><strong>timescale 警告/时序不对</strong></td>
+<td>代码没 <code>\</code>timescale<code>，或全局用</code>-timescale=` 统一</td>
+</tr>
+<tr>
+<td><strong>重复编译报错（simv 已存在/daidir）</strong></td>
+<td>没 <code>make clean</code>，旧的编译产物冲突</td>
+</tr>
+<tr>
+<td><strong>波形只有顶层没内部</strong></td>
+<td><code>$fsdbDumpvars(0, tb)</code> 的 0 丢了，默认只 dump 顶层</td>
+</tr>
+<tr>
+<td><strong>仿真一直"跑不完"</strong></td>
+<td>没 <code>$finish</code>，事件队列永不为空</td>
+</tr>
+<tr>
+<td><strong>结果与预期不符</strong></td>
+<td>检查单位、阻塞/非阻塞、<code>#</code> 延时位置</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_9">相关笔记<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../%E6%95%B0%E5%AD%97%E8%8A%AF%E7%89%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%AA%8C%E8%AF%81%E6%A6%82%E8%BF%B0/">数字芯片设计与验证概述</a> —— 验证流程与工具栈</li>
+<li><a href="../SystemVerilog%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7/">SystemVerilog 核心特性</a> —— 仿真调度、断言、覆盖率</li>
+<li><a href="../UVM%E9%AA%8C%E8%AF%81%E6%96%B9%E6%B3%95%E5%AD%A6%E5%85%A5%E9%97%A8/">UVM 验证方法学入门</a> —— 大规模验证环境</li>
+<li><a href="../Verilog%20HDL%E6%A0%B8%E5%BF%83%E8%AF%AD%E6%B3%95%E4%B8%8E%E5%BB%BA%E6%A8%A1/">Verilog HDL 核心语法与建模</a></li>
+</ul>
 
 
 
@@ -3328,7 +3393,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月31日 16:37:27 UTC">2026年7月31日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月20日 13:21:10 UTC">2026年8月20日</span>
   </span>
 
     
@@ -3338,7 +3403,7 @@
     <span class="md-icon" title="创建日期">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年7月31日 16:37:27 UTC">2026年7月31日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月20日 13:21:10 UTC">2026年8月20日</span>
   </span>
 
     
