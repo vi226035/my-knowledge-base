@@ -21,3 +21,4 @@ created: 2026-07-23
 - [[数字芯片设计与验证概述]] — 设计流程、验证概念、研发流程、语言工具栈
 - [[SystemVerilog核心特性]] — 数据类型、OOP、仿真调度、随机约束、SVA 断言、覆盖率
 - [[UVM验证方法学入门]] — UVM 架构、六大组件、TLM 通信、Factory 机制
+- [[VCS 与 Verdi 仿真指南]] — VCS 编译仿真、fsdb 波形、Makefile、filelist、Verdi 调试

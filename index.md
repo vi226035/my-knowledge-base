@@ -66,6 +66,7 @@ created: 2026-05-25
 
 - [数字IC](数字IC/index.md) — 数字芯片设计与验证索引
 - [数字芯片设计与验证概述](数字IC/数字芯片设计与验证概述.md) — 设计流程、验证三手段、研发流程、语言工具栈
+- [VCS 与 Verdi 仿真指南](数字IC/VCS 与 Verdi 仿真指南.md) — VCS 编译仿真、fsdb 波形、Makefile、filelist、Verdi 调试
 - [Verilog HDL 核心语法与建模](数字IC/Verilog HDL核心语法与建模.md) — 模块结构、四种建模方式、Task/Function
 - [高性能数字电路设计](数字IC/高性能数字电路设计.md) — PPA、状态机三段式、时钟时序、FIFO、低功耗
 - [SystemVerilog 基础语法](数字IC/SystemVerilog基础语法.md) — always_ff/comb、interface、package、数组方法
