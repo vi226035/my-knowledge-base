@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="从 Verilog 到 SystemVerilog 的语法扩展。涵盖 always 块改进、接口、包、过程语句等基础内容。">
+        <meta name="description" content="从 Verilog 到 SystemVerilog 的语法扩展。涵盖基本语法与数据类型、always 块改进、接口、包、过程语句等基础内容。">
       
       
         <meta name="author" content="vi226035">
@@ -76,7 +76,7 @@
     "@context": "https://schema.org",
     "@type": "TechArticle",
     "headline": "SystemVerilog 基础语法",
-    "description": "从 Verilog 到 SystemVerilog 的语法扩展。涵盖 always 块改进、接口、包、过程语句等基础内容。",
+    "description": "从 Verilog 到 SystemVerilog 的语法扩展。涵盖基本语法与数据类型、always 块改进、接口、包、过程语句等基础内容。",
     "author": {
       "@type": "Person",
       "name": "vi226035"
@@ -1981,15 +1981,98 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#always" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一、always 块改进
+        一、基本语法与数据类型
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="一、always 块改进">
+    <nav class="md-nav" aria-label="一、基本语法与数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-logic-reg-wire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 最核心：logic 取代 reg 和 wire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 两态 vs 四态
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 常用数据类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-310" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 [31:0] 是位宽，不是数组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-typedef-enum-struct" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 自定义类型：typedef / enum / struct
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 基本语法速览
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#always" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、always 块改进
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、always 块改进">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2023,12 +2106,12 @@
   <a href="#interface" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、接口（Interface）
+        三、接口（Interface）
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="二、接口（Interface）">
+    <nav class="md-nav" aria-label="三、接口（Interface）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2073,12 +2156,12 @@
   <a href="#package" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、包（Package）
+        四、包（Package）
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="三、包（Package）">
+    <nav class="md-nav" aria-label="四、包（Package）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2109,15 +2192,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、过程语句改进
+        五、过程语句改进
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="四、过程语句改进">
+    <nav class="md-nav" aria-label="五、过程语句改进">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2148,15 +2231,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五、数组操作改进
+        六、数组操作改进
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="五、数组操作改进">
+    <nav class="md-nav" aria-label="六、数组操作改进">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2190,7 +2273,7 @@
   <a href="#sv-vs-verilog" class="md-nav__link">
     <span class="md-ellipsis">
       
-        六、SV 基础语法 vs Verilog 对比
+        七、SV 基础语法 vs Verilog 对比
       
     </span>
   </a>
@@ -2198,7 +2281,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         关键要点总结
@@ -2209,7 +2292,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         延伸阅读
@@ -2502,15 +2585,98 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#always" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一、always 块改进
+        一、基本语法与数据类型
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="一、always 块改进">
+    <nav class="md-nav" aria-label="一、基本语法与数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-logic-reg-wire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 最核心：logic 取代 reg 和 wire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 两态 vs 四态
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 常用数据类型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-310" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 [31:0] 是位宽，不是数组
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#15-typedef-enum-struct" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5 自定义类型：typedef / enum / struct
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6 基本语法速览
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#always" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、always 块改进
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、always 块改进">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2544,12 +2710,12 @@
   <a href="#interface" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、接口（Interface）
+        三、接口（Interface）
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="二、接口（Interface）">
+    <nav class="md-nav" aria-label="三、接口（Interface）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2594,12 +2760,12 @@
   <a href="#package" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、包（Package）
+        四、包（Package）
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="三、包（Package）">
+    <nav class="md-nav" aria-label="四、包（Package）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2630,15 +2796,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、过程语句改进
+        五、过程语句改进
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="四、过程语句改进">
+    <nav class="md-nav" aria-label="五、过程语句改进">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2669,15 +2835,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五、数组操作改进
+        六、数组操作改进
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="五、数组操作改进">
+    <nav class="md-nav" aria-label="六、数组操作改进">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2711,7 +2877,7 @@
   <a href="#sv-vs-verilog" class="md-nav__link">
     <span class="md-ellipsis">
       
-        六、SV 基础语法 vs Verilog 对比
+        七、SV 基础语法 vs Verilog 对比
       
     </span>
   </a>
@@ -2719,7 +2885,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         关键要点总结
@@ -2730,7 +2896,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         延伸阅读
@@ -2762,12 +2928,13 @@
 
 <h1 id="systemverilog">SystemVerilog 基础语法<a class="headerlink" href="#systemverilog" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>从 Verilog 到 SystemVerilog 的语法扩展。涵盖 always 块改进、接口、包、过程语句等基础内容。</p>
+<p>从 Verilog 到 SystemVerilog 的语法扩展。涵盖基本语法与数据类型、always 块改进、接口、包、过程语句等基础内容。</p>
 </blockquote>
 <hr />
 <h2 id="_1">核心概念<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>SV 基础语法</strong>：Verilog 语法的扩展和改进，让代码更清晰、更安全</li>
+<li><strong>logic / 数据类型</strong>：统一了 Verilog 的 <code>reg</code>/<code>wire</code>，引入更清晰的数据类型体系</li>
 <li><strong>always_ff/always_comb/always_latch</strong>：替代传统 <code>always</code>，意图更明确</li>
 <li><strong>Interface</strong>：封装模块间的连接，减少连线错误</li>
 <li><strong>Package</strong>：类似 C 的头文件，集中定义类型和参数</li>
@@ -2776,7 +2943,270 @@
 <p><strong>大白话</strong>：如果把 Verilog 比作手动挡汽车，SV 基础语法就是自动挡——功能一样，但开起来更安全、更省心。</p>
 </blockquote>
 <hr />
-<h2 id="always">一、always 块改进<a class="headerlink" href="#always" title="Permanent link">&para;</a></h2>
+<h2 id="_2">一、基本语法与数据类型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>从最基础的「类型」讲起。理解这一节后，才能看懂后面 <code>always_ff</code>、<code>interface</code> 等内容。</p>
+</blockquote>
+<hr />
+<h3 id="11-logic-reg-wire">1.1 最核心：<code>logic</code> 取代 <code>reg</code> 和 <code>wire</code><a class="headerlink" href="#11-logic-reg-wire" title="Permanent link">&para;</a></h3>
+<p>Verilog 把信号分成两类，规则很麻烦：</p>
+<table>
+<thead>
+<tr>
+<th>Verilog 类型</th>
+<th>作用</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wire</code></td>
+<td>连线（导线）</td>
+<td>只能用 <code>assign</code> 赋值，<strong>不能</strong>出现在 always 块里</td>
+</tr>
+<tr>
+<td><code>reg</code></td>
+<td>变量（寄存器）</td>
+<td>只能出现在 always 块里，<strong>不能</strong>用 <code>assign</code></td>
+</tr>
+</tbody>
+</table>
+<p>新手最容易踩的坑就是「wire 不能在这里赋值」「reg 不能在那里赋值」。</p>
+<p>SV 引入 <code>logic</code> 一个类型通吃：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">logic</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w">         </span><span class="c1">// 既可以用 assign，也可以在 always 里赋值</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">7</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">bus</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>💡 <strong>大白话</strong>：Verilog 硬要区分「电线」和「盒子」，SV 说「别管那么多，都是 <code>logic</code>」。设计代码 90% 的场景写 <code>logic</code> 就够。</p>
+</blockquote>
+<p><strong>唯一例外</strong>：当一个信号被多个模块同时驱动（三态总线、多驱动源）时，必须用 <code>wire</code>；<code>logic</code> 不允许多驱动。</p>
+<hr />
+<h3 id="12-vs">1.2 两态 vs 四态<a class="headerlink" href="#12-vs" title="Permanent link">&para;</a></h3>
+<p>数字电路里一个比特不只是 0/1：</p>
+<ul>
+<li><strong>4 态</strong>：<code>0</code>、<code>1</code>、<code>X</code>（未知/未初始化）、<code>Z</code>（高阻/悬空）</li>
+<li><strong>2 态</strong>：只有 <code>0</code>、<code>1</code></li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    A["你的信号"] --&gt; B{"用在哪儿？"}
+    B --&gt;|"综合电路"| C["4 态&lt;br/&gt;logic"]
+    B --&gt;|"仿真验证"| D["2 态&lt;br/&gt;bit / int"]
+    style C fill:#d4edda,stroke:#333
+    style D fill:#d4edda,stroke:#333</code></pre>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>用哪种</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>综合电路（设计）</td>
+<td>4 态（<code>logic</code>）</td>
+<td>电路里确实有 X 和 Z</td>
+</tr>
+<tr>
+<td>仿真验证（testbench）</td>
+<td>2 态（<code>bit</code>/<code>int</code>）</td>
+<td>仿真更快、更清爽</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="13">1.3 常用数据类型<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th style="text-align: center;">位数</th>
+<th style="text-align: center;">有符号</th>
+<th style="text-align: center;">状态</th>
+<th>典型用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bit</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">无符号</td>
+<td style="text-align: center;">2 态</td>
+<td>简单标志位</td>
+</tr>
+<tr>
+<td><code>logic</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">无符号</td>
+<td style="text-align: center;"><strong>4 态</strong></td>
+<td>综合设计默认</td>
+</tr>
+<tr>
+<td><code>byte</code></td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">有符号</td>
+<td style="text-align: center;">2 态</td>
+<td>一个字节</td>
+</tr>
+<tr>
+<td><code>shortint</code></td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">有符号</td>
+<td style="text-align: center;">2 态</td>
+<td>短整数</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">有符号</td>
+<td style="text-align: center;">2 态</td>
+<td>常用整数</td>
+</tr>
+<tr>
+<td><code>longint</code></td>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">有符号</td>
+<td style="text-align: center;">2 态</td>
+<td>大整数</td>
+</tr>
+<tr>
+<td><code>integer</code></td>
+<td style="text-align: center;">32</td>
+<td style="text-align: center;">有符号</td>
+<td style="text-align: center;">4 态</td>
+<td>Verilog 老写法（兼容）</td>
+</tr>
+<tr>
+<td><code>reg</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">无符号</td>
+<td style="text-align: center;">4 态</td>
+<td>Verilog 老写法</td>
+</tr>
+<tr>
+<td><code>wire</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">无符号</td>
+<td style="text-align: center;">4 态</td>
+<td>多驱动连接</td>
+</tr>
+<tr>
+<td><code>real</code></td>
+<td style="text-align: center;">64</td>
+<td style="text-align: center;">浮点</td>
+<td style="text-align: center;">—</td>
+<td>仿真浮点</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">logic</span><span class="w"> </span><span class="n">clk</span><span class="p">;</span><span class="w">          </span><span class="c1">// 时钟</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">addr</span><span class="p">;</span><span class="w">  </span><span class="c1">// 32 位地址</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">              </span><span class="c1">// testbench 循环变量</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kt">bit</span><span class="w"> </span><span class="n">flag</span><span class="p">;</span><span class="w">           </span><span class="c1">// 一个标志位</span>
+</code></pre></div>
+<hr />
+<h3 id="14-310">1.4 <code>[31:0]</code> 是位宽，不是数组<a class="headerlink" href="#14-310" title="Permanent link">&para;</a></h3>
+<p><code>logic [31:0] data</code> 里的 <code>[31:0]</code> 表示「这一个变量占了 32 个比特」（打包 packed）。它和数组不是一回事：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span><span class="w">      </span><span class="c1">// 一个 32 位宽的变量（打包 packed）</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kt">logic</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span><span class="w">         </span><span class="c1">// 32 个独立的 1 位变量（数组 unpacked）</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">mem</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span><span class="w">  </span><span class="c1">// 256 个元素，每个 32 位（内存）</span>
+</code></pre></div>
+<blockquote>
+<p>记住：<code>[31:0]</code> 写在<strong>变量名左边</strong> = 位宽；<code>[32]</code> 写在<strong>变量名右边</strong> = 数组长度。</p>
+</blockquote>
+<hr />
+<h3 id="15-typedef-enum-struct">1.5 自定义类型：<code>typedef</code> / <code>enum</code> / <code>struct</code><a class="headerlink" href="#15-typedef-enum-struct" title="Permanent link">&para;</a></h3>
+<p>这三个是 SV 最实用的「造字」工具，也是后面「包（Package）」一节的基础。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// typedef：给类型起个名字</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">typedef</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">addr_t</span><span class="p">;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">addr_t</span><span class="w"> </span><span class="n">my_addr</span><span class="p">;</span><span class="w">          </span><span class="c1">// 等价于 logic [31:0] my_addr;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1">// enum：一组有名字的值，比数字可读</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">IDLE</span><span class="p">,</span><span class="w"> </span><span class="n">RUNNING</span><span class="p">,</span><span class="w"> </span><span class="n">DONE</span><span class="p">,</span><span class="w"> </span><span class="n">ERROR</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">}</span><span class="w"> </span><span class="n">state_t</span><span class="p">;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">state_t</span><span class="w"> </span><span class="n">state</span><span class="p">;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1">// struct：把相关字段打包成一个整体</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="k">packed</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">addr</span><span class="p">;</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="kt">logic</span><span class="w">        </span><span class="n">is_write</span><span class="p">;</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="p">}</span><span class="w"> </span><span class="n">transaction_t</span><span class="p">;</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="n">transaction_t</span><span class="w"> </span><span class="n">txn</span><span class="p">;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>作用</th>
+<th>类比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>typedef</code></td>
+<td>给已有类型起外号</td>
+<td>别名</td>
+</tr>
+<tr>
+<td><code>enum</code></td>
+<td>给状态起名字</td>
+<td>枚举</td>
+</tr>
+<tr>
+<td><code>struct</code></td>
+<td>把字段捆成一包</td>
+<td>结构体</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>大白话</strong>：<code>typedef</code> 是起外号，<code>enum</code> 是给状态起名字（<code>IDLE</code> 比 <code>2'b00</code> 好读多了），<code>struct</code> 是把相关的东西装进一个盒子里。</p>
+</blockquote>
+<hr />
+<h3 id="16">1.6 基本语法速览<a class="headerlink" href="#16" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>连续赋值</td>
+<td>组合逻辑，连线</td>
+<td><code>assign y = a &amp; b;</code></td>
+</tr>
+<tr>
+<td>阻塞赋值 <code>=</code></td>
+<td>组合逻辑，顺序执行</td>
+<td><code>y = a &amp; b;</code></td>
+</tr>
+<tr>
+<td>非阻塞赋值 <code>&lt;=</code></td>
+<td>时序逻辑，并行更新</td>
+<td><code>q &lt;= d;</code></td>
+</tr>
+<tr>
+<td><code>always_ff</code></td>
+<td>时序块</td>
+<td><code>always_ff @(posedge clk)</code></td>
+</tr>
+<tr>
+<td><code>always_comb</code></td>
+<td>组合块</td>
+<td><code>always_comb begin ... end</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ 关于 <code>always_ff</code> / <code>always_comb</code> 的详细用法，见下一节「always 块改进」。</p>
+</blockquote>
+<hr />
+<h2 id="always">二、always 块改进<a class="headerlink" href="#always" title="Permanent link">&para;</a></h2>
 <h3 id="11-always">1.1 三种专用 always 块<a class="headerlink" href="#11-always" title="Permanent link">&para;</a></h3>
 <p>SV 引入了三个专用的 always 块，替代传统的 <code>always</code>：</p>
 <table>
@@ -2809,24 +3239,24 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// 时序逻辑：用 always_ff</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b0</span><span class="p">;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">else</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">        </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">end</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1">// 组合逻辑：用 always_comb（无需写敏感列表！）</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">always_comb</span><span class="w"> </span><span class="k">begin</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">end</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="c1">// 锁存器：用 always_latch</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="k">always_latch</span><span class="w"> </span><span class="k">begin</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">enable</span><span class="p">)</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="k">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// 时序逻辑：用 always_ff</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mb">1&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">else</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="n">q</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="k">end</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1">// 组合逻辑：用 always_comb（无需写敏感列表！）</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="k">always_comb</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="k">end</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1">// 锁存器：用 always_latch</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="k">always_latch</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">enable</span><span class="p">)</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">        </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="k">end</span>
 </code></pre></div>
 <h3 id="12-always">1.2 为什么需要专用 always 块？<a class="headerlink" href="#12-always" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart TB
@@ -2850,7 +3280,7 @@
 <p>⚠️ <strong>重要</strong>：实际项目中<strong>强烈推荐</strong>使用 <code>always_ff</code>/<code>always_comb</code>，这是 SV 代码风格的基本要求。</p>
 </blockquote>
 <hr />
-<h2 id="interface">二、接口（Interface）<a class="headerlink" href="#interface" title="Permanent link">&para;</a></h2>
+<h2 id="interface">三、接口（Interface）<a class="headerlink" href="#interface" title="Permanent link">&para;</a></h2>
 <h3 id="21-interface">2.1 什么是 Interface<a class="headerlink" href="#21-interface" title="Permanent link">&para;</a></h3>
 <p><strong>Interface</strong> = 把模块间的连接信号封装在一起，类似"连接器的插头"。</p>
 <pre class="mermaid"><code>flowchart TB
@@ -2869,52 +3299,52 @@
     style C fill:#ffe0e0,stroke:#333
     style D fill:#d4edda,stroke:#333</code></pre>
 <h3 id="22-interface">2.2 Interface 定义与使用<a class="headerlink" href="#22-interface" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// 定义接口</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">interface</span><span class="w"> </span><span class="n">apb_if</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="c1">// 信号声明</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="kt">logic</span><span class="w">       </span><span class="n">pclk</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="kt">logic</span><span class="w">       </span><span class="n">preset_n</span><span class="p">;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">paddr</span><span class="p">;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">pwdata</span><span class="p">;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">prdata</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="kt">logic</span><span class="w">       </span><span class="n">pwrite</span><span class="p">;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="kt">logic</span><span class="w">       </span><span class="n">psel</span><span class="p">;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="kt">logic</span><span class="w">       </span><span class="n">penable</span><span class="p">;</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="c1">// 可以包含断言、任务、函数</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="k">modport</span><span class="w"> </span><span class="n">master</span><span class="p">(</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="k">output</span><span class="w"> </span><span class="n">pclk</span><span class="p">,</span><span class="w"> </span><span class="n">preset_n</span><span class="p">,</span><span class="w"> </span><span class="n">paddr</span><span class="p">,</span><span class="w"> </span><span class="n">pwdata</span><span class="p">,</span><span class="w"> </span><span class="n">pwrite</span><span class="p">,</span><span class="w"> </span><span class="n">psel</span><span class="p">,</span><span class="w"> </span><span class="n">penable</span><span class="p">,</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="k">input</span><span class="w">  </span><span class="n">prdata</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="p">);</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="k">modport</span><span class="w"> </span><span class="n">slave</span><span class="p">(</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">        </span><span class="k">input</span><span class="w">  </span><span class="n">pclk</span><span class="p">,</span><span class="w"> </span><span class="n">preset_n</span><span class="p">,</span><span class="w"> </span><span class="n">paddr</span><span class="p">,</span><span class="w"> </span><span class="n">pwdata</span><span class="p">,</span><span class="w"> </span><span class="n">pwrite</span><span class="p">,</span><span class="w"> </span><span class="n">psel</span><span class="p">,</span><span class="w"> </span><span class="n">penable</span><span class="p">,</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">        </span><span class="k">output</span><span class="w"> </span><span class="n">prdata</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">    </span><span class="p">);</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="k">endinterface</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="c1">// 模块使用接口</span>
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="k">module</span><span class="w"> </span><span class="n">apb_master</span><span class="w"> </span><span class="p">(</span><span class="n">apb_if</span><span class="p">.</span><span class="n">master</span><span class="w"> </span><span class="n">ifc</span><span class="p">);</span>
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">    </span><span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">ifc</span><span class="p">.</span><span class="n">pclk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ifc</span><span class="p">.</span><span class="n">psel</span><span class="p">)</span>
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="w">            </span><span class="n">ifc</span><span class="p">.</span><span class="n">paddr</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">next_addr</span><span class="p">;</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">    </span><span class="k">end</span>
-<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="k">endmodule</span>
-<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
-<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="k">module</span><span class="w"> </span><span class="n">apb_slave</span><span class="w"> </span><span class="p">(</span><span class="n">apb_if</span><span class="p">.</span><span class="n">slave</span><span class="w"> </span><span class="n">ifc</span><span class="p">);</span>
-<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">    </span><span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">ifc</span><span class="p">.</span><span class="n">pclk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
-<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ifc</span><span class="p">.</span><span class="n">psel</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ifc</span><span class="p">.</span><span class="n">penable</span><span class="p">)</span>
-<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="w">            </span><span class="n">ifc</span><span class="p">.</span><span class="n">prdata</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">mem</span><span class="p">[</span><span class="n">ifc</span><span class="p">.</span><span class="n">paddr</span><span class="p">];</span>
-<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">    </span><span class="k">end</span>
-<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="k">endmodule</span>
-<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>
-<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="c1">// 顶层连接</span>
-<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="k">module</span><span class="w"> </span><span class="n">top</span><span class="p">;</span>
-<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="w">    </span><span class="n">apb_if</span><span class="w"> </span><span class="n">bus_if</span><span class="p">();</span><span class="w">  </span><span class="c1">// 创建接口实例</span>
-<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>
-<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="w">    </span><span class="n">apb_master</span><span class="w"> </span><span class="n">u_master</span><span class="w"> </span><span class="p">(.</span><span class="n">ifc</span><span class="p">(</span><span class="n">bus_if</span><span class="p">));</span>
-<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="w">    </span><span class="n">apb_slave</span><span class="w">  </span><span class="n">u_slave</span><span class="w">  </span><span class="p">(.</span><span class="n">ifc</span><span class="p">(</span><span class="n">bus_if</span><span class="p">));</span>
-<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="k">endmodule</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// 定义接口</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">interface</span><span class="w"> </span><span class="n">apb_if</span><span class="p">;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="c1">// 信号声明</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="kt">logic</span><span class="w">       </span><span class="n">pclk</span><span class="p">;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="kt">logic</span><span class="w">       </span><span class="n">preset_n</span><span class="p">;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">paddr</span><span class="p">;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">pwdata</span><span class="p">;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">prdata</span><span class="p">;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="kt">logic</span><span class="w">       </span><span class="n">pwrite</span><span class="p">;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="kt">logic</span><span class="w">       </span><span class="n">psel</span><span class="p">;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="kt">logic</span><span class="w">       </span><span class="n">penable</span><span class="p">;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="c1">// 可以包含断言、任务、函数</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="k">modport</span><span class="w"> </span><span class="n">master</span><span class="p">(</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">        </span><span class="k">output</span><span class="w"> </span><span class="n">pclk</span><span class="p">,</span><span class="w"> </span><span class="n">preset_n</span><span class="p">,</span><span class="w"> </span><span class="n">paddr</span><span class="p">,</span><span class="w"> </span><span class="n">pwdata</span><span class="p">,</span><span class="w"> </span><span class="n">pwrite</span><span class="p">,</span><span class="w"> </span><span class="n">psel</span><span class="p">,</span><span class="w"> </span><span class="n">penable</span><span class="p">,</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">        </span><span class="k">input</span><span class="w">  </span><span class="n">prdata</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="k">modport</span><span class="w"> </span><span class="n">slave</span><span class="p">(</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">        </span><span class="k">input</span><span class="w">  </span><span class="n">pclk</span><span class="p">,</span><span class="w"> </span><span class="n">preset_n</span><span class="p">,</span><span class="w"> </span><span class="n">paddr</span><span class="p">,</span><span class="w"> </span><span class="n">pwdata</span><span class="p">,</span><span class="w"> </span><span class="n">pwrite</span><span class="p">,</span><span class="w"> </span><span class="n">psel</span><span class="p">,</span><span class="w"> </span><span class="n">penable</span><span class="p">,</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">        </span><span class="k">output</span><span class="w"> </span><span class="n">prdata</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="k">endinterface</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="c1">// 模块使用接口</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="k">module</span><span class="w"> </span><span class="n">apb_master</span><span class="w"> </span><span class="p">(</span><span class="n">apb_if</span><span class="p">.</span><span class="n">master</span><span class="w"> </span><span class="n">ifc</span><span class="p">);</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">    </span><span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">ifc</span><span class="p">.</span><span class="n">pclk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ifc</span><span class="p">.</span><span class="n">psel</span><span class="p">)</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">            </span><span class="n">ifc</span><span class="p">.</span><span class="n">paddr</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">next_addr</span><span class="p">;</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="k">endmodule</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="k">module</span><span class="w"> </span><span class="n">apb_slave</span><span class="w"> </span><span class="p">(</span><span class="n">apb_if</span><span class="p">.</span><span class="n">slave</span><span class="w"> </span><span class="n">ifc</span><span class="p">);</span>
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="w">    </span><span class="k">always_ff</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">ifc</span><span class="p">.</span><span class="n">pclk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ifc</span><span class="p">.</span><span class="n">psel</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">ifc</span><span class="p">.</span><span class="n">penable</span><span class="p">)</span>
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a><span class="w">            </span><span class="n">ifc</span><span class="p">.</span><span class="n">prdata</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">mem</span><span class="p">[</span><span class="n">ifc</span><span class="p">.</span><span class="n">paddr</span><span class="p">];</span>
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="k">endmodule</span>
+<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>
+<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="c1">// 顶层连接</span>
+<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="k">module</span><span class="w"> </span><span class="n">top</span><span class="p">;</span>
+<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a><span class="w">    </span><span class="n">apb_if</span><span class="w"> </span><span class="n">bus_if</span><span class="p">();</span><span class="w">  </span><span class="c1">// 创建接口实例</span>
+<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>
+<a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a><span class="w">    </span><span class="n">apb_master</span><span class="w"> </span><span class="n">u_master</span><span class="w"> </span><span class="p">(.</span><span class="n">ifc</span><span class="p">(</span><span class="n">bus_if</span><span class="p">));</span>
+<a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a><span class="w">    </span><span class="n">apb_slave</span><span class="w">  </span><span class="n">u_slave</span><span class="w">  </span><span class="p">(.</span><span class="n">ifc</span><span class="p">(</span><span class="n">bus_if</span><span class="p">));</span>
+<a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a><span class="k">endmodule</span>
 </code></pre></div>
 <h3 id="23-interface">2.3 Interface 的优势<a class="headerlink" href="#23-interface" title="Permanent link">&para;</a></h3>
 <table>
@@ -2951,48 +3381,48 @@
 <p><strong>大白话</strong>：Interface 就像 USB 接口——不管插什么设备，只要符合 USB 标准就能用。不用每次重新定义"哪根线是数据、哪根是电源"。</p>
 </blockquote>
 <hr />
-<h2 id="package">三、包（Package）<a class="headerlink" href="#package" title="Permanent link">&para;</a></h2>
+<h2 id="package">四、包（Package）<a class="headerlink" href="#package" title="Permanent link">&para;</a></h2>
 <h3 id="31-package">3.1 什么是 Package<a class="headerlink" href="#31-package" title="Permanent link">&para;</a></h3>
 <p><strong>Package</strong> = 集中定义类型、参数、函数的地方，类似 C 语言的<strong>头文件</strong>（.h）。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// 定义包</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">package</span><span class="w"> </span><span class="n">my_types_pkg</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="c1">// 类型定义</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="n">IDLE</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mb">2&#39;b00</span><span class="p">,</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="n">RUNNING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">2&#39;b01</span><span class="p">,</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="n">DONE</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mb">2&#39;b10</span><span class="p">,</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="n">ERROR</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mb">2&#39;b11</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">state_t</span><span class="p">;</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="k">packed</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="kt">bit</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">addr</span><span class="p">;</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">        </span><span class="kt">bit</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="kt">bit</span><span class="w">        </span><span class="n">is_write</span><span class="p">;</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">transaction_t</span><span class="p">;</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="c1">// 参数定义</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FIFO_DEPTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">DATA_WIDTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="c1">// 函数定义</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="k">automatic</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">clog2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">            </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">            </span><span class="n">result</span><span class="o">++</span><span class="p">;</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">        </span><span class="k">end</span>
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
-<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">    </span><span class="k">endfunction</span>
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="k">endpackage</span>
-<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>
-<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="c1">// 使用包</span>
-<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="k">module</span><span class="w"> </span><span class="n">my_module</span><span class="p">;</span>
-<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="w">    </span><span class="k">import</span><span class="w"> </span><span class="n">my_types_pkg</span><span class="o">::*</span><span class="p">;</span><span class="w">  </span><span class="c1">// 导入包中所有定义</span>
-<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>
-<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="w">    </span><span class="n">state_t</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w">           </span><span class="c1">// 使用包中定义的类型</span>
-<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">    </span><span class="n">transaction_t</span><span class="w"> </span><span class="n">txn</span><span class="p">;</span>
-<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="n">clog2</span><span class="p">(</span><span class="n">FIFO_DEPTH</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">addr</span><span class="p">;</span><span class="w">  </span><span class="c1">// 使用包中的函数和参数</span>
-<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="k">endmodule</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// 定义包</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">package</span><span class="w"> </span><span class="n">my_types_pkg</span><span class="p">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="c1">// 类型定义</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="kt">logic</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="n">IDLE</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mb">2&#39;b00</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="n">RUNNING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">2&#39;b01</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="n">DONE</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mb">2&#39;b10</span><span class="p">,</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="n">ERROR</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mb">2&#39;b11</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">state_t</span><span class="p">;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="k">packed</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">        </span><span class="kt">bit</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">addr</span><span class="p">;</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">        </span><span class="kt">bit</span><span class="w"> </span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">data</span><span class="p">;</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">        </span><span class="kt">bit</span><span class="w">        </span><span class="n">is_write</span><span class="p">;</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">transaction_t</span><span class="p">;</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span><span class="c1">// 参数定义</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">FIFO_DEPTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">    </span><span class="k">parameter</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">DATA_WIDTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">    </span><span class="c1">// 函数定义</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="k">automatic</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">clog2</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">);</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">            </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">            </span><span class="n">result</span><span class="o">++</span><span class="p">;</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="w">    </span><span class="k">endfunction</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a><span class="k">endpackage</span>
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="c1">// 使用包</span>
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="k">module</span><span class="w"> </span><span class="n">my_module</span><span class="p">;</span>
+<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a><span class="w">    </span><span class="k">import</span><span class="w"> </span><span class="n">my_types_pkg</span><span class="o">::*</span><span class="p">;</span><span class="w">  </span><span class="c1">// 导入包中所有定义</span>
+<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>
+<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="w">    </span><span class="n">state_t</span><span class="w"> </span><span class="n">state</span><span class="p">;</span><span class="w">           </span><span class="c1">// 使用包中定义的类型</span>
+<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a><span class="w">    </span><span class="n">transaction_t</span><span class="w"> </span><span class="n">txn</span><span class="p">;</span>
+<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a><span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="p">[</span><span class="n">clog2</span><span class="p">(</span><span class="n">FIFO_DEPTH</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="n">addr</span><span class="p">;</span><span class="w">  </span><span class="c1">// 使用包中的函数和参数</span>
+<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="k">endmodule</span>
 </code></pre></div>
 <h3 id="32-package-vs-define">3.2 Package  vs  `define<a class="headerlink" href="#32-package-vs-define" title="Permanent link">&para;</a></h3>
 <table>
@@ -3030,7 +3460,7 @@
 <p>⚠️ <strong>重要</strong>：实际项目中<strong>不要用 `define` 定义常量</strong>，用 `package` 或 `parameter`。`define 只用于条件编译（如 `ifdef SIMULATION）。</p>
 </blockquote>
 <hr />
-<h2 id="_2">四、过程语句改进<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_3">五、过程语句改进<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 新的赋值语句<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -3070,92 +3500,92 @@
 </table>
 <h3 id="42-unique-case-priority-if">4.2 unique case 和 priority if<a class="headerlink" href="#42-unique-case-priority-if" title="Permanent link">&para;</a></h3>
 <p><strong><code>unique case</code></strong>：要求所有条件互斥，且必须覆盖所有情况</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// 普通 case：不检查是否互斥或完整</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="mb">2&#39;b00</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="mb">2&#39;b01</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="c1">// 缺少 10 和 11，会产生锁存器！</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">endcase</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1">// unique case：检查互斥性和完整性</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="k">unique</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="mb">2&#39;b00</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="mb">2&#39;b01</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="mb">2&#39;b10</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="mb">2&#39;b11</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="c1">// 必须覆盖所有情况，否则编译报错</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="k">endcase</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// 普通 case：不检查是否互斥或完整</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="mb">2&#39;b00</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="mb">2&#39;b01</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="c1">// 缺少 10 和 11，会产生锁存器！</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="k">endcase</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1">// unique case：检查互斥性和完整性</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="k">unique</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="mb">2&#39;b00</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="mb">2&#39;b01</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="mb">2&#39;b10</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="mb">2&#39;b11</span><span class="o">:</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="c1">// 必须覆盖所有情况，否则编译报错</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="k">endcase</span>
 </code></pre></div>
 <p><strong><code>priority if</code></strong>：按顺序检查，第一个为真的分支执行</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// 普通 if：并行检查</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_high</span><span class="p">)</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b100</span><span class="p">;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_med</span><span class="p">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b010</span><span class="p">;</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_low</span><span class="p">)</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b001</span><span class="p">;</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1">// priority if：明确优先级顺序</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="k">priority</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_high</span><span class="p">)</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b100</span><span class="p">;</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_med</span><span class="p">)</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b010</span><span class="p">;</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_low</span><span class="p">)</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b001</span><span class="p">;</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="k">else</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b000</span><span class="p">;</span><span class="w">  </span><span class="c1">// 必须有默认分支</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// 普通 if：并行检查</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_high</span><span class="p">)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b100</span><span class="p">;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_med</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b010</span><span class="p">;</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_low</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b001</span><span class="p">;</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="c1">// priority if：明确优先级顺序</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="k">priority</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_high</span><span class="p">)</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b100</span><span class="p">;</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_med</span><span class="p">)</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b010</span><span class="p">;</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req_low</span><span class="p">)</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b001</span><span class="p">;</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="k">else</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">    </span><span class="n">grant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mb">3&#39;b000</span><span class="p">;</span><span class="w">  </span><span class="c1">// 必须有默认分支</span>
 </code></pre></div>
 <blockquote>
 <p><strong>大白话</strong>：<code>unique case</code> 像"多选一"——必须选且只能选一个；<code>priority if</code> 像"排队优先"——前面的条件优先满足。</p>
 </blockquote>
 <hr />
-<h2 id="_3">五、数组操作改进<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_4">六、数组操作改进<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="51">5.1 数组方法<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
 <p>SV 为数组增加了许多内置方法：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&#39;{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">};</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">[$];</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1">// 数组方法</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="k">unique</span><span class="p">();</span><span class="w">      </span><span class="c1">// 去重</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">reverse</span><span class="p">();</span><span class="w">     </span><span class="c1">// 反转</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">sort</span><span class="p">();</span><span class="w">        </span><span class="c1">// 排序</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">rsort</span><span class="p">();</span><span class="w">       </span><span class="c1">// 降序排序</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1">// 数组归约方法</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">sum</span><span class="p">();</span><span class="w">        </span><span class="c1">// 求和：36</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="kt">int</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">product</span><span class="p">();</span><span class="w"> </span><span class="c1">// 乘积</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="kt">int</span><span class="w"> </span><span class="n">xor_all</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="k">xor</span><span class="p">();</span><span class="w">    </span><span class="c1">// 异或</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="c1">// 数组定位方法</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">find_first</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w">  </span><span class="c1">// 找第一个 &gt;5 的元素</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// 统计偶数个数</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="c1">// 数组赋值</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&#39;{</span><span class="mi">8</span><span class="p">{</span><span class="mi">0</span><span class="p">}};</span><span class="w">              </span><span class="c1">// 所有元素赋值为 0</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&#39;{[</span><span class="mi">0</span><span class="o">:</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">};</span><span class="w">  </span><span class="c1">// 部分赋值</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&#39;{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">};</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="p">[$];</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1">// 数组方法</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="k">unique</span><span class="p">();</span><span class="w">      </span><span class="c1">// 去重</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">reverse</span><span class="p">();</span><span class="w">     </span><span class="c1">// 反转</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">sort</span><span class="p">();</span><span class="w">        </span><span class="c1">// 排序</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">rsort</span><span class="p">();</span><span class="w">       </span><span class="c1">// 降序排序</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c1">// 数组归约方法</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">sum</span><span class="p">();</span><span class="w">        </span><span class="c1">// 求和：36</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="kt">int</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">product</span><span class="p">();</span><span class="w"> </span><span class="c1">// 乘积</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="kt">int</span><span class="w"> </span><span class="n">xor_all</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="k">xor</span><span class="p">();</span><span class="w">    </span><span class="c1">// 异或</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="c1">// 数组定位方法</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="kt">int</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">find_first</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span><span class="w">  </span><span class="c1">// 找第一个 &gt;5 的元素</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">  </span><span class="c1">// 统计偶数个数</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="c1">// 数组赋值</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&#39;{</span><span class="mi">8</span><span class="p">{</span><span class="mi">0</span><span class="p">}};</span><span class="w">              </span><span class="c1">// 所有元素赋值为 0</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&#39;{[</span><span class="mi">0</span><span class="o">:</span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">};</span><span class="w">  </span><span class="c1">// 部分赋值</span>
 </code></pre></div>
 <h3 id="52">5.2 队列操作<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">q</span><span class="p">[$]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1">// 插入</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">q</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w">       </span><span class="c1">// 在索引 2 处插入 10：{1,2,10,3,4,5}</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">q</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">        </span><span class="c1">// 在开头插入：{0,1,2,10,3,4,5}</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1">// 删除</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="n">q</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">           </span><span class="c1">// 删除索引 2：{0,1,10,3,4,5}</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">q</span><span class="p">.</span><span class="n">delete</span><span class="p">();</span><span class="w">            </span><span class="c1">// 清空队列</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="c1">// 切片</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="kt">int</span><span class="w"> </span><span class="n">slice</span><span class="p">[$]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">];</span><span class="w"> </span><span class="c1">// 取索引 1~3：{1,10,3}</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="c1">// 大小</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w">   </span><span class="c1">// 队列大小</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">q</span><span class="p">[$]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1">// 插入</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">q</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w">       </span><span class="c1">// 在索引 2 处插入 10：{1,2,10,3,4,5}</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">q</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">        </span><span class="c1">// 在开头插入：{0,1,2,10,3,4,5}</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1">// 删除</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">q</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w">           </span><span class="c1">// 删除索引 2：{0,1,10,3,4,5}</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="n">q</span><span class="p">.</span><span class="n">delete</span><span class="p">();</span><span class="w">            </span><span class="c1">// 清空队列</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="c1">// 切片</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="kt">int</span><span class="w"> </span><span class="n">slice</span><span class="p">[$]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">3</span><span class="p">];</span><span class="w"> </span><span class="c1">// 取索引 1~3：{1,10,3}</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="c1">// 大小</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w">   </span><span class="c1">// 队列大小</span>
 </code></pre></div>
 <blockquote>
 <p><strong>大白话</strong>：SV 的数组方法就像 Python 的列表操作——不用自己写循环，一行代码搞定排序、去重、统计。</p>
 </blockquote>
 <hr />
-<h2 id="sv-vs-verilog">六、SV 基础语法 vs Verilog 对比<a class="headerlink" href="#sv-vs-verilog" title="Permanent link">&para;</a></h2>
+<h2 id="sv-vs-verilog">七、SV 基础语法 vs Verilog 对比<a class="headerlink" href="#sv-vs-verilog" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>flowchart TB
     subgraph Verilog
         V1["always @(*)"]
@@ -3185,16 +3615,17 @@
     style S3 fill:#d4edda,stroke:#333
     style S4 fill:#d4edda,stroke:#333</code></pre>
 <hr />
-<h2 id="_4">关键要点总结<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_5">关键要点总结<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ul>
 <li>SV 基础语法是 Verilog 的<strong>安全增强版</strong>——功能一样，但更不容易出错</li>
+<li><code>logic</code> 取代 <code>reg</code>/<code>wire</code>，注意分清<strong>两态</strong>（仿真）与<strong>四态</strong>（电路）</li>
 <li><code>always_ff</code>/<code>always_comb</code> 替代传统 <code>always</code>，意图更明确</li>
 <li><code>interface</code> 打包信号，减少连线错误，便于复用</li>
 <li><code>package</code> 替代 <code>`</code>define`，提供类型安全的常量和类型定义</li>
 <li><code>unique case</code> 和 <code>priority if</code> 让条件语句更安全</li>
 <li>SV 数组方法让数据处理更简洁（排序、去重、统计一行搞定）</li>
 </ul>
-<h2 id="_5">延伸阅读<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_6">延伸阅读<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../SystemVerilog%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7/">SystemVerilog核心特性</a> — SV 高级特性（OOP、随机、覆盖率）</li>
 <li><a href="../Verilog%20HDL%E6%A0%B8%E5%BF%83%E8%AF%AD%E6%B3%95%E4%B8%8E%E5%BB%BA%E6%A8%A1/">Verilog HDL核心语法与建模</a> — Verilog 基础语法</li>
@@ -3222,7 +3653,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月16日 03:19:13 UTC">2026年8月16日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月27日 11:42:46 UTC">2026年9月27日</span>
   </span>
 
     

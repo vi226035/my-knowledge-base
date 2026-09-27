@@ -2826,6 +2826,8 @@
   
 
 
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
 <h1 id="_1">数字电路基础<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <h2 id="_2">一、大白话一句话理解<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <blockquote>
@@ -3133,11 +3135,14 @@ $<span class="arithmatex">\(B_{n-1} = G_{n-1}, \qquad B_i = B_{i+1} \oplus G_i\)
 <p><strong>例题 6</strong>：二进制 <span class="arithmatex">\(1011\)</span> → 格雷码。
 <span class="arithmatex">\(G_3 = B_3 = 1\)</span>；<span class="arithmatex">\(G_2 = B_3 \oplus B_2 = 1 \oplus 0 = 1\)</span>；<span class="arithmatex">\(G_1 = B_2 \oplus B_1 = 0 \oplus 1 = 1\)</span>；<span class="arithmatex">\(G_0 = B_1 \oplus B_0 = 1 \oplus 1 = 0\)</span>。
 结果为 <span class="arithmatex">\(1110\)</span>（与对照表中十进制 11 一致 ✓）。</p>
+<p><strong>例题 7</strong>：格雷码 <span class="arithmatex">\(1101\)</span> → 二进制。
+<span class="arithmatex">\(B_3 = G_3 = 1\)</span>；<span class="arithmatex">\(B_2 = B_3 \oplus G_2 = 1 \oplus 1 = 0\)</span>；<span class="arithmatex">\(B_1 = B_2 \oplus G_1 = 0 \oplus 0 = 0\)</span>；<span class="arithmatex">\(B_0 = B_1 \oplus G_0 = 0 \oplus 1 = 1\)</span>。
+结果为 <span class="arithmatex">\(1001\)</span>，即十进制 9（与对照表一致 ✓）。</p>
 </blockquote>
 <h4 id="3">（3）奇偶校验码<a class="headerlink" href="#3" title="Permanent link">&para;</a></h4>
 <p>在有效数据位后附加一位<strong>校验位</strong>，使整个码字中 1 的总数为偶数（<strong>偶校验</strong>）或奇数（<strong>奇校验</strong>）。只能<strong>检测奇数位错误</strong>，不能纠错，常用于存储器、总线传输。</p>
 <blockquote>
-<p><strong>例题 7</strong>：对 8421 码加偶校验位（校验位放最高位）：
+<p><strong>例题 8</strong>：对 8421 码加偶校验位（校验位放最高位）：
 - <span class="arithmatex">\(0110\)</span>（6）：含 2 个 1（偶），校验位 = 0 → 码字 <span class="arithmatex">\(00110\)</span>
 - <span class="arithmatex">\(0111\)</span>（7）：含 3 个 1（奇），校验位 = 1 → 码字 <span class="arithmatex">\(10111\)</span></p>
 </blockquote>
@@ -3491,9 +3496,9 @@ $<span class="arithmatex">\(B_{n-1} = G_{n-1}, \qquad B_i = B_{i+1} \oplus G_i\)
 </tbody>
 </table>
 <blockquote>
-<p><strong>例题 8</strong>：化简 <span class="arithmatex">\(Y = AB + \overline{A}C + BC\)</span>。</p>
+<p><strong>例题 9</strong>：化简 <span class="arithmatex">\(Y = AB + \overline{A}C + BC\)</span>。</p>
 <p>由冗余律直接得 <span class="arithmatex">\(Y = AB + \overline{A}C\)</span>。推导验证：<span class="arithmatex">\(BC = BC(A + \overline{A}) = ABC + \overline{A}BC\)</span>，其中 <span class="arithmatex">\(ABC\)</span> 被 <span class="arithmatex">\(AB\)</span> 吸收、<span class="arithmatex">\(\overline{A}BC\)</span> 被 <span class="arithmatex">\(\overline{A}C\)</span> 吸收。</p>
-<p><strong>例题 9</strong>：化简 <span class="arithmatex">\(Y = \overline{\overline{AB} + \overline{C}}\)</span>。</p>
+<p><strong>例题 10</strong>：化简 <span class="arithmatex">\(Y = \overline{\overline{AB} + \overline{C}}\)</span>。</p>
 <p>反复用摩根定律：<span class="arithmatex">\(Y = \overline{\overline{AB}} \cdot \overline{\overline{C}} = AB \cdot C = ABC\)</span>。</p>
 </blockquote>
 <h4 id="_5">代数化简的"四大招"<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
@@ -3530,10 +3535,10 @@ $<span class="arithmatex">\(B_{n-1} = G_{n-1}, \qquad B_i = B_{i+1} \oplus G_i\)
 </tbody>
 </table>
 <blockquote>
-<p><strong>例题 10（并项）</strong>：<span class="arithmatex">\(Y = A\overline{B}C + ABC = AC(\overline{B} + B) = AC\)</span>。</p>
-<p><strong>例题 11（吸收）</strong>：<span class="arithmatex">\(Y = AB + ABD + ABE = AB(1 + D + E) = AB\)</span>。</p>
-<p><strong>例题 12（消去）</strong>：<span class="arithmatex">\(Y = A + \overline{A}B + \overline{A}C = A + B + C\)</span>（两次消去）。</p>
-<p><strong>例题 13（综合）</strong>：化简 <span class="arithmatex">\(Y = \overline{A}B + AB + A\overline{B}\)</span>。
+<p><strong>例题 11（并项）</strong>：<span class="arithmatex">\(Y = A\overline{B}C + ABC = AC(\overline{B} + B) = AC\)</span>。</p>
+<p><strong>例题 12（吸收）</strong>：<span class="arithmatex">\(Y = AB + ABD + ABE = AB(1 + D + E) = AB\)</span>。</p>
+<p><strong>例题 13（消去）</strong>：<span class="arithmatex">\(Y = A + \overline{A}B + \overline{A}C = A + B + C\)</span>（两次消去）。</p>
+<p><strong>例题 14（综合）</strong>：化简 <span class="arithmatex">\(Y = \overline{A}B + AB + A\overline{B}\)</span>。
 先并项前两项：<span class="arithmatex">\((\overline{A} + A)B = B\)</span>，得 <span class="arithmatex">\(Y = B + A\overline{B}\)</span>；再用消去法 <span class="arithmatex">\(X + \overline{X}Y = X + Y\)</span>（此处 <span class="arithmatex">\(X=B,\ Y=A\)</span>）：
 $<span class="arithmatex">\(Y = B + A\)</span>$
 代数法依赖公式熟练度，变量多时容易漏项，因此工程上更常用下一节的<strong>卡诺图法</strong>。</p>
@@ -3577,7 +3582,7 @@ $<span class="arithmatex">\(Y = B + A\)</span>$
 </tbody>
 </table>
 <blockquote>
-<p><strong>例题 14（五种表示互转，全流程演示）</strong>：以三变量函数 <span class="arithmatex">\(F = AB + \overline{A}C\)</span> 为例。</p>
+<p><strong>例题 15（五种表示互转，全流程演示）</strong>：以三变量函数 <span class="arithmatex">\(F = AB + \overline{A}C\)</span> 为例。</p>
 <p><strong>① 表达式 → 真值表</strong>（逐行代入）：</p>
 </blockquote>
 <table>
@@ -3922,7 +3927,7 @@ $<span class="arithmatex">\(Y = B + A\)</span>$
 </ol>
 <h3 id="34">3.4 卡诺图化简详细例题<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
 <blockquote>
-<p><strong>例题 15</strong>：用卡诺图化简 <span class="arithmatex">\(Y(A,B,C,D) = \sum m(0,1,2,5,8,9,10)\)</span>。</p>
+<p><strong>例题 16</strong>：用卡诺图化简 <span class="arithmatex">\(Y(A,B,C,D) = \sum m(0,1,2,5,8,9,10)\)</span>。</p>
 </blockquote>
 <p><strong>第一步</strong>：在卡诺图中把最小项位置填 1，其余填 0：</p>
 <table>
@@ -3975,7 +3980,7 @@ $<span class="arithmatex">\(Y = B + A\)</span>$
 <p><strong>第三步</strong>：各圈相加得最简与或式：</p>
 <div class="arithmatex">\[Y = \overline{B}\,\overline{C} + \overline{B}\,\overline{D} + \overline{A}\,\overline{C}D\]</div>
 <blockquote>
-<p><strong>例题 16（含无关项）</strong>：化简 <span class="arithmatex">\(Y = \sum m(1,3,5,7,9) + \sum d(10,11,12,13)\)</span>（<span class="arithmatex">\(d\)</span> 为无关项）。</p>
+<p><strong>例题 17（含无关项）</strong>：化简 <span class="arithmatex">\(Y = \sum m(1,3,5,7,9) + \sum d(10,11,12,13)\)</span>（<span class="arithmatex">\(d\)</span> 为无关项）。</p>
 <p><strong>第一步</strong>：填卡诺图（1 位置填 1，无关项位置填 <span class="arithmatex">\(\times\)</span>，其余填 0）：</p>
 </blockquote>
 <table>
@@ -4190,7 +4195,7 @@ $<span class="arithmatex">\(Y = B + A\)</span>$
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月5日 15:26:32 UTC">2026年8月5日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月27日 11:42:46 UTC">2026年9月27日</span>
   </span>
 
     

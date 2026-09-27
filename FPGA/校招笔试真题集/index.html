@@ -1883,7 +1883,18 @@
   <a href="#28" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.8 其他公司（可自行新增小节）
+        2.8 复旦微
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 其他公司（可自行新增小节）
       
     </span>
   </a>
@@ -2670,7 +2681,18 @@
   <a href="#28" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.8 其他公司（可自行新增小节）
+        2.8 复旦微
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 其他公司（可自行新增小节）
       
     </span>
   </a>
@@ -2766,6 +2788,47 @@ hold 检查：<span class="arithmatex">\(t_{co(min)} + t_{comb(min)} \ge t_h\)</
 </code></pre></div>
 <p><strong>答案</strong>：代码1 → <span class="arithmatex">\(a=0,b=1\)</span>（交换）；代码2 → <span class="arithmatex">\(a=0,b=0\)</span>。</p>
 <p><strong>解析</strong>：非阻塞 <code>&lt;=</code> 并行取旧值，所以 a 拿 b 旧值 0、b 拿 a 旧值 1，交换；阻塞 <code>=</code> 顺序执行，a 先变 0，b 再取"已经变过的 a"=0。<strong>时序逻辑里用阻塞赋值会仿真/综合不一致</strong>，这是经典反例。</p>
+<p><strong>追问（高频变体：同一块内混用 <code>&lt;=</code> 和 <code>=</code>）</strong>：下面代码在上升沿后 <span class="arithmatex">\(a,b\)</span> 是多少？</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="p">;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">end</span>
+</code></pre></div>
+<p><strong>答案</strong>：<span class="arithmatex">\(a = in+1\)</span>（本拍新值）；<span class="arithmatex">\(b\)</span> 得到的是 <strong>a 的旧值</strong>（上一拍的值）——即 b 恰好比 a 晚一拍。</p>
+<p><strong>解析</strong>：关键不在符号本身，而在<strong>"读 a 的那一刻，a 更新了没有"</strong>：</p>
+<ul>
+<li><code>a &lt;= in + 1</code> 非阻塞：右边 <span class="arithmatex">\(in+1\)</span> 先算好，但 <strong>a 的更新推迟到本时间步末尾</strong>统一进行；</li>
+<li><code>b = a</code> 阻塞：<strong>当场执行</strong>，此刻 a 还停在旧值（更新尚未发生），所以 b 读到的是旧值。</li>
+</ul>
+<p>举例：沿到来前 <span class="arithmatex">\(a=3\)</span>、<span class="arithmatex">\(in=5\)</span> → 沿后 <span class="arithmatex">\(a=6\)</span>、<span class="arithmatex">\(b=3\)</span>；下一拍 b 继续拿这一拍的 a，稳定保持"b 比 a 晚一拍"。</p>
+<p>三种写法对比（同一沿之后）：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(b\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>混合 <code>a &lt;= in+1; b = a;</code></td>
+<td><span class="arithmatex">\(in+1\)</span></td>
+<td>a 的旧值</td>
+</tr>
+<tr>
+<td>全阻塞 <code>a = in+1; b = a;</code></td>
+<td><span class="arithmatex">\(in+1\)</span></td>
+<td><span class="arithmatex">\(in+1\)</span>（新值，与 a 同值）</td>
+</tr>
+<tr>
+<td>全非阻塞 <code>a &lt;= in+1; b &lt;= a;</code></td>
+<td><span class="arithmatex">\(in+1\)</span></td>
+<td>a 的旧值</td>
+</tr>
+</tbody>
+</table>
+<p>混合写法<strong>结果恰好与全非阻塞相同</strong>，但仍是风格大忌：工具链（综合/lint）普遍会报 "mixed blocking and non-blocking" 类警告，且 b 先于 a 在时间步内更新，容易与其他块产生竞争。面试标准答法：<strong>时序一律 <code>&lt;=</code>、组合一律 <code>=</code>，绝不混用</strong>（对比表见 <a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">八股</a> 2.2 节）。</p>
 <h3 id="13-fifo">1.3 FIFO 深度计算（⭐⭐⭐⭐⭐）<a class="headerlink" href="#13-fifo" title="Permanent link">&para;</a></h3>
 <p><strong>知识点</strong>：<code>FIFO 深度</code>、<code>CDC</code></p>
 <p><strong>题干</strong>：写时钟 100MHz 背靠背突发写 200 个数据，读时钟 80MHz 连续读，问 FIFO 最小深度。</p>
@@ -2775,19 +2838,19 @@ hold 检查：<span class="arithmatex">\(t_{co(min)} + t_{comb(min)} \ge t_h\)</
 <p><strong>知识点</strong>：<code>分频</code>、<code>Verilog</code></p>
 <p><strong>题干</strong>：写出占空比 50% 的三分频器代码。</p>
 <p><strong>答案</strong>：模 3 计数器，上升沿/下降沿各产生 <code>(cnt==0)</code> 脉冲，相或：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">cnt_p</span><span class="p">,</span><span class="w"> </span><span class="n">cnt_n</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="n">cnt_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">cnt_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_p</span><span class="o">==</span><span class="mh">2</span><span class="p">)</span><span class="o">?</span><span class="mh">0</span><span class="o">:</span><span class="n">cnt_p</span><span class="o">+</span><span class="mh">1</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">negedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="n">cnt_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">cnt_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_n</span><span class="o">==</span><span class="mh">2</span><span class="p">)</span><span class="o">?</span><span class="mh">0</span><span class="o">:</span><span class="n">cnt_n</span><span class="o">+</span><span class="mh">1</span><span class="p">;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">assign</span><span class="w"> </span><span class="n">clk_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_p</span><span class="o">==</span><span class="mh">0</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_n</span><span class="o">==</span><span class="mh">0</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">cnt_p</span><span class="p">,</span><span class="w"> </span><span class="n">cnt_n</span><span class="p">;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="n">cnt_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">cnt_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_p</span><span class="o">==</span><span class="mh">2</span><span class="p">)</span><span class="o">?</span><span class="mh">0</span><span class="o">:</span><span class="n">cnt_p</span><span class="o">+</span><span class="mh">1</span><span class="p">;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">negedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="n">cnt_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">cnt_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_n</span><span class="o">==</span><span class="mh">2</span><span class="p">)</span><span class="o">?</span><span class="mh">0</span><span class="o">:</span><span class="n">cnt_n</span><span class="o">+</span><span class="mh">1</span><span class="p">;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">assign</span><span class="w"> </span><span class="n">clk_out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_p</span><span class="o">==</span><span class="mh">0</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_n</span><span class="o">==</span><span class="mh">0</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="15-latch">1.5 推断出 latch 的代码（⭐⭐⭐）<a class="headerlink" href="#15-latch" title="Permanent link">&para;</a></h3>
 <p><strong>知识点</strong>：<code>Verilog</code>、<code>latch</code></p>
 <p><strong>题干</strong>：下面代码综合出什么电路？</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">en</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">end</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">en</span><span class="p">)</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">end</span>
 </code></pre></div>
 <p><strong>答案</strong>：推断出 <strong>latch</strong>（en=0 时 y 保持）。</p>
 <p><strong>解析</strong>：组合 always 中 <code>if</code> 无 <code>else</code> → 未写分支保持旧值 → 综合器用锁存器实现。应补 <code>else y = 1'b0;</code>。</p>
@@ -3092,34 +3155,144 @@ $<span class="arithmatex">\(T_{clk} \ge t_{co} + t_{comb} + t_{su} + t_{skew} + 
 <p><strong>9. 编程题：0~255 计数器，有效时计数、无效保持，255→0 时输出一个时钟周期的溢出脉冲（⭐⭐⭐⭐⭐）</strong></p>
 <p><strong>知识点</strong>：<code>计数器</code>、<code>Verilog</code></p>
 <p><strong>答案</strong>：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">module</span><span class="w"> </span><span class="n">cnt_ovf</span><span class="w"> </span><span class="p">(</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">clk</span><span class="p">,</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">rst_n</span><span class="p">,</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">en</span><span class="p">,</span><span class="w">            </span><span class="c1">// 有效计数，无效保持</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">cnt</span><span class="p">,</span><span class="w"> </span><span class="c1">// 0~255</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="n">ovf</span><span class="w">        </span><span class="c1">// 255→0 那一拍，输出一个周期高电平</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="p">);</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">            </span><span class="n">cnt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">8</span><span class="mi">&#39;d0</span><span class="p">;</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">            </span><span class="n">ovf</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">        </span><span class="k">end</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">en</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">            </span><span class="n">cnt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">            </span><span class="n">ovf</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">8</span><span class="mi">&#39;d255</span><span class="p">);</span><span class="w">   </span><span class="c1">// 本拍 cnt 由 255 变 0，输出溢出脉冲</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">        </span><span class="k">end</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">            </span><span class="n">cnt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span><span class="w">               </span><span class="c1">// en 无效：保持</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">            </span><span class="n">ovf</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">        </span><span class="k">end</span>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="k">endmodule</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">module</span><span class="w"> </span><span class="n">cnt_ovf</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">clk</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">rst_n</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">en</span><span class="p">,</span><span class="w">            </span><span class="c1">// 有效计数，无效保持</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="mh">7</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">cnt</span><span class="p">,</span><span class="w"> </span><span class="c1">// 0~255</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="kt">reg</span><span class="w"> </span><span class="n">ovf</span><span class="w">        </span><span class="c1">// 255→0 那一拍，输出一个周期高电平</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="p">);</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">            </span><span class="n">cnt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">8</span><span class="mi">&#39;d0</span><span class="p">;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">            </span><span class="n">ovf</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">en</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">            </span><span class="n">cnt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cnt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">            </span><span class="n">ovf</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">cnt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mh">8</span><span class="mi">&#39;d255</span><span class="p">);</span><span class="w">   </span><span class="c1">// 本拍 cnt 由 255 变 0，输出溢出脉冲</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">            </span><span class="n">cnt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cnt</span><span class="p">;</span><span class="w">               </span><span class="c1">// en 无效：保持</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">            </span><span class="n">ovf</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">        </span><span class="k">end</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="k">endmodule</span>
 </code></pre></div>
 <p><strong>解析</strong>：
 - <strong>计数</strong>：<code>en</code> 为 1 时 <code>cnt &lt;= cnt+1</code>，0~255 循环；<code>en</code> 为 0 时 <code>cnt &lt;= cnt</code> 保持。
 - <strong>溢出脉冲</strong>：<code>ovf &lt;= (cnt==255)</code>——当本拍旧值 cnt=255 且 en=1 时，这一拍 cnt 变为 0、ovf 变为 1；下一拍 cnt=0 时 <code>ovf&lt;=0</code>。所以 <code>ovf</code> 恰好高一个时钟周期，且正是在 255→0 跳变后的那一拍。
 - <strong>边界</strong>：复位后 cnt=0 不立即输出脉冲；en 保持有效时每 256 拍出一次溢出。
 - 已用仿真验证：<code>ovf</code> 只在 255→0 那一拍为高，宽恰为 1 个时钟周期。</p>
-<h3 id="28">2.8 其他公司（可自行新增小节）<a class="headerlink" href="#28" title="Permanent link">&para;</a></h3>
+<h3 id="28">2.8 复旦微<a class="headerlink" href="#28" title="Permanent link">&para;</a></h3>
+<p><strong>考查方向</strong>：亚稳态/CDC、FPGA 架构资源、硬件电路基础（上拉电阻）、时钟资源、时序计算（<span class="arithmatex">\(f_{max}\)</span>、有效 setup/hold）。</p>
+<blockquote>
+<p>以下 7 题为面试/笔试回忆整理。第 5、6 题原数据记不全，已按考点自出例题还原考法。题面参数对应：<span class="arithmatex">\(T_{set}=t_{su}\)</span>（建立时间）、<span class="arithmatex">\(T_h=t_h\)</span>（保持时间）、<span class="arithmatex">\(T_{offset}/T_{skew}\)</span>=时钟偏斜。</p>
+</blockquote>
+<p><strong>1. 什么是 FPGA 的亚稳态？为什么会产生亚稳态？（⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>亚稳态</code>、<code>CDC</code></p>
+<p><strong>答案</strong>：
+- <strong>是什么</strong>：触发器的输出在时钟沿后<strong>无法在规定时间内稳定到 0 或 1</strong>，停留在中间电平或来回振荡，最终<strong>随机</strong>收敛（收敛时间不可预测）。严格说亚稳态是触发器的普遍现象，不限 FPGA。
+- <strong>为什么</strong>：输入数据在时钟沿附近的<strong>建立/保持窗口</strong>内跳变 → 触发器内部正反馈来不及完成"0 还是 1"的判决 → 进入两个稳态之间的不确定区。<strong>本质是违反了 <span class="arithmatex">\(t_{su}/t_h\)</span></strong>（见第 7 题）。
+- <strong>典型场景</strong>：跨时钟域传输（最常考）、异步信号直接进同步逻辑、复位释放时刻。
+- <strong>危害</strong>：不定值向后传播——后级可能采到 0/1/振荡值，甚至不同后级采到不同值。
+- <strong>解决</strong>：两级同步器（打两拍给收敛时间）、格雷码、异步 FIFO、握手——只能降低概率、不能根治，用 <span class="arithmatex">\(MTBF\)</span> 衡量。</p>
+<p>展开见 <a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">八股</a> 4.1 节。</p>
+<p><strong>2. FPGA 的内部资源有哪些？（⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>FPGA 架构</code></p>
+<p><strong>答案</strong>（按六类记）：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>资源</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可编程逻辑</td>
+<td>LUT + FF（触发器）+ 进位链（组成 SLICE/CLB）</td>
+<td>LUT 查表实现组合逻辑，FF 实现时序逻辑</td>
+</tr>
+<tr>
+<td>存储</td>
+<td>BRAM、分布式 RAM</td>
+<td>大容量块存储 / 小容量异步读存储</td>
+</tr>
+<tr>
+<td>运算</td>
+<td>DSP48</td>
+<td>乘法 + 累加，滤波、FFT</td>
+</tr>
+<tr>
+<td>时钟</td>
+<td>PLL/MMCM + 全局时钟网络 BUFG</td>
+<td>倍频/分频/移相、低偏斜分发时钟</td>
+</tr>
+<tr>
+<td>IO</td>
+<td>IOB、多种电平标准、DDR、SerDes</td>
+<td>与外部芯片通信</td>
+</tr>
+<tr>
+<td>布线</td>
+<td>可编程互连（走线 + 开关盒）</td>
+<td>把以上资源连起来——"可编程"的关键</td>
+</tr>
+</tbody>
+</table>
+<p>（视型号还有硬核：DDR 控制器、PCIe、以太网 MAC、ARM 核等。）展开见 <a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">八股</a> 1.2 节。</p>
+<p><strong>3. 上拉电阻的作用和用途？（⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>硬件基础</code></p>
+<p><strong>答案</strong>（作用，按重要性排）：
+1. <strong>确定默认电平</strong>：把悬空/高阻节点箝位到高电平——CMOS 输入不能悬空，否则电平不定、易受干扰；
+2. <strong>配合开漏（OD）/开集输出</strong>：开漏只能拉低、不能拉高，输出高电平全靠外部上拉提供；
+3. <strong>实现"线与"</strong>：多个开漏输出共接一条线，任一拉低则整线为低——用于共享中断、总线仲裁；
+4. <strong>改善上升沿</strong>：与线路电容构成 RC 充电，阻值越小上升沿越快；
+5. <strong>限流</strong>：开漏拉低时灌电流 <span class="arithmatex">\(I=V/R\)</span> 由电阻限制。</p>
+<p><strong>用途</strong>：I2C 的 SDA/SCL（必须上拉）、开漏复位/中断、按键输入（另一端接地）、三态总线防浮空、未用引脚处理、电平转换。</p>
+<p><strong>阻值</strong>：常用 4.7k / 10kΩ——太小功耗大，太大上升沿慢且抗扰差。</p>
+<p><strong>4. FPGA 中的全局时钟网络有哪些优点和作用？（⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>时钟资源</code></p>
+<p><strong>答案</strong>：
+<strong>作用</strong>：把时钟经<strong>专用树状布线</strong>低偏斜地送到全芯片触发器，让同一时钟域内所有 FF（触发器）<strong>几乎同时</strong>收到时钟沿。</p>
+<p><strong>优点</strong>：
+- <strong>skew 极小、jitter 低</strong>：专用等长缓冲树，时序容易收敛；
+- <strong>高扇出、驱动强</strong>：一个 BUFG 可驱动成千上万个 FF，不用手动复制；
+- <strong>不占普通布线/逻辑资源</strong>：专用网络，不与数据路径抢走线；
+- <strong>延迟可预测</strong>：时序分析简单、<span class="arithmatex">\(f_{max}\)</span> 更高；还支持时钟使能、BUFGMUX 无毛刺切换。
+- <strong>注意</strong>：数量有限（专用稀缺资源），滥用会报错——非全局时钟可用区域时钟/普通布线降级处理。</p>
+<p><strong>反例</strong>：时钟走普通布线 → 延迟大且不可控、skew 大 → 时序无法收敛。展开见 <a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">八股</a> 3.2 节。</p>
+<p><strong>5. 例题：算时钟最高频率（<span class="arithmatex">\(f_{max}\)</span>）（⭐⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>setup/hold</code>、<code>时序计算</code></p>
+<blockquote>
+<p>原题数据记不全，自出两问还原考法。符号表见本题集 2.7 第 1 题。</p>
+</blockquote>
+<p><strong>例题 1（无偏斜）</strong>：两级 FF（触发器）之间组合逻辑最大延迟 6ns，<span class="arithmatex">\(t_{co}=1\text{ns}\)</span>，<span class="arithmatex">\(t_{su}=1\text{ns}\)</span>，忽略偏斜，求 <span class="arithmatex">\(f_{max}\)</span>。</p>
+<div class="arithmatex">\[T_{min} = t_{co} + t_{comb} + t_{su} = 1+6+1 = 8\text{ns} \quad\Rightarrow\quad f_{max} = \frac{1}{8\text{ns}} = 125\text{MHz}\]</div>
+<p><strong>例题 2（含偏斜，高频考法）</strong>：<span class="arithmatex">\(t_{co}=0.5\text{ns}\)</span>，<span class="arithmatex">\(t_{comb,max}=4.4\text{ns}\)</span>，<span class="arithmatex">\(t_{comb,min}=1\text{ns}\)</span>，<span class="arithmatex">\(t_{su}=0.6\text{ns}\)</span>，<span class="arithmatex">\(t_h=0.4\text{ns}\)</span>；<strong>捕获端时钟比发送端晚到</strong> <span class="arithmatex">\(t_{skew}=0.5\text{ns}\)</span>。求有效建立/保持时间与 <span class="arithmatex">\(f_{max}\)</span>。</p>
+<ul>
+<li>有效 <span class="arithmatex">\(t_{su} = 0.6 - 0.5 = 0.1\text{ns}\)</span> → <span class="arithmatex">\(T_{min} = 0.5+4.4+0.1 = 5.0\text{ns}\)</span> → <span class="arithmatex">\(f_{max} = 200\text{MHz}\)</span>；</li>
+<li>保持检查：数据最快到达 <span class="arithmatex">\(t_{co}+t_{comb,min} = 0.5+1 = 1.5\text{ns}\)</span> ≥ 有效 <span class="arithmatex">\(t_h = 0.4+0.5 = 0.9\text{ns}\)</span> ✓ 不违例；</li>
+<li><strong>变体</strong>：若捕获端<strong>早到</strong> 0.5ns → <span class="arithmatex">\(T_{min} = 0.5+4.4+0.6+0.5 = 6.0\text{ns}\)</span> → <span class="arithmatex">\(166.7\text{MHz}\)</span>——<strong>偏斜方向决定帮不帮忙</strong>。</li>
+</ul>
+<p><strong>6. 例题：算有效的 <span class="arithmatex">\(t_{su}\)</span> 和 <span class="arithmatex">\(t_h\)</span>（⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>时钟偏斜</code>、<code>有效建立/保持</code></p>
+<p><strong>结论</strong>（定义 <span class="arithmatex">\(t_{skew}\)</span> = <strong>捕获端时钟沿 − 发送端时钟沿</strong>，晚到为正）：</p>
+<div class="arithmatex">\[t_{su,eff} = t_{su} - t_{skew}, \qquad t_{h,eff} = t_h + t_{skew}\]</div>
+<p><strong>怎么理解</strong>：捕获端时钟晚到 <span class="arithmatex">\(\Delta\)</span>，数据相当于"多跑了 <span class="arithmatex">\(\Delta\)</span>"才被采样——<strong>建立要求放松 <span class="arithmatex">\(\Delta\)</span>（<span class="arithmatex">\(-t_{skew}\)</span>），保持要求却收紧 <span class="arithmatex">\(\Delta\)</span>（<span class="arithmatex">\(+t_{skew}\)</span>）</strong>，两者此消彼长。</p>
+<p><strong>例题</strong>：<span class="arithmatex">\(t_{su}=0.6\text{ns}\)</span>、<span class="arithmatex">\(t_h=0.4\text{ns}\)</span>：
+- 捕获端<strong>晚到</strong> 0.5ns：有效 <span class="arithmatex">\(t_{su} = 0.1\text{ns}\)</span>，有效 <span class="arithmatex">\(t_h = 0.9\text{ns}\)</span>；
+- 捕获端<strong>早到</strong> 0.5ns：有效 <span class="arithmatex">\(t_{su} = 1.1\text{ns}\)</span>，有效 <span class="arithmatex">\(t_h = -0.1\text{ns}\)</span>（按 0 看，保持反而宽松）。</p>
+<p><strong>保守口径</strong>：偏斜方向不确定时取最坏值——<span class="arithmatex">\(t_{su}+|t_{skew}|\)</span>、<span class="arithmatex">\(t_h+|t_{skew}|\)</span>（2.7 第 1 题公式中 skew 直接进余量，就是此口径）。不同教材对偏斜方向的定义可能相反，做题先看清符号约定。</p>
+<p><strong>7. 什么是建立时间和保持时间？不满足会怎样？（⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>setup/hold</code></p>
+<p><strong>答案</strong>：
+- <strong>建立时间 <span class="arithmatex">\(t_{su}\)</span></strong>：时钟沿<strong>之前</strong>，数据必须提前稳定的最短时间——"不许迟到"；
+- <strong>保持时间 <span class="arithmatex">\(t_h\)</span></strong>：时钟沿<strong>之后</strong>，数据必须继续保持稳定的最短时间——"不许早退"；
+- <strong>来源</strong>：触发器内部主从锁存器开门/关门、正反馈判决都需要时间，所以沿附近的窗口内数据不能动；
+- <strong>不满足的后果</strong>：都进入<strong>亚稳态</strong>（第 1 题）。区别：违反 <span class="arithmatex">\(t_{su}\)</span> → <strong>降频能缓解</strong>（数据到得太晚）；违反 <span class="arithmatex">\(t_h\)</span> → <strong>与频率无关，降频也没用</strong>（数据变得太早）。</p>
+<p>展开（含修复手段）见本题集 2.7 第 2 题、<a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">八股</a> 5.1 节。</p>
+<h3 id="29">2.9 其他公司（可自行新增小节）<a class="headerlink" href="#29" title="Permanent link">&para;</a></h3>
 <ul>
 <li>（等待录入）</li>
 </ul>
@@ -3161,7 +3334,7 @@ $<span class="arithmatex">\(T_{clk} \ge t_{co} + t_{comb} + t_{su} + t_{skew} + 
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年8月11日 15:36:37 UTC">2026年8月11日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月27日 11:42:46 UTC">2026年9月27日</span>
   </span>
 
     
