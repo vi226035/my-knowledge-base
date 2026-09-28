@@ -1894,7 +1894,18 @@
   <a href="#29" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.9 其他公司（可自行新增小节）
+        2.9 九州集团
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#210" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.10 其他公司（可自行新增小节）
       
     </span>
   </a>
@@ -2692,7 +2703,18 @@
   <a href="#29" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.9 其他公司（可自行新增小节）
+        2.9 九州集团
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#210" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.10 其他公司（可自行新增小节）
       
     </span>
   </a>
@@ -3292,7 +3314,81 @@ $<span class="arithmatex">\(T_{clk} \ge t_{co} + t_{comb} + t_{su} + t_{skew} + 
 - <strong>来源</strong>：触发器内部主从锁存器开门/关门、正反馈判决都需要时间，所以沿附近的窗口内数据不能动；
 - <strong>不满足的后果</strong>：都进入<strong>亚稳态</strong>（第 1 题）。区别：违反 <span class="arithmatex">\(t_{su}\)</span> → <strong>降频能缓解</strong>（数据到得太晚）；违反 <span class="arithmatex">\(t_h\)</span> → <strong>与频率无关，降频也没用</strong>（数据变得太早）。</p>
 <p>展开（含修复手段）见本题集 2.7 第 2 题、<a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">八股</a> 5.1 节。</p>
-<h3 id="29">2.9 其他公司（可自行新增小节）<a class="headerlink" href="#29" title="Permanent link">&para;</a></h3>
+<h3 id="29">2.9 九州集团<a class="headerlink" href="#29" title="Permanent link">&para;</a></h3>
+<p><strong>考查方向</strong>：Verilog 编程（模块实例化与复用、参数化设计）、分频器。</p>
+<blockquote>
+<p>以下 2 道为笔试编程题回忆整理。</p>
+</blockquote>
+<p><strong>1. 用半加器搭全加器（⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>Verilog</code>、<code>模块实例化</code></p>
+<p><strong>题干</strong>：已知半加器模块（输入 A、B，输出 <span class="arithmatex">\(S = A \oplus B\)</span>、<span class="arithmatex">\(C = A \&amp; B\)</span>），用它组成全加器（输入 A、B、Ci，输出 So、Co）。</p>
+<p><strong>答案</strong>：<strong>两个半加器 + 一个或门</strong>——先把 A、B 半加，再把"部分和"与 Ci 半加，两个进位相或：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">module</span><span class="w"> </span><span class="n">full_adder</span><span class="p">(</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">Ci</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="n">So</span><span class="p">,</span><span class="w"> </span><span class="n">Co</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">);</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="kt">wire</span><span class="w"> </span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="n">half_adder</span><span class="w"> </span><span class="n">u_ha1</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">.</span><span class="n">A</span><span class="p">(</span><span class="n">A</span><span class="p">),</span><span class="w">  </span><span class="p">.</span><span class="n">B</span><span class="p">(</span><span class="n">B</span><span class="p">),</span><span class="w">  </span><span class="p">.</span><span class="n">S</span><span class="p">(</span><span class="n">s1</span><span class="p">),</span><span class="w"> </span><span class="p">.</span><span class="n">C</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w">  </span><span class="c1">// 先加 A + B</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="n">half_adder</span><span class="w"> </span><span class="n">u_ha2</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">.</span><span class="n">A</span><span class="p">(</span><span class="n">s1</span><span class="p">),</span><span class="w"> </span><span class="p">.</span><span class="n">B</span><span class="p">(</span><span class="n">Ci</span><span class="p">),</span><span class="w"> </span><span class="p">.</span><span class="n">S</span><span class="p">(</span><span class="n">So</span><span class="p">),</span><span class="w"> </span><span class="p">.</span><span class="n">C</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w">  </span><span class="c1">// 部分和再加 Ci</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">Co</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">c2</span><span class="p">;</span><span class="w">   </span><span class="c1">// 两次加法任一出进位，最终就进位</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="k">endmodule</span>
+</code></pre></div>
+<p><strong>解析（为什么这么接）</strong>：全加器的本质是"三个 1 位数相加"，拆成两步：
+1. <strong>HA1 算 <span class="arithmatex">\(A+B\)</span></strong>：部分和 <span class="arithmatex">\(s_1 = A \oplus B\)</span>，进位 <span class="arithmatex">\(c_1 = A \&amp; B\)</span>；
+2. <strong>HA2 算 <span class="arithmatex">\(s_1 + C_i\)</span></strong>：结果 <span class="arithmatex">\(S_o = s_1 \oplus C_i = A \oplus B \oplus C_i\)</span> ✓；进位 <span class="arithmatex">\(c_2 = s_1 \&amp; C_i = (A \oplus B) \cdot C_i\)</span>；
+3. <strong>最终进位</strong>：两次加法"任意一次进了位"就该进位 → <span class="arithmatex">\(C_o = c_1 | c_2 = AB + (A \oplus B)C_i\)</span> ✓（进位即三输入多数函数）。</p>
+<p>验算 <span class="arithmatex">\(A=B=C_i=1\)</span>：<span class="arithmatex">\(s_1=0\)</span>、<span class="arithmatex">\(c_1=1\)</span> → <span class="arithmatex">\(S_o = 0\oplus 1 = 1\)</span>、<span class="arithmatex">\(c_2=0\)</span> → <span class="arithmatex">\(C_o=1\)</span>，即 <span class="arithmatex">\(1+1+1 = 11\)</span> ✓。</p>
+<p><strong>答题要点</strong>：模块例化按名连接端口；不会做时从"<strong>把复杂运算拆成两次简单运算</strong>"角度想——全加 = 半加两次 + 进位合并。</p>
+<p><strong>2. 补全任意奇数分频器（⭐⭐⭐⭐⭐）</strong></p>
+<p><strong>知识点</strong>：<code>分频</code>、<code>奇数分频</code>、<code>参数化设计</code></p>
+<p><strong>题干</strong>：补全模块：<code>parameter div = 9</code> 可自定义（奇数），输入 clk、rst_n，输出 clkout。</p>
+<p><strong>答案</strong>：<strong>双沿计数 + 错半拍相或</strong>（50% 占空比）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">module</span><span class="w"> </span><span class="n">odd_div</span><span class="w"> </span><span class="p">#(</span><span class="k">parameter</span><span class="w"> </span><span class="n">div</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">9</span><span class="p">)(</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">clk</span><span class="p">,</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="k">input</span><span class="w">  </span><span class="n">rst_n</span><span class="p">,</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="k">output</span><span class="w"> </span><span class="n">clkout</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">);</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="k">localparam</span><span class="w"> </span><span class="k">integer</span><span class="w"> </span><span class="n">W</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">$clog2</span><span class="p">(</span><span class="n">div</span><span class="p">);</span><span class="w">      </span><span class="c1">// 计数位宽（div=9 → 4 位）</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="k">localparam</span><span class="w"> </span><span class="k">integer</span><span class="w"> </span><span class="n">HALF</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">div</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mh">1</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mh">2</span><span class="p">;</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="p">[</span><span class="n">W</span><span class="o">-</span><span class="mh">1</span><span class="o">:</span><span class="mh">0</span><span class="p">]</span><span class="w"> </span><span class="n">cnt_p</span><span class="p">,</span><span class="w"> </span><span class="n">cnt_n</span><span class="p">;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="kt">reg</span><span class="w"> </span><span class="n">clk_p</span><span class="p">,</span><span class="w"> </span><span class="n">clk_n</span><span class="p">;</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="c1">// 上升沿：计数 + 产生 clk_p</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w">              </span><span class="n">cnt_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_p</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">div</span><span class="o">-</span><span class="mh">1</span><span class="p">)</span><span class="w"> </span><span class="n">cnt_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">        </span><span class="k">else</span><span class="w">                     </span><span class="n">cnt_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cnt_p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">posedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w">              </span><span class="n">clk_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_p</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HALF</span><span class="p">)</span><span class="w">  </span><span class="n">clk_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_p</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">div</span><span class="o">-</span><span class="mh">1</span><span class="p">)</span><span class="w"> </span><span class="n">clk_p</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>
+<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="w">    </span><span class="c1">// 下降沿：计数 + 产生 clk_n</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">negedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w">              </span><span class="n">cnt_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">div</span><span class="o">-</span><span class="mh">1</span><span class="p">)</span><span class="w"> </span><span class="n">cnt_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">0</span><span class="p">;</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28" href="#__codelineno-7-28"></a><span class="w">        </span><span class="k">else</span><span class="w">                     </span><span class="n">cnt_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">cnt_n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29" href="#__codelineno-7-29"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30" href="#__codelineno-7-30"></a><span class="w">    </span><span class="k">always</span><span class="w"> </span><span class="p">@(</span><span class="k">negedge</span><span class="w"> </span><span class="n">clk</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">negedge</span><span class="w"> </span><span class="n">rst_n</span><span class="p">)</span><span class="w"> </span><span class="k">begin</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31" href="#__codelineno-7-31"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">rst_n</span><span class="p">)</span><span class="w">              </span><span class="n">clk_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-7-32" name="__codelineno-7-32" href="#__codelineno-7-32"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HALF</span><span class="p">)</span><span class="w">  </span><span class="n">clk_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b1</span><span class="p">;</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33" href="#__codelineno-7-33"></a><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cnt_n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">div</span><span class="o">-</span><span class="mh">1</span><span class="p">)</span><span class="w"> </span><span class="n">clk_n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mh">1</span><span class="mb">&#39;b0</span><span class="p">;</span>
+<a id="__codelineno-7-34" name="__codelineno-7-34" href="#__codelineno-7-34"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35" href="#__codelineno-7-35"></a>
+<a id="__codelineno-7-36" name="__codelineno-7-36" href="#__codelineno-7-36"></a><span class="w">    </span><span class="k">assign</span><span class="w"> </span><span class="n">clkout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clk_p</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">clk_n</span><span class="p">;</span><span class="w">   </span><span class="c1">// 两波形错开半拍，相或 → 50% 占空比</span>
+<a id="__codelineno-7-37" name="__codelineno-7-37" href="#__codelineno-7-37"></a><span class="k">endmodule</span>
+</code></pre></div>
+<p><strong>解析</strong>：
+- 难点：高电平要 <span class="arithmatex">\(div/2 = 4.5\)</span> 个周期——<strong>单边沿触发做不出"半拍"</strong>，所以两份计数器分别用上升沿/下降沿触发，两份波形错开半个周期；
+- 每份信号高电平 <span class="arithmatex">\((div-1)/2 = 4\)</span> 拍。以 div=9 为例：clk_p 高 [5T, 9T)、clk_n 高 [5.5T, 9.5T)，相或后<strong>高 4.5T、低 4.5T、周期 9T</strong> ✓；
+- ⚠️ 别照抄 <a href="../FPGA%E6%A0%A1%E6%8B%9B%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1/">八股</a> 8.3 节的 <code>(cnt==0)|(cnt==0)</code> 写法——那只对 div=3 成立；参数化后要改成"<code>cnt==HALF</code> 置位、<code>cnt==div-1</code> 清位"；
+- 细节：div 需为奇数且 ≥3；计数位宽用 <code>$clog2(div)</code>；实际工程里输出时钟建议过 BUFG 上全局时钟网络。</p>
+<h3 id="210">2.10 其他公司（可自行新增小节）<a class="headerlink" href="#210" title="Permanent link">&para;</a></h3>
 <ul>
 <li>（等待录入）</li>
 </ul>
@@ -3334,7 +3430,7 @@ $<span class="arithmatex">\(T_{clk} \ge t_{co} + t_{comb} + t_{su} + t_{skew} + 
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月27日 11:42:46 UTC">2026年9月27日</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="2026年9月28日 08:45:45 UTC">2026年9月28日</span>
   </span>
 
     
